@@ -1,0 +1,10 @@
+.vagrant
+*.iml
+*.ipr
+*.iws
+/projectFilesBackup/
+/.idea/
+/.gradle/
+/build/
+/target/
+/frontend/node_modules/
