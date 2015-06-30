@@ -1,6 +1,7 @@
 package no.employees
 
 import javax.sql.DataSource
+import no.employees.data.DbTables
 import org.h2.jdbcx.JdbcDataSource;
 import slick.driver.JdbcDriver.simple._
 
@@ -19,6 +20,6 @@ trait InMemDBEnvironment extends EmployeeRepoComponent with PlanComponent with D
 trait DBTestData{this: InMemDBEnvironment =>
 
   def createAllTables(implicit session: Session) = {
-    employeeRepo.employees.ddl.create
+    DbTables.employeeQuery.ddl.create
   }
 }

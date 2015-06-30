@@ -1,12 +1,12 @@
 package no.employees
 
 import dispatch.Req
+import no.employees.data.Employee
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
 import org.specs2.specification.{BeforeExample, Before, Fragments, Step}
 
-import slick.driver.JdbcDriver.simple._
 
 object databaseSetup extends InMemDBEnvironment with DBTestData  {
 

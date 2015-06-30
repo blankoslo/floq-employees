@@ -3,25 +3,30 @@ package no.employees
 import no.employees.data.EmployeesPostgresDriver.api._
 
 import no.employees.data.DbTables._
+import no.employees.data.{Employee, Entity}
+
 import slick.dbio.DBIO
 
-import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 import scalaz.{-\/, \/-, \/}
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
 
 trait EmployeeRepoComponent {this: DataSourceComponent =>
 
   def employeeRepo: EmployeeRepo
 
+
   class EmployeeRepo {
     type Error = String
 
     def createEmployee(employee: Employee): \/[Error, Entity[Employee]] = {
-        runDbAction(employees += employee)
+        runDbAction((employeeQuery.returning(employeeQuery.map(_.id))) += Entity(0, employee)).map(id => Entity(id, employee))
     }
 
-    def getEmployees: \/[Error, Seq[Entity[Employee]]]
-        runDbAction(employees.list)
+    def getEmployeesFromRepo: \/[Error, Seq[Entity[Employee]]] = {
+        runDbAction(employeeQuery.result)
     }
 
     protected def runDbAction[A](action: DBIO[A]): \/[Error, A] = {
@@ -29,7 +34,5 @@ trait EmployeeRepoComponent {this: DataSourceComponent =>
       future.onFailure{case (t: Throwable) => -\/(t.toString)}
       Await.result(future, Duration.Inf)
     }
-
   }
-
 }

@@ -1,14 +1,11 @@
 package no.employees.data
 
-import no.employees.{Entity, Employee}
 import slick.lifted.TableQuery
 import EmployeesPostgresDriver.api._
 
-import scalaz.Alpha.O
-
 object DbTables {
 
-  class Employees(tag: Tag) extends Table[Employee](tag, "employees") {
+  class Employees(tag: Tag) extends Table[Entity[Employee]](tag, "employees") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def firstName = column[String]("first_name")
     def lastName = column[String]("last_name")
@@ -20,5 +17,5 @@ object DbTables {
     })
   }
 
-  val employees = TableQuery[Employees]
+  val employeeQuery = TableQuery[Employees]
 }
