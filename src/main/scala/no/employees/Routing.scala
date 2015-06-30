@@ -8,7 +8,7 @@ import unfiltered.filter.request.ContextPath
 import Paths._
 import linx._
 
-trait Routing { this: HandlersComponent =>
+trait Routing { this: EmployeeHandlerComponent =>
 
   private val Intent = Directive.Intent.Mapping[HttpServletRequest, String] { case ContextPath(_, path) => path }
 

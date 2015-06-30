@@ -34,7 +34,7 @@ trait DataSourceComponent {
   val database: DatabaseDef = Database.forURL(jdbcURL, driver = driver)
 }
 
-object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with HandlersComponent with Routing {
+object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with EmployeeHandlerComponent with Routing {
 
   override lazy val driver: String = DatabaseConfig.driver
   override lazy val jdbcURL = DatabaseConfig.jdbcUrl

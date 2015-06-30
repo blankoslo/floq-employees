@@ -3,7 +3,7 @@ package no.employees
 import java.net.{URL, URI}
 import javax.servlet.http.HttpServletRequest
 
-import no.employees.data.ResourceDescription
+import no.employees.data.{Employee, ResourceDescription}
 import unfiltered.directives.Directives._
 import unfiltered.directives.{Directive, Directives}
 import unfiltered.request._
@@ -12,8 +12,7 @@ import JsonCodecs._
 import scalaz._, Scalaz._
 import argonaut._, Argonaut._
 
-trait HandlersComponent {
-  this: EmployeeRepoComponent =>
+trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
 
   def employeeHandler: EmployeeHandler
 
@@ -56,32 +55,33 @@ trait HandlersComponent {
     def handleEmployees(employeeId: Option[String]): RespDirective = {
       employeeId match {
         //case Some(_) => _
-        case None => getEmployees
+        case None => getEmployees | postEmployee
       }
     }
 
-    //  def putSpot(spotId: Int): RespDirective = for {
-    //    _ <- PUT
-    //    _ <- commit
-    //    body <- requestBody
-    //    spot <- parseBody[Spot](body)
-    //    spotEntity <- toDirective(updateSpotInRepo(spotId, spot))
-    //  } yield JsonContent ~> ResponseString(spotEntity.asJson.toString)
-    //
-    //  def deleteSpot(spotId: Int): RespDirective = for {
-    //    _ <- DELETE
-    //    _ <- commit
-    //    _ <- toDirective(deleteSpotFromRepo(spotId))
-    //
-    //  } yield NoContent
-    //
-    //  def postSpot: RespDirective = for {
-    //    _ <- POST
-    //    _ <- commit
-    //    body <- requestBody
-    //    spot <- parseBody[Spot](body)
-    //    spotEntity <- toDirective(saveSpotToRepo(spot))
-    //  } yield JsonContent ~> ResponseString(spotEntity.asJson.toString)
+    def postEmployee: RespDirective = for {
+      _ <- POST
+      _ <- commit
+      body <- requestBody
+      employee <- parseBody[Employee](body)
+      employeeEntity <- toDirective(employeeRepo.saveEmployeeToRepo(employee))
+    } yield JsonContent ~> ResponseString(employeeEntity.asJson.toString)
+
+      def putSpot(employeeId: Int): RespDirective = for {
+        _ <- PUT
+        _ <- commit
+        body <- requestBody
+        employee <- parseBody[Employee](body)
+        employeeEntity <- toDirective(employeeRepo.updateEmployeeInRepo(employeeId, employee))
+      } yield JsonContent ~> ResponseString(employeeEntity.asJson.toString)
+
+      def deleteSpot(employeeId: Int): RespDirective = for {
+        _ <- DELETE
+        _ <- commit
+        _ <- toDirective(employeeRepo.deleteEmployeeFromRepo(employeeId))
+
+      } yield NoContent
+
 
     def getEmployees: RespDirective = for {
       _ <- GET
