@@ -1,33 +1,35 @@
 package no.employees
 
-import slick.driver.JdbcDriver.simple._
-import slick.jdbc.JdbcBackend.Database.dynamicSession
+import no.employees.data.EmployeesPostgresDriver.api._
+
+import no.employees.data.DbTables._
+import slick.dbio.DBIO
+
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
+import scalaz.{-\/, \/-, \/}
 
 trait EmployeeRepoComponent {this: DataSourceComponent =>
 
   def employeeRepo: EmployeeRepo
 
   class EmployeeRepo {
+    type Error = String
 
-    class Employees(tag: Tag) extends Table[Employee](tag, "employees") {
-      def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-      def firstName = column[String]("first_name")
-      def lastName = column[String]("last_name")
-      def * = (id.?, firstName, lastName) <> (Employee.tupled, Employee.unapply)
+    def createEmployee(employee: Employee): \/[Error, Entity[Employee]] = {
+        runDbAction(employees += employee)
     }
 
-    val employees = TableQuery[Employees]
-
-    def createEmployee(employee: Employee) = {
-      Database.forDataSource(dataSource) withDynSession  {
-        employees += employee
-      }
+    def getEmployees: \/[Error, Seq[Entity[Employee]]]
+        runDbAction(employees.list)
     }
 
-    def getEmployees() : List[Employee] = {
-      Database.forDataSource(dataSource) withDynSession  {
-        employees.list
-      }
+    protected def runDbAction[A](action: DBIO[A]): \/[Error, A] = {
+      val future: Future[\/[Error, A]] = database.run(action).map(\/-(_))
+      future.onFailure{case (t: Throwable) => -\/(t.toString)}
+      Await.result(future, Duration.Inf)
     }
+
   }
+
 }

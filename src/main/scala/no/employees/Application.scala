@@ -4,6 +4,8 @@ import java.net.{URI, URL}
 import javax.sql.DataSource
 
 import org.postgresql.ds.PGSimpleDataSource
+import slick.jdbc.JdbcBackend._
+
 import unfiltered.jetty.Http
 
 import scala.util.Properties
@@ -14,8 +16,27 @@ object Application extends App {
     .plan(ComponentRegistry.employeePlan).run()
 }
 
+object DatabaseConfig {
+  val jdbcUrl = {
+    val databaseUrl : Option[String] = Option(System.getenv("DATABASE_URL"))
+    databaseUrl match{
+      case Some(value) => {
+        val dbUri = new URI(value)
+        val username: String = dbUri.getUserInfo().split(":"){0};
+        val password: String = dbUri.getUserInfo().split(":"){1};
+        "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+      }
+      case None => "jdbc:postgresql://horton.elephantsql.com:5432/tbbuzxgh?user=tbbuzxgh&password=NrwbB3-z2afCRu4yOaz7sX-nxEdgy7Cb"
+    }
+  }
+
+  val driver: String = "org.postgresql.Driver"
+}
+
 trait DataSourceComponent {
-  def dataSource: DataSource
+  val jdbcURL: String
+  val driver: String
+  val database: DatabaseDef = Database.forURL(jdbcURL, driver = driver)
 }
 
 object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with PlanComponent {

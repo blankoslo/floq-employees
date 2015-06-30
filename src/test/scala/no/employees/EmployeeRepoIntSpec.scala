@@ -10,7 +10,7 @@ import slick.driver.JdbcDriver.simple._
 
 object databaseSetup extends InMemDBEnvironment with DBTestData  {
 
-  implicit val session = Database.forDataSource(dataSource).createSession()
+  implicit val session = DatabaseConfig.forDataSource(dataSource).createSession()
 
   lazy val createDb = {
     createAllTables
