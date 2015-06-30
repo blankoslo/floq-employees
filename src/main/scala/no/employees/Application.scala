@@ -9,10 +9,7 @@ import scala.util.Properties
 
 
 
-trait Application extends App {
-
-
-
+object Application extends App {
   unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt)
     .plan(ComponentRegistry.EmployeePlan).run()
 }
@@ -27,7 +24,7 @@ object DatabaseConfig {
         val password: String = dbUri.getUserInfo().split(":"){1};
         "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
       }
-      case None => "jdbc:postgresql://horton.elephantsql.com:5432/tbbuzxgh?user=tbbuzxgh&password=NrwbB3-z2afCRu4yOaz7sX-nxEdgy7Cb"
+      case None => "jdbc:postgresql://horton.elephantsql.com:5432/ymzbexfr?user=ymzbexfr&password=v64te7Ce6pvw7GanC9V6N7dI81ZZaAdV"
     }
   }
 
