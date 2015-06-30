@@ -15,10 +15,9 @@ import argonaut._, Argonaut._
 trait HandlersComponent {
   this: EmployeeRepoComponent =>
 
-  def handlers: Handlers
+  def employeeHandler: EmployeeHandler
 
-  class Handlers {
-
+  class EmployeeHandler {
 
     type RespDirective = Directive[HttpServletRequest, ResponseFunction[Any], ResponseFunction[Any]]
     private val requestBody: Directive[Any, Nothing, JsonField] = request[Any].map(Body.string)
@@ -90,7 +89,6 @@ trait HandlersComponent {
       spots <- toDirective(employeeRepo.getEmployeesFromRepo)
     } yield JsonContent ~> ResponseString(spots.asJson.toString)
 
-
     private def toDirective[A, B](result: \/[A, B]): Directive[Any, ResponseFunction[Any], B] = result match {
       case \/-(success) => Directives.success(success)
       case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
@@ -100,8 +98,5 @@ trait HandlersComponent {
       case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
       case \/-(client) => Directives.success(client)
     }
-
   }
-
 }
-

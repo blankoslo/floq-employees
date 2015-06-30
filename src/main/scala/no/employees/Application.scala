@@ -7,8 +7,6 @@ import unfiltered.filter.Plan
 
 import scala.util.Properties
 
-
-
 object Application extends App {
   unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt)
     .plan(ComponentRegistry.EmployeePlan).run()
@@ -27,7 +25,6 @@ object DatabaseConfig {
       case None => "jdbc:postgresql://horton.elephantsql.com:5432/ymzbexfr?user=ymzbexfr&password=v64te7Ce6pvw7GanC9V6N7dI81ZZaAdV"
     }
   }
-
   val driver: String = "org.postgresql.Driver"
 }
 
@@ -43,7 +40,7 @@ object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent 
   override lazy val jdbcURL = DatabaseConfig.jdbcUrl
 
   val employeeRepo = new EmployeeRepo
-  val handlers = new Handlers
+  val employeeHandler = new EmployeeHandler
 
   object EmployeePlan extends Plan {
     def intent = employeeIntent
