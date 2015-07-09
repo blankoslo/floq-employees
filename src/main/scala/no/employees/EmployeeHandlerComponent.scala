@@ -48,8 +48,8 @@ trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
       base <- baseUrl
 
       descriptions <- toDirective(\/-(List(
-        ResourceDescription("spots", Paths.Employees, base),
-        ResourceDescription("spot", Paths.Employee, base))))
+        ResourceDescription("employees", Paths.Employees, base),
+        ResourceDescription("employee", Paths.Employee, base))))
     } yield JsonContent ~> ResponseString(descriptions.asJson.toString)
 
     def handleEmployees(employeeId: Option[String]): RespDirective = {

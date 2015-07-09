@@ -4,9 +4,6 @@ import no.employees.data.EmployeesPostgresDriver.api._
 
 import no.employees.data.DbTables._
 import no.employees.data.{Employee, Entity}
-import no.hipadvisor.data.Entity
-import no.hipadvisor.data.Spot
-import no.hipadvisor.data.Tables._
 
 import slick.dbio.DBIO
 

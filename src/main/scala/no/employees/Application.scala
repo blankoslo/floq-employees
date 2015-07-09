@@ -34,15 +34,16 @@ trait DataSourceComponent {
   val database: DatabaseDef = Database.forURL(jdbcURL, driver = driver)
 }
 
-object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with EmployeeHandlerComponent with Routing {
+object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with EmployeeHandlerComponent with RoutingComponent {
 
   override lazy val driver: String = DatabaseConfig.driver
   override lazy val jdbcURL = DatabaseConfig.jdbcUrl
 
   val employeeRepo = new EmployeeRepo
   val employeeHandler = new EmployeeHandler
+  val routing = new Routing
 
   object EmployeePlan extends Plan {
-    def intent = employeeIntent
+    def intent = routing.employeeIntent
   }
 }
