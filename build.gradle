@@ -37,8 +37,10 @@ dependencies {
     compile "org.json4s:json4s-jackson_$mainVersionScala:3.2.11"
 
     testCompile "com.h2database:h2:1.4.185"
-    testCompile "org.specs2:specs2-junit_$mainVersionScala:2.3.13"
-    testCompile "junit:junit:4.12"
+    testCompile "org.scalatest:scalatest_$mainVersionScala:2.2.4"
+
+
+        testCompile "junit:junit:4.12"
 }
 
 test {

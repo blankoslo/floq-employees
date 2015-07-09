@@ -86,8 +86,8 @@ trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
     def getEmployees: RespDirective = for {
       _ <- GET
       _ <- commit
-      spots <- toDirective(employeeRepo.getEmployeesFromRepo)
-    } yield JsonContent ~> ResponseString(spots.asJson.toString)
+      employees <- toDirective(employeeRepo.getEmployeesFromRepo)
+    } yield JsonContent ~> ResponseString(employees.asJson.toString)
 
     private def toDirective[A, B](result: \/[A, B]): Directive[Any, ResponseFunction[Any], B] = result match {
       case \/-(success) => Directives.success(success)
