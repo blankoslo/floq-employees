@@ -8,7 +8,7 @@ import org.json4s.DefaultFormats
 import org.junit.runner.RunWith
 import org.json4s.native.Serialization.{read, write}
 import dispatch._, Defaults._
-import org.scalatest.{Sequential, FunSuite}
+import org.scalatest.{BeforeAndAfterAll, Sequential, FunSuite}
 import org.scalatest.junit.JUnitRunner
 
 import argonaut._, Argonaut._
@@ -44,12 +44,19 @@ import scala.concurrent.duration.Duration
 //}
 
 @RunWith(classOf[JUnitRunner])
-class EmployeeIntSpec extends FunSuite with InMemDBEnvironment {
+class EmployeeIntSpec extends FunSuite with InMemDBEnvironment with BeforeAndAfterAll with DBTestData {
 
   val server = unfiltered.jetty.Server.anylocal.plan(EmployeePlan).start()
   lazy val myHost = host("localhost", server.portBindings.head.port)
   implicit val formats = DefaultFormats
   //implicit val session = dbSetup.session
+
+
+  override def beforeAll: Unit = {
+    createAllTables
+  }
+
+
 
   //lazy val dbSetup = databaseSetupVote
   //override def map(fs: => Fragments) = Step(dbSetup.createDb) ^ Step(dbSetup.createTestData) ^ fs ^ Step(dbSetup.closeSession)

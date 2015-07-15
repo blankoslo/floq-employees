@@ -4,7 +4,14 @@ import javax.sql.DataSource
 import no.employees.data.{EmployeesPostgresDriver, DbTables}
 import org.h2.jdbcx.JdbcDataSource;
 import EmployeesPostgresDriver.api._
+import slick.jdbc.JdbcBackend.DatabaseDef
 import unfiltered.filter.Plan
+
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
+import scalaz.{-\/, \/-, \/}
+
+import scala.concurrent.ExecutionContext.Implicits.global
 
 trait InMemDBEnvironment extends EmployeeRepoComponent with EmployeeHandlerComponent with DataSourceComponent with RoutingComponent {
 
@@ -23,14 +30,14 @@ trait InMemDBEnvironment extends EmployeeRepoComponent with EmployeeHandlerCompo
   }
 
   override lazy val driver: String = DatabaseConfig.driver
-  override lazy val jdbcURL =
-    //"jdbc:postgresql://horton.elephantsql.com:5432/laxvgaoy?user=laxvgaoy&password=aGv3zZYWNsehP-kL0ly7k3B9xNvxgGdv"
+  override lazy val jdbcURL = "jdbc:postgresql://horton.elephantsql.com:5432/laxvgaoy?user=laxvgaoy&password=aGv3zZYWNsehP-kL0ly7k3B9xNvxgGdv"
 
 }
 
 trait DBTestData{this: InMemDBEnvironment =>
 
   def createAllTables = {
-    DbTables.employeeQuery.schema.create
+
+
   }
 }

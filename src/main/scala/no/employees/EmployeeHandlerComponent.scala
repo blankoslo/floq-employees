@@ -65,21 +65,20 @@ trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
       body <- requestBody
       employee <- parseBody[Employee](body)
       employeeEntity <- toDirective(employeeRepo.saveEmployeeToRepo(employee))
-    } yield JsonContent ~> ResponseString(employeeEntity.asJson.toString)
+    } yield JsonContent ~> Created ~> ResponseString(employeeEntity.asJson.toString)
 
-      def putSpot(employeeId: Int): RespDirective = for {
+    def putSpot(employeeId: Int): RespDirective = for {
         _ <- PUT
         _ <- commit
         body <- requestBody
         employee <- parseBody[Employee](body)
         employeeEntity <- toDirective(employeeRepo.updateEmployeeInRepo(employeeId, employee))
-      } yield JsonContent ~> ResponseString(employeeEntity.asJson.toString)
+      } yield JsonContent ~> Created ~> ResponseString(employeeEntity.asJson.toString)
 
-      def deleteSpot(employeeId: Int): RespDirective = for {
+    def deleteSpot(employeeId: Int): RespDirective = for {
         _ <- DELETE
         _ <- commit
         _ <- toDirective(employeeRepo.deleteEmployeeFromRepo(employeeId))
-
       } yield NoContent
 
 
