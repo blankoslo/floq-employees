@@ -51,7 +51,6 @@ class EmployeeIntSpec extends FunSuite with IntegrationTestRegistry with BeforeA
       case \/-(success) => assert(success.length == 1)
       case -\/(failure) => failure
     }
-
   }
 }
 
@@ -61,3 +60,4 @@ object TestHelper {
       .setHeader("Accept", "application/json")
   }
 }
+
