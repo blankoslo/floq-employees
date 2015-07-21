@@ -2,14 +2,24 @@ package no.employees
 
 import java.net.{URI, URL}
 
+import org.eclipse.jetty.servlets.CrossOriginFilter
 import slick.jdbc.JdbcBackend._
 import unfiltered.filter.Plan
 
 import scala.util.Properties
 
+
 object Application extends App {
-  unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt)
-    .plan(ComponentRegistry.EmployeePlan).run()
+  unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt).plan(new CrossOriginFilter)
+    .plan(ComponentRegistry.EmployeePlan).resources(getStaticDir()).run()
+
+  def getStaticDir(): URL = {
+    val resourceDirMarker = "index.html"
+    val resourceMarkerPath: URL = this.getClass().getClassLoader.getResource(resourceDirMarker);
+    // Need parent dir
+    new URL(resourceMarkerPath.toString.replace(resourceDirMarker, ""))
+  }
+
 }
 
 object DatabaseConfig {

@@ -22,6 +22,8 @@ dependencies {
     compile "net.databinder:unfiltered-directives_$mainVersionScala:$unfilteredVersion"
     compile "net.databinder.dispatch:dispatch-core_$mainVersionScala:0.11.2"
 
+    compile "org.eclipse.jetty:jetty-servlets:7.6.9.v20130131"
+
     compile "com.github.tminglei:slick-pg_$mainVersionScala:0.9.0"
     compile "org.scalaz:scalaz-core_$mainVersionScala:7.0.6"
     compile "io.argonaut:argonaut_$mainVersionScala:6.1"
@@ -48,6 +50,18 @@ test {
         events "passed", "skipped", "failed"
     }
 }
+
+sourceSets {
+    main {
+        scala {
+            srcDir 'src/main/scala'
+        }
+        resources {
+            srcDir 'frontend/public'
+        }
+    }
+}
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.4'
