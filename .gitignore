@@ -9,3 +9,4 @@
 /target/
 /frontend/node_modules/
 /out/
+/frontend/public/dist/

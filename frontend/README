@@ -1,0 +1,7 @@
+Prerequisites:
+- node
+- npm
+
+1. Install dependencies by running "npm install"
+2. Run "gulp watch" to continuously build frontend
+3. Run "node server.js" to start the application (port 3000)

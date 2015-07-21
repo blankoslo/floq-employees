@@ -1,0 +1,40 @@
+{
+  "name": "employees",
+  "version": "0.0.1",
+  "description": "The frontend application for employees",
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch"
+  },
+  "dependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^8.1.1",
+    "fluxxor": "1.6.0",
+    "gulp": "^3.8.10",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-karma": "0.0.4",
+    "gulp-less": "^3.0.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-rename": "^1.2.0",
+    "immutable": "3.7.4",
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-browserify": "^3.0.2",
+    "karma-jasmine": "^0.3.5",
+    "path": "^0.11.14",
+    "react": "^0.13.3",
+    "react-router": "0.13.3",
+    "react-select": "^0.4.9",
+    "reactable": "^0.10.2",
+    "reactify": "^1.0.0",
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.0.0"
+  },
+  "devDependencies": {
+    "express": "^4.12.3",
+    "gulp-notify": "^2.2.0",
+    "karma-babel-preprocessor": "^5.2.1",
+    "karma-notify-reporter": "^0.1.1",
+    "karma-phantomjs2-launcher": "^0.1.6"
+  }
+}
