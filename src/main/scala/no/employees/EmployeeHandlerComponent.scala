@@ -3,7 +3,7 @@ package no.employees
 import java.net.{URL, URI}
 import javax.servlet.http.HttpServletRequest
 
-import no.employees.data.{Employee, ResourceDescription}
+import no.employees.data.{Genders, Employee, ResourceDescription}
 import unfiltered.directives.Directives._
 import unfiltered.directives.{Directive, Directives}
 import unfiltered.request._
@@ -48,10 +48,16 @@ trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
       base <- baseUrl
 
       descriptions <- toDirective(\/-(List(
+        ResourceDescription("genders", Paths.Genders, base),
         ResourceDescription("employees", Paths.Employees, base),
         ResourceDescription("employee", Paths.Employee, base))))
     } yield JsonContent ~> ResponseString(descriptions.asJson.toString)
 
+    def getGenders: RespDirective = for {
+      _ <- GET
+      _ <- commit
+    } yield JsonContent ~> ResponseString(Genders.values.asJson.toString)
+    
     def handleEmployees(employeeId: Option[String]): RespDirective = {
       employeeId match {
         //case Some(_) => _

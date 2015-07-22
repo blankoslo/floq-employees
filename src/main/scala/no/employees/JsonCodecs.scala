@@ -22,6 +22,9 @@ object JsonCodecs {
   implicit def localDateDecoder: DecodeJson[LocalDate] =
     implicitly[DecodeJson[String]].map(a => LocalDate.parse(a.toString, formatter)) setName "java.time.LocalDate"
 
+  implicit def GendersEncodeJson(implicit ev: EncodeJson[Genders.Gender]): EncodeJson[Genders.ValueSet] = {
+    EncodeJson( (p: Genders.ValueSet) =>  p.toList.asJson)
+  }
 
   implicit def genderCodec: CodecJson[Genders.Gender] = CodecJson({
     case Genders.Male => "male".asJson

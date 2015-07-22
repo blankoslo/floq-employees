@@ -9,6 +9,7 @@ object Paths {
   val Api = Root / "api"
   val Employees = Api / "employees"
   val Employee = Employees / 'employeeid
+  val Genders = Api / "genders"
 
   object -/ {
     def apply(linx: Linx[_, _]): String = apply(linx.toString())
