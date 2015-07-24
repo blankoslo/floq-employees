@@ -16,6 +16,14 @@ function parseError(req) {
 }
 
 var actions = {
+    loadGenders() {
+        this.dispatch(Constants.GENDERS_LOAD_STARTED);
+        client.getGenders().then(
+            (e) => this.dispatch(Constants.GENDERS_LOAD_SUCCEEDED, e),
+            (e) => this.dispatch(Constants.GENDERS_LOAD_FAILED, parseError(e))
+        );
+    },
+
     loadEmployees() {
         this.dispatch(Constants.EMPLOYEES_LOAD_STARTED);
         client.getEmployees().then(
@@ -24,14 +32,14 @@ var actions = {
         );
     },
 
-    createEmployee(empployee) {
-        this.dispatch(Constants.CLIENT_CREATE_STARTED, newClient);
-        client.createClient(newClient).then(
-            (e) => this.dispatch(Constants.CLIENT_CREATE_SUCCEEDED, e),
-            (e) => this.dispatch(Constants.CLIENT_CREATE_FAILED, parseError(e))
+    createEmployee(employee) {
+        alert("yo")
+        this.dispatch(Constants.EMPLOYEES_CREATE_STARTED, employee);
+        client.createEmployee(employee).then(
+            (e) => this.dispatch(Constants.EMPLOYEES_CREATE_SUCCEEDED, e),
+            (e) => this.dispatch(Constants.EMPLOYEES_CREATE_FAILED, parseError(e))
         );
     }
-
 };
 
 module.exports = actions;

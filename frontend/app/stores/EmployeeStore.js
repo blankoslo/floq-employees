@@ -23,8 +23,8 @@ var EmployeeStore = Fluxxor.createStore({
         this.emit("change");
     },
     
-    onEmployeesLoaded(spots) {
-        this.employees = spots;
+    onEmployeesLoaded(employees) {
+        this.employees = employees;
         this.loadState = this.loadState
                              .set("loaded", true)
                              .set("loading", false);

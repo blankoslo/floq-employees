@@ -5,10 +5,12 @@ var _ = require('underscore');
 var Constants = require('./constants.js');
 var Immutable = require('immutable');
 var EmployeeStore = require('./stores/EmployeeStore.js');
+var GenderStore = require('./stores/GenderStore.js');
 var actions = require('./actions.js');
 
 var stores = {
     EmployeeStore: new EmployeeStore(),
+    GenderStore: new GenderStore()
 };
 
 var flux = new Fluxxor.Flux(stores, actions);
@@ -20,6 +22,7 @@ flux.on("dispatch", function(type, payload) {
 });
 
 var EmployeeList = require('./components/employeeList.jsx');
+var CreateEmployee = require('./components/createEmployee.jsx');
 
 var App = React.createClass({
     mixins: [
@@ -42,6 +45,7 @@ var App = React.createClass({
         return (
             <div className="container">
                 <header><h1>Ansattliste</h1></header>
+                <CreateEmployee />
                 <EmployeeList />
             </div>
         );

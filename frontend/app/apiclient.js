@@ -53,12 +53,23 @@ var apiClient = function(rootUri) {
         return descriptionPromise;
     }
 
+    function getGenders() {
+        return getDescription()
+            .then(e => xhrGet(e.genders.href))
+            .then(parseResponseWith(parseGenders));
+    }
+
     function getEmployees() {
         return getDescription()
             .then(e => xhrGet(e.employees.href))
             .then(parseResponseWith(employeesJs =>
                 Immutable.fromJS(employeesJs).map(employeesMap =>
                     new Record.Employee(employeesMap))));
+    }
+
+    function parseGenders(payload) {
+        return Immutable.fromJS(payload).map(gender =>
+            new Record.Gender({name: gender, value: gender}));
     }
 
     function parseEmployees(payload) {
@@ -72,11 +83,11 @@ var apiClient = function(rootUri) {
             return getDescription()
             .then(e => e.employees.href)
             .then(e => xhrPost(e, employee.toJS()))
-            .then(parseResponseWith(parseClient));
+            .then(parseResponseWith(parseEmployees));
     }
 
     return {
-        getEmployees, createEmployee
+        getGenders, getEmployees, createEmployee
     };
 }
 

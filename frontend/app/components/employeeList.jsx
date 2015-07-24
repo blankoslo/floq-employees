@@ -22,6 +22,7 @@ var EmployeeList = React.createClass({
     },
 
     render: function () {
+        console.log(this.state.employees);
         var employees = this.state.employees.toJS();
         var columns = [{key: 'firstName', label: 'Fornavn'}, {key: 'lastName', label: 'Etternavn'}, {key: 'phone', label:'Telefon'},
             {key: 'address', label: 'Adresse'}, {key: 'postalCode', label: 'Postnr.'}, {key: 'city', label: 'By'}, {key: 'dateOfEmployment', label: 'Startdato'}];
