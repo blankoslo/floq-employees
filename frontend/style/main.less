@@ -1,12 +1,50 @@
 @import "reset.less";
 @import "header.less";
-@import "spotItem.less";
 @import "datepicker.less";
 
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 
+@errorColor: red;
+@backgroundPanelColor: #c3c3c3;
+@inputColor: #EEE;
+
+
 body {
   font-family: 'Lato', sans-serif;
+}
+
+label {
+  width: 15rem;
+  display: inline-block;
+}
+
+form {
+  display: table;
+}
+
+div.formContainer {
+  background-color: @backgroundPanelColor;
+  padding: 0.5rem 1rem;
+}
+
+div.form-group {
+  display: table-cell;
+}
+
+div.form-row {
+  display: table-row;
+}
+
+input, select {
+  position: relative;
+  font-size: 16px;
+  border-style: none;
+  border-bottom: 1px solid black;
+  line-height: 19px;
+  padding: 6px 10px 5px;
+  width: 12rem;
+  margin-bottom: 1rem;
+  background-color: @inputColor;
 }
 
 div.container {
@@ -14,11 +52,16 @@ div.container {
   margin: 0 auto;
 }
 
-.inline {
-  display: inline;
+.errorMessage {
+  input {
+    border-color: @errorColor;
+  }
 }
 
+.error {
+  color: red;
 
+}
 table {
   width: 100%;
   border-collapse: separate;
