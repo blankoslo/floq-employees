@@ -7,7 +7,6 @@ var Constants = require('./constants.js');
 var client = apiClient("./api");
 
 function parseError(req) {
-    alert("hea");
         const payload = JSON.parse(req.responseText);
         return new Record.Error({
             type: payload.type,
@@ -33,7 +32,6 @@ var actions = {
     },
 
     createEmployee(employee) {
-        alert("yo")
         this.dispatch(Constants.EMPLOYEES_CREATE_STARTED, employee);
         client.createEmployee(employee).then(
             (e) => this.dispatch(Constants.EMPLOYEES_CREATE_SUCCEEDED, e),
