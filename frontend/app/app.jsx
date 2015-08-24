@@ -28,18 +28,6 @@ var App = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React)
     ],
-    
-    getInitialState: function() {
-        return { activeFilters: [], selectedCity: undefined };
-    },
-
-    toggleFilter: function(type) {
-        if(_.contains(this.state.activeFilters, type)){
-            this.setState({activeFilters: _.without(this.state.activeFilters, type)});
-        } else {
-            this.setState({activeFilters: this.state.activeFilters.concat(type)});
-        }
-    },
 
     render: function() {
         return (

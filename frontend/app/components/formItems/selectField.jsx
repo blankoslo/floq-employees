@@ -22,10 +22,10 @@ var selectField = React.createClass({
         var handleChange = this.props.handleChange;
         var disabled = this.props.disabled;
 
-        if (this.props.value === "Velg") {
+        if (this.props.value == null) {
             var defaultValue = (
                 <option hidden value="Velg">
-                    "Velg"
+                    Velg
                 </option>
             );
         }

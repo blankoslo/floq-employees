@@ -9,7 +9,6 @@ var GenderStore = Fluxxor.createStore({
     initialize() {
         this.genders = Immutable.List();
         this.loadState = new Record.LoadState();
-        this.loadState = new Record.LoadState();
         this.bindActions(
             Constants.GENDERS_LOAD_STARTED, this.onGendersLoading,
             Constants.GENDERS_LOAD_SUCCEEDED, this.onGendersLoaded,
