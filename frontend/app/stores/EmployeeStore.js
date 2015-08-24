@@ -4,7 +4,6 @@ var Immutable = require('immutable');
 var Fluxxor = require('fluxxor');
 var Record = require('./../record.js');
 var Constants = require('./../constants.js');
-var MicroEvent = require('microevent');
 
 var EmployeeStore = Fluxxor.createStore({
 

@@ -1,6 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.moowork.gradle:gradle-node-plugin:0.10'
+    }
+}
+
 apply plugin: 'scala'
 apply plugin: 'idea'
 apply plugin: 'application'
+apply plugin: 'com.moowork.node'
 
 repositories {
     mavenCentral()
@@ -60,11 +71,21 @@ sourceSets {
     }
 }
 
-task buildFrontend(type:Exec) {
-    workingDir 'frontend'
-    commandLine './buildfrontend.sh'
+task installFrontend(type: NpmTask) {
+    execOverrides {
+        it.workingDir = "frontend"
+    }
+
+    setArgs( ['install'] )
 }
 
+task buildFrontend(type: NpmTask, dependsOn: 'installFrontend') {
+    execOverrides {
+        it.workingDir = "frontend"
+    }
+
+    args = ['run', 'build']
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.6'
