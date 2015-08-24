@@ -40,9 +40,7 @@ dependencies {
 
     testCompile "com.h2database:h2:1.4.185"
     testCompile "org.scalatest:scalatest_$mainVersionScala:2.2.4"
-
-
-        testCompile "junit:junit:4.12"
+    testCompile "junit:junit:4.12"
 }
 
 test {
@@ -62,9 +60,14 @@ sourceSets {
     }
 }
 
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
+task buildFrontend(type:Exec) {
+    workingDir 'frontend'
+    commandLine './buildfrontend.sh'
 }
 
-task stage(dependsOn: ['clean', 'installApp'])
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
+
+task stage(dependsOn: ['clean', 'buildFrontend', 'installDist'])
