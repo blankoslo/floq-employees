@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import argonaut.Argonaut._
 import argonaut.{DecodeResult, DecodeJson, CodecJson, EncodeJson}
 import linx.VariableLinx
-import no.employees.data.{Genders, ResourceDescription, Employee, Entity}
+import no.employees.data._
 
 
 object JsonCodecs {
@@ -40,6 +40,9 @@ object JsonCodecs {
   implicit def employeeCodec: CodecJson[Employee] = casecodec13(Employee.apply, Employee.unapply)(
     "firstName", "lastName", "phone", "gender", "birthDate", "dateOfEmployment", "terminationDate", "emergencyContactName",
     "emergencyContactPhone", "emergencyContactRelation", "address", "postalCode", "city")
+
+  implicit def tokenCodec: CodecJson[GoogleVerifyResponse] = casecodec4(GoogleVerifyResponse.apply, GoogleVerifyResponse.unapply)(
+    "aud", "hd", "email", "name")
 
   implicit def EntityEncodeJson[A](implicit ev: EncodeJson[A]): EncodeJson[Entity[A]] = {
     EncodeJson(entity => {

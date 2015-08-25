@@ -22,6 +22,7 @@ trait RoutingComponent { this: EmployeeHandlerComponent =>
       case Employee(employeeId) => employeeHandler.handleEmployees(Some(employeeId))
       case Employees() => employeeHandler.handleEmployees(None)
       case Genders() => employeeHandler.getGenders
+      case Signin() => employeeHandler.signIn()
     }
   }
 }

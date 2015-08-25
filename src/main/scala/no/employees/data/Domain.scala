@@ -28,3 +28,8 @@ case class Employee(firstName: String,
                     city: Option[String]);
 
 case class ResourceDescription(name: String, link: Linx[_, _], baseUrl: URL)
+
+case class GoogleVerifyResponse(aud: String,
+                                 hd: Option[String],
+                                 email: String,
+                                 name: String)

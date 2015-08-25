@@ -79,22 +79,6 @@ sourceSets {
     }
 }
 
-task installFrontend(type: NpmTask) {
-    execOverrides {
-        it.workingDir = "frontend"
-    }
-
-    setArgs( ['install'] )
-}
-
-task buildFrontend(type: NpmTask, dependsOn: 'installFrontend') {
-    execOverrides {
-        it.workingDir = "frontend"
-    }
-
-    args = ['run', 'build']
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.6'
 }
