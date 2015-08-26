@@ -54,20 +54,22 @@ trait EmployeeHandlerComponent extends RequestHandler{ this: EmployeeRepoCompone
     type AuthRespDirective = (User) => Directive[HttpServletRequest, ResponseFunction[Any], ResponseFunction[Any]]
 
     def handleDescription: AuthRespDirective = t =>
-      for {_ <- GET
-           _ <- commit
-           base <- baseUrl
+      for {
+        _ <- GET
+        _ <- commit
+        base <- baseUrl
 
-           descriptions <- toDirective(\/-(List(
-             ResourceDescription("genders", Paths.Genders, base),
-             ResourceDescription("employees", Paths.Employees, base),
-             ResourceDescription("employee", Paths.Employee, base))))
+        descriptions <- toDirective(\/-(List(
+          ResourceDescription("genders", Paths.Genders, base),
+          ResourceDescription("employees", Paths.Employees, base),
+          ResourceDescription("employee", Paths.Employee, base))))
       } yield JsonContent ~> ResponseString(descriptions.asJson.toString)
 
-    def getGenders: RespDirective = for {
-      _ <- GET
-      _ <- commit
-    } yield JsonContent ~> ResponseString(Genders.values.asJson.toString)
+    def getGenders: AuthRespDirective = t =>
+      for {
+        _ <- GET
+        _ <- commit
+      } yield JsonContent ~> ResponseString(Genders.values.asJson.toString)
 
 
     def handleEmployees(employeeId: Option[String]): AuthRespDirective = t => {

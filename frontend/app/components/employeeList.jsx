@@ -19,8 +19,7 @@ var EmployeeList = React.createClass({
         var userStore = this.getFlux().store('UserStore');
         return {
             employees: employeeStore.employees,
-            loggedInUser: userStore.loggedInUser,
-            userIsLoggedIn: userStore.userIsLoggedIn
+            loggedInUser: userStore.loggedInUser
         };
     },
 

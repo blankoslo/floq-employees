@@ -34,7 +34,7 @@ var apiClient = function(rootUri) {
     }
 
     const xhrGet = (url, token) => xhr('get', url, null, token);
-    const xhrPost = (url, data) => xhr('post', url, data);
+    const xhrPost = (url, data, token) => xhr('post', url, data, token);
     const xhrPut = (url, data) => xhr('put', url, data);
     const xhrDelete = (url) => xhr('delete', url);
 
@@ -54,9 +54,9 @@ var apiClient = function(rootUri) {
         return descriptionPromise;
     }
 
-    function getGenders() {
-        return getDescription()
-            .then(e => xhrGet(e.genders.href))
+    function getGenders(token) {
+        return getDescription(token)
+            .then(e => xhrGet(e.genders.href, token))
             .then(parseResponseWith(parseGenders));
     }
 
@@ -80,15 +80,11 @@ var apiClient = function(rootUri) {
         })
     }
 
-    function createEmployee(employee) {
-            return getDescription()
+    function createEmployee(employee, token) {
+            return getDescription(token)
             .then(e => e.employees.href)
-            .then(e => xhrPost(e, employee.toJS()))
+            .then(e => xhrPost(e, employee.toJS(), token))
             .then(parseResponseWith(parseEmployees));
-    }
-
-    function signIn(id) {
-
     }
 
     return {

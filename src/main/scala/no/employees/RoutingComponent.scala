@@ -34,11 +34,16 @@ trait AuthenticationModule extends RequestHandler {
       token <- toDirective(tokenIterator.toSeq.headOption, Unauthorized)
       googleResponse <- verifyToken(token)
       _ <- isDomainCorrect(googleResponse)
-    } yield User("yo", "yo")
+      user <- googleResponseToUser(googleResponse)
+    } yield user
 
+
+  private def googleResponseToUser(googleVerifyResponse: GoogleVerifyResponse) = {
+    Directives.success(User(googleVerifyResponse.name, googleVerifyResponse.email))
+  }
 
   private def isDomainCorrect(googleVerifyResponse: GoogleVerifyResponse) = googleVerifyResponse.hd match {
-    case Some("jdo.no") => Directives.success()
+    case Some("jdo.no") => Directives.success("Correct domain")
     case _ => Directives.failure(Unauthorized ~> ResponseString("Wrong domain"))
   }
 
@@ -54,7 +59,6 @@ trait AuthenticationModule extends RequestHandler {
   }
 }
 
-
 trait RoutingComponent extends AuthenticationModule{ this: EmployeeHandlerComponent =>
 
   def routing: Routing
@@ -67,7 +71,7 @@ trait RoutingComponent extends AuthenticationModule{ this: EmployeeHandlerCompon
       case Api() => withAuth.flatMap(employeeHandler.handleDescription)
       case Employee(employeeId) => withAuth.flatMap(employeeHandler.handleEmployees(Some(employeeId)))
       case Employees() => withAuth.flatMap(employeeHandler.handleEmployees(None))
-      case Genders() => employeeHandler.getGenders
+      case Genders() => withAuth.flatMap(employeeHandler.getGenders)
     }
   }
 }

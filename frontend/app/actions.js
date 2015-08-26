@@ -22,9 +22,9 @@ var actions = {
         this.dispatch(Constants.USER_SIGNED_IN, user)
     },
 
-    loadGenders() {
+    loadGenders(token) {
         this.dispatch(Constants.GENDERS_LOAD_STARTED);
-        client.getGenders().then(
+        client.getGenders(token).then(
             (e) => this.dispatch(Constants.GENDERS_LOAD_SUCCEEDED, e),
             (e) => this.dispatch(Constants.GENDERS_LOAD_FAILED, parseError(e))
         );
@@ -38,9 +38,9 @@ var actions = {
         );
     },
 
-    createEmployee(employee) {
+    createEmployee(employee, token) {
         this.dispatch(Constants.EMPLOYEES_CREATE_STARTED, employee);
-        client.createEmployee(employee).then(
+        client.createEmployee(employee, token).then(
             (e) => this.dispatch(Constants.EMPLOYEES_CREATE_SUCCEEDED, e),
             (e) => this.dispatch(Constants.EMPLOYEES_CREATE_FAILED, parseError(e))
         );

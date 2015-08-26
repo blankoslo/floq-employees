@@ -8,7 +8,6 @@ var Constants = require('./../constants.js');
 var UserStore = Fluxxor.createStore({
     initialize() {
         this.loggedInUser = new Record.User();
-        this.userIsLoggedIn = false;
         this.bindActions(
             Constants.USER_SIGNED_IN, this.onUserSignedIn
         );
@@ -17,12 +16,7 @@ var UserStore = Fluxxor.createStore({
     onUserSignedIn(user) {
         console.log("Hurray, we have a sign in!")
         this.loggedInUser = user;
-        this.userIsLoggedIn = true;
         this.emit("change");
-    },
-
-    onUserSignOut() {
-        this.userIsLoggedIn = false;
     }
 
 });

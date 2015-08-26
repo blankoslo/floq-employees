@@ -9,18 +9,19 @@ var DateField = require('./formItems/dateField.jsx');
 var EmployeeForm = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('GenderStore')
+        Fluxxor.StoreWatchMixin('GenderStore', 'UserStore')
     ],
 
     componentDidMount() {
-        this.getFlux().actions.loadGenders();
+        this.getFlux().actions.loadGenders(this.state.loggedInUser.token);
     },
 
     getStateFromFlux() {
         var genderStore = this.getFlux().store('GenderStore');
+        var userStore = this.getFlux().store('UserStore');
         return {
-            genders: genderStore.genders
-
+            genders: genderStore.genders,
+            loggedInUser: userStore.loggedInUser
         };
     },
 
@@ -35,7 +36,7 @@ var EmployeeForm = React.createClass({
         event.preventDefault();
 
         if(this.requiredFieldsAreOk()){
-            this.getFlux().actions.createEmployee(this.state.employee);
+            this.getFlux().actions.createEmployee(this.state.employee, this.state.loggedInUser.token);
         }
     },
 
