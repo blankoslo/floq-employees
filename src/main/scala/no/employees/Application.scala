@@ -58,6 +58,18 @@ object Application extends App {
 
 }
 
+object LocalApplication extends App {
+  unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt).plan(new EmployeesCrossOriginFilter)
+    .plan(ComponentRegistry.EmployeePlan).resources(getStaticDir()).run()
+
+  def getStaticDir(): URL = {
+    val resourceDirMarker = "index.html"
+    val resourceMarkerPath: URL = this.getClass().getClassLoader.getResource(resourceDirMarker);
+    // Need parent dir
+    new URL(resourceMarkerPath.toString.replace("build/resources/main/" + resourceDirMarker, "frontend/public"))
+  }
+}
+
 object DatabaseConfig {
   val jdbcUrl = {
     val databaseUrl : Option[String] = Option(System.getenv("DATABASE_URL"))
