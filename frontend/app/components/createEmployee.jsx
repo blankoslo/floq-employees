@@ -29,10 +29,6 @@ var CreateEmployee = React.createClass({
         Fluxxor.StoreWatchMixin('EmployeeStore')
     ],
 
-    componentDidMount() {
-        this.getFlux().actions.loadGenders();
-    },
-
     employeeSaved() {
       alert("saved!");
     },

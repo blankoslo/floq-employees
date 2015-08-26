@@ -13,6 +13,8 @@ object Genders extends Enumeration {
 
 case class Entity[A](id: Int, value: A)
 
+case class User(name: String, email: String)
+
 case class Employee(firstName: String,
                     lastName: String,
                     phone: String,

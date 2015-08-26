@@ -18,13 +18,14 @@ var apiClient = function(rootUri) {
         return e => e.employee.template.replace('{employeeid}', id);
     }
 
-    function xhr(method, url, data) {
+    function xhr(method, url, data, token) {
         const isSuccess = n => n >= 200 && n < 400;
         return new Promise((resolve, reject) => {
             const req = new XMLHttpRequest();
             req.onload = () => isSuccess(req.status) ? resolve(req) : reject(req);
             req.onerror = () => reject(req);
             req.open(method, url);
+            req.setRequestHeader('Authorization', token);
             if (data) {
                 req.setRequestHeader('Content-Type', 'text/json');
             }
@@ -32,7 +33,7 @@ var apiClient = function(rootUri) {
         });
     }
 
-    const xhrGet = (url) => xhr('get', url);
+    const xhrGet = (url, token) => xhr('get', url, null, token);
     const xhrPost = (url, data) => xhr('post', url, data);
     const xhrPut = (url, data) => xhr('put', url, data);
     const xhrDelete = (url) => xhr('delete', url);
@@ -44,9 +45,9 @@ var apiClient = function(rootUri) {
     const parseResponseWith = (transformer) => (req) =>
         transformer(JSON.parse(req.responseText));
 
-    function getDescription() {
+    function getDescription(token) {
         if (!descriptionPromise) {
-            descriptionPromise = xhrGet(rootUri)
+            descriptionPromise = xhrGet(rootUri, token)
                 .then(parseResponse)
                 .then(rootArrayToMap);
         }
@@ -59,9 +60,9 @@ var apiClient = function(rootUri) {
             .then(parseResponseWith(parseGenders));
     }
 
-    function getEmployees() {
-        return getDescription()
-            .then(e => xhrGet(e.employees.href))
+    function getEmployees(token) {
+        return getDescription(token)
+            .then(e => xhrGet(e.employees.href, token))
             .then(parseResponseWith(employeesJs =>
                 Immutable.fromJS(employeesJs).map(employeesMap =>
                     new Record.Employee(employeesMap))));
@@ -84,6 +85,10 @@ var apiClient = function(rootUri) {
             .then(e => e.employees.href)
             .then(e => xhrPost(e, employee.toJS()))
             .then(parseResponseWith(parseEmployees));
+    }
+
+    function signIn(id) {
+
     }
 
     return {
