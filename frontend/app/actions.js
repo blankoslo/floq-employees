@@ -18,7 +18,7 @@ var actions = {
 
     setLoggedInUser(googleUser) {
         var user = new Record.User({name: googleUser.getBasicProfile().getName(), pictureUrl: googleUser.getBasicProfile().getImageUrl(),
-            token: googleUser.getAuthResponse().id_token});
+            token: googleUser.getAuthResponse().id_token, email: googleUser.getBasicProfile().getEmail()});
         this.dispatch(Constants.USER_SIGNED_IN, user)
     },
 

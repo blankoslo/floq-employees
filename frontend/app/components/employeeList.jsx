@@ -11,7 +11,7 @@ var EmployeeList = React.createClass({
     ],
 
     componentDidMount() {
-        //this.getFlux().actions.loadEmployees(this.state.loggedInUser.token);
+        this.getFlux().actions.loadEmployees(this.state.loggedInUser.token);
     },
 
     getStateFromFlux() {
@@ -24,20 +24,13 @@ var EmployeeList = React.createClass({
         };
     },
 
-    loadEmployees() {
-        console.log("Lastetoken: " + this.state.loggedInUser.token)
-        this.getFlux().actions.loadEmployees(this.state.loggedInUser.token);
-    },
-
     render: function () {
-
         var employees = this.state.employees.toJS();
         var columns = [{key: 'firstName', label: 'Fornavn'}, {key: 'lastName', label: 'Etternavn'}, {key: 'phone', label:'Telefon'},
             {key: 'address', label: 'Adresse'}, {key: 'postalCode', label: 'Postnr.'}, {key: 'city', label: 'By'}, {key: 'dateOfEmployment', label: 'Startdato'}];
 
         return (
             <div>
-                <button onClick={this.loadEmployees} >Last folk </button>
             <Table className="table" data={employees} columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'desc'}}/>
                 </div>
         );

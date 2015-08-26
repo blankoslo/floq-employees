@@ -3,7 +3,7 @@ var Immutable = require('immutable');
 var Record = {
     LoadState: Immutable.Record({loaded: false, loading: false, dirty: false, error: null}),
     CreateState: Immutable.Record({created: true, creating: false, dirty: false, error: null}),
-    User: Immutable.Record({name: "", pictureUrl: "", token: ""}),
+    User: Immutable.Record({name: "", pictureUrl: "", token: "", email:""}),
     Employee: Immutable.Record({firstName: null, lastName: null, phone: null, gender: null, birthDate: null,
         dateOfEmployment: null, terminationDate: null, emergencyContactName: null, emergencyContactPhone: null,
         emergencyContactRelation: null, address: null, postalCode: null, city: null}),

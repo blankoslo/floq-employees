@@ -27,7 +27,8 @@ var EmployeeList = require('./components/employeeList.jsx');
 var CreateEmployee = require('./components/createEmployee.jsx');
 var UserHeader = require('./components/userHeader.jsx');
 
-var App = React.createClass({
+
+var GoogleSignIn = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React)
     ],
@@ -58,7 +59,23 @@ var App = React.createClass({
         console.log('Token: ' + googleUser.getAuthResponse().id_token);
 
         this.getFlux().actions.setLoggedInUser(googleUser);
+        React.render(<App flux={flux} />, document.body);
     },
+
+    render: function(){
+        return(
+            <div className="container">
+                <div id="my-signin2" />
+            </div>
+        );
+    }
+
+});
+
+var App = React.createClass({
+    mixins: [
+        Fluxxor.FluxMixin(React)
+    ],
 
     render: function(){
         return(
@@ -76,5 +93,4 @@ function triggerGoogleLoaded() {
     window.dispatchEvent(new Event('google-loaded'));
 }
 
-React.render(<App flux={flux} />, document.body);
-
+React.render(<GoogleSignIn flux={flux} />, document.body);
