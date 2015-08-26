@@ -18,7 +18,33 @@ import scalaz._, Scalaz._
 import argonaut._, Argonaut._
 
 
-trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
+trait RequestHandler {
+
+  val requestBody: Directive[Any, Nothing, JsonField] = request[Any].map(Body.string)
+
+  val baseUrl: Directive[HttpServletRequest, Nothing, URL] = request[HttpServletRequest].map(req => {
+    val requestUrl = new URL(req.underlying.getRequestURL.toString)
+    new URL(requestUrl.getProtocol, requestUrl.getHost, requestUrl.getPort, "")
+  })
+
+  def toDirective[A, B](result: \/[A, B]): Directive[Any, ResponseFunction[Any], B] = result match {
+    case \/-(success) => Directives.success(success)
+    case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
+  }
+
+  def toDirective[A](maybeA: Option[A], error: ResponseFunction[Any]): Directive[Any, ResponseFunction[Any], A] = maybeA match {
+    case Some(a) => Directives.success(a)
+    case None => Directives.failure(error)
+  }
+
+  def parseBody[A](body: String)(implicit ev: DecodeJson[A]): Directive[Any, ResponseFunction[Any], A] = Parse.decodeEither[A](body)(ev) match {
+    case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
+    case \/-(client) => Directives.success(client)
+  }
+
+}
+
+trait EmployeeHandlerComponent extends RequestHandler{ this: EmployeeRepoComponent =>
 
   def employeeHandler: EmployeeHandler
 
@@ -26,13 +52,6 @@ trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
 
     type RespDirective = Directive[HttpServletRequest, ResponseFunction[Any], ResponseFunction[Any]]
     type AuthRespDirective = (User) => Directive[HttpServletRequest, ResponseFunction[Any], ResponseFunction[Any]]
-
-    private val requestBody: Directive[Any, Nothing, JsonField] = request[Any].map(Body.string)
-
-    private val baseUrl: Directive[HttpServletRequest, Nothing, URL] = request[HttpServletRequest].map(req => {
-      val requestUrl = new URL(req.underlying.getRequestURL.toString)
-      new URL(requestUrl.getProtocol, requestUrl.getHost, requestUrl.getPort, "")
-    })
 
     def handleDescription: AuthRespDirective = t =>
       for {_ <- GET
@@ -72,21 +91,5 @@ trait EmployeeHandlerComponent { this: EmployeeRepoComponent =>
       _ <- commit
       employees <- toDirective(employeeRepo.getEmployeesFromRepo)
     } yield JsonContent ~> ResponseString(employees.asJson.toString)
-
-
-    private def toDirective[A, B](result: \/[A, B]): Directive[Any, ResponseFunction[Any], B] = result match {
-      case \/-(success) => Directives.success(success)
-      case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
-    }
-
-    private def toDirective[A](maybeA: Option[A]): Directive[Any, ResponseFunction[Any], A] = maybeA match {
-      case Some(a) => Directives.success(a)
-      case None => Directives.failure(NotFound)
-    }
-
-    def parseBody[A](body: String)(implicit ev: DecodeJson[A]): Directive[Any, ResponseFunction[Any], A] = Parse.decodeEither[A](body)(ev) match {
-      case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
-      case \/-(client) => Directives.success(client)
-    }
   }
 }

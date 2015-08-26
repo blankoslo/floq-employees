@@ -26,12 +26,7 @@ import dispatch.{Http, Req, host, _}
 
 import JsonCodecs._
 
-trait AuthenticationModule {
-
-  private val baseUrl: Directive[HttpServletRequest, Nothing, URL] = request[HttpServletRequest].map(req => {
-    val requestUrl = new URL(req.underlying.getRequestURL.toString)
-    new URL(requestUrl.getProtocol, requestUrl.getHost, requestUrl.getPort, "")
-  })
+trait AuthenticationModule extends RequestHandler {
 
     //todo verify app id?
     def withAuth = for {
@@ -57,23 +52,6 @@ trait AuthenticationModule {
       case _ => Directives.failure(Unauthorized ~> ResponseString("Invalid token"))
     }
   }
-
-  private def toDirective[A, B](result: \/[A, B]): Directive[Any, ResponseFunction[Any], B] = result match {
-    case \/-(success) => Directives.success(success)
-    case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
-  }
-
-  private def toDirective[A](maybeA: Option[A], error: ResponseFunction[Any]): Directive[Any, ResponseFunction[Any], A] = maybeA match {
-    case Some(a) => Directives.success(a)
-    case None => Directives.failure(error)
-  }
-
-  def parseBody[A](body: String)(implicit ev: DecodeJson[A]): Directive[Any, ResponseFunction[Any], A] = Parse.decodeEither[A](body)(ev) match {
-    case -\/(failure) => Directives.failure(InternalServerError ~> ResponseString(failure.toString))
-    case \/-(client) => Directives.success(client)
-  }
-
-
 }
 
 
