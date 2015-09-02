@@ -74,10 +74,18 @@ trait EmployeeHandlerComponent extends RequestHandler{ this: EmployeeRepoCompone
 
     def handleEmployees(employeeId: Option[String]): AuthRespDirective = t => {
       employeeId match {
-        //case Some(_) => _
+        case Some(id) => updateEmployee(id)
         case None => getEmployees | postEmployee
       }
     }
+
+    def updateEmployee(id: String): RespDirective = for {
+      _ <- PUT
+      _ <- commit
+      body <- requestBody
+      employee <- parseBody[Employee](body)
+      employeeEntity <- toDirective(employeeRepo.updateEmployeeInRepo(id.toInt, employee))
+    } yield JsonContent ~> Created ~> ResponseString(employeeEntity.asJson.toString)
 
     def postEmployee: RespDirective = for {
       _ <- POST
