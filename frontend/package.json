@@ -34,7 +34,6 @@
     "vinyl-source-stream": "^1.0.0"
   },
   "devDependencies": {
-    "express": "^4.12.3",
     "gulp-notify": "^2.2.0",
     "karma-babel-preprocessor": "^5.2.1",
     "karma-notify-reporter": "^0.1.1",
