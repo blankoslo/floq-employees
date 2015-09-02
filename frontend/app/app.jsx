@@ -59,7 +59,7 @@ var GoogleSignIn = React.createClass({
         console.log('Token: ' + googleUser.getAuthResponse().id_token);
 
         this.getFlux().actions.setLoggedInUser(googleUser);
-        React.render(<App flux={flux} />, document.body);
+        React.render(<App flux={flux} />, document.getElementById('employeeApp'));
     },
 
     render: function(){
@@ -80,7 +80,7 @@ var App = React.createClass({
     render: function(){
         return(
             <div className="container">
-                <UserHeader /><div id="my-signin2" />
+                <UserHeader />
                 <header><h1>Ansattliste</h1></header>
                 <CreateEmployee />
                 <EmployeeList />
@@ -93,4 +93,4 @@ function triggerGoogleLoaded() {
     window.dispatchEvent(new Event('google-loaded'));
 }
 
-React.render(<GoogleSignIn flux={flux} />, document.body);
+React.render(<GoogleSignIn flux={flux} />, document.getElementById('googleSignIn'));
