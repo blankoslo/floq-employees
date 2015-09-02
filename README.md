@@ -8,10 +8,8 @@ Prerequisites: Java
 ```shell
 ./gradlew
 ```
-
 2. To start the application, run
 ```shell
 ./gradlew run
 ```
-
 3. Go to http://localhost:8081
