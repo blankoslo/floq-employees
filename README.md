@@ -4,12 +4,12 @@ Employee application
 
 Prerequisites: Java
 
-1. To install embedded gradle, run
+Step 1 - To install embedded gradle, run
 ```shell
 ./gradlew
 ```
-2. To start the application, run
+Step 2 - To start the application, run
 ```shell
 ./gradlew run
 ```
-3. Go to http://localhost:8081
+Step 3 - Go to http://localhost:8081
