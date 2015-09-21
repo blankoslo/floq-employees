@@ -1,3 +1,9 @@
+// fluxxor depends on lodash, which expects the global var to be set,
+// which webpack doesn't seem to do by default.
+// https://github.com/lodash/lodash/issues/915
+// Workaround until I figure out how to expose global in webpack:
+window.global = window;
+
 var React = require('react');
 var ReactRouter = require('react-router');
 var Fluxxor = require('fluxxor');
@@ -8,6 +14,8 @@ var EmployeeStore = require('./stores/EmployeeStore.js');
 var GenderStore = require('./stores/GenderStore.js');
 var UserStore = require('./stores/UserStore.js');
 var actions = require('./actions.js');
+require("../style/main.less");
+
 
 var stores = {
     EmployeeStore: new EmployeeStore(),
@@ -22,6 +30,7 @@ flux.on("dispatch", function(type, payload) {
         //        console.log("[Dispatch]", type, payload);
     }
 });
+
 
 var EmployeeList = require('./components/employeeList.jsx');
 var CreateEmployee = require('./components/createEmployee.jsx');
