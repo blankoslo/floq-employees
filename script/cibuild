@@ -1,2 +1,2 @@
-./buildfrontend.sh
+./buildfrontend.bash
 ./gradlew stage
