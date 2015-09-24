@@ -74,7 +74,7 @@ var GoogleSignIn = React.createClass({
     render: function(){
         return(
             <div className="container">
-                <div id="my-signin2" />
+                <div id="my-signin2" data-onsuccess={this.onSignIn} />
             </div>
         );
     }
