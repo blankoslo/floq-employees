@@ -8,6 +8,11 @@ buildscript {
     }
 }
 
+plugins {
+  id "com.moowork.node" version "0.10"
+}
+
+
 apply plugin: 'scala'
 apply plugin: 'idea'
 apply plugin: 'application'
@@ -66,6 +71,12 @@ node {
 
     // Enabled the automatic download. False is the default (for now).
     download = true
+
+    // Set the work directory for unpacking node
+      workDir = file("${project.buildDir}/nodejs")
+
+      // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}/frontend")
 }
 
 sourceSets {
@@ -83,4 +94,14 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.6'
 }
 
-task stage(dependsOn: ['clean', 'installDist'])
+task buildFrontend(type: NpmTask, dependsOn: ['npmInstall']) {
+  execOverrides {
+    it.workingDir = file("${project.projectDir}/frontend")
+  }
+  args = ['run', 'minify']
+}
+
+task stage(dependsOn: ['clean', 'installDist', 'buildFrontend'])
+
+buildFrontend.mustRunAfter clean
+installDist.mustRunAfter buildFrontend
