@@ -47,7 +47,7 @@ class EmployeesCrossOriginFilter extends CrossOriginFilter {
 
 object Application extends App {
   unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt).plan(new EmployeesCrossOriginFilter)
-    .plan(ComponentRegistry.EmployeePlan).resources(getStaticDir()).run()
+    .plan(HttpsForcerPlan).plan(ComponentRegistry.EmployeePlan).resources(getStaticDir()).run()
 
   def getStaticDir(): URL = {
     val resourceDirMarker = "index.html"
