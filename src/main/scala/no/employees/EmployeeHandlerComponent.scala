@@ -24,7 +24,9 @@ trait RequestHandler {
 
   val baseUrl: Directive[HttpServletRequest, Nothing, URL] = request[HttpServletRequest].map(req => {
     val requestUrl = new URL(req.underlying.getRequestURL.toString)
-    new URL(requestUrl.getProtocol, requestUrl.getHost, requestUrl.getPort, "")
+
+    //TODO: fix forcing https (since we have http between heroku endpoint and application)
+    new URL("https", requestUrl.getHost, requestUrl.getPort, "")
   })
 
   def toDirective[A, B](result: \/[A, B]): Directive[Any, ResponseFunction[Any], B] = result match {
