@@ -71,16 +71,19 @@ object LocalApplication extends App {
 }
 
 object DatabaseConfig {
+
+  def transformDatabaseUrl(originalUrl: String) : String = {
+    val dbUri = new URI(originalUrl)
+    val username: String = dbUri.getUserInfo.split(":"){0};
+    val password: String = dbUri.getUserInfo.split(":"){1};
+    "jdbc:postgresql://" + dbUri.getHost + ':' + dbUri.getPort + dbUri.getPath + "?user=" + username + "&password=" + password;
+  }
+
   val jdbcUrl = {
     val databaseUrl : Option[String] = Option(System.getenv("DATABASE_URL"))
     databaseUrl match{
-      case Some(value) => {
-        val dbUri = new URI(value)
-        val username: String = dbUri.getUserInfo().split(":"){0};
-        val password: String = dbUri.getUserInfo().split(":"){1};
-        "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-      }
-      case None => "jdbc:postgresql://horton.elephantsql.com:5432/ymzbexfr?user=ymzbexfr&password=v64te7Ce6pvw7GanC9V6N7dI81ZZaAdV"
+      case Some(value) => transformDatabaseUrl(value)
+      case None => "jdbc:postgresql://horton.elephantsql.com:5432/ymzbexfr?user=ymzbexfr&password=v64te7Ce6pvw7GanC9V6N7dI81ZZaAdV" //default to DEV-db 
     }
   }
   val driver: String = "org.postgresql.Driver"
