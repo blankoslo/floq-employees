@@ -37,8 +37,8 @@ object JsonCodecs {
     case _ => DecodeResult.fail("Could not decode Gender enum", c.history)
   })
 
-  implicit def employeeCodec: CodecJson[Employee] = casecodec13(Employee.apply, Employee.unapply)(
-    "firstName", "lastName", "phone", "gender", "birthDate", "dateOfEmployment", "terminationDate", "emergencyContactName",
+  implicit def employeeCodec: CodecJson[Employee] = casecodec14(Employee.apply, Employee.unapply)(
+    "firstName", "lastName", "phone", "email", "gender", "birthDate", "dateOfEmployment", "terminationDate", "emergencyContactName",
     "emergencyContactPhone", "emergencyContactRelation", "address", "postalCode", "city")
 
   implicit def tokenCodec: CodecJson[GoogleVerifyResponse] = casecodec4(GoogleVerifyResponse.apply, GoogleVerifyResponse.unapply)(

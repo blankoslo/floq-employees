@@ -18,6 +18,7 @@ case class User(name: String, email: String)
 case class Employee(firstName: String,
                     lastName: String,
                     phone: String,
+                    email: String,
                     gender: Gender,
                     birthDate: LocalDate,
                     dateOfEmployment: Option[LocalDate] ,

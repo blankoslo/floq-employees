@@ -13,6 +13,7 @@ object DbTables {
     def firstName = column[String]("first_name")
     def lastName = column[String]("last_name")
     def phone = column[String]("phone")
+    def email = column[String]("email")
     def gender = column[Gender]("gender")
     def birthDate = column[LocalDate]("birth_date")
     def dateOfEmployment = column[Option[LocalDate]]("date_of_employment")
@@ -24,7 +25,7 @@ object DbTables {
     def postalCode = column[Option[String]]("postal_code")
     def city = column[Option[String]]("city")
 
-    def * = (id, (firstName, lastName, phone, gender, birthDate, dateOfEmployment, terminationDate, emergencyContactName,
+    def * = (id, (firstName, lastName, phone, email, gender, birthDate, dateOfEmployment, terminationDate, emergencyContactName,
       emergencyContactPhone, emergencyContactRelation, address, postalCode, city)).shaped <>( {
       case (id, employeeInfo) => Entity(id, Employee.tupled.apply(employeeInfo))
     }, { (employee: Entity[Employee]) => {

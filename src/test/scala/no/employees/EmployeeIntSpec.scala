@@ -32,16 +32,16 @@ class EmployeeIntSpec extends FunSuite with IntegrationTestRegistry with BeforeA
     Await.result(future, Duration.Inf)
   }
 
-  test("Post to vote should return created code") {
-    val json = Employee("firstname", "lastname", "40221672", Genders.Female, LocalDate.now, Some(LocalDate.now), Some(LocalDate.now),
+  test("Post to employee should return created code") {
+    val json = Employee("firstname", "lastname", "40221672", "email", Genders.Female, LocalDate.now, Some(LocalDate.now), Some(LocalDate.now),
       Some(""), Some(""), Some(""), Some(""), Some(""), Some("")).asJson.toString
     val req = TestHelper.setJsonHeaders(myHost / "api" / "employees").setBody(json).POST
 
     assert(Await.result(Http(req), Duration(3, "sec")).getStatusCode == 201)
   }
 
-  test("Post to vote should create employee in db") {
-    val json = Employee("", "lastname", "40221672", Genders.Male, LocalDate.now, Some(LocalDate.now), Some(LocalDate.now),
+  test("Post to employee should create employee in db") {
+    val json = Employee("", "lastname", "40221672", "email", Genders.Male, LocalDate.now, Some(LocalDate.now), Some(LocalDate.now),
       Some(""), Some(""), Some(""), Some(""), Some(""), Some("")).asJson.toString
     val req = TestHelper.setJsonHeaders(myHost / "api" / "employees").setBody(json).POST
 

@@ -50,7 +50,7 @@ var EmployeeForm = React.createClass({
             return Object.keys(obj).length === 0;
         }
 
-        var requiredFields = ['firstName', 'lastName', 'phone', 'gender', 'birthDate'];
+        var requiredFields = ['firstName', 'lastName', 'phone', 'gender', 'birthDate', 'email'];
         var that = this;
         var errors = {};
         requiredFields.forEach( function (requiredField) {
@@ -79,6 +79,7 @@ var EmployeeForm = React.createClass({
                     <TextField id="firstName" label="Fornavn" value={this.state.employee.firstName} handleChange={this.handleChange} error={this.state.errors['firstName']} />
                     <TextField id="lastName" label="Etternavn" value={this.state.employee.lastName} handleChange={this.handleChange} error={this.state.errors['lastName']} />
                     <TextField id="phone" label="Telefon" value={this.state.employee.phone} handleChange={this.handleChange} error={this.state.errors['phone']}/>
+                    <TextField id="email" label="Epost" value={this.state.employee.email} handleChange={this.handleChange} error={this.state.errors['email']}/>
                 </div>
                 <div className="form-row">
                     <SelectField id="gender" label="Kjønn" value={this.state.employee.gender} options={options} handleChange={this.handleChange} error={this.state.errors['gender']}/>
