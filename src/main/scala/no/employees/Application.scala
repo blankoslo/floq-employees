@@ -95,7 +95,17 @@ trait DataSourceComponent {
   val database: DatabaseDef = Database.forURL(jdbcURL, driver = driver)
 }
 
-object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with EmployeeHandlerComponent with RoutingComponent {
+trait EnvironmentComponent {
+  object Environments extends Enumeration {
+    type Environment = Value
+    val DEV, TEST, PROD = Value
+  }
+
+  private val envString = Option(System.getenv("ENV")).getOrElse("DEV").toUpperCase
+  val env = Environments.withName(envString)
+}
+
+object ComponentRegistry extends EmployeeRepoComponent with DataSourceComponent with EmployeeHandlerComponent with RoutingComponent with EnvironmentComponent {
 
   override lazy val driver: String = DatabaseConfig.driver
   override lazy val jdbcURL = DatabaseConfig.jdbcUrl
