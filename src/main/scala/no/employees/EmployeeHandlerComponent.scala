@@ -56,7 +56,31 @@ trait EmployeeHandlerComponent extends RequestHandler{ this: EmployeeRepoCompone
     type RespDirective = Directive[HttpServletRequest, ResponseFunction[Any], ResponseFunction[Any]]
     type AuthRespDirective = (User) => Directive[HttpServletRequest, ResponseFunction[Any], ResponseFunction[Any]]
 
-    def handleDescription: AuthRespDirective = t =>
+
+    def handleRoot: RespDirective = for {
+      _ <- GET
+      _ <- commit
+    } yield HtmlContent ~> ResponseString(
+        <html>
+          <head>
+            <meta charset="utf-8" />
+            <meta name="google-signin-client_id" content="1085640931155-0f6l02jv973og8mi4nb124k6qlrh470p.apps.googleusercontent.com" />
+            <title>Ansattliste</title>
+          </head>
+          <body>
+            <section id="googleSignIn" ></section>
+            <section id="employeeApp" ></section>
+
+            <script src="dist/googleSignInHack.js"></script>
+            <script src="dist/app.bundle.js"></script>
+            <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async="async" defer="defer"></script>
+
+          </body>
+        </html>.toString
+      )
+
+
+        def handleDescription: AuthRespDirective = t =>
       for {
         _ <- GET
         _ <- commit

@@ -68,10 +68,12 @@ trait RoutingComponent extends AuthenticationModule{ this: EmployeeHandlerCompon
     private val Intent = Directive.Intent.Mapping[HttpServletRequest, String] { case ContextPath(_, path) => path }
 
     def employeeIntent: Intent[HttpServletRequest, Any] = Intent {
+      case Root() => employeeHandler.handleRoot
       case Api() => withAuth.flatMap(employeeHandler.handleDescription)
       case Employee(employeeId) => withAuth.flatMap(employeeHandler.handleEmployees(Some(employeeId)))
       case Employees() => withAuth.flatMap(employeeHandler.handleEmployees(None))
       case Genders() => withAuth.flatMap(employeeHandler.getGenders)
+      case a if !a.contains("dist") =>  employeeHandler.handleRoot
     }
   }
 }
