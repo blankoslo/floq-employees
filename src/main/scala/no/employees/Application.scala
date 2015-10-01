@@ -4,11 +4,15 @@ import java.net.{URI, URL}
 import java.util
 import javax.servlet.{ServletContext, FilterConfig}
 
+import no.employees.scripts.Frontend
+import no.employees.scripts.Frontend.Error
 import org.eclipse.jetty.servlets.CrossOriginFilter
 import slick.jdbc.JdbcBackend._
 import unfiltered.filter.Plan
 
+import scala.sys.process.Process
 import scala.util.Properties
+import scalaz.{\/-, -\/}
 
 class EmployeesCrossOriginFilter extends CrossOriginFilter {
 
@@ -59,8 +63,14 @@ object Application extends App {
 }
 
 object LocalApplication extends App {
-  unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt).plan(new EmployeesCrossOriginFilter)
-    .plan(ComponentRegistry.EmployeePlan).resources(getStaticDir()).run()
+  private var frontendCompileProcess: Option[Process] = None
+
+  def beforeStart(): Unit = {
+    frontendCompileProcess = Frontend.runNpmWatch() match {
+      case -\/(Error(msg)) => println(s"WARNING: Failed to initiate frontend compile. Error msg: $msg"); None
+      case \/-(compileProcess) => println("Starting npm watch/compile"); Some(compileProcess)
+    }
+  }
 
   def getStaticDir(): URL = {
     val resourceDirMarker = "index.html"
@@ -68,6 +78,10 @@ object LocalApplication extends App {
     // Need parent dir
     new URL(resourceMarkerPath.toString.replace("build/resources/main/" + resourceDirMarker, "frontend/public"))
   }
+
+    beforeStart()
+    unfiltered.jetty.Server.http(Properties.envOrElse("PORT", "8081").toInt).plan(new EmployeesCrossOriginFilter)
+      .plan(ComponentRegistry.EmployeePlan).resources(getStaticDir()).run()
 }
 
 object DatabaseConfig {

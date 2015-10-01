@@ -6,4 +6,6 @@ command -v npm >/dev/null 2>&1 || { echo >&2 "Couldn't find node/npm on path!. T
 [[ "$PWD" == *frontend/app ]] || { echo >&2 "Couldn't locate the js folder! This script must be run from either the folder or the project root folder"; exit 1; }
 
 npm install
-npm run minify
+
+NPM_COMMAND=${1-build}
+npm run ${NPM_COMMAND}
