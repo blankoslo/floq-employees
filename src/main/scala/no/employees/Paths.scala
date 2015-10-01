@@ -5,6 +5,7 @@ import linx.Root
 
 object Paths {
 
+  val Static = Root / "index.html"
   val Api = Root / "api"
   val Signin = Api / "signin"
   val Employees = Api / "employees"
