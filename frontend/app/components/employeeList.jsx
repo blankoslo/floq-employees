@@ -11,7 +11,7 @@ var EmployeeList = React.createClass({
     ],
 
     componentDidMount() {
-        this.getFlux().actions.loadEmployees(this.state.loggedInUser.token);
+        if(this.state.loggedInUser.token) this.getFlux().actions.loadEmployees(this.state.loggedInUser.token);
     },
 
     getStateFromFlux() {

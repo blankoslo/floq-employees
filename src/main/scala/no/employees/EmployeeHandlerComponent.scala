@@ -68,13 +68,8 @@ trait EmployeeHandlerComponent extends RequestHandler{ this: EmployeeRepoCompone
             <title>Ansattliste</title>
           </head>
           <body>
-            <section id="googleSignIn" ></section>
-            <section id="employeeApp" ></section>
-
-            <script src="dist/googleSignInHack.js"></script>
             <script src="dist/app.bundle.js"></script>
             <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async="async" defer="defer"></script>
-
           </body>
         </html>.toString
       )
