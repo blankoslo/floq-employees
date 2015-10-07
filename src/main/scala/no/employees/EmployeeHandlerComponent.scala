@@ -68,7 +68,7 @@ trait EmployeeHandlerComponent extends RequestHandler{ this: EmployeeRepoCompone
             <title>Ansattliste</title>
           </head>
           <body>
-            <script src="dist/app.bundle.js"></script>
+            <script src="/dist/app.bundle.js"></script>
             <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async="async" defer="defer"></script>
           </body>
         </html>.toString

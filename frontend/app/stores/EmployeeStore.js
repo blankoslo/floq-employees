@@ -4,6 +4,7 @@ var Immutable = require('immutable');
 var Fluxxor = require('fluxxor');
 var Record = require('./../record.js');
 var Constants = require('./../constants.js');
+var Utils = require('./../utils.js');
 
 var EmployeeStore = Fluxxor.createStore({
 
@@ -19,6 +20,11 @@ var EmployeeStore = Fluxxor.createStore({
             Constants.EMPLOYEES_CREATE_SUCCEEDED, this.onEmployeesCreateSucceeded,
             Constants.EMPLOYEES_CREATE_FAILED, this.onEmployeesCreateFailed
         );
+    },
+
+    getEmployee(id) {
+        console.log(this.employees.toJS());
+        return Utils.getEmployeeById(id, this.employees);
     },
 
     onEmployeesCreateStarted() {
@@ -49,6 +55,7 @@ var EmployeeStore = Fluxxor.createStore({
     },
     
     onEmployeesLoaded(employees) {
+        console.log(employees);
         this.employees = employees;
         this.loadState = this.loadState
                              .set("loaded", true)
