@@ -6,10 +6,10 @@ window.global = window;
 
 
 var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var RouteHandler = Router.RouteHandler;
+var ReactRouter = require('react-router');
+var Route = ReactRouter.Route;
+var DefaultRoute = ReactRouter.DefaultRoute;
+var RouteHandler = ReactRouter.RouteHandler;
 
 var Fluxxor = require('fluxxor');
 var _ = require('underscore');
@@ -32,6 +32,7 @@ var flux = new Fluxxor.Flux(stores, actions);
 var FluxMixin = Fluxxor.FluxMixin(React);
 
 var EmployeeList = require('./components/employeeList.jsx');
+var ViewEmployee = require('./components/viewEmployee.jsx');
 var CreateEmployee = require('./components/createEmployee.jsx');
 var UserHeader = require('./components/userHeader.jsx');
 var GoogleSignIn = require('./components/googleSignIn.jsx');
@@ -39,15 +40,13 @@ var GoogleSignIn = require('./components/googleSignIn.jsx');
 var App = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Router.State,
-        Router.Navigation
+        ReactRouter.State,
+        ReactRouter.Navigation
     ],
 
     render: function(){
         return(
             <div className="container">
-                <UserHeader />
-                <header><h1>Ansattliste</h1></header>
                 <CreateEmployee />
                 <EmployeeList />
             </div>
@@ -66,6 +65,8 @@ var AppWrapper = React.createClass({
                     <GoogleSignIn />
 
                     <div className="page">
+                        <UserHeader />
+                        <header><h1>Ansattliste</h1></header>
                         <RouteHandler/>
                     </div>
                 </div>
@@ -87,11 +88,12 @@ var routes = (
     <Route name="app" path="/" handler={AppWrapper}>
         <Route name="empty" path="empty" handler={Empty}/>
         <Route name="list" path="list" handler={App}/>
+            <Route name="employee" path="/employee/:id" handler={ViewEmployee}/>
         <DefaultRoute handler={App}/>
     </Route>
 );
 
-Router.run(routes, Router.HistoryLocation, (Handler) => {
+ReactRouter.run(routes, ReactRouter.HistoryLocation, (Handler) => {
     React.render(<Handler flux={flux}/>, document.body);
 });
 
