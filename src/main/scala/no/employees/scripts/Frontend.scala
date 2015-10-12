@@ -13,9 +13,13 @@ object Frontend {
     def isSuccess = result == 0
   }
 
-  def runNpmBuild(): \/[Error, Result] = runNpmCommand("build").map(p => Result(p.exitValue()))
-
-  def runNpmWatch(): \/[Error, Process] =  runNpmCommand("watch")
+  def runNpmWatch(): \/[Error, Process] =  {
+    for {
+      projectRoot <- getProjectRootPath
+      buildScript <- \/-(projectRoot + "./gradlew watchFrontend")
+      p <- \/-(Process(s"$buildScript", new File(projectRoot)).run(ProcessLogger(s => println(s))))
+    } yield p
+  }
 
   private val getProjectRootPath: \/[Error, String] = {
     val maybeProjectRoot = for {
@@ -26,11 +30,4 @@ object Frontend {
     maybeProjectRoot.map(\/-(_)).getOrElse(-\/(Error("Failed to find project root path")))
   }
 
-  private def runNpmCommand(npmCommand: String): \/[Error, Process] = {
-    for {
-      projectRoot <- getProjectRootPath
-      buildScript <- \/-(projectRoot + "buildfrontend.bash")
-      p <- \/-(Process(s"$buildScript $npmCommand", new File(projectRoot)).run(ProcessLogger(s => println(s))))
-    } yield p
-  }
 }
