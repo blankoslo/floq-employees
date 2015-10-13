@@ -39,7 +39,7 @@ var GoogleSignIn = require('./components/googleSignIn.jsx');
 
 var App = React.createClass({
     mixins: [
-        Fluxxor.FluxMixin(React),
+        FluxMixin,
         ReactRouter.State,
         ReactRouter.Navigation
     ],
