@@ -12,16 +12,11 @@ var EmployeeForm = React.createClass({
         Fluxxor.StoreWatchMixin('GenderStore', 'UserStore')
     ],
 
-    componentDidMount() {
-        this.getFlux().actions.loadGenders(this.state.loggedInUser.token);
-    },
-
     getStateFromFlux() {
         var genderStore = this.getFlux().store('GenderStore');
-        var userStore = this.getFlux().store('UserStore');
         return {
-            genders: genderStore.genders,
-            loggedInUser: userStore.loggedInUser
+            genders: genderStore.genders
+
         };
     },
 
@@ -32,17 +27,17 @@ var EmployeeForm = React.createClass({
       }
     },
 
+    handleChange: function (event) {
+        var newEmployee = this.state.employee.set(event.target.name, event.target.value)
+        this.setState({employee: newEmployee})
+    },
+
     handleSubmit(event) {
         event.preventDefault();
 
         if(this.requiredFieldsAreOk()){
-            this.getFlux().actions.createEmployee(this.state.employee, this.state.loggedInUser.token);
+            this.props.onSubmit(event, this.state.employee);
         }
-    },
-
-    handleChange: function (event) {
-        var newEmployee = this.state.employee.set(event.target.name, event.target.value)
-        this.setState({employee: newEmployee})
     },
 
     requiredFieldsAreOk: function () {

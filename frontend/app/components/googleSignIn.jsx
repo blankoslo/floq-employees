@@ -39,8 +39,6 @@ var GoogleSignIn = React.createClass({
         console.log('Token: ' + googleUser.getAuthResponse().id_token);
 
         this.getFlux().actions.setLoggedInUser(googleUser);
-
-        //this.transitionTo('/list');
     },
 
     render: function(){
