@@ -11,10 +11,6 @@ var EmployeeList = React.createClass({
         Fluxxor.StoreWatchMixin('EmployeeStore', 'UserStore')
     ],
 
-    componentDidMount() {
-        if(this.state.loggedInUser.token) this.getFlux().actions.loadEmployees(this.state.loggedInUser.token);
-    },
-
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
         var userStore = this.getFlux().store('UserStore');
@@ -26,17 +22,17 @@ var EmployeeList = React.createClass({
 
     render: function () {
         var employees = this.state.employees.toJS();
-
-        var rows = employees.map(employee => <Tr data={employee}><Td column="edit"><Link to="employee" params={{id: employee.id}}>Detaljer</Link></Td></Tr>);
-
+        var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employee/${employee.id}`}>Vis</Link></Td></Tr>);
 
         var columns = [{key: 'firstName', label: 'Fornavn'}, {key: 'lastName', label: 'Etternavn'}, {key: 'phone', label:'Telefon'},
-            {key: 'address', label: 'Adresse'}, {key: 'postalCode', label: 'Postnr.'}, {key: 'city', label: 'By'}, {key: 'dateOfEmployment', label: 'Startdato'},
-            {key:"edit", label: "Endre"}];
+            {key: 'address', label: 'Adresse'}, {key: 'postalCode', label: 'Postnr.'}, {key: 'city', label: 'Sted'}, {key: 'dateOfEmployment', label: 'Ansettelsesdato'},
+            {key:"edit", label: "Detaljer"}];
 
         return (
             <div>
-            <Table className="table" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'desc'}}>{rows}</Table>
+                {this.props.children}
+
+            <Table className="table" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
                 {rows}
                 </div>
         );
