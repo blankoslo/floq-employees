@@ -64,13 +64,12 @@ var routes = (
             <Route path="/employee/:id/edit" component={EditEmployee} />
             <Route path="/employees/new" component={CreateEmployee} />
         </Route>
-
     </Route>
 );
 
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 let history = createBrowserHistory();
-React.render(<Router history={history} createElement={createFluxComponent}  >{routes}</Router>, document.body);
+React.render(<Router history={history} createElement={createFluxComponent}>{routes}</Router>, document.body);
 
 window.global.triggerGoogleLoaded = function() {
     window.dispatchEvent(new Event('google-loaded'));

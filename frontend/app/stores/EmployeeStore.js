@@ -38,7 +38,6 @@ var EmployeeStore = Fluxxor.createStore({
     },
 
     onEmployeesCreateSucceeded(employee) {
-
         this.employees = this.employees.push(employee);
 
         this.createState = this.createState

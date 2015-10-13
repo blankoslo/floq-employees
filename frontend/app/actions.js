@@ -15,7 +15,6 @@ function parseError(req) {
 }
 
 var actions = {
-
     setLoggedInUser(googleUser) {
         var user = new Record.User({name: googleUser.getBasicProfile().getName(), pictureUrl: googleUser.getBasicProfile().getImageUrl(),
             token: googleUser.getAuthResponse().id_token, email: googleUser.getBasicProfile().getEmail()});
