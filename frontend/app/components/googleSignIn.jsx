@@ -16,18 +16,18 @@ var GoogleSignIn = React.createClass({
     renderGoogleLoginButton: function() {
         console.log('rendering google signin button')
         gapi.signin2.render('my-signin2', {
-            'scope': 'https://www.googleapis.com/auth/plus.login',
+            'scope': 'profile',
             'width': 250,
             'height': 50,
             'longtitle': true,
             'theme': 'light',
-            'onsuccess': this.onSignIn
+            'onsuccess': this.onSignIn,
+            'onfailure': this.onFailure
         })
     },
 
     componentDidMount: function() {
-        window.addEventListener('google-loaded',this.renderGoogleLoginButton);
-
+        window.addEventListener('google-loaded', this.renderGoogleLoginButton);
     },
 
     onSignIn: function(googleUser) {
@@ -41,10 +41,14 @@ var GoogleSignIn = React.createClass({
         this.getFlux().actions.setLoggedInUser(googleUser);
     },
 
-    render: function(){
+    onFailure: function() {
+        console.log("An error occured with logging in!");
+    },
+
+    render: function() {
         return(
             <div className="container">
-                <div id="my-signin2" data-onsuccess={this.onSignIn} />
+                <div id="my-signin2"/>
             </div>
         );
     }
