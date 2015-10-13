@@ -19,22 +19,6 @@ var actions = {
         var user = new Record.User({name: googleUser.getBasicProfile().getName(), pictureUrl: googleUser.getBasicProfile().getImageUrl(),
             token: googleUser.getAuthResponse().id_token, email: googleUser.getBasicProfile().getEmail()});
         this.dispatch(Constants.USER_SIGNED_IN, user);
-
-        //todo  fix hacky solution to get employees and genders on sign in:
-
-        this.dispatch(Constants.EMPLOYEES_LOAD_STARTED);
-        client.getEmployees(user.token).then(
-            (e) => this.dispatch(Constants.EMPLOYEES_LOAD_SUCCEEDED, e),
-            (e) => this.dispatch(Constants.EMPLOYEES_LOAD_FAILED, parseError(e))
-        );
-
-        this.dispatch(Constants.GENDERS_LOAD_STARTED);
-        client.getGenders(user.token).then(
-            (e) => this.dispatch(Constants.GENDERS_LOAD_SUCCEEDED, e),
-            (e) => this.dispatch(Constants.GENDERS_LOAD_FAILED, parseError(e))
-        );
-
-
     },
 
     loadGenders(token) {
