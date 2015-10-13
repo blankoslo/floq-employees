@@ -12,7 +12,7 @@ var Errors = React.createClass({
         var errors = this.props.errors;
         var errorTexts = [];
 
-        for(var error in errors){
+        for (var error in errors) {
             errorTexts.push(error + " er et obligatorisk felt");
         }
 
@@ -69,16 +69,14 @@ var EditEmployee = React.createClass({
         var spinner;
         var partial;
 
-
-
-        if(employee) {
-            partial =   <div className="formContainer">
+        if (employee) {
+            partial = <div className="formContainer">
                 <Errors errors={this.state.errors} />
                 <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
             </div>;
         }
 
-        return <div>  {partial} </div>
+        return <div> {partial} </div>
     }
 });
 
