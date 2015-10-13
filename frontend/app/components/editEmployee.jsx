@@ -50,14 +50,18 @@ var EditEmployee = React.createClass({
         this.setState({errors: errors});
     },
 
+    returnToEmployee() {
+        this.history.pushState(null, `/employee/${this.props.params.id}`);
+    },
+
     toggleEmployeeForm(event) {
         event.preventDefault();
-        this.history.pushState(null, `/employees`, query);
-
+        this.returnToEmployee();
     },
 
     handleSubmit(event, employee) {
         this.getFlux().actions.updateEmployee(employee, this.state.loggedInUser.token);
+        this.returnToEmployee();
     },
 
     render: function () {
