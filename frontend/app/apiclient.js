@@ -78,7 +78,7 @@ var apiClient = function(rootUri) {
     }
 
     function createEmployee(employee, token) {
-            return getDescription(token)
+        return getDescription(token)
             .then(e => e.employees.href)
             .then(e => xhrPost(e, employee.toJS(), token))
             .then(parseResponseWith(parseEmployees));
