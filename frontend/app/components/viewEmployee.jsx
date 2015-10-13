@@ -5,18 +5,17 @@ var EmployeeStore = require('./../stores/EmployeeStore');
 var Constants = require('./../constants.js');
 var Record = require ('./../record.js');
 var EmployeeForm = require('./employeeForm.jsx');
-
+import { History } from 'react-router'
 
 var ViewEmployee = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
+        History,
         Fluxxor.StoreWatchMixin('EmployeeStore')
     ],
 
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
-        console.log(this.props.params.id);
-
         return {
             employeeStore: employeeStore
         };
@@ -28,14 +27,25 @@ var ViewEmployee = React.createClass({
         };
     },
 
+    closeView() {
+        event.preventDefault();
+        this.history.pushState(null, `/employees`, null);
+    },
 
-
+    editView() {
+        event.preventDefault();
+        this.history.pushState(null, `/employee/${this.props.params.id}/edit`, null);
+    },
 
     render: function () {
         var employee = this.state.employeeStore.getEmployee(this.props.params.id);
+        var partial;
 
+        if(employee){
 
-        return <div className="formContainer">
+            partial = <div className="formContainer">
+                <button className="closeButton" onClick={this.closeView}>X</button><br/>
+                <button className="closeButton" onClick={this.editView}>Endre</button>
                 <div className="form-row">
                     <LabelValue label="Fornavn" value={employee.firstName} />
                     <LabelValue label="Etternavn" value={employee.lastName} />
@@ -49,26 +59,29 @@ var ViewEmployee = React.createClass({
                     <LabelValue label="Ansettelsesdato" value={employee.dateOfEmployment} />
                 </div>
                 <div className="form-row">
-                    <span>{employee.emergencyContactName}</span>
-                    <span>{employee.emergencyContactPhone}</span>
-                    <span>{employee.emergencyContactRelation}</span>
+                    <LabelValue label="Kontaktperson" value={employee.emergencyContactName} />
+                    <LabelValue label="Kontaktperson, telefon" value={employee.emergencyContactPhone} />
+                    <LabelValue label="Kontaktperson, relasjon" value={employee.emergencyContactRelation} />
                 </div>
                 <div className="form-row">
-                    <span>{employee.address}</span>
-                    <span>{employee.postalCode}</span>
-                    <span>{employee.city}</span>
+                    <LabelValue label="Adresse" value={employee.address} />
+                    <LabelValue label="Postnr." value={employee.postalCode} />
+                    <LabelValue label="Sted" value={employee.city} />
                 </div>
-             </div>
+            </div>
+        }
+        else {
+            partial = <div></div>
+        }
+
+        return partial;
     }
 });
 
 var LabelValue = React.createClass({
-
     render() {
-        return <div className="form-group"><label className="control-label">{this.props.label}</label><span>{this.props.value}</span></div>
+        return <div className="form-group"><label className="control-label">{this.props.label}</label><div>{this.props.value}</div></div>
     }
-
-
 });
 
 module.exports = ViewEmployee;

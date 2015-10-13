@@ -4,7 +4,7 @@ var Record = require('./record.js');
 var apiClient = require('./apiclient.js');
 var Constants = require('./constants.js');
 
-var client = apiClient("./api");
+var client = apiClient("/api");
 
 function parseError(req) {
         const payload = JSON.parse(req.responseText);
@@ -21,12 +21,20 @@ var actions = {
             token: googleUser.getAuthResponse().id_token, email: googleUser.getBasicProfile().getEmail()});
         this.dispatch(Constants.USER_SIGNED_IN, user);
 
-        //todo  fix hacky solution to get employees on sign in
+        //todo  fix hacky solution to get employees and genders on sign in:
+
         this.dispatch(Constants.EMPLOYEES_LOAD_STARTED);
         client.getEmployees(user.token).then(
             (e) => this.dispatch(Constants.EMPLOYEES_LOAD_SUCCEEDED, e),
             (e) => this.dispatch(Constants.EMPLOYEES_LOAD_FAILED, parseError(e))
         );
+
+        this.dispatch(Constants.GENDERS_LOAD_STARTED);
+        client.getGenders(user.token).then(
+            (e) => this.dispatch(Constants.GENDERS_LOAD_SUCCEEDED, e),
+            (e) => this.dispatch(Constants.GENDERS_LOAD_FAILED, parseError(e))
+        );
+
 
     },
 
@@ -51,6 +59,14 @@ var actions = {
         client.createEmployee(employee, token).then(
             (e) => this.dispatch(Constants.EMPLOYEES_CREATE_SUCCEEDED, e),
             (e) => this.dispatch(Constants.EMPLOYEES_CREATE_FAILED, parseError(e))
+        );
+    },
+
+    updateEmployee(employee, token) {
+        this.dispatch(Constants.EMPLOYEES_UPDATE_STARTED, employee);
+        client.updateEmployee(employee, token).then(
+            (e) => this.dispatch(Constants.EMPLOYEES_UPDATE_SUCCEEDED, e),
+            (e) => this.dispatch(Constants.EMPLOYEES_UPDATE_FAILED, parseError(e))
         );
     }
 };

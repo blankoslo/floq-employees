@@ -1,5 +1,6 @@
 var React = require('react');
 var Fluxxor = require('fluxxor');
+import { History } from 'react-router'
 
 var EmployeeStore = require('./../stores/EmployeeStore');
 var Constants = require('./../constants.js');
@@ -26,13 +27,16 @@ var Errors = React.createClass({
 var EditEmployee = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('EmployeeStore')
+        History,
+        Fluxxor.StoreWatchMixin('EmployeeStore', 'UserStore')
     ],
 
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
+        var userStore = this.getFlux().store('UserStore');
         return {
-            createState: employeeStore.createState
+            employeeStore: employeeStore,
+            loggedInUser: userStore.loggedInUser
         };
     },
 
@@ -48,30 +52,29 @@ var EditEmployee = React.createClass({
 
     toggleEmployeeForm(event) {
         event.preventDefault();
-        this.setState({createState: this.state.createState.set("created", !this.state.createState.created)});
+        this.history.pushState(null, `/employees`, query);
+
+    },
+
+    handleSubmit(event, employee) {
+        this.getFlux().actions.updateEmployee(employee, this.state.loggedInUser.token);
     },
 
     render: function () {
-
+        var employee = this.state.employeeStore.getEmployee(this.props.params.id);
         var spinner;
         var partial;
 
-        if(this.state.createState.creating) {
-            spinner = <span>Lagrer...</span>
-        } else {
-            spinner = <span></span>
-        }
 
-        if(!this.state.createState.created) {
+
+        if(employee) {
             partial =   <div className="formContainer">
                 <Errors errors={this.state.errors} />
-                <EmployeeForm initialEmployee={new Record.Employee()} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
+                <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
             </div>;
-        } else {
-            partial = <button onClick={this.toggleEmployeeForm}>Legg til ansatt</button>
         }
 
-        return <div> {spinner} {partial} </div>
+        return <div>  {partial} </div>
     }
 });
 
