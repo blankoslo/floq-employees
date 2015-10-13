@@ -35,7 +35,7 @@ var apiClient = function(rootUri) {
 
     const xhrGet = (url, token) => xhr('get', url, null, token);
     const xhrPost = (url, data, token) => xhr('post', url, data, token);
-    const xhrPut = (url, data) => xhr('put', url, data, token);
+    const xhrPut = (url, data, token) => xhr('put', url, data, token);
     const xhrDelete = (url) => xhr('delete', url);
 
     function parseResponse(req) {
