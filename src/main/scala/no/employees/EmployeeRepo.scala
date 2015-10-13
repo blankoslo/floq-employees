@@ -32,8 +32,8 @@ trait EmployeeRepoComponent {this: DataSourceComponent =>
       validateOnlyOneRowAffected(runDbAction(employeeQuery.filter(_.id === id).delete), Unit)
     }
 
-    def updateEmployeeInRepo(employeeId: Int, employee: Employee): \/[Error, Employee] = {
-      validateOnlyOneRowAffected(runDbAction(employeeQuery.filter(_.id === employeeId).update(Entity(employeeId, employee))), employee)
+    def updateEmployeeInRepo(employeeId: Int, employee: Employee): \/[Error, Entity[Employee]] = {
+      validateOnlyOneRowAffected(runDbAction(employeeQuery.filter(_.id === employeeId).update(Entity(employeeId, employee))), Entity(employeeId, employee))
     }
 
     protected def runDbAction[A](action: DBIO[A]): \/[Error, A] = {
