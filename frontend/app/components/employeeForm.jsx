@@ -19,18 +19,17 @@ var EmployeeForm = React.createClass({
         var genderStore = this.getFlux().store('GenderStore');
         return {
             genders: genderStore.genders
-
         };
     },
 
-    getInitialState(){
+    getInitialState() {
       return {
           errors: {},
           employee: this.props.initialEmployee
       }
     },
 
-    handleChange: function (event) {
+    handleChange(event) {
         var newEmployee = this.state.employee.set(event.target.name, event.target.value)
         this.setState({employee: newEmployee})
     },
@@ -38,12 +37,12 @@ var EmployeeForm = React.createClass({
     handleSubmit(event) {
         event.preventDefault();
 
-        if(this.requiredFieldsAreOk()){
+        if (this.requiredFieldsAreOk()) {
             this.props.onSubmit(event, this.state.employee);
         }
     },
 
-    requiredFieldsAreOk: function () {
+    requiredFieldsAreOk() {
         function isEmpty(obj) {
             return Object.keys(obj).length === 0;
         }
@@ -51,7 +50,7 @@ var EmployeeForm = React.createClass({
         var requiredFields = ['firstName', 'lastName', 'phone', 'gender', 'birthDate', 'email'];
         var that = this;
         var errors = {};
-        requiredFields.forEach( function (requiredField) {
+        requiredFields.forEach(function(requiredField) {
             var value = that.state.employee[requiredField];
             if (!value || (String(value).trim() === '')) {
                 errors[requiredField] = 'This field is required';
@@ -63,12 +62,12 @@ var EmployeeForm = React.createClass({
         return isEmpty(errors);
     },
 
-    handleChangeDate: function (date, id) {
+    handleChangeDate(date, id) {
         var newEmployee = this.state.employee.set(id, date.format('YYYY-MM-DD'));
         this.setState({employee: newEmployee});
     },
 
-    render: function () {
+    render() {
         var options = this.state.genders.toJS();
 
         return (
