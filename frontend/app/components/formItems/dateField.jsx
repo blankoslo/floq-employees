@@ -18,7 +18,7 @@ var textField = React.createClass({
         this.props.handleChange(date, this.props.id);
     },
 
-    render: function() {
+    render() {
         var id = this.props.id;
         var label = this.props.label;
         var error = this.props.error;
@@ -36,7 +36,7 @@ var textField = React.createClass({
                     <label className="control-label" htmlFor={id}>
                         "YOOO"
                     </label>
-                    </DatePicker>
+                </DatePicker>
             </FormField>
         );
     }

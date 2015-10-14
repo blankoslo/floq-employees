@@ -28,17 +28,16 @@ var EmployeeList = React.createClass({
         };
     },
 
-    render: function () {
+    render() {
         var employees = this.state.employees.toJS();
         var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employee/${employee.id}`}>Vis</Link></Td></Tr>);
 
         return (
             <div>
                 {this.props.children}
-
-            <Table className="table" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
+                <Table className="table" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
                 {rows}
-                </div>
+            </div>
         );
     }
 });

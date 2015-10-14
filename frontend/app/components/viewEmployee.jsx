@@ -40,7 +40,7 @@ var ViewEmployee = React.createClass({
         this.history.pushState(null, `/employee/${this.props.params.id}/edit`, null);
     },
 
-    render: function () {
+    render() {
         var employee = this.state.employeeStore.getEmployee(this.props.params.id);
         var partial;
 

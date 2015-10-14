@@ -2,14 +2,13 @@ var React = require('react');
 var classNames = require('classnames');
 
 var formField = React.createClass({
-
     propTypes: {
         id: React.PropTypes.string.isRequired,
         label: React.PropTypes.string.isRequired,
         error: React.PropTypes.bool
     },
 
-    render: function() {
+    render() {
         var classes = classNames({
             'form-group': true,
             errorMessage: this.props.error
@@ -23,7 +22,6 @@ var formField = React.createClass({
             </div>
         );
     }
-
 });
 
 module.exports = formField;
