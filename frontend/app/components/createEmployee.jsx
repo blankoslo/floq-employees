@@ -9,11 +9,11 @@ let Constants = require ('./../constants.js');
 let labels = Constants.ATTR_LABELS;
 
 var Errors = React.createClass({
-    render: function() {
+    render() {
         var errors = this.props.errors;
         var errorTexts = [];
 
-        for(var error in errors){
+        for (var error in errors) {
             errorTexts.push(labels[error] + " er et obligatorisk felt");
         }
 
@@ -21,7 +21,7 @@ var Errors = React.createClass({
             <div className="errorBlock">
                 {errorTexts.map(error => <div className="error">{error}</div>)}
             </div>
-        )
+        );
     }
 });
 
@@ -61,11 +61,12 @@ var CreateEmployee = React.createClass({
         this.getFlux().actions.createEmployee(employee, this.state.loggedInUser.token);
     },
 
-    render: function () {
-        return (<div className="formContainer">
-            <Errors errors={this.state.errors} />
-            <EmployeeForm initialEmployee={new Record.Employee()} onSubmit={this.handleSubmit} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
-        </div>
+    render() {
+        return (
+            <div className="formContainer">
+                <Errors errors={this.state.errors} />
+                <EmployeeForm initialEmployee={new Record.Employee()} onSubmit={this.handleSubmit} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
+            </div>
         );
     }
 });
