@@ -13,7 +13,7 @@ var selectField = React.createClass({
         disabled: React.PropTypes.bool
     },
 
-    render: function () {
+    render() {
         var id = this.props.id;
         var label = this.props.label;
         var error = this.props.error;
@@ -29,6 +29,7 @@ var selectField = React.createClass({
                 </option>
             );
         }
+
         return (
             <FormField error={error} id={id} label={label}>
                 <select className="form-control" id={id} name={id} onChange={handleChange} value={value} disabled={disabled}>
@@ -38,7 +39,8 @@ var selectField = React.createClass({
             </FormField>
         );
     },
-    option: function (optionData) {
+
+    option(optionData) {
         return (
             <option key={optionData.name} value={optionData.value}>
                 {optionData.name}

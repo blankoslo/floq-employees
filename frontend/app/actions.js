@@ -7,11 +7,11 @@ var Constants = require('./constants.js');
 var client = apiClient("/api");
 
 function parseError(req) {
-        const payload = JSON.parse(req.responseText);
-        return new Record.Error({
-            type: payload.type,
-            description: payload.description,
-            resourceId: payload.resourceId});
+    const payload = JSON.parse(req.responseText);
+    return new Record.Error({
+        type: payload.type,
+        description: payload.description,
+        resourceId: payload.resourceId});
 }
 
 var actions = {

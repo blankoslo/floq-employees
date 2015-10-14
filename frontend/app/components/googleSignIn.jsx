@@ -13,7 +13,7 @@ var GoogleSignIn = React.createClass({
         Router.Navigation
     ],
 
-    renderGoogleLoginButton: function() {
+    renderGoogleLoginButton() {
         console.log('rendering google signin button')
         gapi.signin2.render('my-signin2', {
             'scope': 'profile',
@@ -26,11 +26,11 @@ var GoogleSignIn = React.createClass({
         })
     },
 
-    componentDidMount: function() {
+    componentDidMount() {
         window.addEventListener('google-loaded', this.renderGoogleLoginButton);
     },
 
-    onSignIn: function(googleUser) {
+    onSignIn(googleUser) {
         let profile = googleUser.getBasicProfile();
         let token = googleUser.getAuthResponse().id_token
         console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -44,11 +44,11 @@ var GoogleSignIn = React.createClass({
         this.getFlux().actions.loadEmployees(token);
     },
 
-    onFailure: function() {
+    onFailure() {
         console.log("An error occured with logging in!");
     },
 
-    render: function() {
+    render() {
         return(
             <div className="container">
                 <div id="my-signin2"/>

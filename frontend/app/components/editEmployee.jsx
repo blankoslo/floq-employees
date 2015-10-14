@@ -8,7 +8,7 @@ var Record = require ('./../record.js');
 var EmployeeForm = require('./employeeForm.jsx');
 
 var Errors = React.createClass({
-    render: function() {
+    render() {
         var errors = this.props.errors;
         var errorTexts = [];
 
@@ -20,7 +20,7 @@ var Errors = React.createClass({
             <div className="errorBlock">
                 {errorTexts.map(error => <div className="error">{error}</div>)}
             </div>
-        )
+        );
     }
 });
 
@@ -64,19 +64,21 @@ var EditEmployee = React.createClass({
         this.returnToEmployee();
     },
 
-    render: function () {
+    render() {
         var employee = this.state.employeeStore.getEmployee(this.props.params.id);
         var spinner;
         var partial;
 
         if (employee) {
-            partial = <div className="formContainer">
-                <Errors errors={this.state.errors} />
-                <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
-            </div>;
+            partial = (
+                <div className="formContainer">
+                    <Errors errors={this.state.errors} />
+                    <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
+                </div>
+           );
         }
 
-        return <div> {partial} </div>
+        return <div> {partial} </div>;
     }
 });
 

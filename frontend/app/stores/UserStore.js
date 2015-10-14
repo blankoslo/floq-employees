@@ -18,7 +18,6 @@ var UserStore = Fluxxor.createStore({
         this.loggedInUser = user;
         this.emit("change");
     }
-
 });
 
 module.exports = UserStore;
