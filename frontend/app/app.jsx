@@ -18,7 +18,6 @@ var UserStore = require('./stores/UserStore.js');
 var actions = require('./actions.js');
 require("../style/main.less");
 
-
 var stores = {
     EmployeeStore: new EmployeeStore(),
     GenderStore: new GenderStore(),
