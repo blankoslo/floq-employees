@@ -101,6 +101,13 @@ task buildFrontend(type: NpmTask, dependsOn: ['npmInstall']) {
   args = ['run', 'minify']
 }
 
+task watchFrontend(type: NpmTask, dependsOn: ['npmInstall']) {
+    execOverrides {
+        it.workingDir = file("${project.projectDir}/frontend")
+    }
+    args = ['run', 'watch']
+}
+
 task stage(dependsOn: ['clean', 'installDist', 'buildFrontend'])
 
 buildFrontend.mustRunAfter clean

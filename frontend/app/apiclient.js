@@ -35,7 +35,7 @@ var apiClient = function(rootUri) {
 
     const xhrGet = (url, token) => xhr('get', url, null, token);
     const xhrPost = (url, data, token) => xhr('post', url, data, token);
-    const xhrPut = (url, data) => xhr('put', url, data);
+    const xhrPut = (url, data, token) => xhr('put', url, data, token);
     const xhrDelete = (url) => xhr('delete', url);
 
     function parseResponse(req) {
@@ -74,21 +74,25 @@ var apiClient = function(rootUri) {
     }
 
     function parseEmployees(payload) {
-        return new Record.Employee({
-            firstName: payload.firstName,
-            lastName: payload.lastName
-        })
+        return new Record.Employee(payload);
     }
 
     function createEmployee(employee, token) {
-            return getDescription(token)
+        return getDescription(token)
             .then(e => e.employees.href)
             .then(e => xhrPost(e, employee.toJS(), token))
             .then(parseResponseWith(parseEmployees));
     }
 
+    function updateEmployee(employee, token) {
+        return getDescription(token)
+            .then(e => e.employee.template.replace('{employeeid}', employee.id))
+            .then(e => xhrPut(e, employee.toJS(), token))
+            .then(parseResponseWith(parseEmployees));
+    }
+
     return {
-        getGenders, getEmployees, createEmployee
+        getGenders, getEmployees, createEmployee, updateEmployee
     };
 }
 

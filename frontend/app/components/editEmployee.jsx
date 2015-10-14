@@ -2,7 +2,8 @@ var React = require('react');
 var Fluxxor = require('fluxxor');
 import { History } from 'react-router'
 
-
+var EmployeeStore = require('./../stores/EmployeeStore');
+var Constants = require('./../constants.js');
 var Record = require ('./../record.js');
 var EmployeeForm = require('./employeeForm.jsx');
 
@@ -11,7 +12,7 @@ var Errors = React.createClass({
         var errors = this.props.errors;
         var errorTexts = [];
 
-        for(var error in errors){
+        for (var error in errors) {
             errorTexts.push(error + " er et obligatorisk felt");
         }
 
@@ -23,7 +24,7 @@ var Errors = React.createClass({
     }
 });
 
-var CreateEmployee = React.createClass({
+var EditEmployee = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
         History,
@@ -34,7 +35,7 @@ var CreateEmployee = React.createClass({
         var employeeStore = this.getFlux().store('EmployeeStore');
         var userStore = this.getFlux().store('UserStore');
         return {
-            createState: employeeStore.createState,
+            employeeStore: employeeStore,
             loggedInUser: userStore.loggedInUser
         };
     },
@@ -49,23 +50,34 @@ var CreateEmployee = React.createClass({
         this.setState({errors: errors});
     },
 
+    returnToEmployee() {
+        this.history.pushState(null, `/employee/${this.props.params.id}`);
+    },
+
     toggleEmployeeForm(event) {
         event.preventDefault();
-        this.history.pushState(null, `/employees`, null);
-
+        this.returnToEmployee();
     },
 
     handleSubmit(event, employee) {
-        this.getFlux().actions.createEmployee(employee, this.state.loggedInUser.token);
+        this.getFlux().actions.updateEmployee(employee, this.state.loggedInUser.token);
+        this.returnToEmployee();
     },
 
     render: function () {
-        return (<div className="formContainer">
-            <Errors errors={this.state.errors} />
-            <EmployeeForm initialEmployee={new Record.Employee()} onSubmit={this.handleSubmit} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
-        </div>
-        );
+        var employee = this.state.employeeStore.getEmployee(this.props.params.id);
+        var spinner;
+        var partial;
+
+        if (employee) {
+            partial = <div className="formContainer">
+                <Errors errors={this.state.errors} />
+                <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
+            </div>;
+        }
+
+        return <div> {partial} </div>
     }
 });
 
-module.exports = CreateEmployee;
+module.exports = EditEmployee;

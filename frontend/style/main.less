@@ -16,6 +16,7 @@ body {
 label {
   width: 15rem;
   display: inline-block;
+  font-weight: 700;
 }
 
 form {
@@ -27,8 +28,26 @@ div.formContainer {
   padding: 0.5rem 1rem;
 }
 
+.closeButton {
+  position: absolute;
+  right: 5px;
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-size: 2em;
+}
+
 div.form-group {
   display: table-cell;
+
+  >div {
+    padding-bottom: 1rem;
+    display: inline-block;
+  }
 }
 
 div.form-row {

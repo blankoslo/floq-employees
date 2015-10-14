@@ -18,8 +18,9 @@ var UserHeader = React.createClass({
     },
 
     render: function () {
-        return <div className="userHeader">Logget inn som {this.state.loggedInUser.name} ({this.state.loggedInUser.email}) </div>
-    }
+        return(
+            <div className="userHeader">Logget inn som {this.state.loggedInUser.name} ({this.state.loggedInUser.email}) </div>
+        )}
 });
 
 module.exports = UserHeader;
