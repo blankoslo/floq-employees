@@ -5,6 +5,14 @@ var Router = require('react-router');
 var Link = Router.Link;
 var Table = Reactable.Table, Tr = Reactable.Tr, Td = Reactable.Td;
 
+var Constants = require('../constants.js');
+let labels = Constants.ATTR_LABELS;
+let columns = ['firstName', 'lastName', 'phone', 'address', 'postalCode',
+    'city', 'dateOfEmployment', 'edit']
+    .map(function(name) {
+            return {key: name, label: labels[name]};
+    });
+
 var EmployeeList = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
@@ -23,10 +31,6 @@ var EmployeeList = React.createClass({
     render: function () {
         var employees = this.state.employees.toJS();
         var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employee/${employee.id}`}>Vis</Link></Td></Tr>);
-
-        var columns = [{key: 'firstName', label: 'Fornavn'}, {key: 'lastName', label: 'Etternavn'}, {key: 'phone', label:'Telefon'},
-            {key: 'address', label: 'Adresse'}, {key: 'postalCode', label: 'Postnr.'}, {key: 'city', label: 'Sted'}, {key: 'dateOfEmployment', label: 'Ansettelsesdato'},
-            {key:"edit", label: "Detaljer"}];
 
         return (
             <div>

@@ -5,6 +5,8 @@ import { History } from 'react-router'
 
 var Record = require ('./../record.js');
 var EmployeeForm = require('./employeeForm.jsx');
+let Constants = require ('./../constants.js');
+let labels = Constants.ATTR_LABELS;
 
 var Errors = React.createClass({
     render: function() {
@@ -12,7 +14,7 @@ var Errors = React.createClass({
         var errorTexts = [];
 
         for(var error in errors){
-            errorTexts.push(error + " er et obligatorisk felt");
+            errorTexts.push(labels[error] + " er et obligatorisk felt");
         }
 
         return (
