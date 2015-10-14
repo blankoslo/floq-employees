@@ -12,8 +12,8 @@ var Errors = React.createClass({
         var errors = this.props.errors;
         var errorTexts = [];
 
-        for (var error in errors) {
-            errorTexts.push(error + " er et obligatorisk felt");
+        for(var error in errors){
+            errorTexts.push(labels[error] + " er et obligatorisk felt");
         }
 
         return (
@@ -50,33 +50,28 @@ var EditEmployee = React.createClass({
         this.setState({errors: errors});
     },
 
-    returnToEmployee() {
-        this.history.pushState(null, `/employee/${this.props.params.id}`);
-    },
-
     toggleEmployeeForm(event) {
         event.preventDefault();
-        this.returnToEmployee();
+        this.history.pushState(null, `/employees`, query);
+
     },
 
     handleSubmit(event, employee) {
         this.getFlux().actions.updateEmployee(employee, this.state.loggedInUser.token);
-        this.returnToEmployee();
     },
 
     render: function () {
         var employee = this.state.employeeStore.getEmployee(this.props.params.id);
-        var spinner;
         var partial;
 
-        if (employee) {
-            partial = <div className="formContainer">
+        if(employee) {
+            partial =   <div className="formContainer">
                 <Errors errors={this.state.errors} />
                 <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
             </div>;
         }
 
-        return <div> {partial} </div>
+        return <div>  {partial} </div>
     }
 });
 
