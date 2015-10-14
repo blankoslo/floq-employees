@@ -6,6 +6,7 @@ var EmployeeStore = require('./../stores/EmployeeStore');
 var Constants = require('./../constants.js');
 var Record = require ('./../record.js');
 var EmployeeForm = require('./employeeForm.jsx');
+let labels = Constants.ATTR_LABELS;
 
 var Errors = React.createClass({
     render: function() {
