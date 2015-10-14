@@ -12,7 +12,7 @@ var textField = React.createClass({
         handleBlur: React.PropTypes.func
     },
 
-    render: function() {
+    render() {
         var id = this.props.id;
         var label = this.props.label;
         var error = this.props.error;

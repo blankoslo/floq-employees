@@ -7,7 +7,6 @@ var Constants = require('./../constants.js');
 var Utils = require('./../utils.js');
 
 var EmployeeStore = Fluxxor.createStore({
-
     initialize() {
         this.employees = Immutable.List();
         this.createState = new Record.CreateState();
