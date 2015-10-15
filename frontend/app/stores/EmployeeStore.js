@@ -26,7 +26,6 @@ var EmployeeStore = Fluxxor.createStore({
     },
 
     getEmployee(id) {
-        console.log(this.employees.toJS());
         return Utils.getEmployeeById(id, this.employees);
     },
 
@@ -85,7 +84,6 @@ var EmployeeStore = Fluxxor.createStore({
     },
     
     onEmployeesLoaded(employees) {
-        console.log(employees);
         this.employees = employees;
         this.loadState = this.loadState
                              .set("loaded", true)

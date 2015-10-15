@@ -59,6 +59,7 @@ var CreateEmployee = React.createClass({
 
     handleSubmit(event, employee) {
         this.getFlux().actions.createEmployee(employee, this.state.loggedInUser.token);
+        this.history.pushState(null, `/employee/new`, null);
     },
 
     render() {

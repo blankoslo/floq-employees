@@ -55,7 +55,7 @@ var ViewEmployee = React.createClass({
                     <LabelValue label={labels.email} value={employee.email} />
                 </div>
                 <div className="form-row">
-                    <LabelValue label={labels.gender} value={employee.gender} />
+                    <LabelValue label={labels.gender} value={labels[employee.gender]} />
                     <LabelValue label={labels.birthDate} value={employee.birthDate} />
                     <LabelValue label={labels.dateOfEmployment} value={employee.dateOfEmployment} />
                 </div>
