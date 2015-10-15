@@ -59,6 +59,7 @@ var EditEmployee = React.createClass({
 
     handleSubmit(event, employee) {
         this.getFlux().actions.updateEmployee(employee, this.state.loggedInUser.token);
+        this.history.pushState(null, `/employee/${employee.id}`, null);
     },
 
     render() {
