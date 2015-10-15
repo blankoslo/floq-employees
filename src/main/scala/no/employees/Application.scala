@@ -97,7 +97,7 @@ object DatabaseConfig {
     val databaseUrl : Option[String] = Option(System.getenv("DATABASE_URL"))
     databaseUrl match{
       case Some(value) => transformDatabaseUrl(value)
-      case None => "jdbc:postgresql://horton.elephantsql.com:5432/ymzbexfr?user=ymzbexfr&password=v64te7Ce6pvw7GanC9V6N7dI81ZZaAdV" //default to DEV-db 
+      case None => "jdbc:postgresql://horton.elephantsql.com:5432/qqpzgylo?user=qqpzgylo&password=xVINSxGAIrwBxAMAsn6Ts1U63FZ7aQJY" //default to DEV-db
     }
   }
   val driver: String = "org.postgresql.Driver"
