@@ -68,7 +68,7 @@ var EmployeeForm = React.createClass({
     },
 
     render() {
-        var options = this.state.genders.toJS();
+        var options = this.state.genders.map(o => Record.Gender({name: labels[o.name], value: o.value}));
 
         return (
             <form onSubmit={this.handleSubmit}>
