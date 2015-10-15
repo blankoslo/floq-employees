@@ -14,7 +14,6 @@ var UserStore = Fluxxor.createStore({
     },
 
     onUserSignedIn(user) {
-        console.log("Hurray, we have a sign in!")
         this.loggedInUser = user;
         this.emit("change");
     }
