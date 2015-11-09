@@ -43,7 +43,7 @@ trait AuthenticationModule extends RequestHandler {
   }
 
   private def isDomainCorrect(googleVerifyResponse: GoogleVerifyResponse) = googleVerifyResponse.hd match {
-    case Some("jdo.no") => Directives.success("Correct domain")
+    case Some("blankoslo.no") => Directives.success("Correct domain")
     case _ => Directives.failure(Unauthorized ~> ResponseString("Wrong domain"))
   }
 
