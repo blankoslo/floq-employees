@@ -29,15 +29,13 @@ var EditEmployee = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
         History,
-        Fluxxor.StoreWatchMixin('EmployeeStore', 'UserStore')
+        Fluxxor.StoreWatchMixin('EmployeeStore')
     ],
 
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
-        var userStore = this.getFlux().store('UserStore');
         return {
-            employeeStore: employeeStore,
-            loggedInUser: userStore.loggedInUser
+            employeeStore: employeeStore
         };
     },
 
@@ -58,7 +56,7 @@ var EditEmployee = React.createClass({
     },
 
     handleSubmit(event, employee) {
-        this.getFlux().actions.updateEmployee(employee, this.state.loggedInUser.token);
+        this.getFlux().actions.updateEmployee(employee);
         this.history.pushState(null, `/employee/${employee.id}`, null);
     },
 
