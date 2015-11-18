@@ -36,7 +36,6 @@ var AppWrapper = React.createClass({
     mixins: [FluxMixin],
 
     componentWillMount() {
-        console.log("cwd appwrapper");
         this.getFlux().actions.loadGenders();
         this.getFlux().actions.loadEmployees();
     },
