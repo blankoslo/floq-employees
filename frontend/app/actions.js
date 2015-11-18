@@ -4,7 +4,7 @@ var Record = require('./record.js');
 var apiClient = require('./apiclient.js');
 var Constants = require('./constants.js');
 
-var client = apiClient("http://localhost:8081/api");
+var client = apiClient(window.config.apiUri);
 
 function parseError(req) {
     const payload = JSON.parse(req.responseText);
