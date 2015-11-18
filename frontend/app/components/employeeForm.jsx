@@ -12,7 +12,7 @@ let labels = Constants.ATTR_LABELS;
 var EmployeeForm = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('GenderStore', 'UserStore')
+        Fluxxor.StoreWatchMixin('GenderStore')
     ],
 
     getStateFromFlux() {

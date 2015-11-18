@@ -16,7 +16,7 @@ function parseError(req) {
 
 var actions = {
     loadGenders() {
-        var token = this.flux.store('UserStore').token;
+        var token = window.id_token;
 
         this.dispatch(Constants.GENDERS_LOAD_STARTED);
         client.getGenders(token).then(
@@ -26,7 +26,7 @@ var actions = {
     },
 
     loadEmployees() {
-        var token = this.flux.store('UserStore').token;
+        var token = window.id_token;
 
         this.dispatch(Constants.EMPLOYEES_LOAD_STARTED);
         client.getEmployees(token).then(
@@ -36,7 +36,7 @@ var actions = {
     },
 
     createEmployee(employee) {
-        var token = this.flux.store('UserStore').token;
+        var token = window.id_token;
 
         this.dispatch(Constants.EMPLOYEES_CREATE_STARTED, employee);
         client.createEmployee(employee, token).then(
@@ -46,7 +46,7 @@ var actions = {
     },
 
     updateEmployee(employee) {
-        var token = this.flux.store('UserStore').token;
+        var token = window.id_token;
 
         this.dispatch(Constants.EMPLOYEES_UPDATE_STARTED, employee);
         client.updateEmployee(employee, token).then(

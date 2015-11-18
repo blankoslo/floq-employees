@@ -14,13 +14,11 @@ var Constants = require('./constants.js');
 var Immutable = require('immutable');
 var EmployeeStore = require('./stores/EmployeeStore.js');
 var GenderStore = require('./stores/GenderStore.js');
-var UserStore = require('./stores/UserStore.js');
 var actions = require('./actions.js');
 
 var stores = {
     EmployeeStore: new EmployeeStore(),
-    GenderStore: new GenderStore(),
-    UserStore: new UserStore()
+    GenderStore: new GenderStore()
 };
 
 var flux = new Fluxxor.Flux(stores, actions);
@@ -30,7 +28,6 @@ var EmployeeList = require('./components/employeeList.jsx');
 var ViewEmployee = require('./components/viewEmployee.jsx');
 var EditEmployee = require('./components/editEmployee.jsx');
 var CreateEmployee = require('./components/createEmployee.jsx');
-var UserHeader = require('./components/userHeader.jsx');
 
 var AppWrapper = React.createClass({
     mixins: [FluxMixin],

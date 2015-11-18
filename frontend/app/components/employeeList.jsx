@@ -16,15 +16,13 @@ let columns = ['firstName', 'lastName', 'phone', 'address', 'postalCode',
 var EmployeeList = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('EmployeeStore', 'UserStore')
+        Fluxxor.StoreWatchMixin('EmployeeStore')
     ],
 
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
-        var userStore = this.getFlux().store('UserStore');
         return {
-            employees: employeeStore.employees,
-            loggedInUser: userStore.loggedInUser
+            employees: employeeStore.employees
         };
     },
 
