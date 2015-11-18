@@ -16,15 +16,13 @@ let columns = ['firstName', 'lastName', 'phone', 'address', 'postalCode',
 var EmployeeList = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('EmployeeStore', 'UserStore')
+        Fluxxor.StoreWatchMixin('EmployeeStore')
     ],
 
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
-        var userStore = this.getFlux().store('UserStore');
         return {
-            employees: employeeStore.employees,
-            loggedInUser: userStore.loggedInUser
+            employees: employeeStore.employees
         };
     },
 
@@ -33,9 +31,9 @@ var EmployeeList = React.createClass({
         var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employee/${employee.id}`}>Vis</Link></Td></Tr>);
 
         return (
-            <div>
+            <div className="employeelist">
                 {this.props.children}
-                <Table className="table" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
+                <Table id="employeetable" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
                 {rows}
             </div>
         );

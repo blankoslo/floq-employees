@@ -12,7 +12,7 @@ let labels = Constants.ATTR_LABELS;
 var EmployeeForm = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
-        Fluxxor.StoreWatchMixin('GenderStore', 'UserStore')
+        Fluxxor.StoreWatchMixin('GenderStore')
     ],
 
     getStateFromFlux() {
@@ -32,6 +32,10 @@ var EmployeeForm = React.createClass({
     handleChange(event) {
         var newEmployee = this.state.employee.set(event.target.name, event.target.value)
         this.setState({employee: newEmployee})
+    },
+
+    handleCancel(event) {
+        this.props.onCancel(event, this.state.employee);
     },
 
     handleSubmit(event) {
@@ -93,7 +97,7 @@ var EmployeeForm = React.createClass({
                     <TextField id="postalCode" label={labels.postalCode} value={this.state.employee.postalCode} handleChange={this.handleChange} />
                     <TextField id="city" label={labels.city} value={this.state.employee.city} handleChange={this.handleChange} />
                 </div>
-                <button type="submit" value="Submit">Lagre</button> <button onClick={this.props.onCancel}>Avbryt</button>
+                <button type="submit" value="Submit" className="appbutton bgred">Lagre</button> <button onClick={this.handleCancel} className="appbutton bgred">Avbryt</button>
             </form>
         );
     }

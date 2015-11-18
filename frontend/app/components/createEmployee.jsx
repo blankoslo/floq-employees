@@ -29,15 +29,13 @@ var CreateEmployee = React.createClass({
     mixins: [
         Fluxxor.FluxMixin(React),
         History,
-        Fluxxor.StoreWatchMixin('EmployeeStore', 'UserStore')
+        Fluxxor.StoreWatchMixin('EmployeeStore')
     ],
 
     getStateFromFlux() {
         var employeeStore = this.getFlux().store('EmployeeStore');
-        var userStore = this.getFlux().store('UserStore');
         return {
-            createState: employeeStore.createState,
-            loggedInUser: userStore.loggedInUser
+            createState: employeeStore.createState
         };
     },
 
@@ -58,7 +56,7 @@ var CreateEmployee = React.createClass({
     },
 
     handleSubmit(event, employee) {
-        this.getFlux().actions.createEmployee(employee, this.state.loggedInUser.token);
+        this.getFlux().actions.createEmployee(employee);
         this.history.pushState(null, `/employee/new`, null);
     },
 

@@ -46,8 +46,6 @@ var ViewEmployee = React.createClass({
 
         if (employee) {
             partial = <div className="formContainer">
-                <button className="closeButton" onClick={this.closeView}>X</button><br/>
-                <button className="closeButton" onClick={this.editView}>Endre</button>
                 <div className="form-row">
                     <LabelValue label={labels.firstName} value={employee.firstName} />
                     <LabelValue label={labels.lastName} value={employee.lastName} />
@@ -69,6 +67,8 @@ var ViewEmployee = React.createClass({
                     <LabelValue label={labels.postalCode} value={employee.postalCode} />
                     <LabelValue label={labels.city} value={employee.city} />
                 </div>
+                <button className="closeButton appbutton bgred" onClick={this.closeView}>Lukk</button>
+                <button className="closeButton appbutton bgred" onClick={this.editView}>Endre</button>
             </div>
         } else {
             partial = <div></div>
