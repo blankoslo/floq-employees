@@ -34,6 +34,10 @@ var EmployeeForm = React.createClass({
         this.setState({employee: newEmployee})
     },
 
+    handleCancel(event) {
+        this.props.onCancel(event, this.state.employee);
+    },
+
     handleSubmit(event) {
         event.preventDefault();
 
