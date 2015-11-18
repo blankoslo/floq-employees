@@ -93,7 +93,7 @@ var EmployeeForm = React.createClass({
                     <TextField id="postalCode" label={labels.postalCode} value={this.state.employee.postalCode} handleChange={this.handleChange} />
                     <TextField id="city" label={labels.city} value={this.state.employee.city} handleChange={this.handleChange} />
                 </div>
-                <button type="submit" value="Submit">Lagre</button> <button onClick={this.props.onCancel}>Avbryt</button>
+                <button type="submit" value="Submit" className="appbutton bgred">Lagre</button> <button onClick={this.handleCancel} className="appbutton bgred">Avbryt</button>
             </form>
         );
     }

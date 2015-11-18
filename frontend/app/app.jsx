@@ -16,7 +16,6 @@ var EmployeeStore = require('./stores/EmployeeStore.js');
 var GenderStore = require('./stores/GenderStore.js');
 var UserStore = require('./stores/UserStore.js');
 var actions = require('./actions.js');
-require("../style/main.less");
 
 var stores = {
     EmployeeStore: new EmployeeStore(),
@@ -45,7 +44,7 @@ var AppWrapper = React.createClass({
     render() {
         return (
             <div>
-                <Link to={`/employees/new`}>Legg til ansatt</Link>
+                <Link to={`/employees/new`} className='appbutton bgred'>Legg til ansatt</Link>
                 {this.props.children}
             </div>
         );

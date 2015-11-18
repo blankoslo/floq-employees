@@ -33,9 +33,9 @@ var EmployeeList = React.createClass({
         var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employee/${employee.id}`}>Vis</Link></Td></Tr>);
 
         return (
-            <div>
+            <div className="employeelist">
                 {this.props.children}
-                <Table className="table" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
+                <Table id="employeetable" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
                 {rows}
             </div>
         );
