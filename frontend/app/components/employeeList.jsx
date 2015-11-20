@@ -28,7 +28,7 @@ var EmployeeList = React.createClass({
 
     render() {
         var employees = this.state.employees.toJS();
-        var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employee/${employee.id}`}>Vis</Link></Td></Tr>);
+        var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employees/${employee.id}`}>Vis</Link></Td></Tr>);
 
         return (
             <div className="employeelist">

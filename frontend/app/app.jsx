@@ -59,8 +59,8 @@ React.render(
         <Route path="/" component={AppWrapper}>
             <IndexRoute component={EmployeeList}/>
             <Route path="employees" component={EmployeeList}>
-                <Route path="/employee/:id" component={ViewEmployee} />
-                <Route path="/employee/:id/edit" component={EditEmployee} />
+                <Route path="/employees/:id" component={ViewEmployee} />
+                <Route path="/employees/:id/edit" component={EditEmployee} />
                 <Route path="/employees/new" component={CreateEmployee} />
             </Route>
         </Route>

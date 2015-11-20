@@ -37,7 +37,7 @@ var ViewEmployee = React.createClass({
 
     editView() {
         event.preventDefault();
-        this.history.pushState(null, `/employee/${this.props.params.id}/edit`, null);
+        this.history.pushState(null, `/employees/${this.props.params.id}/edit`, null);
     },
 
     render() {
