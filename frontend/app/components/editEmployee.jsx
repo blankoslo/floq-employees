@@ -51,12 +51,12 @@ var EditEmployee = React.createClass({
 
     toggleEmployeeForm(event, employee) {
         event.preventDefault();
-        this.history.pushState(null, `/employee/${employee.id}`, null);
+        this.history.pushState(null, `/employees/${employee.id}`, null);
     },
 
     handleSubmit(event, employee) {
         this.getFlux().actions.updateEmployee(employee);
-        this.history.pushState(null, `/employee/${employee.id}`, null);
+        this.history.pushState(null, `/employees/${employee.id}`, null);
     },
 
     render() {
