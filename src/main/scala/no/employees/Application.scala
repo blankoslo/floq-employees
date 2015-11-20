@@ -18,7 +18,7 @@ class EmployeesCrossOriginFilter extends CrossOriginFilter {
 
   override def init(filterConfig: FilterConfig) {
     val allowedOriginsConfig: String =  "*"
-    val allowedMethodsConfig: String = "GET,POST,HEAD"
+    val allowedMethodsConfig: String = "GET,POST,HEAD,PUT"
     val allowedHeadersConfig = "X-Requested-With,Content-Type,Accept,Origin, Authorization"
     val preflightMaxAgeConfig: String = "1800"
     val allowedCredentialsConfig: String =  "true"
