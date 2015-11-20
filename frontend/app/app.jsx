@@ -15,6 +15,7 @@ var Immutable = require('immutable');
 var EmployeeStore = require('./stores/EmployeeStore.js');
 var GenderStore = require('./stores/GenderStore.js');
 var actions = require('./actions.js');
+require('../style/datepicker.less');
 
 var stores = {
     EmployeeStore: new EmployeeStore(),
