@@ -15,6 +15,10 @@ var EmployeeForm = React.createClass({
         Fluxxor.StoreWatchMixin('GenderStore')
     ],
 
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    },
+
     getStateFromFlux() {
         var genderStore = this.getFlux().store('GenderStore');
         return {
@@ -76,28 +80,40 @@ var EmployeeForm = React.createClass({
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="form-row">
-                    <TextField id="firstName" label={labels.firstName} value={this.state.employee.firstName} handleChange={this.handleChange} error={this.state.errors['firstName']} />
-                    <TextField id="lastName" label={labels.lastName} value={this.state.employee.lastName} handleChange={this.handleChange} error={this.state.errors['lastName']} />
-                    <TextField id="phone" label={labels.phone} value={this.state.employee.phone} handleChange={this.handleChange} error={this.state.errors['phone']}/>
-                    <TextField id="email" label={labels.email} value={this.state.employee.email} handleChange={this.handleChange} error={this.state.errors['email']}/>
+                <div className="mdl-grid">
+                    <div className="mdl-cell mdl-cell--3-col">
+                        <TextField id="firstName" label={labels.firstName} value={this.state.employee.firstName} handleChange={this.handleChange} error={this.state.errors['firstName']} required={true}/>
+                        <TextField id="lastName" label={labels.lastName} value={this.state.employee.lastName} handleChange={this.handleChange} error={this.state.errors['lastName']} required={true}/>
+                        <TextField id="phone" label={labels.phone} value={this.state.employee.phone} handleChange={this.handleChange} error={this.state.errors['phone']} required={true}/>
+                        <TextField id="email" label={labels.email} value={this.state.employee.email} handleChange={this.handleChange} error={this.state.errors['email']} required={true}/>
+                    </div>
+                    <div className="mdl-cell mdl-cell--3-col">
+                        <SelectField id="gender" label={labels.gender} value={this.state.employee.gender} options={options} handleChange={this.handleChange} error={this.state.errors['gender']} required={true}/>
+                        <DateField id="birthDate" label={labels.birthDate} value={this.state.employee.birthDate} handleChange={this.handleChangeDate} error={this.state.errors['birthDate']} required={true}/>
+                        <DateField id="dateOfEmployment" label={labels.dateOfEmployment} value={this.state.employee.dateOfEmployment} handleChange={this.handleChangeDate} />
+                    </div>
+                    <div className="mdl-cell mdl-cell--3-col">
+                        <TextField id="emergencyContactName" label={labels.emergencyContactName} value={this.state.employee.emergencyContactName} handleChange={this.handleChange} />
+                        <TextField id="emergencyContactPhone" label={labels.emergencyContactPhone} value={this.state.employee.emergencyContactPhone} handleChange={this.handleChange} />
+                        <TextField id="emergencyContactRelation" label={labels.emergencyContactRelation} value={this.state.employee.emergencyContactRelation} handleChange={this.handleChange} />
+                    </div>
+                    <div className="mdl-cell mdl-cell--3-col">
+                        <TextField id="address" label={labels.address} value={this.state.employee.address} handleChange={this.handleChange} />
+                        <TextField id="postalCode" label={labels.postalCode} value={this.state.employee.postalCode} handleChange={this.handleChange} />
+                        <TextField id="city" label={labels.city} value={this.state.employee.city} handleChange={this.handleChange} />
+                    </div>
+                    <div className="mdl-cell mdl-cell--3-col">
+                        <button type="submit"
+                                value="Submit"
+                                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent form-element">
+                            Lagre
+                        </button>
+                        <button onClick={this.handleCancel}
+                                className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored form-element">
+                            Lukk
+                        </button>
+                    </div>
                 </div>
-                <div className="form-row">
-                    <SelectField id="gender" label={labels.gender} value={this.state.employee.gender} options={options} handleChange={this.handleChange} error={this.state.errors['gender']}/>
-                    <DateField id="birthDate" label={labels.birthDate} value={this.state.employee.birthDate} handleChange={this.handleChangeDate} error={this.state.errors['birthDate']}/>
-                    <DateField id="dateOfEmployment" label={labels.dateOfEmployment} value={this.state.employee.dateOfEmployment} handleChange={this.handleChangeDate} />
-                </div>
-                <div className="form-row">
-                    <TextField id="emergencyContactName" label={labels.emergencyContactName} value={this.state.employee.emergencyContactName} handleChange={this.handleChange} />
-                    <TextField id="emergencyContactPhone" label={labels.emergencyContactPhone} value={this.state.employee.emergencyContactPhone} handleChange={this.handleChange} />
-                    <TextField id="emergencyContactRelation" label={labels.emergencyContactRelation} value={this.state.employee.emergencyContactRelation} handleChange={this.handleChange} />
-                </div>
-                <div className="form-row">
-                    <TextField id="address" label={labels.address} value={this.state.employee.address} handleChange={this.handleChange} />
-                    <TextField id="postalCode" label={labels.postalCode} value={this.state.employee.postalCode} handleChange={this.handleChange} />
-                    <TextField id="city" label={labels.city} value={this.state.employee.city} handleChange={this.handleChange} />
-                </div>
-                <button type="submit" value="Submit" className="appbutton bgred">Lagre</button> <button onClick={this.handleCancel} className="appbutton bgred">Avbryt</button>
             </form>
         );
     }

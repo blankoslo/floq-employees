@@ -19,7 +19,6 @@
     "react-datepicker": "^0.10.0",
     "react-router": "^1.0.0-rc1",
     "react-select": "^0.4.9",
-    "reactable": "^0.10.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

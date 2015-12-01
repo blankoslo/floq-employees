@@ -38,10 +38,13 @@ var AppWrapper = React.createClass({
         this.getFlux().actions.loadEmployees();
     },
 
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    },
+
     render() {
         return (
             <div>
-                <Link to={`/employees/new`} className='appbutton bgred'>Legg til ansatt</Link>
                 {this.props.children}
             </div>
         );
@@ -57,11 +60,10 @@ let history = createBrowserHistory();
 React.render(
     <Router history={history} createElement={createFluxComponent}>
         <Route path="/" component={AppWrapper}>
-            <IndexRoute component={EmployeeList}/>
-            <Route path="employees" component={EmployeeList}>
-                <Route path="/employees/:id" component={ViewEmployee} />
-                <Route path="/employees/:id/edit" component={EditEmployee} />
+            <Route path="/employees" component={EmployeeList}>
                 <Route path="/employees/new" component={CreateEmployee} />
+                <Route path="/employees/:id/edit" component={EditEmployee} />
+                <Route path="/employees/:id" component={ViewEmployee} />
             </Route>
         </Route>
     </Router>,

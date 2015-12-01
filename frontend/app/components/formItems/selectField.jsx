@@ -21,6 +21,7 @@ var selectField = React.createClass({
         var options = this.props.options;
         var handleChange = this.props.handleChange;
         var disabled = this.props.disabled;
+        var required = this.props.required;
 
         if (this.props.value == null) {
             var defaultValue = (
@@ -32,7 +33,13 @@ var selectField = React.createClass({
 
         return (
             <FormField error={error} id={id} label={label}>
-                <select className="form-control" id={id} name={id} onChange={handleChange} value={value} disabled={disabled}>
+                <select className="form-control"
+                        id={id}
+                        name={id}
+                        onChange={handleChange}
+                        value={value}
+                        disabled={disabled}
+                        required={required}>
                     {defaultValue}
                     {options.map(this.option)}
                 </select>
