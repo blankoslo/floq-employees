@@ -37,7 +37,7 @@ var Constants = {
         emergencyContactPhone: 'Kontaktperson, telefon',
         emergencyContactRelation: 'Kontaktperson, relasjon',
 
-        edit: 'Detaljer'
+        edit: ''
     }
 };
 

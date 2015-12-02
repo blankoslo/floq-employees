@@ -62,7 +62,7 @@ var CreateEmployee = React.createClass({
 
     render() {
         return (
-            <div className="formContainer">
+            <div className="mdl-cell mdl-cell--12-col content-box">
                 <Errors errors={this.state.errors} />
                 <EmployeeForm initialEmployee={new Record.Employee()} onSubmit={this.handleSubmit} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
             </div>

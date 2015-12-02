@@ -19,17 +19,23 @@ var textField = React.createClass({
         var value = this.props.value;
         var handleChange = this.props.handleChange;
         var handleBlur = this.props.handleBlur;
+        var required = this.props.required;
 
         return (
-            <FormField id={id} label={label} error={error}>
+            <FormField id={id}
+                       label={label}
+                       error={error}
+                       className='mdl-textfield mdl-js-textfield form-element'
+                       labelClassName='mdl-textfield__label'>
                 <input
                     type="text"
-                    className="form-control"
+                    className="mdl-textfield__input"
                     id={id}
                     onChange={handleChange}
                     value={value}
                     name={id}
-                    onBlur={handleBlur} />
+                    onBlur={handleBlur}
+                    required={required}/>
             </FormField>
         );
     }

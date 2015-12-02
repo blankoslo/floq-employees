@@ -12,10 +12,10 @@ var formField = React.createClass({
         var classes = classNames({
             'form-group': true,
             errorMessage: this.props.error
-        });
+        }, this.props.className);
         return (
             <div className={classes}>
-                <label className="control-label" htmlFor={this.props.id}>
+                <label className={this.props.labelClassName} htmlFor={this.props.id}>
                     {this.props.label}
                 </label>
                 {this.props.children}

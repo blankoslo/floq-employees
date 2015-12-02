@@ -1,17 +1,18 @@
 var React = require('react');
 var Fluxxor = require('fluxxor');
-var Reactable = require('reactable');
-var Router = require('react-router');
-var Link = Router.Link;
-var Table = Reactable.Table, Tr = Reactable.Tr, Td = Reactable.Td;
+import { Link } from 'react-router';
 
 var Constants = require('../constants.js');
 let labels = Constants.ATTR_LABELS;
-let columns = ['firstName', 'lastName', 'phone', 'address', 'postalCode',
+let headers = ['firstName', 'lastName', 'phone', 'address', 'postalCode',
     'city', 'dateOfEmployment', 'edit']
-    .map(function(name) {
-            return {key: name, label: labels[name]};
-    });
+    .map(name =>
+        <th key={`header-${name}`} className='mdl-data-table__cell--non-numeric'>
+            {labels[name]}
+        </th>
+    );
+
+var EmployeeRow = require('./employeeRow.jsx');
 
 var EmployeeList = React.createClass({
     mixins: [
@@ -20,21 +21,40 @@ var EmployeeList = React.createClass({
     ],
 
     getStateFromFlux() {
-        var employeeStore = this.getFlux().store('EmployeeStore');
-        return {
-            employees: employeeStore.employees
-        };
+        var employees = this.getFlux().store('EmployeeStore').employees
+                .sort((a, b) => a.firstName > b.firstName);
+
+        return {employees};
     },
 
     render() {
         var employees = this.state.employees.toJS();
-        var rows = employees.map(employee => <Tr key={'key'+employee.id} data={employee}><Td column="edit"><Link to={`/employees/${employee.id}`}>Vis</Link></Td></Tr>);
+        console.log(employees);
+        var rows = employees.map(employee =>
+            <EmployeeRow key={`employee-${employee.id}`} employee={employee}/>
+        );
 
         return (
-            <div className="employeelist">
+            <div className="mdl-grid">
+                <div className="mdl-cell mdl-cell--12-col content-box">
+                    <h4>Ansatte</h4>
+                    {rows.length > 0 ?
+                        <table className="mdl-data-table mdl-js-data-table full-width">
+                            <thead>
+                                <tr>{headers}</tr>
+                            </thead>
+                            <tbody>
+                                {rows}
+                            </tbody>
+                        </table>
+                        : null
+                    }
+                    <br/>
+                    <Link to='/employees/new' className='mdl-button mdl-js-button mdl-button--fab mdl-button--colored'>
+                        <i className='material-icons'>add</i>
+                    </Link>
+                </div>
                 {this.props.children}
-                <Table id="employeetable" columns={columns} sortable={true} defaultSort={{column: 'firstName', direction: 'asc'}}>{rows}</Table>
-                {rows}
             </div>
         );
     }
