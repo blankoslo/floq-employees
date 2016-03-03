@@ -29,7 +29,6 @@ var EmployeeList = React.createClass({
 
     render() {
         var employees = this.state.employees.toJS();
-        console.log(employees);
         var rows = employees.map(employee =>
             <EmployeeRow key={`employee-${employee.id}`} employee={employee}/>
         );

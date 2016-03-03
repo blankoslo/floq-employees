@@ -1,10 +1,13 @@
 var React = require('react');
 var Fluxxor = require('fluxxor');
+var moment = require('moment');
 
 var Record = require ('./../record.js');
 var TextField = require('./formItems/textField.jsx');
-var SelectField = require('./formItems/selectField.jsx');
 var DateField = require('./formItems/dateField.jsx');
+var SelectField = require('./formItems/selectField.jsx');
+var RadioButtonField = require('./formItems/radioButtonField.jsx');
+var FormField = require('./formItems/formField.jsx');
 
 var Constants = require('../constants.js');
 let labels = Constants.ATTR_LABELS;
@@ -16,6 +19,10 @@ var EmployeeForm = React.createClass({
     ],
 
     componentDidMount() {
+        componentHandler.upgradeDom();
+    },
+
+    componentDidUpdate() {
         componentHandler.upgradeDom();
     },
 
@@ -34,7 +41,7 @@ var EmployeeForm = React.createClass({
     },
 
     handleChange(event) {
-        var newEmployee = this.state.employee.set(event.target.name, event.target.value)
+        var newEmployee = this.state.employee.set(event.target.name, event.target.value);
         this.setState({employee: newEmployee})
     },
 
@@ -70,9 +77,21 @@ var EmployeeForm = React.createClass({
         return isEmpty(errors);
     },
 
-    handleChangeDate(date, id) {
-        var newEmployee = this.state.employee.set(id, date.format('YYYY-MM-DD'));
-        this.setState({employee: newEmployee});
+    handleChangeDate(event) {
+        var id = event.target.name;
+        var date = event.target.value;
+
+        if(moment(date, 'DD/MM/YYYY').isValid()){
+            var newEmployee = this.state.employee.set(id, date);
+            this.setState({employee: newEmployee});
+        }
+        else {
+            var errors = {};
+            errors[id] = 'Not a valid date';
+            console.log('wroong date' + id)
+            this.props.setErrors(errors);
+        }
+
     },
 
     render() {
@@ -88,19 +107,19 @@ var EmployeeForm = React.createClass({
                         <TextField id="email" label={labels.email} value={this.state.employee.email} handleChange={this.handleChange} error={this.state.errors['email']} required={true}/>
                     </div>
                     <div className="mdl-cell mdl-cell--3-col">
-                        <SelectField id="gender" label={labels.gender} value={this.state.employee.gender} options={options} handleChange={this.handleChange} error={this.state.errors['gender']} required={true}/>
-                        <DateField id="birthDate" label={labels.birthDate} value={this.state.employee.birthDate} handleChange={this.handleChangeDate} error={this.state.errors['birthDate']} required={true}/>
-                        <DateField id="dateOfEmployment" label={labels.dateOfEmployment} value={this.state.employee.dateOfEmployment} handleChange={this.handleChangeDate} />
-                    </div>
-                    <div className="mdl-cell mdl-cell--3-col">
-                        <TextField id="emergencyContactName" label={labels.emergencyContactName} value={this.state.employee.emergencyContactName} handleChange={this.handleChange} />
-                        <TextField id="emergencyContactPhone" label={labels.emergencyContactPhone} value={this.state.employee.emergencyContactPhone} handleChange={this.handleChange} />
-                        <TextField id="emergencyContactRelation" label={labels.emergencyContactRelation} value={this.state.employee.emergencyContactRelation} handleChange={this.handleChange} />
+                        <DateField id="birthDate" label={"24/12/1984 (" +labels.birthDate + ")"} value={this.state.employee.birthDate} handleChange={this.handleChangeDate} error={this.state.errors['birthDate']} required={true} />
+                        <DateField id="dateOfEmployment" label={"21/10/2015 (" + labels.dateOfEmployment + ")"} value={this.state.employee.dateOfEmployment} handleChange={this.handleChangeDate} required={true} />
+                        <RadioButtonField id="gender" label={labels.gender} value={this.state.employee.gender} options={options} handleChange={this.handleChange} error={this.state.errors['gender']} required={true}/>
                     </div>
                     <div className="mdl-cell mdl-cell--3-col">
                         <TextField id="address" label={labels.address} value={this.state.employee.address} handleChange={this.handleChange} />
                         <TextField id="postalCode" label={labels.postalCode} value={this.state.employee.postalCode} handleChange={this.handleChange} />
                         <TextField id="city" label={labels.city} value={this.state.employee.city} handleChange={this.handleChange} />
+                    </div>
+                    <div className="mdl-cell mdl-cell--3-col">
+                        <TextField id="emergencyContactName" label={labels.emergencyContactName} value={this.state.employee.emergencyContactName} handleChange={this.handleChange} />
+                        <TextField id="emergencyContactPhone" label={labels.emergencyContactPhone} value={this.state.employee.emergencyContactPhone} handleChange={this.handleChange} />
+                        <TextField id="emergencyContactRelation" label={labels.emergencyContactRelation} value={this.state.employee.emergencyContactRelation} handleChange={this.handleChange} />
                     </div>
                     <div className="mdl-cell mdl-cell--3-col">
                         <button type="submit"
