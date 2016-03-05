@@ -12,7 +12,15 @@ class EmployeeList extends Component {
 
     render() {
         if (this.props.employees === null) {
-            return <div>Loading…</div>;
+            return (
+                <div style={{
+                        width: '100%',
+                        margin: '15px',
+                        textAlign: 'center'
+                    }}>
+                    <div className="mdl-spinner mdl-js-spinner is-active" />
+                </div>
+            );
         }
 
         var employeeRows = this.props.employees.map(employee =>
