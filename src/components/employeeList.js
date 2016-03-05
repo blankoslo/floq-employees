@@ -3,16 +3,11 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {getEmployees} from '../actions/index';
+import EmployeeRow from './employeeRow';
 
 class EmployeeList extends Component {
     componentWillMount() {
         this.props.getEmployees();
-    }
-
-    renderList() {
-        return this.props.employees.map(employee => {
-            return <li key={employee.id}>{employee.first_name}</li>;
-        });
     }
 
     render() {
@@ -20,11 +15,13 @@ class EmployeeList extends Component {
             return <div>Loading…</div>;
         }
 
+        var employeeRows = this.props.employees.map(employee =>
+            <EmployeeRow key={`employee-${employee.id}`} employee={employee}/>
+        );
+
         return (
-            <div>
-                <ul>
-                    {this.renderList()}
-                </ul>
+            <div className="demo-list-action mdl-list">
+                {employeeRows}
             </div>
         );
     }
