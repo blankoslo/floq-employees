@@ -62,10 +62,10 @@ class ViewEmployee extends Component {
             <div className="mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone">
               <hr />
             </div>
-            <div className={gridClasses}>
+            <div className="mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone">
               <h5>Kontaktperson</h5>
             </div>
-            <div className={gridClasses}>
+            <div className="mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone">
               <p style={{marginBottom: '8px'}}>{employee.emergency_contact_name}</p>
               <p style={{marginBottom: '8px', color: '#9B9B9B'}}>{employee.emergency_contact_relation}</p>
               <p style={{marginBottom: '8px'}}>{employee.emergency_contact_phone}</p>
