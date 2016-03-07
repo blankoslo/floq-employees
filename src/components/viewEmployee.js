@@ -1,48 +1,74 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import md5 from 'md5';
 
 class ViewEmployee extends Component {
     render() {
       const activeId = parseInt(this.props.params.id);
-      const activeEmployee = this.props.employees.find(e => e.id === activeId);
+      const employee = this.props.employees.find(e => e.id === activeId);
       const gridClasses="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone";
 
         return (
           <div className="mdl-grid">
             <div className={gridClasses} style={{textAlign: 'center'}}>
-              {activeEmployee.first_name} {activeEmployee.last_name}
+              <img style={{
+                  width: '128px',
+                  height: '128px',
+                  borderRadius: '64px'
+                }}
+                src={`http://www.gravatar.com/avatar/${md5(employee.email)}`} />
             </div>
             <div className={gridClasses} style={{textAlign: 'center'}}>
-              {activeEmployee.title}
+              <h5>{employee.first_name} {employee.last_name}</h5>
+              <span style={{color: '#9B9B9B'}}>{employee.title}</span>
             </div>
-            <div className={gridClasses}>
-              <i className='material-icons'>phone</i>
-              {activeEmployee.phone}
-            </div>
-            <div className={gridClasses}>
-                      <i className='material-icons'>email</i>
-                      {activeEmployee.email}
-            </div>
-            <div className={gridClasses}>
-              <i className='material-icons'>location_on</i>
-              {activeEmployee.address}
-              <br />
-              {activeEmployee.postal_code} {activeEmployee.city}
-            </div>
-            <div className={gridClasses}>
+            <div className="mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone">
               <hr />
             </div>
             <div className={gridClasses}>
-              <h4>Kontaktperson</h4>
+              <div className="mdl-grid">
+                <div style={{textAlign: 'right'}}className="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone mdl-cell--top">
+                  <i className='material-icons' style={{color: '#414CB7'}}>phone</i>
+                </div>
+                <div className="mdl-cell mdl-cell--10-col mdl-cell--3-col-phone mdl-cell--top">
+                  {employee.phone}
+                </div>
+              </div>
             </div>
             <div className={gridClasses}>
-              {activeEmployee.emergency_contact_name}
+              <div className="mdl-grid">
+                <div style={{textAlign: 'right'}}className="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone mdl-cell--top">
+                  <div className="mdl-layout-spacer"></div>
+                  <i className='material-icons' style={{color: '#414CB7'}}>email</i>
+                </div>
+                <div className="mdl-cell mdl-cell--10-col mdl-cell--3-col-phone mdl-cell--top">
+                  {employee.email}
+                </div>
+              </div>
             </div>
             <div className={gridClasses}>
-              {activeEmployee.emergency_contact_relation}
+              <div className="mdl-grid">
+                <div style={{textAlign: 'right'}}className="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone mdl-cell--top">
+                  <div className="mdl-layout-spacer" />
+                  <i className='material-icons' style={{color: '#414CB7'}}>location_on</i>
+                </div>
+                <div className="mdl-cell mdl-cell--10-col mdl-cell--3-col-phone mdl-cell--top">
+                  {employee.address}
+                  <br />
+                  {employee.postal_code} {employee.city}
+                </div>
+              </div>
+            </div>
+            <div className="mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone">
+              <hr />
             </div>
             <div className={gridClasses}>
-              {activeEmployee.emergency_contact_phone}
+              <h5>Kontaktperson</h5>
+            </div>
+            <div className={gridClasses}>
+              <p style={{marginBottom: '8px'}}>{employee.emergency_contact_name}</p>
+              <p style={{marginBottom: '8px', color: '#9B9B9B'}}>{employee.emergency_contact_relation}</p>
+              <p style={{marginBottom: '8px'}}>{employee.emergency_contact_phone}</p>
             </div>
           </div>
         );
@@ -52,7 +78,7 @@ class ViewEmployee extends Component {
 /*
             <div>
                 mdl-cell--N-offset-desktop
-                {activeEmployee.first_name}
+                {employee.first_name}
             </div>
 */
 
