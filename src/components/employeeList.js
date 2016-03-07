@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -31,14 +31,15 @@ class EmployeeList extends Component {
   }
 }
 
-const mapStateToProps = ({ employees }) => {
-  return {
-    employees: employees
-  };
+EmployeeList.propTypes = {
 };
 
+const mapStateToProps = ({ employees }) => ({
+  employees: employees
+});
+
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getEmployees }, dispatch);
+  return bindActionCreators({ getEmployees: getEmployees }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
