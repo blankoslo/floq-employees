@@ -1,0 +1,26 @@
+.main-color {
+    color: #414cb7;
+}
+
+.gray {
+    color: #9b9b9b;
+}
+
+p.emergency-contact {
+    font-size: 16px;
+    margin-bottom: 8px; 
+}
+
+img.profile-pic {
+    width: 128px;
+    height: 128px;
+    border-radius: 64px;
+}
+
+div.center-text {
+    text-align: center
+}
+
+div.pull-right {
+    text-align: right;
+}

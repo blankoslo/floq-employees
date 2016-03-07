@@ -16,7 +16,7 @@ module.exports = {
   devtool: 'source-map',
   module: {
       loaders: [
-          { test: /\.less$/, loader: "style!css!less" },
+          { test: /\.css$/, loader: "style!css" },
           { test: /\.json$/, loader: "json" },
           { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/, include: __dirname }
       ]
