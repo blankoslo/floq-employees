@@ -21,7 +21,6 @@ class EmployeeList extends Component {
       </div>
     );
 
-    console.log(this.props.children);
     const listClasses = this.props.children === null
       ? "mdl-cell mdl-cell--4-col mdl-cell--12-col-phone"
       : "mdl-cell mdl-cell--4-col mdl-cell--hide-phone";
