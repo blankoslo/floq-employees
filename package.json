@@ -23,6 +23,7 @@
     "install": "^0.5.4",
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
+    "md5": "^2.0.0",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7",
     "webpack": "^1.12.14",

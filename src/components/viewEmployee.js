@@ -1,105 +1,63 @@
-var React = require('react');
-var Fluxxor = require('fluxxor');
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-var EmployeeStore = require('./../stores/EmployeeStore');
-var Constants = require('./../constants.js');
-var Record = require ('./../record.js');
-var EmployeeForm = require('./employeeForm.jsx');
-import { History } from 'react-router'
-
-var Constants = require('../constants.js');
-let labels = Constants.ATTR_LABELS;
-
-var ViewEmployee = React.createClass({
-    mixins: [
-        Fluxxor.FluxMixin(React),
-        History,
-        Fluxxor.StoreWatchMixin('EmployeeStore')
-    ],
-
-    getStateFromFlux() {
-        var employeeStore = this.getFlux().store('EmployeeStore');
-        return {
-            employeeStore: employeeStore
-        };
-    },
-
-    getInitialState() {
-        return {
-            errors: {}
-        };
-    },
-
-    closeView() {
-        event.preventDefault();
-        this.history.pushState(null, `/employees`, null);
-    },
-
-    editView() {
-        event.preventDefault();
-        this.history.pushState(null, `/employees/${this.props.params.id}/edit`, null);
-    },
-
+class ViewEmployee extends Component {
     render() {
-        var employee = this.state.employeeStore.getEmployee(this.props.params.id);
-        var partial;
+      const activeId = parseInt(this.props.params.id);
+      const activeEmployee = this.props.employees.find(e => e.id === activeId);
+      const gridClasses="mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone";
 
-        if (employee) {
-            partial = <div className="mdl-grid content-box">
-                <div className="mdl-cell mdl-cell--3-col">
-                    <LabelValue label={labels.firstName} value={employee.firstName} />
-                    <LabelValue label={labels.lastName} value={employee.lastName} />
-                    <LabelValue label={labels.phone} value={employee.phone} />
-                    <LabelValue label={labels.email} value={employee.email} />
-                </div>
-                <div className="mdl-cell mdl-cell--3-col">
-                    <LabelValue label={labels.gender} value={labels[employee.gender]} />
-                    <LabelValue label={labels.birthDate} value={employee.birthDate} />
-                    <LabelValue label={labels.dateOfEmployment} value={employee.dateOfEmployment} />
-                </div>
-                <div className="mdl-cell mdl-cell--3-col">
-                    <LabelValue label={labels.emergencyContactName} value={employee.emergencyContactName} />
-                    <LabelValue label={labels.emergencyContactPhone} value={employee.emergencyContactPhone} />
-                    <LabelValue label={labels.emergencyContactRelation} value={employee.emergencyContactRelation} />
-                </div>
-                <div className="mdl-cell mdl-cell--3-col">
-                    <LabelValue label={labels.address} value={employee.address} />
-                    <LabelValue label={labels.postalCode} value={employee.postalCode} />
-                    <LabelValue label={labels.city} value={employee.city} />
-                </div>
-                <br/>
-                <div className="mdl-cell mdl-cell--3-col">
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent form-element"
-                            onClick={this.editView}>
-                        Endre
-                    </button>
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored form-element"
-                            onClick={this.closeView}>
-                        Lukk
-                    </button>
-                </div>
-            </div>
-        } else {
-            partial = <div></div>
-        }
-
-        return partial;
-    }
-});
-
-var LabelValue = React.createClass({
-    render() {
         return (
-            <div className="data-group">
-                <label className="data-label">
-                    {this.props.label}
-                </label>
-                <div className='data-value'>
-                    {this.props.value}
-                </div>
+          <div className="mdl-grid">
+            <div className={gridClasses} style={{textAlign: 'center'}}>
+              {activeEmployee.first_name} {activeEmployee.last_name}
             </div>
+            <div className={gridClasses} style={{textAlign: 'center'}}>
+              {activeEmployee.title}
+            </div>
+            <div className={gridClasses}>
+              <i className='material-icons'>phone</i>
+              {activeEmployee.phone}
+            </div>
+            <div className={gridClasses}>
+                      <i className='material-icons'>email</i>
+                      {activeEmployee.email}
+            </div>
+            <div className={gridClasses}>
+              <i className='material-icons'>location_on</i>
+              {activeEmployee.address}
+              <br />
+              {activeEmployee.postal_code} {activeEmployee.city}
+            </div>
+            <div className={gridClasses}>
+              <hr />
+            </div>
+            <div className={gridClasses}>
+              <h4>Kontaktperson</h4>
+            </div>
+            <div className={gridClasses}>
+              {activeEmployee.emergency_contact_name}
+            </div>
+            <div className={gridClasses}>
+              {activeEmployee.emergency_contact_relation}
+            </div>
+            <div className={gridClasses}>
+              {activeEmployee.emergency_contact_phone}
+            </div>
+          </div>
         );
     }
+};
+
+/*
+            <div>
+                mdl-cell--N-offset-desktop
+                {activeEmployee.first_name}
+            </div>
+*/
+
+const mapStateToProps = ({ employees }) => ({
+  employees: employees
 });
 
-module.exports = ViewEmployee;
+export default connect(mapStateToProps)(ViewEmployee);

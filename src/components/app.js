@@ -13,6 +13,15 @@ class App extends Component {
   }
 
   render() {
+    // Show a spinner until we get employees data
+    if (this.props.employees === null) {
+      return (
+        <div style={ { width: '100%', margin: '15px', textAlign: 'center' } }>
+          <div className="mdl-spinner mdl-js-spinner is-active" />
+        </div>
+      );
+    }
+
     return (
       <div className='main-content'>
         {this.props.children}

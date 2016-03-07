@@ -8,22 +8,32 @@ import EmployeeRow from './employeeRow';
 
 class EmployeeList extends Component {
   render() {
-    if (this.props.employees === null) {
-      return (
-        <div style={ { width: '100%', margin: '15px', textAlign: 'center' } }>
-          <div className="mdl-spinner mdl-js-spinner is-active" />
-        </div>
-      );
-    }
-
     const employeeRows = this.props.employees.map(employee =>
       <EmployeeRow key={`employee-${employee.id}`} employee={ employee }/>
     );
 
+    const list = (
+      <div>
+        <div className="demo-list-action mdl-list">
+          <h4>Alle ansatte</h4>
+          {employeeRows}
+        </div>
+      </div>
+    );
+
+    console.log(this.props.children);
+    const listClasses = this.props.children === null
+      ? "mdl-cell mdl-cell--4-col mdl-cell--12-col-phone"
+      : "mdl-cell mdl-cell--4-col mdl-cell--hide-phone";
+
     return (
-      <div className="demo-list-action mdl-list">
-        <h4>Ansatte</h4>
-        {employeeRows}
+      <div className="mdl-grid">
+        <div className={listClasses}>
+          {list}
+        </div>
+        <div className="mdl-cell mdl-cell--8-col">
+          {this.props.children}
+        </div>
       </div>
     );
   }
