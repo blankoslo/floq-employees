@@ -19,6 +19,7 @@
     "eslint": "^2.3.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
+    "flow-bin": "^0.22.1",
     "install": "^0.5.4",
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",

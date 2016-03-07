@@ -1,8 +1,10 @@
+// @flow
 
 import React, { PropTypes } from 'react';
 
+type Employee = {first_name : string, last_name : string};
 
-const EmployeeRow = (props) => {
+const EmployeeRow = (props : {employee: Employee}) => {
   const employee = props.employee;
 
   return (
