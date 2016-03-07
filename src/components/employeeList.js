@@ -4,14 +4,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getEmployees } from '../actions/index';
 import EmployeeRow from './employeeRow';
 
 class EmployeeList extends Component {
-  componentWillMount() {
-    this.props.getEmployees();
-  }
-
   render() {
     if (this.props.employees === null) {
       return (
@@ -41,8 +36,4 @@ const mapStateToProps = ({ employees }) => ({
   employees: employees
 });
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getEmployees: getEmployees }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EmployeeList);
+export default connect(mapStateToProps)(EmployeeList);

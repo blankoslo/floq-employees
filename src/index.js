@@ -1,10 +1,13 @@
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
+import { Router, browserHistory } from 'react-router';
 
-import App from './components/app';
+import routes from './routes';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = compose(
@@ -14,6 +17,7 @@ const createStoreWithMiddleware = compose(
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
+    <Router history={browserHistory} routes={routes}>
+    </Router>
   </Provider>
   , document.getElementById('app'));

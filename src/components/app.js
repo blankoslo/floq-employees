@@ -1,14 +1,32 @@
+// @flow
+
 import React from 'react';
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import EmployeeList from './employeeList';
+import { getEmployees } from '../actions/index';
 
-export default class App extends Component {
+class App extends Component {
+  componentWillMount() {
+    this.props.getEmployees();
+  }
+
   render() {
     return (
-        <div>
-            <EmployeeList />
-        </div>
+      <div className='main-content'>
+        {this.props.children}
+      </div>
     );
   }
 }
+
+const mapStateToProps = ({ employees }) => ({
+  employees: employees
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getEmployees: getEmployees }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
