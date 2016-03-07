@@ -4,7 +4,24 @@ import React, { PropTypes } from 'react';
 import { browserHistory, Link } from 'react-router';
 import md5 from 'md5';
 
-type Employee = {id : number, first_name : string, last_name : string};
+type Employee = {
+    id : number,
+    first_name : string,
+    last_name : string,
+    title : string,
+    phone : string,
+    email : string,
+    gender : string,
+    birth_date : string,
+    date_of_employment : string,
+    termination_date : string,
+    emergency_contact_name : string,
+    emergency_contact_phone : string,
+    emergency_contact_relation : string,
+    address : string,
+    postal_code : string,
+    city : string
+};
 
 const EmployeeRow = (props : {employee: Employee}) => {
   const employee = props.employee;
