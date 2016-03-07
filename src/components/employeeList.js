@@ -27,6 +27,7 @@ class EmployeeList extends Component {
 
     return (
       <div className="demo-list-action mdl-list">
+        <h4>Ansatte</h4>
         {employeeRows}
       </div>
     );
