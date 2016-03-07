@@ -1,10 +1,8 @@
 var React = require('react');
-var DatePicker = require('react-datepicker');
 
-var FormField = require('./formField.jsx');
+var TextField = require('./textField.jsx');
 
-
-var textField = React.createClass({
+var dateField = React.createClass({
     propTypes: {
         id: React.PropTypes.string.isRequired,
         label: React.PropTypes.string.isRequired,
@@ -14,32 +12,19 @@ var textField = React.createClass({
         handleBlur: React.PropTypes.func
     },
 
-    handleChangedDate: function(date) {
-        this.props.handleChange(date, this.props.id);
-    },
-
     render() {
         var id = this.props.id;
         var label = this.props.label;
         var error = this.props.error;
         var value = this.props.value;
+        var handleChange = this.props.handleChange;
         var handleBlur = this.props.handleBlur;
+        var required = this.props.required;
 
         return (
-            <FormField id={id} label={label} error={error} className="datepickerContainer">
-                <DatePicker
-                    key={id}
-                    dateFormat='DD/MM/YYYY'
-                    onChange={this.handleChangedDate}
-                    placeholderText='DD/MM/YYYY'
-                    >
-                    <label className="control-label" htmlFor={id}>
-                        "YOOO"
-                    </label>
-                </DatePicker>
-            </FormField>
+            <TextField id={id} label={label} value={value} handleChange={handleChange} error={error} required={required} />
         );
     }
 });
 
-module.exports = textField;
+module.exports = dateField;

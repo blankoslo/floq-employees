@@ -25,7 +25,7 @@ var textField = React.createClass({
             <FormField id={id}
                        label={label}
                        error={error}
-                       className='mdl-textfield mdl-js-textfield form-element'
+                       className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label form-element'
                        labelClassName='mdl-textfield__label'>
                 <input
                     type="text"
