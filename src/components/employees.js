@@ -22,16 +22,18 @@ class EmployeeList extends Component {
     );
 
     const listClasses = this.props.children === null
-      ? "mdl-cell mdl-cell--4-col mdl-cell--12-col-phone"
-      : "mdl-cell mdl-cell--4-col mdl-cell--hide-phone";
+      ? "mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet"
+      : "mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--hide-phone";
 
     return (
       <div className="mdl-grid">
         <div className={listClasses}>
           {list}
         </div>
-        <div className="mdl-cell mdl-cell--8-col">
-          {this.props.children}
+        <div className="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet">
+          <div className="detail-view">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );
