@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import md5 from 'md5';
 
-import style from '../../styles/style.css';
+import style from '../../styles/style.less';
 
 class ViewEmployee extends Component {
     render() {
