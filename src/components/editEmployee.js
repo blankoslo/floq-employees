@@ -1,79 +1,109 @@
-var React = require('react');
-var Fluxxor = require('fluxxor');
-import { History } from 'react-router'
+import React, { Component, PropTypes } from 'react';
+import { reduxForm } from 'redux-form';
+import { createEmployee } from '../actions/index';
 
-var EmployeeStore = require('./../stores/EmployeeStore');
-var Constants = require('./../constants.js');
-var Record = require ('./../record.js');
-var EmployeeForm = require('./employeeForm.jsx');
-let labels = Constants.ATTR_LABELS;
+const FormTextField = props => {
+  return (
+      <div className="mdl-grid">
+        <div className='mdl-textfield mdl-js-textfield mdl-textfield--floating-label'>
+          <input className='mdl-textfield__input' type='text' id={props.id} pattern={props.pattern} {...props.field} />
+          <label className='mdl-textfield__label' htmlFor={props.id}>{props.label}</label>
+          <span className='mdl-textfield__error'>{props.field.error}</span>
+        </div>
+      </div>
+    );
+}
 
-var Errors = React.createClass({
-    render() {
-        var errors = this.props.errors;
-        var errorTexts = [];
+class EditEmployee extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
 
-        for(var error in errors){
-            errorTexts.push(labels[error] + " er et obligatorisk felt");
-        }
+  componentDidMount() {
+    componentHandler.upgradeDom();
+  }
 
-        return (
-            <div className="errorBlock">
-                {errorTexts.map(error => <div className="error">{error}</div>)}
-            </div>
-        );
-    }
-});
+  onSubmit(props) {
+    this.props.createEmployee(props)
+        .then(res => {
+          console.log('res', res);
+          // Employee was created, navigate to the index
+          //this.context.router.push('/');
+        });
+  }
 
-var EditEmployee = React.createClass({
-    mixins: [
-        Fluxxor.FluxMixin(React),
-        History,
-        Fluxxor.StoreWatchMixin('EmployeeStore')
-    ],
+  render() {
+    return (
+      <form onSubmit={this.props.handleSubmit(this.onSubmit.bind(this))}>
+        <FormTextField
+            label='Fornavn'
+            field={this.props.fields.first_name}
+            id='first_name'
+            pattern='.+'
+        />
+        <FormTextField
+            label='Etternavn'
+            field={this.props.fields.last_name}
+            id='last_name'
+            pattern='.+'
+        />
+        <FormTextField
+            label='Adresse'
+            field={this.props.fields.address}
+            id='address'
+            pattern='.+'
+        />
+        <FormTextField
+            label='Postnummer'
+            field={this.props.fields.postal_code}
+            id='postal_code'
+            pattern='^\d+$'
+        />
+        <FormTextField
+            label='Poststed'
+            field={this.props.fields.city}
+            id='city'
+            pattern='.+'
+        />
+      <div className="mdl-grid">
+        <button className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored'type='submit'>Lagre</button>
+      </div>
+      </form>
+    );
+  }
+};
 
-    getStateFromFlux() {
-        var employeeStore = this.getFlux().store('EmployeeStore');
-        return {
-            employeeStore: employeeStore
-        };
-    },
+const validate = values => {
+  const errors = {};
 
-    getInitialState() {
-        return {
-            errors: {}
-        };
-    },
+  if (!values.first_name) {
+    errors.first_name = 'Oppgi fornavn';
+  }
 
-    setErrors(errors) {
-        this.setState({errors: errors});
-    },
+  if (!values.last_name) {
+    errors.last_name = 'Oppgi etternavn';
+  }
 
-    toggleEmployeeForm(event, employee) {
-        event.preventDefault();
-        this.history.pushState(null, `/employees/${employee.id}`, null);
-    },
+  if (!values.address) {
+    errors.address = 'Oppgi adresse';
+  }
 
-    handleSubmit(event, employee) {
-        this.getFlux().actions.updateEmployee(employee);
-        this.history.pushState(null, `/employees/${employee.id}`, null);
-    },
+  if (!values.postal_code) {
+    errors.postal_code = 'Oppgi postnummer';
+  } else if (!/^\d+$/.test(values.postal_code)) {
+    errors.postal_code = 'Ugyldig postnummer';
+  }
 
-    render() {
-        var employee = this.state.employeeStore.getEmployee(this.props.params.id);
-        var partial;
+  if (!values.city) {
+    errors.city = 'Oppgi poststed';
+  }
 
-        if (employee) {
-            partial = (
-                <div className="formContainer">
-                    <Errors errors={this.state.errors} />
-                    <EmployeeForm onSubmit={this.handleSubmit} initialEmployee={employee} onCancel={this.toggleEmployeeForm} setErrors={this.setErrors} />
-                </div>
-           );
-        }
+  return errors;
+};
 
-        return <div> {partial} </div>;
-    }
-});
-
-module.exports = EditEmployee;
+export default reduxForm({
+  form: 'EditEmployeeForm',
+  fields: ['first_name', 'last_name', 'phone', 'email', 'address',
+           'postal_code', 'city'],
+  validate
+}, null, { createEmployee })(EditEmployee);
