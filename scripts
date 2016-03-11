@@ -1,2 +1,0 @@
-employees: psql -h horton.elephantsql.com -U ymzbexfr -d ymzbexfr -f employees.sql //password: v64te7Ce6pvw7GanC9V6N7dI81ZZaAdV
-employees integration test: psql -h horton.elephantsql.com -U laxvgaoy -d laxvgaoy -f employees.sql //password: aGv3zZYWNsehP-kL0ly7k3B9xNvxgGdv

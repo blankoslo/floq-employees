@@ -1,1 +1,0 @@
-web: ./build/install/employees/bin/employees

@@ -1,14 +1,2 @@
-.vagrant
-*.iml
-*.ipr
-*.iws
-/projectFilesBackup/
-/.idea/
-/.gradle/
-/build/
-/target/
-/frontend/node_modules/
-/out/
-/frontend/public/dist/
-*.swp
-*.swo
+node_modules/
+dist/
