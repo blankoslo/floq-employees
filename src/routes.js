@@ -1,16 +1,19 @@
+// @flow
+
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
 import App from './components/app';
-import Employees from './components/employees';
-import ViewEmployee from './components/viewEmployee';
-import EditEmployee from './components/editEmployee';
+import Employee from './components/employee';
+import EmployeeForm from './components/employeeForm';
+
+import EmployeeContainer from './containers/employee';
 
 export default (
-  <Route path="/" component={App}>
-    <Route path="/employees" component={Employees}>
-      <Route path="/employees/:id" component={ViewEmployee} />
-      <Route path="/employees/:id/edit" component={EditEmployee} />
+  <Route path='/employees' component={App}>
+    <Route path='/employees/:id' component={EmployeeContainer}>
+      <IndexRoute component={Employee} />
+      <Route path='/employees/:id/edit' component={EmployeeForm} />
     </Route>
   </Route>
 );

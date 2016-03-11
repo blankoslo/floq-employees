@@ -1,10 +1,13 @@
 // @flow
 
-import React, { PropTypes } from 'react';
-import { browserHistory, Link } from 'react-router';
+import React from 'react';
+import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 import md5 from 'md5';
 
-type Employee = {
+import { selectEmployee } from '../actions/index';
+
+export type Employee = {
     id : number,
     first_name : string,
     last_name : string,
@@ -23,30 +26,27 @@ type Employee = {
     city : string
 };
 
-const EmployeeRow = (props : {employee: Employee}) => {
-  const employee = props.employee;
-
-  return (
-    <div
-      className="mdl-list__item"
-      style={{borderTop: '1px solid #E0E0E0'}}
-      onClick={() => browserHistory.push(`/employees/${employee.id}`)}>
-      <span className="mdl-list__item-primary-content">
-        <span>{employee.first_name} {employee.last_name}</span>
-        <div className="mdl-layout-spacer"></div>
-        <img style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '20px'
-          }}
-          src={`http://www.gravatar.com/avatar/${md5(employee.email)}`} />
-      </span>
-    </div>
-  );
+const setCurrentEmployee = (id) => {
+  browserHistory.push(`/employees/${id}`);
 };
+
+const EmployeeRow = (props) => (
+  <div
+    className='mdl-list__item employee-list-row'
+    onClick={setCurrentEmployee.bind(this, props.employee.id)}
+  >
+    <span className='mdl-list__item-primary-content'>
+      <span>{props.employee.first_name} {props.employee.last_name}</span>
+      <div className='mdl-layout-spacer'></div>
+      <img className='employee-list-image'
+        src={`http://www.gravatar.com/avatar/${md5(props.employee.email)}`}
+      />
+    </span>
+  </div>
+);
 
 EmployeeRow.propTypes = {
-  employee: PropTypes.object.isRequired
+  employee: React.PropTypes.object.isRequired
 };
 
-export default EmployeeRow;
+export default connect(null, { selectEmployee })(EmployeeRow);

@@ -1,24 +1,22 @@
 // @flow
 
 import React, { Component } from 'react';
+import ViewEmployee from './viewEmployee';
 import { connect } from 'react-redux';
-import { updateField } from '../actions/index';
-import EditEmployee from './editEmployee';
+
 import Spinner from './spinner';
 
-class EmployeeForm extends Component {
+class Employee extends Component {
   render() {
     if (this.props.selected_employee === null) {
       return <Spinner />;
     }
 
-    return (
-      <EditEmployee employee={this.props.selected_employee} />
-    );
+    return <ViewEmployee employee={this.props.selected_employee} />;
   }
 }
 
-EmployeeForm.propTypes = {
+Employee.propTypes = {
   selected_employee: React.PropTypes.object
 };
 
@@ -26,4 +24,4 @@ const mapStateToProps = ({ selected_employee }) => ({
   selected_employee
 });
 
-export default connect(mapStateToProps, { updateField })(EmployeeForm);
+export default connect(mapStateToProps)(Employee);

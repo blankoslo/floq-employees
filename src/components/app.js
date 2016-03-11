@@ -1,41 +1,29 @@
 // @flow
 
 import React from 'react';
-import { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import EmployeeList from './employeeList';
 
-import { getEmployees } from '../actions/index';
+const App = (props) => {
+  const listClasses = props.children === null
+    ? 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet'
+    : 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--hide-phone';
 
-class App extends Component {
-  componentWillMount() {
-    this.props.getEmployees();
-  }
-
-  render() {
-    // Show a spinner until we get employees data
-    if (this.props.employees === null) {
-      return (
-        <div style={ { width: '100%', margin: '15px', textAlign: 'center' } }>
-          <div className="mdl-spinner mdl-js-spinner is-active" />
-        </div>
-      );
-    }
-
-    return (
-      <div className='main-content'>
-        {this.props.children}
+  return (
+    <div className='mdl-grid'>
+      <div className={listClasses}>
+        <EmployeeList />
       </div>
-    );
-  }
-}
-
-const mapStateToProps = ({ employees }) => ({
-  employees: employees
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getEmployees: getEmployees }, dispatch);
+      <div className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
+        <div className='detail-view'>
+          {props.children}
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+App.propTypes = {
+  children: React.PropTypes.object
+};
+
+export default App;

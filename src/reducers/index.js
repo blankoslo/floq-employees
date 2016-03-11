@@ -1,9 +1,23 @@
+// @flow
+
 import { combineReducers } from 'redux';
-import { reducer as FormReducer } from 'redux-form';
-import EmployeesReduser from './employees';
+import GetEmployeesReducer from './getEmployees';
+import SelectEmployeeReducer from './selectEmployee';
+
+const FormReducer = (state = null, action) => {
+  switch (action.type) {
+    case 'FORM_UPDATE_VALUE':
+      return Object.assign({}, state, action.payload);
+    case 'FORM_RESET':
+      return {};
+    default:
+      return state;
+  }
+};
 
 const rootReducer = combineReducers({
-  employees: EmployeesReduser,
+  employees: GetEmployeesReducer,
+  selected_employee: SelectEmployeeReducer,
   form: FormReducer
 });
 
