@@ -1,12 +1,13 @@
 DROP TABLE IF EXISTS employees;
 DROP TYPE IF EXISTS gender;
 
-CREATE TYPE gender AS ENUM ('Male', 'Female', 'Other');
+CREATE TYPE gender AS ENUM ('male', 'female', 'other');
 
 CREATE TABLE employees (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
+  title TEXT NOT NULL,
   phone TEXT NOT NULL,
   email TEXT NOT NULL,
   gender gender NOT NULL,
