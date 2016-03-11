@@ -22,7 +22,7 @@ export default class TextField extends Component {
       value
     });
 
-    this.props.onChange(value);
+    this.props.onChange(this.props.fieldName, value);
   }
 
   render() {
@@ -31,14 +31,14 @@ export default class TextField extends Component {
         <div className='mdl-cell mdl-cell--12-col'>
           <div style={ { width: '100%' } } className={ textFieldClasses }>
             <input
-              id={this.props.id}
+              fieldName={this.props.fieldName}
               className='mdl-textfield__input'
               type='text'
               pattern={this.props.pattern}
               value={this.state.value}
               onChange={this.onChange}
             />
-            <label className='mdl-textfield__label' htmlFor={this.props.id}>
+            <label className='mdl-textfield__label' htmlFor={this.props.fieldName}>
               {this.props.label}
             </label>
             <span className='mdl-textfield__error'>Men ffs da</span>
@@ -50,7 +50,7 @@ export default class TextField extends Component {
 }
 
 TextField.propTypes = {
-  id: React.PropTypes.string.isRequired,
+  fieldName: React.PropTypes.string.isRequired,
   value: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired,

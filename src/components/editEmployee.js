@@ -18,6 +18,13 @@ class EditEmployee extends Component {
     router: PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   componentDidMount() {
     componentHandler.upgradeDom();
   }
@@ -56,107 +63,107 @@ class EditEmployee extends Component {
     const employee = this.props.employee;
 
     return (
-      <form onSubmit={this.onSubmit.bind(this)}>
+      <form onSubmit={this.onSubmit}>
         <TextField
           value={employee.first_name}
           label={labels.no.first_name}
-          onChange={this.onChange.bind(this, 'first_name')}
-          id='first_name'
+          onChange={this.onChange}
+          fieldName='first_name'
           pattern='.+'
         />
         <TextField
           value={employee.last_name}
           label={labels.no.last_name}
-          onChange={this.onChange.bind(this, 'last_name')}
-          id='last_name'
+          onChange={this.onChange}
+          fieldName='last_name'
           pattern='.+'
         />
         <TextField
           value={employee.title}
           label={labels.no.title}
-          onChange={this.onChange.bind(this, 'title')}
-          id='title'
+          onChange={this.onChange}
+          fieldName='title'
           pattern='.+'
         />
         <SelectField
           choices={['female', 'male', 'other']}
           labels={labels.no}
           value={employee.gender}
-          onChange={this.onChange.bind(this, 'gender')}
-          id='gender'
+          onChange={this.onChange}
+          fieldName='gender'
         />
         <TextField
           value={employee.phone}
           label={labels.no.phone}
-          onChange={this.onChange.bind(this, 'phone')}
-          id='phone'
+          onChange={this.onChange}
+          fieldName='phone'
           pattern='[-+ 0-9]+'
         />
         <TextField
           value={employee.email}
           label={labels.no.email}
-          onChange={this.onChange.bind(this, 'email')}
-          id='email'
+          onChange={this.onChange}
+          fieldName='email'
           pattern='.+@.+'
         />
         <TextField
           value={employee.address}
           label={labels.no.address}
-          onChange={this.onChange.bind(this, 'address')}
-          id='address'
+          onChange={this.onChange}
+          fieldName='address'
           pattern='.+'
         />
         <TextField
           value={employee.postal_code}
           label={labels.no.postal_code}
-          onChange={this.onChange.bind(this, 'postal_code')}
-          id='postal_code'
+          onChange={this.onChange}
+          fieldName='postal_code'
           pattern='^\d+$'
         />
         <TextField
           value={employee.city}
           label={labels.no.city}
-          onChange={this.onChange.bind(this, 'city')}
-          id='city'
+          onChange={this.onChange}
+          fieldName='city'
           pattern='.+'
         />
         <DateField
           value={employee.birth_date}
           label={labels.no.birth_date}
-          onChange={this.onChange.bind(this, 'birth_date')}
-          id='birth_date'
+          onChange={this.onChange}
+          fieldName='birth_date'
         />
         <DateField
           value={employee.date_of_employment}
           label={labels.no.date_of_employment}
-          onChange={this.onChange.bind(this, 'date_of_employment')}
-          id='date_of_employment'
+          onChange={this.onChange}
+          fieldName='date_of_employment'
         />
         <DateField
           value={employee.termination_date}
           label={labels.no.termination_date}
-          onChange={this.onChange.bind(this, 'termination_date')}
-          id='termination_date'
+          onChange={this.onChange}
+          fieldName='termination_date'
         />
         <TextField
           value={employee.emergency_contact_name}
           label={labels.no.emergency_contact_name}
-          onChange={this.onChange.bind(this, 'emergency_contact_name')}
-          id='emergency_contact_name'
+          onChange={this.onChange}
+          fieldName='emergency_contact_name'
           pattern='.+'
         />
         <TextField
           value={employee.emergency_contact_phone}
           label={labels.no.emergency_contact_phone}
-          onChange={this.onChange.bind(this, 'emergency_contact_phone')}
-          id='emergency_contact_phone'
+          onChange={this.onChange}
+          fieldName='emergency_contact_phone'
           pattern='[-+ 0-9]+'
         />
         <TextField
           value={employee.emergency_contact_relation}
           label={labels.no.emergency_contact_relation}
-          onChange={this.onChange.bind(this, 'emergency_contact_relation')}
-          id='emergency_contact_relation'
+          onChange={this.onChange}
+          fieldName='emergency_contact_relation'
           pattern='.+'
         />
         <div className='mdl-grid'>
