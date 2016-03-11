@@ -1,1 +1,1 @@
-export let apiUrl = 'http://82.196.1.13:8001'
+export let apiUrl = 'http://192.81.222.35'
