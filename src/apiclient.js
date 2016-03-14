@@ -4,7 +4,10 @@ import axios_ from 'axios';
 import { apiUrl } from '../config';
 
 const axios = axios_.create({
-  baseURL: apiUrl
+  baseURL: apiUrl,
+  headers: {
+    Authorization: 'Bearer ' + window.apiToken // from `intranet` app
+  }
 });
 
 export const getEmployees = () =>
