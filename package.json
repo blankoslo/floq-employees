@@ -22,8 +22,6 @@
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
     "flow-bin": "^0.22.1",
-    "install": "^0.5.4",
-    "jsdom": "^8.1.0",
     "less": "^2.6.1",
     "less-loader": "^2.2.2",
     "md5": "^2.0.0",
