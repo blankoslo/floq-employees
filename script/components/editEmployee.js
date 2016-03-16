@@ -49,7 +49,6 @@ class EditEmployee extends Component {
       : this.props.updateEmployee(this.props.selected_employee.id, data);
 
     persist.then(res => {
-          console.log('Response', res);
           if (res.error === true) {
             alert(res.payload.data.message); // FIXME
           } else {
