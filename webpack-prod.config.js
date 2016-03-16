@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'source-map',
   module: {
       loaders: [
-          { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+          { test: /\.less$/, loader: 'style!css!less' },
           { test: /\.json$/, loader: "json" },
           { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/, include: __dirname }
       ]
