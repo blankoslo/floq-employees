@@ -1,10 +1,9 @@
 // @flow
 
 import axios_ from 'axios';
-import { apiUrl } from '../config';
 
 const axios = axios_.create({
-  baseURL: apiUrl,
+  baseURL: window.config.apiUri || 'http://192.81.222.35:3001',
   headers: {
     Authorization: 'Bearer ' + window.apiToken // from `intranet` app
   }
