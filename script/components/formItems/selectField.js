@@ -12,11 +12,12 @@ class SelectField extends Component {
   }
 
   onChange(value) {
+    console.log(value);
     this.setState({
       value
     });
 
-    this.props.onChange(value);
+    this.props.onChange(this.props.fieldName, value);
   }
 
   render() {
