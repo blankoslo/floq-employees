@@ -14,7 +14,7 @@ const viewEmployee = ({ employee }) => (
     </div>
     <div className={`${cellClasses} center-text`}>
       <img className='profile-pic'
-        src={`http://www.gravatar.com/avatar/${md5(employee.email)}`}
+        src={`https://www.gravatar.com/avatar/${md5(employee.email)}`}
       />
     </div>
     <div className={`${cellClasses} center-text`}>
