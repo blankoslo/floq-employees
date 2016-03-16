@@ -6,15 +6,6 @@ module.exports = {
     path: __dirname + "/dist/js",
     filename: "app.bundle.js"
   },
-  plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    })
-  ],
   devtool: 'source-map',
   module: {
       loaders: [
