@@ -1,7 +1,7 @@
 var express = require('express');
 var webpack = require('webpack');
 
-if (process.env.ENV === 'PROD') {
+if (process.env.NODE_ENV === 'production') {
   var app = express();
   app.get('/app.bundle.js', function (req, res) {
     res.sendFile('dist/js/app.bundle.js', {
