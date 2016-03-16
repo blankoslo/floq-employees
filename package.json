@@ -11,19 +11,12 @@
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
-    "babel-core": "^6.2.1",
     "babel-eslint": "^5.0.0",
-    "babel-loader": "^6.2.0",
-    "babel-preset-es2015": "^6.1.18",
-    "babel-preset-react": "^6.1.18",
-    "babel-preset-stage-1": "^6.1.18",
     "css-loader": "^0.23.1",
     "eslint": "^2.3.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
     "flow-bin": "^0.22.1",
-    "less": "^2.6.1",
-    "less-loader": "^2.2.2",
     "md5": "^2.0.0",
     "react-addons-test-utils": "^0.14.7",
     "react-hot-loader": "^1.3.0",
@@ -31,16 +24,23 @@
     "redux-devtools-dock-monitor": "^1.1.0",
     "redux-devtools-log-monitor": "^1.0.5",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
     "axios": "^0.9.1",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babel-preset-stage-1": "^6.1.18",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0",
     "redux": "^3.0.4",
-    "redux-promise": "^0.5.1"
+    "redux-promise": "^0.5.1",
+    "webpack": "^1.12.14"
   }
 }
