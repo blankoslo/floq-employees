@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getEmployees, updateEmployee, updateField } from '../actions/index';
+import { getEmployees, createEmployee, updateEmployee, updateField } from '../actions/index';
 import TextField from './formItems/textField';
 import DateField from './formItems/dateField';
 import SelectField from './formItems/selectField';
@@ -43,14 +43,18 @@ class EditEmployee extends Component {
     }
 
     const data = this.props.form[FORM_NAME];
-    this.props.updateEmployee(this.props.selected_employee.id, data)
-        .then(res => {
+
+    const persist = this.props.selected_employee.id === undefined
+      ? this.props.createEmployee(data)
+      : this.props.updateEmployee(this.props.selected_employee.id, data);
+
+    persist.then(res => {
           console.log('Response', res);
           if (res.error === true) {
             alert(res.payload.data.message); // FIXME
           } else {
             this.props.getEmployees();
-            this.context.router.push(`/employees/${this.props.selected_employee.id}`);
+            this.context.router.push(`/employees/${this.props.selected_employee.id || ''}`);
           }
         });
   }
@@ -181,6 +185,7 @@ EditEmployee.propTypes = {
   selected_employee: React.PropTypes.object,
   form: React.PropTypes.object,
   getEmployees: React.PropTypes.func,
+  createEmployee: React.PropTypes.func,
   updateEmployee: React.PropTypes.func,
   updateField: React.PropTypes.func
 };
@@ -192,6 +197,7 @@ const mapStateToProps = ({ form, selected_employee }) => ({
 
 const mapDispatchToProps = {
   getEmployees,
+  createEmployee,
   updateEmployee,
   updateField
 };

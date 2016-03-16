@@ -11,6 +11,9 @@ import EmployeeContainer from './containers/employee';
 
 export default (
   <Route path='/employees' component={App}>
+    <Route path='/employees/new' component={EmployeeContainer}>
+      <IndexRoute component={EmployeeForm} />
+    </Route>
     <Route path='/employees/:id' component={EmployeeContainer}>
       <IndexRoute component={Employee} />
       <Route path='/employees/:id/edit' component={EmployeeForm} />

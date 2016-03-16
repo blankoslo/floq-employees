@@ -1,5 +1,6 @@
 // @flow
 
+import * as _ from 'lodash';
 import { combineReducers } from 'redux';
 import GetEmployeesReducer from './getEmployees';
 import SelectEmployeeReducer from './selectEmployee';
@@ -7,7 +8,7 @@ import SelectEmployeeReducer from './selectEmployee';
 const FormReducer = (state = null, action) => {
   switch (action.type) {
     case 'FORM_UPDATE_VALUE':
-      return Object.assign({}, state, action.payload);
+      return _.merge({}, state, action.payload);
     case 'FORM_RESET':
       return {};
     default:
