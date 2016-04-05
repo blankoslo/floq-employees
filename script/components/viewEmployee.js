@@ -7,6 +7,17 @@ import md5 from 'md5';
 const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
 const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
 
+const IconAndText = ({icon, text}) => (
+  <div style={{display: "flex", flexFlow: "row"}}>
+    <div style={{margin: "0 10px"}}>
+      <i className='material-icons main-color'>{icon}</i>
+    </div>
+    <div>
+      {text.map(line => <div>{line}</div>)}
+    </div>
+  </div>
+);
+
 const viewEmployee = ({ employee }) => (
   <div className='mdl-grid'>
     <div className={`${cellClasses} center-text`}>
@@ -25,38 +36,15 @@ const viewEmployee = ({ employee }) => (
       <hr />
     </div>
     <div className={gridClasses}>
-      <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--2-col mdl-cell--1-col-phone mdl-cell--top pull-right'>
-          <i className='material-icons main-color'>phone</i>
-        </div>
-        <div className='mdl-cell mdl-cell--10-col mdl-cell--3-col-phone mdl-cell--top'>
-          {employee.phone}
-        </div>
-      </div>
+      <IconAndText icon="phone" text={[employee.phone]} />
     </div>
     <div className={gridClasses}>
-      <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--2-col mdl-cell--1-col-phone mdl-cell--top pull-right'>
-          <div className='mdl-layout-spacer'></div>
-          <i className='material-icons main-color'>email</i>
-        </div>
-        <div className='mdl-cell mdl-cell--10-col mdl-cell--3-col-phone mdl-cell--top'>
-          {employee.email}
-        </div>
-      </div>
+      <IconAndText icon="email" text={[employee.email]} />
     </div>
     <div className={gridClasses}>
-      <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--2-col mdl-cell--1-col-phone mdl-cell--top pull-right'>
-          <div className='mdl-layout-spacer' />
-          <i className='material-icons main-color'>location_on</i>
-        </div>
-        <div className='mdl-cell mdl-cell--10-col mdl-cell--3-col-phone mdl-cell--top'>
-          {employee.address}
-          <br />
-          {employee.postal_code} {employee.city}
-        </div>
-      </div>
+      <IconAndText
+          icon="location_on"
+          text={[employee.address, employee.postal_code + ' ' + employee.city]} />
     </div>
     <div className={cellClasses}>
       <hr />
