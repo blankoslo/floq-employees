@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import md5 from 'md5';
 
 const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
@@ -21,7 +21,6 @@ const IconAndText = ({icon, text}) => (
 const viewEmployee = ({ employee }) => (
   <div className='mdl-grid'>
     <div className={`${cellClasses} center-text`}>
-      <Link to={`/employees/${employee.id}/edit`}>Edit</Link>
     </div>
     <div className={`${cellClasses} center-text`}>
       <img className='profile-pic'
@@ -62,6 +61,11 @@ const viewEmployee = ({ employee }) => (
         </div>
       </div>
     </div>
+    <button
+        onClick={() => browserHistory.push(`/employees/${employee.id}/edit`)}
+        className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+      <i className='material-icons dark-gray'>create</i>
+    </button>
   </div>
 );
 
