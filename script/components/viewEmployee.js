@@ -13,7 +13,7 @@ const IconAndText = ({icon, text}) => (
       <i className='material-icons main-color'>{icon}</i>
     </div>
     <div>
-      {text.map(line => <div>{line}</div>)}
+      {text.map(line => <div key={line}>{line}</div>)}
     </div>
   </div>
 );
