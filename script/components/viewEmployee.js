@@ -8,8 +8,8 @@ const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cel
 const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
 
 const IconAndText = ({icon, text}) => (
-  <div style={{display: "flex", flexFlow: "row"}}>
-    <div style={{width: "34px"}}>
+  <div className='icon-row'>
+    <div className='icon-row-icon'>
       <i className='material-icons main-color'>{icon}</i>
     </div>
     <div>
@@ -32,8 +32,7 @@ const viewEmployee = ({ employee }) => (
       <h5>{employee.first_name} {employee.last_name}</h5>
       <span className='gray'>{employee.title}</span>
     </div>
-    <div className={cellClasses}>
-      <hr />
+    <div className='vert-spacer'>
     </div>
     <div className={gridClasses}>
       <IconAndText icon="phone" text={[employee.phone]} />
@@ -46,24 +45,20 @@ const viewEmployee = ({ employee }) => (
           icon="location_on"
           text={[employee.address, employee.postal_code + ' ' + employee.city]} />
     </div>
-    <div className={cellClasses}>
-      <hr />
+    <div className='mdl-cell mdl-cell--9-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone'>
+      <hr className='icon-margin' />
     </div>
-    <div>
-      <div style={{display: "flex", flexFlow: "row"}}>
-        <div style={{width: "34px"}}>
+    <div className={gridClasses}>
+      <div className='icon-row'>
+        <div className='icon-row-icon'>
         </div>
         <div>
-          <div className={cellClasses}>
-            <h3>Kontaktperson</h3>
-          </div>
-          <div className={cellClasses}>
-            <span className='emergency-contact'>{employee.emergency_contact_name}</span>
-            <br />
-            <span className='emergency-contact gray'>{employee.emergency_contact_relation}</span>
-            <br />
-            <span className='emergency-contact'>{employee.emergency_contact_phone}</span>
-          </div>
+          <h3>Kontaktperson</h3>
+          <span className='emergency-contact'>{employee.emergency_contact_name}</span>
+          <br />
+          <span className='emergency-contact gray'>{employee.emergency_contact_relation}</span>
+          <br />
+          <span className='emergency-contact'>{employee.emergency_contact_phone}</span>
         </div>
       </div>
     </div>
