@@ -9,7 +9,7 @@ const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cel
 
 const IconAndText = ({icon, text}) => (
   <div style={{display: "flex", flexFlow: "row"}}>
-    <div style={{margin: "0 10px"}}>
+    <div style={{width: "34px"}}>
       <i className='material-icons main-color'>{icon}</i>
     </div>
     <div>
@@ -49,13 +49,23 @@ const viewEmployee = ({ employee }) => (
     <div className={cellClasses}>
       <hr />
     </div>
-    <div className={cellClasses}>
-      <h5>Kontaktperson</h5>
-    </div>
-    <div className={cellClasses}>
-      <p className='emergency-contact'>{employee.emergency_contact_name}</p>
-      <p className='emergency-contact gray'>{employee.emergency_contact_relation}</p>
-      <p className='emergency-contact'>{employee.emergency_contact_phone}</p>
+    <div>
+      <div style={{display: "flex", flexFlow: "row"}}>
+        <div style={{width: "34px"}}>
+        </div>
+        <div>
+          <div className={cellClasses}>
+            <h3>Kontaktperson</h3>
+          </div>
+          <div className={cellClasses}>
+            <span className='emergency-contact'>{employee.emergency_contact_name}</span>
+            <br />
+            <span className='emergency-contact gray'>{employee.emergency_contact_relation}</span>
+            <br />
+            <span className='emergency-contact'>{employee.emergency_contact_phone}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 );
