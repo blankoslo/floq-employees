@@ -37,23 +37,30 @@ class EditEmployee extends Component {
     e.preventDefault();
 
     // no changes
-    if (this.props.form === null) {
+    if (this.props.selected_employee !== null && this.props.form === null) {
       this.context.router.push(`/employees/${this.props.selected_employee.id}`);
       return;
     }
 
-    const data = this.props.form[FORM_NAME];
+    const data = this.props.form
+      ? this.props.form[FORM_NAME]
+      : {};
 
-    const persist = this.props.selected_employee.id === undefined
+    const persist = this.props.selected_employee === null
       ? this.props.createEmployee(data)
       : this.props.updateEmployee(this.props.selected_employee.id, data);
 
     persist.then(res => {
           if (res.error === true) {
-            alert(res.payload.data.message); // FIXME
+            // FIXME
+            alert('Error when attempting to save data: ' + res.payload.data.message);
           } else {
+            const next = this.props.selected_employee
+              ? `/employees/${this.props.selected_employee.id}`
+              : `/employees/`;
+
             this.props.getEmployees();
-            this.context.router.push(`/employees/${this.props.selected_employee.id || ''}`);
+            this.context.router.push(next);
           }
         });
   }
