@@ -1,4 +1,6 @@
 @import "reset.less";
+//@import "header.less";
+//@import "datepicker.less";
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,700);
 
@@ -153,11 +155,26 @@ div.pull-right {
 }
 
 div.employee-list-row {
-    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #eee;
 }
 
 img.employee-list-image {
     width: 40px;
     height: 40px;
     border-radius: 20px;
+}
+
+div.employee-list-header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+#add-employee-button {
+    align-self: flex-end;
+    background-color: white;
+    margin: 0;
+    position: relative;
+    top: 20px;
+    right: 10px;
 }

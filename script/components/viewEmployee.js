@@ -31,8 +31,7 @@ const viewEmployee = ({ employee }) => (
       <h5>{employee.first_name} {employee.last_name}</h5>
       <span className='gray'>{employee.title}</span>
     </div>
-    <div className='vert-spacer'>
-    </div>
+    <div className='vert-spacer' />
     <div className={gridClasses}>
       <IconAndText icon="phone" text={[employee.phone]} />
     </div>
