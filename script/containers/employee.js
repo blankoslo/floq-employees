@@ -8,7 +8,7 @@ class EmployeeContainer extends Component {
   componentDidMount() {
     // dispatch a SELECT_EMPLOYEE in case there is no active employee for the
     // initial render
-    if (this.props.employees !== null && props.params.id !== undefined) {
+    if (this.props.employees !== null && this.props.params.id !== undefined) {
       const selectedId = parseInt(this.props.params.id);
       const activeEmployee = this.props.employees.find(e => e.id === selectedId);
       this.props.selectEmployee(activeEmployee);
