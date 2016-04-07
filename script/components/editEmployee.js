@@ -52,8 +52,9 @@ class EditEmployee extends Component {
 
     persist.then(res => {
       if (res.error === true) {
+        const errorMessage = `Error when attempting to save data: ${res.payload.data.message}`;
         // FIXME
-        alert(`Error when attempting to save data: ${res.payload.data.message}`);
+        alert(errorMessage); // eslint-disable-line no-alert
       } else {
         const next = this.props.selected_employee
                    ? `/employees/${this.props.selected_employee.id}`

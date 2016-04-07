@@ -36,7 +36,9 @@ class EmployeeContainer extends Component {
 
 EmployeeContainer.propTypes = {
   children: React.PropTypes.object,
-  selectEmployee: React.PropTypes.func
+  selectEmployee: React.PropTypes.func,
+  employees: React.PropTypes.array,
+  params: React.PropTypes.object
 };
 
 const mapStateToProps = ({ employees }) => ({

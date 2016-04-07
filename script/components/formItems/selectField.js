@@ -48,6 +48,7 @@ class SelectField extends Component {
 
 SelectField.propTypes = {
   value: React.PropTypes.string,
+  fieldName: React.PropTypes.string.isRequired,
   labels: React.PropTypes.object.isRequired,
   choices: React.PropTypes.array.isRequired,
   onChange: React.PropTypes.func.isRequired

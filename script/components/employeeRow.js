@@ -10,6 +10,7 @@ import { selectEmployee } from '../actions/index';
 const setCurrentEmployee = (id) => {
   browserHistory.push(`/employees/${id}`);
 };
+
 const EmployeeRow = (props) => (
   <div
     className='mdl-list__item employee-list-row'
