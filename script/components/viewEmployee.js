@@ -1,22 +1,27 @@
 // @flow
 
 import React from 'react';
-import { browserHistory, Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import md5 from 'md5';
 
 const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
 const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
 
-const IconAndText = ({icon, text}) => (
+const IconAndText = ({ icon, textLines }) => (
   <div className='icon-row'>
     <div className='icon-row-icon'>
       <i className='material-icons main-color'>{icon}</i>
     </div>
     <div>
-      {text.map(line => <div key={line}>{line}</div>)}
+      {textLines.map(line => <div key={line}>{line}</div>)}
     </div>
   </div>
 );
+
+IconAndText.propTypes = {
+  icon: React.PropTypes.string.isRequired,
+  textLines: React.PropTypes.array.isRequired
+};
 
 const viewEmployee = ({ employee }) => (
   <div className='mdl-grid'>
@@ -33,15 +38,16 @@ const viewEmployee = ({ employee }) => (
     </div>
     <div className='vert-spacer' />
     <div className={gridClasses}>
-      <IconAndText icon="phone" text={[employee.phone]} />
+      <IconAndText icon='phone' textLines={[employee.phone]} />
     </div>
     <div className={gridClasses}>
-      <IconAndText icon="email" text={[employee.email]} />
+      <IconAndText icon='email' textLines={[employee.email]} />
     </div>
     <div className={gridClasses}>
       <IconAndText
-          icon="location_on"
-          text={[employee.address, employee.postal_code + ' ' + employee.city]} />
+        icon='location_on'
+        textLines={[employee.address, `${employee.postal_code} ${employee.city}`]}
+      />
     </div>
     <div className='mdl-cell mdl-cell--9-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone'>
       <hr className='icon-margin' />
@@ -61,8 +67,9 @@ const viewEmployee = ({ employee }) => (
       </div>
     </div>
     <button
-        onClick={() => browserHistory.push(`/employees/${employee.id}/edit`)}
-        className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+      onClick={() => browserHistory.push(`/employees/${employee.id}/edit`)}
+      className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+    >
       <i className='material-icons dark-gray'>create</i>
     </button>
   </div>

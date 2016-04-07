@@ -1,10 +1,9 @@
 // @flow
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import EditEmployee from './editEmployee';
 
-export default (props) =>
+export default () =>
   (
     <EditEmployee employee={{}} />
   );

@@ -30,9 +30,10 @@ class EmployeeList extends Component {
               <h3>Alle ansatte</h3>
             </div>
             <button
-                onClick={() => browserHistory.push(`/employees/new`)}
-                id='add-employee-button'
-                className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'>
+              onClick={() => browserHistory.push('/employees/new')}
+              id='add-employee-button'
+              className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+            >
               <i className='material-icons dark-gray'>add</i>
             </button>
           </div>

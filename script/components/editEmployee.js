@@ -51,18 +51,18 @@ class EditEmployee extends Component {
       : this.props.updateEmployee(this.props.selected_employee.id, data);
 
     persist.then(res => {
-          if (res.error === true) {
-            // FIXME
-            alert('Error when attempting to save data: ' + res.payload.data.message);
-          } else {
-            const next = this.props.selected_employee
-              ? `/employees/${this.props.selected_employee.id}`
-              : `/employees/`;
+      if (res.error === true) {
+        // FIXME
+        alert(`Error when attempting to save data: ${res.payload.data.message}`);
+      } else {
+        const next = this.props.selected_employee
+                   ? `/employees/${this.props.selected_employee.id}`
+                   : '/employees/';
 
-            this.props.getEmployees();
-            this.context.router.push(next);
-          }
-        });
+        this.props.getEmployees();
+        this.context.router.push(next);
+      }
+    });
   }
 
   onChange(fieldName, value) {

@@ -41,7 +41,7 @@ export default class TextField extends Component {
             <label className='mdl-textfield__label' htmlFor={this.props.fieldName}>
               {this.props.label}
             </label>
-            <span className='mdl-textfield__error'>Men ffs da</span>
+            <span className='mdl-textfield__error'>Ugyldig format</span>
           </div>
         </div>
       </div>
