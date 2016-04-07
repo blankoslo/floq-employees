@@ -15,6 +15,7 @@ module.exports = {
   ],
   devtool: 'source-map',
   module: {
+      preLoaders: [ { test: /\.js?$/, loaders: ['eslint'] } ],
       loaders: [
           { test: /\.less$/, loader: 'style!css!less' },
           { test: /\.json$/, loader: "json" },
