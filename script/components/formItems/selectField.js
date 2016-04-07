@@ -30,7 +30,10 @@ class SelectField extends Component {
           type='radio' id={choice} className='mdl-radio__button'
           name='options'
           value={choice}
-          onChange={this.onChange.bind(this, choice)}
+          onChange={() => {
+            this.setState({ value: choice });
+            this.props.onChange(this.props.fieldName, choice);
+          }}
           checked={choice === this.state.value}
         />
           <span className='mdl-radio__label'>{this.props.labels[choice]}</span>
