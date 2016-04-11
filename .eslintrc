@@ -1,7 +1,9 @@
 {
   "extends": "airbnb",
   "globals": {
-    "componentHandler": false
+    "componentHandler": false,
+    "describe": false,
+    "it": false
   },
   "parser": "babel-eslint",
   "rules": {
