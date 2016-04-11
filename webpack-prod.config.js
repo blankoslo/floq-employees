@@ -6,9 +6,10 @@ module.exports = {
     path: __dirname + "/dist/js",
     filename: "app.bundle.js"
   },
+  devtool: 'source-map',
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
+      sourceMap: true,
       compress: {
         warnings: false
       }
