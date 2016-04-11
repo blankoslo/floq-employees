@@ -27,3 +27,4 @@ CREATE TABLE employees (
 --   ('Magne Kristoffer', 'Davidsen', '40221672', 'Male', '1984-06-20'),
 --   ('Jon Bernholdt', 'Olsen', '98219371', 'Male', '1978-09-23'
 -- );
+CREATE UNIQUE INDEX unique_employee_email ON emloyees (email);
