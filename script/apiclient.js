@@ -2,8 +2,6 @@
 
 import axios_ from 'axios';
 
-global.window = global.document.defaultView;
-
 const axios = axios_.create({
   baseURL: window.config && window.config.apiUri
              ? window.config.apiUri
