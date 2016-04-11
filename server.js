@@ -7,6 +7,10 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile('dist/js/app.bundle.js', {
       root: __dirname
     });
+  }).get('/app.bundle.js.map', function (req, res) {
+    res.sendFile('dist/js/app.bundle.js.map', {
+      root: __dirname
+    });
   }).listen(process.env.PORT || 8080, function (err) {
     if (err) { console.log(err) };
     console.log('Listening at localhost:8080');
