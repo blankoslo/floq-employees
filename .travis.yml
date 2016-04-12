@@ -7,7 +7,7 @@ env:
 script:
   - npm run lint
   - npm test
-  - webpack --config ./webpack-prod.config.js
+  - npm run pack
 
 notifications:
   slack:
