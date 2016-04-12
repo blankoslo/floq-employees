@@ -22,9 +22,4 @@ CREATE TABLE employees (
   city TEXT
 );
 
--- INSERT INTO employees (first_name, last_name, phone, gender, birth_date) VALUES
---   ('Jahn Arne', 'Johnsen', '98219394', 'Male', '1982-03-31'),
---   ('Magne Kristoffer', 'Davidsen', '40221672', 'Male', '1984-06-20'),
---   ('Jon Bernholdt', 'Olsen', '98219371', 'Male', '1978-09-23'
--- );
 CREATE UNIQUE INDEX unique_employee_email ON emloyees (email);
