@@ -1,5 +1,3 @@
-// @flow
-
 import { GET_EMPLOYEES } from '../actions/index';
 
 export default (state = null, action) => {

@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component } from 'react';
 
 const textFieldClasses = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';

@@ -1,5 +1,3 @@
-// @flow
-
 import { SELECT_EMPLOYEE } from '../actions/index';
 
 export default (state = null, action) => {

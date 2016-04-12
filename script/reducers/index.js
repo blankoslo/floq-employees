@@ -1,5 +1,3 @@
-// @flow
-
 import * as _ from 'lodash';
 import { combineReducers } from 'redux';
 import GetEmployeesReducer from './getEmployees';

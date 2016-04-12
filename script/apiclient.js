@@ -1,5 +1,3 @@
-// @flow
-
 import axios_ from 'axios';
 
 const axios = axios_.create({

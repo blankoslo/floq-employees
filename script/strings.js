@@ -1,5 +1,3 @@
-// @flow
-
 export const formLabels = {
   no: {
     save: 'Lagre'

@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import ViewEmployee from './viewEmployee';
 import { connect } from 'react-redux';
