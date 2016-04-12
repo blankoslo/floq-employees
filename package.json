@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "The frontend application for employees",
   "scripts": {
-    "install": "webpack",
     "postinstall": "webpack --config ./webpack-prod.config.js",
     "start": "node server.js",
     "lint": "eslint script test",
