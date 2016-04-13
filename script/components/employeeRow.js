@@ -15,6 +15,7 @@ const EmployeeRow = (props) => (
       <div className='mdl-layout-spacer'></div>
       <img className='employee-list-image'
         src={`https://www.gravatar.com/avatar/${md5(props.employee.email)}`}
+        alt={props.employee.first_name}
       />
     </span>
   </div>
