@@ -1,8 +1,10 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+
+const port = process.env.PORT || 8080;
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
+    `webpack-dev-server/client?http://localhost:${port}`,
     'webpack/hot/only-dev-server',
     './script/index.js'
   ],
