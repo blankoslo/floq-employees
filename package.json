@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "The frontend application for employees",
   "scripts": {
-    "build": "webpack --config ./webpack-prod.config.js",
     "start": "node server.js",
+    "dist": "webpack --config ./webpack-prod.config.js",
     "lint": "eslint script test",
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
