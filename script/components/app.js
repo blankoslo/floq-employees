@@ -7,14 +7,12 @@ const App = (props) => {
     : 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--hide-phone';
 
   return (
-    <div className='mdl-grid'>
-      <div className={listClasses}>
+    <div id='container' className='mdl-grid'>
+      <div id='employee-list' className={listClasses}>
         <EmployeeList />
       </div>
-      <div className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
-        <div className='detail-view'>
-          {props.children}
-        </div>
+      <div id='employee-detail' className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
+        {props.children}
       </div>
     </div>
   );
