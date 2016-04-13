@@ -12,7 +12,9 @@ notifications:
 
 deploy:
   provider: heroku
-  app: blank-employees
+  app:
+    master: blank-employees
+    develop: blank-employees-test
   skip_cleanup: true
   api_key:
     secure: BCZvPjTEJrA55otKi4FTHfr1bhYgxNHnk7TM1uDfUTkze5250juHhggoaA0cH/G0ezlMTcXxwNBTvE5iPgy3OdeDQEjpYgTXR6qFrD4MA+3ddLoqgYAy787YxLsvps6OUdoidtWb92gDyuGpbVu/xJAot4lRa44DHSQan7/Lgzca+O/Caw2tWevanGZnwom7111YNuVQHcQPrePHPXTkFAidadp0lbOBwhnujl5v1Nd6gwZ+svTfwqplP+Oq1cZzarUNZGRq3oF0V+iySpSegXl0M8gK5j60ANb/6VjDNq8ofVLKR2hu2Ex1pFvBSW3OcchWyH2/s7/IIn0TFZFXlwQlTuU/pPFHLhahN+Ej2WIxa5UOzsfz1iUHJfke6z+vGF7HtsHpTmbzgmv/GC9aRLqLqd1wooYhQi4jokXMhqVpOzNhDvHWHSyl89NNOmLTHkt9zd6NMEJ9B+aZyRrC4PmFF04xZr3tzDVqeMH/DdeMmlN5UgyuD/bk+laJ5bXkZCoAO3vVF+ZdLFFTtFz0piepDLkLK4/t26vVNcyquk+9M9/m/yewKd2/plOMrycbaU7FQtsly+Hm3Gp9VZmHJ3ZJdxnXWgqH4ndKAMup7q1Ium1k5qnFCJ2QvO7CN2e4bAQz3Gr0Y3Q9/CtgAe7OSPj3Qg55Clqiq/ECZFKC8yA=
