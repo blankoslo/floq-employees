@@ -20,6 +20,7 @@ deploy:
     develop: blank-intranet-test
   local_dir: dist
   upload-dir: employees
+  cache_control: "max-age=0"
   acl: public-read
   access_key_id: GOOG7LNU2B5QD5WTPQH7
   secret_access_key:
