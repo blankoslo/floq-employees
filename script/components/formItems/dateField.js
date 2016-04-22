@@ -8,7 +8,7 @@ const DateField = props => (
     label={props.label}
     onChange={props.onChange}
     fieldName={props.fieldName}
-    pattern='\d{4}-\d{2}-\d{2}'
+    pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}'
   />
 );
 

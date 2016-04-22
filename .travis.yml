@@ -1,4 +1,6 @@
 language: node_js
+cache:
+  directories: node_modules
 node_js:
   - "5"
 
@@ -8,13 +10,19 @@ script:
 
 notifications:
   slack:
-    - heltblank:mDZuPnWzmVTOTUd8i7167IZx
+    secure: ssmoeR+BD6CSxOuvdV3m8isfRlcTIkvEJal2c4aQ0deB4rq3vKa0hRGSPtgiGqKtNNe+EvXO3xRUdpKZjyl8SDNLFDgVvq9VwrCGbuRMJcpo63xp5IQWQXlpaQxJGT//vi5tD+CjmK36mTYhGSjqAQxd0Xd67kOMz/UOLB5QN32Zm+PoebvRVQIp+7oNIGXyKGU4QlPx/BJgeYn7/EvU/mu9JqOsm+UE4dzlP8ZBSxGcWrfHtKo1b9Q393Eq3Bib3c2v+gZmXgr4tvYSon8b6A+8IPK3BPVdesholxoCARfmF3tieKWcKDWKHM65ZDiLvRzVJA+BRQYiJFeVW+urMQYgVH6tis9Xpbjt0eP5UD1WWNytq5F2TxQu1ENzUXSeYz4VNY4snyQylejUkBdIhEo2GYe+yzXPGBHHgeTyWh3BO4kC3SCgEngSKQA5AQzT75bdRnGybwEBlCQHsQIjHCPVki/UBDga6TRCKhvYcwi8FTk9ai5IDi3i3BJIKV9EOb1EPHimMBjakFpkjXDczeQ8M/7+ExtwEmMzN2SSjZ1kecg13cykSNvq3pKT4btoZkpvjlNoUREDt8zCIP16+uN+mFk1hMCPZsi6362M/7fNgUBgZWkliEhzJvOn7T2n6DQ6Ad+C/qqs8j0PGicT26+y3QEK8EShspIXdjmIQck=
 
+before_deploy: npm run dist
 deploy:
-  provider: heroku
-  app:
-    master: blank-employees
-    develop: blank-employees-test
+  provider: gcs
+  bucket:
+    master: blank-intranet
+    develop: blank-intranet-test
+  local_dir: dist
+  upload-dir: employees
+  cache_control: "max-age=0"
+  acl: public-read
+  access_key_id: GOOG7LNU2B5QD5WTPQH7
+  secret_access_key:
+    secure: riAVaejo/y5jS6CN0ka8H2b18XFdIv/oFL8Z0Z/2frNIWEGVR/G11l8P3MssoWJEmaUoXfrb+nrkm3kg7vEdr5s7TseGYWa37+9rl2hZ4jJO6NAEM4PFOdN+jVhq+Rs/HLWQEu6jZwwOQgbsKleW/loi2m2XYL3TnM00A26f0wNPbzZn31P4Z0wUkKE3G9hu4KgTBjO5SRNKDaMcaq0wM00Hi/2PYj1Nar9cdp0uIBQK3eee2v92Z7MvQQP7fREKqVhvQgdSRaqWUVDCvXlhmv3Wy/lx9q179EB9T/v7m9nbmB86Qg5Rk5ZdlEGDcga6/cL9eCB4zupThopUEPr++gdle75aMabru+gK8oFB2o+b+fEeqzfO0tsZ+EX0dbeJyDueMyZVZlMbbir/zl4hTaCThAu4wR1rKh9qzB0oqAoy6EdltQet7SLsgv3OBwpGo9jzMdWl8ZLDZwAuycjVuqNO6jZphkI676fQZLKXeegUlADwaTctbQ7x69IaID1Da/+V7pEgj9qQk7L75AM6OQZ1XFHj6MA+rVEsLyzwT5tSwaOPB6OeLMTKsf2BgClhTIWnEnZeby8RTELCJF1br8cZUtCkT05bUYRbyr8Jf4f5C9UTNOTA1WkKjpeEVGeNgrP9Xrger9X9EJSLQnZ9K+BRtUUDL0t3qz9P2x81olo=
   skip_cleanup: true
-  api_key:
-    secure: BCZvPjTEJrA55otKi4FTHfr1bhYgxNHnk7TM1uDfUTkze5250juHhggoaA0cH/G0ezlMTcXxwNBTvE5iPgy3OdeDQEjpYgTXR6qFrD4MA+3ddLoqgYAy787YxLsvps6OUdoidtWb92gDyuGpbVu/xJAot4lRa44DHSQan7/Lgzca+O/Caw2tWevanGZnwom7111YNuVQHcQPrePHPXTkFAidadp0lbOBwhnujl5v1Nd6gwZ+svTfwqplP+Oq1cZzarUNZGRq3oF0V+iySpSegXl0M8gK5j60ANb/6VjDNq8ofVLKR2hu2Ex1pFvBSW3OcchWyH2/s7/IIn0TFZFXlwQlTuU/pPFHLhahN+Ej2WIxa5UOzsfz1iUHJfke6z+vGF7HtsHpTmbzgmv/GC9aRLqLqd1wooYhQi4jokXMhqVpOzNhDvHWHSyl89NNOmLTHkt9zd6NMEJ9B+aZyRrC4PmFF04xZr3tzDVqeMH/DdeMmlN5UgyuD/bk+laJ5bXkZCoAO3vVF+ZdLFFTtFz0piepDLkLK4/t26vVNcyquk+9M9/m/yewKd2/plOMrycbaU7FQtsly+Hm3Gp9VZmHJ3ZJdxnXWgqH4ndKAMup7q1Ium1k5qnFCJ2QvO7CN2e4bAQz3Gr0Y3Q9/CtgAe7OSPj3Qg55Clqiq/ECZFKC8yA=

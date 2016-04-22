@@ -17,7 +17,7 @@ class EmployeeList extends Component {
     }
 
     const employeeRows = this.props.employees.map(employee =>
-      <EmployeeRow key={`employee-${employee.id}`} employee={ employee } />
+      <EmployeeRow key={`employee-${employee.id}`} employee={employee} />
     );
 
     return (

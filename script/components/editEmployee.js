@@ -127,7 +127,7 @@ class EditEmployee extends Component {
           label={labels.no.postal_code}
           onChange={this.onChange}
           fieldName='postal_code'
-          pattern='^\d+$'
+          pattern='^[0-9]+$'
         />
         <TextField
           value={employee.city}
