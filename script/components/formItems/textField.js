@@ -7,20 +7,30 @@ export default class TextField extends Component {
     super(props);
 
     this.state = {
-      value: props.value
+      value: props.value,
+      blurred: false
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
 
   onChange(e) {
     const value = e.target.value;
 
     this.setState({
-      value
+      value,
+      blurred: this.state.blurred
     });
 
     this.props.onChange(this.props.fieldName, value);
+  }
+
+  onBlur() {
+    this.setState({
+      value: this.state.value,
+      blurred: true
+    });
   }
 
   render() {
@@ -35,11 +45,17 @@ export default class TextField extends Component {
               pattern={this.props.pattern}
               value={this.state.value}
               onChange={this.onChange}
+              onBlur={this.onBlur}
             />
             <label className='mdl-textfield__label' htmlFor={this.props.fieldName}>
               {this.props.label}
             </label>
-            <span className='mdl-textfield__error'>Ugyldig format</span>
+            <span
+              style={{ display: this.state.blurred ? 'block' : 'none' }}
+              className='mdl-textfield__error'
+            >
+              Ugyldig format
+            </span>
           </div>
         </div>
       </div>
