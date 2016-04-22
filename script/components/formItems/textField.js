@@ -49,7 +49,7 @@ export default class TextField extends Component {
 
 TextField.propTypes = {
   fieldName: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string,
+  value: React.PropTypes.string.isRequired,
   label: React.PropTypes.string.isRequired,
   onChange: React.PropTypes.func.isRequired,
   pattern: React.PropTypes.string.isRequired
