@@ -27,7 +27,7 @@ export default class TextField extends Component {
     return (
       <div className='mdl-grid'>
         <div className='mdl-cell mdl-cell--12-col'>
-          <div style={ { width: '100%' } } className={ textFieldClasses }>
+          <div style={{ width: '100%' }} className={textFieldClasses}>
             <input
               fieldName={this.props.fieldName}
               className='mdl-textfield__input'

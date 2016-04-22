@@ -13,7 +13,8 @@ const EmployeeRow = (props) => (
     <span className='mdl-list__item-primary-content'>
       <span>{props.employee.first_name} {props.employee.last_name}</span>
       <div className='mdl-layout-spacer'></div>
-      <img className='employee-list-image'
+      <img
+        className='employee-list-image'
         src={`https://www.gravatar.com/avatar/${md5(props.employee.email)}`}
         alt={props.employee.first_name}
       />
