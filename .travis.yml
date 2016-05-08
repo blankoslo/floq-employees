@@ -24,6 +24,8 @@ deploy:
     secret_access_key:
       secure: riAVaejo/y5jS6CN0ka8H2b18XFdIv/oFL8Z0Z/2frNIWEGVR/G11l8P3MssoWJEmaUoXfrb+nrkm3kg7vEdr5s7TseGYWa37+9rl2hZ4jJO6NAEM4PFOdN+jVhq+Rs/HLWQEu6jZwwOQgbsKleW/loi2m2XYL3TnM00A26f0wNPbzZn31P4Z0wUkKE3G9hu4KgTBjO5SRNKDaMcaq0wM00Hi/2PYj1Nar9cdp0uIBQK3eee2v92Z7MvQQP7fREKqVhvQgdSRaqWUVDCvXlhmv3Wy/lx9q179EB9T/v7m9nbmB86Qg5Rk5ZdlEGDcga6/cL9eCB4zupThopUEPr++gdle75aMabru+gK8oFB2o+b+fEeqzfO0tsZ+EX0dbeJyDueMyZVZlMbbir/zl4hTaCThAu4wR1rKh9qzB0oqAoy6EdltQet7SLsgv3OBwpGo9jzMdWl8ZLDZwAuycjVuqNO6jZphkI676fQZLKXeegUlADwaTctbQ7x69IaID1Da/+V7pEgj9qQk7L75AM6OQZ1XFHj6MA+rVEsLyzwT5tSwaOPB6OeLMTKsf2BgClhTIWnEnZeby8RTELCJF1br8cZUtCkT05bUYRbyr8Jf4f5C9UTNOTA1WkKjpeEVGeNgrP9Xrger9X9EJSLQnZ9K+BRtUUDL0t3qz9P2x81olo=
     skip_cleanup: true
+    on:
+      branch: develop
   - provider: gcs
     bucket: blank-intranet
     local_dir: dist
@@ -34,3 +36,5 @@ deploy:
     secret_access_key:
       secure: riAVaejo/y5jS6CN0ka8H2b18XFdIv/oFL8Z0Z/2frNIWEGVR/G11l8P3MssoWJEmaUoXfrb+nrkm3kg7vEdr5s7TseGYWa37+9rl2hZ4jJO6NAEM4PFOdN+jVhq+Rs/HLWQEu6jZwwOQgbsKleW/loi2m2XYL3TnM00A26f0wNPbzZn31P4Z0wUkKE3G9hu4KgTBjO5SRNKDaMcaq0wM00Hi/2PYj1Nar9cdp0uIBQK3eee2v92Z7MvQQP7fREKqVhvQgdSRaqWUVDCvXlhmv3Wy/lx9q179EB9T/v7m9nbmB86Qg5Rk5ZdlEGDcga6/cL9eCB4zupThopUEPr++gdle75aMabru+gK8oFB2o+b+fEeqzfO0tsZ+EX0dbeJyDueMyZVZlMbbir/zl4hTaCThAu4wR1rKh9qzB0oqAoy6EdltQet7SLsgv3OBwpGo9jzMdWl8ZLDZwAuycjVuqNO6jZphkI676fQZLKXeegUlADwaTctbQ7x69IaID1Da/+V7pEgj9qQk7L75AM6OQZ1XFHj6MA+rVEsLyzwT5tSwaOPB6OeLMTKsf2BgClhTIWnEnZeby8RTELCJF1br8cZUtCkT05bUYRbyr8Jf4f5C9UTNOTA1WkKjpeEVGeNgrP9Xrger9X9EJSLQnZ9K+BRtUUDL0t3qz9P2x81olo=
     skip_cleanup: true
+    on:
+      branch: master
