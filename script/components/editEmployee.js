@@ -16,13 +16,6 @@ class EditEmployee extends Component {
     router: PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
   componentDidMount() {
     componentHandler.upgradeDom();
   }
@@ -31,7 +24,7 @@ class EditEmployee extends Component {
     componentHandler.upgradeDom();
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     // no changes
@@ -64,9 +57,7 @@ class EditEmployee extends Component {
     });
   }
 
-  onChange(fieldName, value) {
-    this.props.updateField(FORM_NAME, fieldName, value);
-  }
+  onChange = (fieldName, value) => this.props.updateField(FORM_NAME, fieldName, value);
 
   render() {
     const employee = this.props.employee;

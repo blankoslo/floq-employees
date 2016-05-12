@@ -10,12 +10,9 @@ export default class TextField extends Component {
       value: props.value,
       blurred: false
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.onBlur = this.onBlur.bind(this);
   }
 
-  onChange(e) {
+  onChange = (e) => {
     const value = e.target.value;
 
     this.setState({
@@ -26,12 +23,10 @@ export default class TextField extends Component {
     this.props.onChange(this.props.fieldName, value);
   }
 
-  onBlur() {
-    this.setState({
-      value: this.state.value,
-      blurred: true
-    });
-  }
+  onBlur = () => this.setState({
+    value: this.state.value,
+    blurred: true
+  });
 
   render() {
     return (
