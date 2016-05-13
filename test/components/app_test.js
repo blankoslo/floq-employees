@@ -2,7 +2,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
-import App from '../../script/components/app';
+import App from '../../src/components/app';
 
 describe('App', () => {
   it('should exist', () => {
