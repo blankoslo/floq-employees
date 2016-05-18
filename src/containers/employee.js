@@ -9,9 +9,9 @@ class EmployeeContainer extends Component {
     if (this.props.employees !== null && this.props.params.id !== undefined) {
       const selectedId = parseInt(this.props.params.id);
       const activeEmployee = this.props.employees.find(e => e.id === selectedId);
-      this.props.selectEmployee(activeEmployee);
+      this.props.dispatch(selectEmployee(activeEmployee));
     } else {
-      this.props.selectEmployee(null);
+      this.props.dispatch(selectEmployee(null));
     }
   }
 
@@ -21,9 +21,9 @@ class EmployeeContainer extends Component {
     if (props.employees !== null && props.params.id !== undefined) {
       const selectedId = parseInt(props.params.id);
       const activeEmployee = props.employees.find(e => e.id === selectedId);
-      this.props.selectEmployee(activeEmployee);
+      this.props.dispatch(selectEmployee(activeEmployee));
     } else {
-      this.props.selectEmployee(null);
+      this.props.dispatch(selectEmployee(null));
     }
   }
 
@@ -34,7 +34,7 @@ class EmployeeContainer extends Component {
 
 EmployeeContainer.propTypes = {
   children: React.PropTypes.object,
-  selectEmployee: React.PropTypes.func,
+  dispatch: React.PropTypes.func,
   employees: React.PropTypes.array,
   params: React.PropTypes.object
 };
@@ -43,4 +43,4 @@ const mapStateToProps = ({ employees }) => ({
   employees
 });
 
-export default connect(mapStateToProps, { selectEmployee })(EmployeeContainer);
+export default connect(mapStateToProps)(EmployeeContainer);
