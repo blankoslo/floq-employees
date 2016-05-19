@@ -1,4 +1,5 @@
 import React from 'react';
+import * as _ from 'lodash';
 
 import { isLoading, getValue } from '../loading';
 import TextField from './formItems/textField';
@@ -7,6 +8,74 @@ import SelectField from './formItems/selectField';
 import { employeeFormLabels as labels, formLabels } from '../strings';
 
 const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored';
+
+const fields = {
+  first_name: { type: 'TextField' },
+  last_name: { type: 'TextField' },
+  title: { type: 'TextField' },
+  gender: {
+    type: 'SelectField',
+    choices: ['female', 'male', 'other'],
+    labels: labels.no
+  },
+  phone: { type: 'TextField', pattern: '[-+ 0-9]+' },
+  email: { type: 'TextField', pattern: '.+@.+' },
+  address: { type: 'TextField' },
+  postal_code: { type: 'TextField', pattern: '^[0-9]+$' },
+  city: { type: 'TextField' },
+  birth_date: { type: 'DateField' },
+  date_of_employment: { type: 'DateField' },
+  termination_date: { type: 'DateField' },
+  emergency_contact_name: { type: 'TextField' },
+  emergency_contact_phone: { type: 'TextField', pattern: '[-+ 0-9]+' },
+  emergency_contact_relation: { type: 'TextField' }
+};
+
+const renderField = (props, fieldConfig, fieldName) => {
+  const employee = getValue(props.employee);
+
+  switch (fieldConfig.type) {
+    case 'TextField':
+      return (
+        <TextField
+          value={employee[fieldName] || ''}
+          label={labels.no[fieldName]}
+          onChange={props.onChange}
+          fieldName={fieldName}
+          pattern={fieldConfig.pattern || '.+'}
+          key={fieldName}
+        />
+      );
+    case 'DateField':
+      return (
+        <DateField
+          value={employee[fieldName] || ''}
+          label={labels.no[fieldName]}
+          onChange={props.onChange}
+          fieldName={fieldName}
+          key={fieldName}
+        />
+      );
+    case 'SelectField':
+      return (
+        <SelectField
+          choices={fieldConfig.choices}
+          value={employee[fieldName]}
+          labels={labels.no}
+          onChange={props.onChange}
+          fieldName={fieldName}
+          key={fieldName}
+        />
+      );
+    default:
+      throw new Error(`Unknown field type: ${fieldConfig.type}`);
+  }
+};
+
+renderField.propTypes = {
+  employee: React.PropTypes.object.isRequired,
+  onChange: React.PropTypes.func.isRequired
+};
 
 const EmployeeForm = (props) => {
   if (isLoading(props.employee)) {
@@ -19,112 +88,11 @@ const EmployeeForm = (props) => {
     );
   }
 
-  const employee = getValue(props.employee);
+  const fieldElems = _.map(fields, (config, fieldName) => renderField(props, config, fieldName));
 
   return (
     <form onSubmit={props.onSubmit}>
-      <TextField
-        value={employee.first_name}
-        label={labels.no.first_name}
-        onChange={props.onChange}
-        fieldName='first_name'
-        pattern='.+'
-      />
-      <TextField
-        value={employee.last_name}
-        label={labels.no.last_name}
-        onChange={props.onChange}
-        fieldName='last_name'
-        pattern='.+'
-      />
-      <TextField
-        value={employee.title}
-        label={labels.no.title}
-        onChange={props.onChange}
-        fieldName='title'
-        pattern='.+'
-      />
-      <SelectField
-        choices={['female', 'male', 'other']}
-        labels={labels.no}
-        value={employee.gender}
-        onChange={props.onChange}
-        fieldName='gender'
-      />
-      <TextField
-        value={employee.phone}
-        label={labels.no.phone}
-        onChange={props.onChange}
-        fieldName='phone'
-        pattern='[-+ 0-9]+'
-      />
-      <TextField
-        value={employee.email}
-        label={labels.no.email}
-        onChange={props.onChange}
-        fieldName='email'
-        pattern='.+@.+'
-      />
-      <TextField
-        value={employee.address}
-        label={labels.no.address}
-        onChange={props.onChange}
-        fieldName='address'
-        pattern='.+'
-      />
-      <TextField
-        value={employee.postal_code}
-        label={labels.no.postal_code}
-        onChange={props.onChange}
-        fieldName='postal_code'
-        pattern='^[0-9]+$'
-      />
-      <TextField
-        value={employee.city}
-        label={labels.no.city}
-        onChange={props.onChange}
-        fieldName='city'
-        pattern='.+'
-      />
-      <DateField
-        value={employee.birth_date}
-        label={labels.no.birth_date}
-        onChange={props.onChange}
-        fieldName='birth_date'
-      />
-      <DateField
-        value={employee.date_of_employment}
-        label={labels.no.date_of_employment}
-        onChange={props.onChange}
-        fieldName='date_of_employment'
-      />
-      <DateField
-        value={employee.termination_date}
-        label={labels.no.termination_date}
-        onChange={props.onChange}
-        fieldName='termination_date'
-      />
-      <TextField
-        value={employee.emergency_contact_name}
-        label={labels.no.emergency_contact_name}
-        onChange={props.onChange}
-        fieldName='emergency_contact_name'
-        pattern='.+'
-      />
-      <TextField
-        value={employee.emergency_contact_phone}
-        label={labels.no.emergency_contact_phone}
-        onChange={props.onChange}
-        fieldName='emergency_contact_phone'
-        pattern='[-+ 0-9]+'
-      />
-      <TextField
-        value={employee.emergency_contact_relation}
-        label={labels.no.emergency_contact_relation}
-        onChange={props.onChange}
-        fieldName='emergency_contact_relation'
-        pattern='.+'
-      />
+      {fieldElems}
       <div className='mdl-grid'>
         <button className={buttonClasses} type='submit'>
           {formLabels.no.save}
