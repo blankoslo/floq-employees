@@ -2,7 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
 import App from './components/app';
-import ViewEmployee from './components/viewEmployee';
+import Employee from './components/employee';
 import EmployeeForm from './components/employeeForm';
 import CreateEmployee from './components/createEmployee';
 
@@ -14,7 +14,7 @@ export default (
       <IndexRoute component={CreateEmployee} />
     </Route>
     <Route path='/employees/:id' component={EmployeeContainer}>
-      <IndexRoute component={ViewEmployee} />
+      <IndexRoute component={Employee} />
       <Route path='/employees/:id/edit' component={EmployeeForm} />
     </Route>
   </Route>
