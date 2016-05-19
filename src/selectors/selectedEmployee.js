@@ -1,14 +1,17 @@
 import { createSelector } from 'reselect';
 
+import Loading from '../loading';
+
 const employeesSelector = state => state.employees;
 const selectedEmployeeSelector = state => state.selected_employee;
 
 const getEmployee = (employees, selectedEmployee) => {
   if (selectedEmployee === null) {
-    return null;
+    return Loading.loading;
   }
 
-  return employees.find(e => e.id === selectedEmployee) || null;
+  const employee = employees.find(e => e.id === selectedEmployee) || null;
+  return Loading.loaded(employee);
 };
 
 export default createSelector(

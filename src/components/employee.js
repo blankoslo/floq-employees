@@ -21,14 +21,18 @@ IconAndText.propTypes = {
   textLines: React.PropTypes.array.isRequired
 };
 
-const Employee = ({ employee }) => {
-  if (employee === null) {
+const Employee = (props) => {
+  if (props.employee.isloading) {
+    return null;
+  } else if (props.employee.isloaded && props.employee.value === null) {
     return (
       <div>
         Not found.
       </div>
     );
   }
+
+  const employee = props.employee.value;
 
   return (
     <div className='mdl-grid'>
@@ -86,7 +90,7 @@ const Employee = ({ employee }) => {
 };
 
 Employee.propTypes = {
-  employee: React.PropTypes.object
+  employee: React.PropTypes.object.isRequired
 };
 
 export default Employee;
