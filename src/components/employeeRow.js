@@ -1,9 +1,6 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { connect } from 'react-redux';
 import md5 from 'md5';
-
-import { selectEmployee } from '../actions/index';
 
 const EmployeeRow = (props) => (
   <div
@@ -26,4 +23,4 @@ EmployeeRow.propTypes = {
   employee: React.PropTypes.object.isRequired
 };
 
-export default connect(null, { selectEmployee })(EmployeeRow);
+export default EmployeeRow;
