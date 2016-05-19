@@ -1,8 +1,8 @@
 import React from 'react';
-import EditEmployee from './editEmployee';
+import EmployeeForm from './employeeForm';
 
 export default () => (
-  <EditEmployee
+  <EmployeeForm
     employee={{
       first_name: '',
       last_name: '',
