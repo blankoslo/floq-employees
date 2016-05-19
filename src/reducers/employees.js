@@ -1,8 +1,10 @@
 import { GET_EMPLOYEES } from '../actions/index';
 
-export default (state = [], action) => {
+import { loading, loaded } from '../loading';
+
+export default (state = loading(), action) => {
   if (action.type === GET_EMPLOYEES) {
-    return action.payload.data;
+    return loaded(action.payload.data);
   }
 
   return state;

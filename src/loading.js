@@ -2,10 +2,10 @@
 
 // constructor functions:
 
-export const loading = {
+export const loading = () => ({
   state: 'loading',
   value: null
-};
+});
 
 export const loaded = (data) => ({
   state: 'loaded',

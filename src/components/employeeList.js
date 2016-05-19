@@ -5,6 +5,7 @@ import { getEmployees } from '../actions/index';
 
 import EmployeeRow from './employeeRow';
 import Spinner from './spinner';
+import { isLoading, getValue } from '../loading';
 
 class EmployeeList extends Component {
   componentWillMount() {
@@ -12,11 +13,11 @@ class EmployeeList extends Component {
   }
 
   render() {
-    if (this.props.employees === null) {
+    if (isLoading(this.props.employees)) {
       return <Spinner />;
     }
 
-    const employeeRows = this.props.employees.map(employee =>
+    const employeeRows = getValue(this.props.employees).map(employee =>
       <EmployeeRow key={`employee-${employee.id}`} employee={employee} />
     );
 
@@ -45,7 +46,7 @@ class EmployeeList extends Component {
 }
 
 EmployeeList.propTypes = {
-  employees: React.PropTypes.array,
+  employees: React.PropTypes.object,
   getEmployees: React.PropTypes.func
 };
 
