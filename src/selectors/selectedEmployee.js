@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import Loading from '../loading';
+import * as Loading from '../loading';
 
 const employeesSelector = state => state.employees;
 const selectedEmployeeSelector = state => state.selected_employee;

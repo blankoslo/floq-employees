@@ -2,6 +2,8 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import md5 from 'md5';
 
+import { isLoading, isLoaded, getValue } from '../loading';
+
 const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
 const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
 
@@ -22,9 +24,9 @@ IconAndText.propTypes = {
 };
 
 const Employee = (props) => {
-  if (props.employee.isloading) {
+  if (isLoading(props.employee)) {
     return null;
-  } else if (props.employee.isloaded && props.employee.value === null) {
+  } else if (isLoaded(props.employee) && getValue(props.employee) === null) {
     return (
       <div>
         Not found.
@@ -32,7 +34,7 @@ const Employee = (props) => {
     );
   }
 
-  const employee = props.employee.value;
+  const employee = getValue(props.employee);
 
   return (
     <div className='mdl-grid'>
@@ -90,7 +92,7 @@ const Employee = (props) => {
 };
 
 Employee.propTypes = {
-  employee: React.PropTypes.object.isRequired
+  employee: React.PropTypes.object
 };
 
 export default Employee;
