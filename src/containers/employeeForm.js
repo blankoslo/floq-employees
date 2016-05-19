@@ -25,7 +25,7 @@ class EmployeeForm extends Component {
 
     // no changes
     if (this.props.selected_employee !== null && this.props.form === null) {
-      this.context.router.push(`/employees/${this.props.selected_employee.id}`);
+      this.context.router.push(`/employees/${this.props.selected_employee}`);
       return;
     }
 
@@ -35,7 +35,7 @@ class EmployeeForm extends Component {
 
     const persist = this.props.selected_employee === null
       ? this.props.dispatch(createEmployee(data))
-      : this.props.dispatch(updateEmployee(this.props.selected_employee.id, data));
+      : this.props.dispatch(updateEmployee(this.props.selected_employee, data));
 
     persist.then(res => {
       if (res.error === true) {
@@ -44,7 +44,7 @@ class EmployeeForm extends Component {
         alert(errorMessage); // eslint-disable-line no-alert
       } else {
         const next = this.props.selected_employee
-                   ? `/employees/${this.props.selected_employee.id}`
+                   ? `/employees/${this.props.selected_employee}`
                    : '/employees/';
 
         this.props.dispatch(getEmployees());
