@@ -1,18 +1,7 @@
-import * as _ from 'lodash';
 import { combineReducers } from 'redux';
 import GetEmployeesReducer from './getEmployees';
 import SelectEmployeeReducer from './selectEmployee';
-
-const FormReducer = (state = null, action) => {
-  switch (action.type) {
-    case 'FORM_UPDATE_VALUE':
-      return _.merge({}, state, action.payload);
-    case 'FORM_RESET':
-      return {};
-    default:
-      return state;
-  }
-};
+import FormReducer from './form';
 
 const rootReducer = combineReducers({
   employees: GetEmployeesReducer,
