@@ -21,7 +21,7 @@ IconAndText.propTypes = {
   textLines: React.PropTypes.array.isRequired
 };
 
-const viewEmployee = ({ employee }) => {
+const Employee = ({ employee }) => {
   if (employee === null) {
     return (
       <div>
@@ -85,8 +85,8 @@ const viewEmployee = ({ employee }) => {
   );
 };
 
-viewEmployee.propTypes = {
+Employee.propTypes = {
   employee: React.PropTypes.object
 };
 
-export default viewEmployee;
+export default Employee;
