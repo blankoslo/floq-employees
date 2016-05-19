@@ -1,46 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectEmployee } from '../actions/index';
+import selectedEmployeeSelector from '../selectors/selectedEmployee';
 
 class EmployeeContainer extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     // dispatch a SELECT_EMPLOYEE in case there is no active employee for the
     // initial render
-    if (this.props.employees !== null && this.props.params.id !== undefined) {
-      const selectedId = parseInt(this.props.params.id);
-      const activeEmployee = this.props.employees.find(e => e.id === selectedId);
-      this.props.dispatch(selectEmployee(activeEmployee));
-    } else {
-      this.props.dispatch(selectEmployee(null));
+    if (props.params.id !== undefined) {
+      const selectedId = parseInt(props.params.id);
+      props.dispatch(selectEmployee(selectedId));
     }
   }
 
   componentWillReceiveProps(props) {
-    // we might have received new `employees`, so dispatch a SELECT_EMPLOYEE
-    // action to (possibly) update the current, selected employee
-    if (props.employees !== null && props.params.id !== undefined) {
+    if (props.params.id !== undefined) {
       const selectedId = parseInt(props.params.id);
-      const activeEmployee = props.employees.find(e => e.id === selectedId);
-      this.props.dispatch(selectEmployee(activeEmployee));
-    } else {
-      this.props.dispatch(selectEmployee(null));
+      props.dispatch(selectEmployee(selectedId));
     }
   }
 
   render() {
-    return this.props.children;
+    // pass `employee` prop to children
+    return React.cloneElement(this.props.children, {
+      employee: this.props.selected_employee
+    });
   }
 }
 
 EmployeeContainer.propTypes = {
+  selected_employee: React.PropTypes.object,
   children: React.PropTypes.object,
   dispatch: React.PropTypes.func,
-  employees: React.PropTypes.array,
   params: React.PropTypes.object
 };
 
-const mapStateToProps = ({ employees }) => ({
-  employees
+const mapStateToProps = (state) => ({
+  selected_employee: selectedEmployeeSelector(state)
 });
 
 export default connect(mapStateToProps)(EmployeeContainer);

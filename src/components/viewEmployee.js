@@ -21,7 +21,16 @@ IconAndText.propTypes = {
   textLines: React.PropTypes.array.isRequired
 };
 
-const viewEmployee = ({ employee }) => (
+const viewEmployee = ({ employee }) => {
+  if (employee === null) {
+    return (
+      <div>
+        Not found.
+      </div>
+    );
+  }
+
+  return (
   <div className='mdl-grid'>
     <div className={`${cellClasses} center-text`}>
     </div>
@@ -73,10 +82,11 @@ const viewEmployee = ({ employee }) => (
       <i className='material-icons dark-gray'>create</i>
     </button>
   </div>
-);
+  );
+};
 
 viewEmployee.propTypes = {
-  employee: React.PropTypes.object.isRequired
+  employee: React.PropTypes.object
 };
 
 export default viewEmployee;

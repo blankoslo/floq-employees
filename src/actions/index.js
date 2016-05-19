@@ -19,9 +19,9 @@ export const getEmployees = () => ({
   payload: api.getEmployees()
 });
 
-export const selectEmployee = (employee) => ({
+export const selectEmployee = (id) => ({
   type: SELECT_EMPLOYEE,
-  payload: employee
+  payload: id
 });
 
 export const createEmployee = (employee) => ({
