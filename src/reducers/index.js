@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import GetEmployeesReducer from './getEmployees';
-import SelectEmployeeReducer from './selectEmployee';
+
+import EmployeesReducer from './employees';
+import SelectedEmployeeReducer from './selectedEmployee';
 import FormReducer from './form';
 
 const rootReducer = combineReducers({
-  employees: GetEmployeesReducer,
-  selected_employee: SelectEmployeeReducer,
+  employees: EmployeesReducer,
+  selected_employee: SelectedEmployeeReducer,
   form: FormReducer
 });
 
