@@ -1,57 +1,43 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { browserHistory } from 'react-router';
-import { getEmployees } from '../actions/index';
 
 import EmployeeRow from './employeeRow';
 import Spinner from './spinner';
-import { isLoading, getValue } from '../loading';
 
-class EmployeeList extends Component {
-  componentWillMount() {
-    this.props.dispatch(getEmployees());
+const EmployeeList = (props) => {
+  if (props.employees.loading) {
+    return <Spinner />;
   }
 
-  render() {
-    if (isLoading(this.props.employees)) {
-      return <Spinner />;
-    }
+  const employeeRows = props.employees.data.map(employee =>
+    <EmployeeRow key={`employee-${employee.id}`} employee={employee} />
+  );
 
-    const employeeRows = getValue(this.props.employees).map(employee =>
-      <EmployeeRow key={`employee-${employee.id}`} employee={employee} />
-    );
-
-    return (
-      <div>
-        <div className='demo-list-action mdl-list'>
-          <div className='employee-list-header'>
-            <div>
-              <h3>Alle ansatte</h3>
-            </div>
-            <button
-              onClick={() => browserHistory.push('/employees/new')}
-              id='add-employee-button'
-              className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
-            >
-              <i className='material-icons dark-gray'>add</i>
-            </button>
+  return (
+    <div>
+      <div className='demo-list-action mdl-list'>
+        <div className='employee-list-header'>
+          <div>
+            <h3>Alle ansatte</h3>
           </div>
-          <hr />
-          <div className='vert-spacer' />
-          {employeeRows}
+          <button
+            onClick={() => browserHistory.push('/employees/new')}
+            id='add-employee-button'
+            className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+          >
+            <i className='material-icons dark-gray'>add</i>
+          </button>
         </div>
+        <hr />
+        <div className='vert-spacer' />
+        {employeeRows}
       </div>
-    );
-  }
-}
-
-EmployeeList.propTypes = {
-  employees: React.PropTypes.object,
-  dispatch: React.PropTypes.func
+    </div>
+  );
 };
 
-const mapStateToProps = ({ employees }) => ({
-  employees
-});
+EmployeeList.propTypes = {
+  employees: React.PropTypes.object.isRequired
+};
 
-export default connect(mapStateToProps)(EmployeeList);
+export default EmployeeList;

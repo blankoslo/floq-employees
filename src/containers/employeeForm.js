@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import { createEmployee, updateEmployee, updateField } from '../actions/index';
 
-import EmployeeEditor from '../components/employeeEditor';
-
 const FORM_NAME = 'edit_employee';
 
 class EmployeeForm extends Component {
@@ -12,7 +10,7 @@ class EmployeeForm extends Component {
     router: PropTypes.object
   };
 
-  componentDidMount() { // FIXME: constructor?
+  componentDidMount() {
     componentHandler.upgradeDom();
   }
 
@@ -24,8 +22,8 @@ class EmployeeForm extends Component {
     e.preventDefault();
 
     // no changes
-    if (this.props.selected_employee !== null && this.props.form === null) {
-      this.context.router.push(`/employees/${this.props.selected_employee}`);
+    if (this.props.employee !== null && this.props.form === null) {
+      this.context.router.push(`/employees/${this.props.employee}`);
       document.getElementById('detail').scrollIntoView();
       return;
     }
@@ -34,9 +32,9 @@ class EmployeeForm extends Component {
       ? this.props.form[FORM_NAME]
       : {};
 
-    const persist = this.props.selected_employee === null
+    const persist = this.props.employee === null
       ? this.props.dispatch(createEmployee(data))
-      : this.props.dispatch(updateEmployee(this.props.selected_employee, data));
+      : this.props.dispatch(updateEmployee(this.props.employee, data));
 
     persist.then(res => {
       if (res.error === true) {
@@ -44,8 +42,8 @@ class EmployeeForm extends Component {
         // FIXME
         alert(errorMessage); // eslint-disable-line no-alert
       } else {
-        const next = this.props.selected_employee
-                   ? `/employees/${this.props.selected_employee}`
+        const next = this.props.employee
+                   ? `/employees/${this.props.employee}`
                    : '/employees/';
 
         this.context.router.push(next);
@@ -57,26 +55,27 @@ class EmployeeForm extends Component {
   onChange = (fieldName, value) => this.props.dispatch(updateField(FORM_NAME, fieldName, value));
 
   render() {
-    return (
-      <EmployeeEditor
-        employee={this.props.employee}
-        onSubmit={this.onSubmit}
-        onChange={this.onChange}
-      />
-    );
+    // pass `employee` prop to children
+    const children = React.Children.map(this.props.children,
+      child => React.cloneElement(child, {
+        employee: this.props.employee,
+        onSubmit: this.onSubmit,
+        onChange: this.onChange
+      }));
+
+    return <div>{children}</div>;
   }
 }
 
 EmployeeForm.propTypes = {
-  employee: React.PropTypes.object.isRequired,
-  selected_employee: React.PropTypes.number,
+  employee: React.PropTypes.object,
   form: React.PropTypes.object,
-  dispatch: React.PropTypes.func
+  dispatch: React.PropTypes.func,
+  children: React.PropTypes.object
 };
 
-const mapStateToProps = ({ form, selected_employee }) => ({
-  form,
-  selected_employee
+const mapStateToProps = (state) => ({
+  form: state.form
 });
 
 export default connect(mapStateToProps)(EmployeeForm);

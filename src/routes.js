@@ -1,21 +1,21 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 
-import App from './components/app';
+import App from './containers/app';
 import Employee from './components/employee';
-import CreateEmployee from './components/createEmployee';
+import EmployeeEditor from './components/employeeEditor';
+import NewEmployeeEditor from './components/newEmployeeEditor';
 
 import EmployeeFormContainer from './containers/employeeForm';
-import EmployeeContainer from './containers/employee';
 
 export default (
   <Route path='/employees' component={App}>
-    <Route path='/employees/new' component={EmployeeContainer}>
-      <IndexRoute component={CreateEmployee} />
+    <Route path='new' component={EmployeeFormContainer}>
+      <IndexRoute component={NewEmployeeEditor} />
     </Route>
-    <Route path='/employees/:id' component={EmployeeContainer}>
-      <IndexRoute component={Employee} />
-      <Route path='/employees/:id/edit' component={EmployeeFormContainer} />
+    <Route path='edit' component={EmployeeFormContainer}>
+      <Route path=':id' component={EmployeeEditor} />
     </Route>
+    <Route path=':id' component={Employee} />
   </Route>
 );

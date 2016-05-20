@@ -2,8 +2,6 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import md5 from 'md5';
 
-import { isLoading, isLoaded, getValue } from '../loading';
-
 const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
 const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
 
@@ -24,17 +22,21 @@ IconAndText.propTypes = {
 };
 
 const Employee = (props) => {
-  if (isLoading(props.employee)) {
-    return null;
-  } else if (isLoaded(props.employee) && getValue(props.employee) === null) {
+  if (props.employee.loading) {
     return (
       <div>
-        Not found.
+        Loading
+      </div>
+    );
+  } else if (props.employee.data === null) {
+    return (
+      <div>
+        Not found...
       </div>
     );
   }
 
-  const employee = getValue(props.employee);
+  const employee = props.employee.data;
 
   return (
     <div className='mdl-grid'>
@@ -82,7 +84,7 @@ const Employee = (props) => {
         </div>
       </div>
       <button
-        onClick={() => browserHistory.push(`/employees/${employee.id}/edit`)}
+        onClick={() => browserHistory.push(`/employees/edit/${employee.id}`)}
         className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
       >
         <i className='material-icons dark-gray'>create</i>

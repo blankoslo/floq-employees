@@ -1,7 +1,6 @@
 import React from 'react';
 import * as _ from 'lodash';
 
-import { isLoading, getValue } from '../loading';
 import TextField from './formItems/textField';
 import DateField from './formItems/dateField';
 import SelectField from './formItems/selectField';
@@ -31,16 +30,14 @@ const fields = {
   emergency_contact_relation: { type: 'TextField' }
 };
 
-const renderField = (props, fieldConfig, fieldName) => {
-  const employee = getValue(props.employee);
-
+const renderField = (employee, onChange, fieldConfig, fieldName) => {
   switch (fieldConfig.type) {
     case 'TextField':
       return (
         <TextField
           value={employee[fieldName] || ''}
           label={labels.no[fieldName]}
-          onChange={props.onChange}
+          onChange={onChange}
           fieldName={fieldName}
           pattern={fieldConfig.pattern || '.+'}
           key={fieldName}
@@ -51,7 +48,7 @@ const renderField = (props, fieldConfig, fieldName) => {
         <DateField
           value={employee[fieldName] || ''}
           label={labels.no[fieldName]}
-          onChange={props.onChange}
+          onChange={onChange}
           fieldName={fieldName}
           key={fieldName}
         />
@@ -62,7 +59,7 @@ const renderField = (props, fieldConfig, fieldName) => {
           choices={fieldConfig.choices}
           value={employee[fieldName]}
           labels={labels.no}
-          onChange={props.onChange}
+          onChange={onChange}
           fieldName={fieldName}
           key={fieldName}
         />
@@ -77,10 +74,14 @@ renderField.propTypes = {
   onChange: React.PropTypes.func.isRequired
 };
 
-const EmployeeForm = (props) => {
-  if (isLoading(props.employee)) {
-    return null;
-  } else if (getValue(props.employee) === null) {
+const EmployeeEditor = (props) => {
+  if (props.employee.loading) {
+    return (
+      <div>
+        Loading.
+      </div>
+    );
+  } else if (props.employee.data === null) {
     return (
       <div>
         Not found.
@@ -88,7 +89,8 @@ const EmployeeForm = (props) => {
     );
   }
 
-  const fieldElems = _.map(fields, (config, fieldName) => renderField(props, config, fieldName));
+  const fieldElems = _.map(fields, (config, fieldName) =>
+    renderField(props.employee.data, props.onChange, config, fieldName));
 
   return (
     <form onSubmit={props.onSubmit}>
@@ -102,11 +104,11 @@ const EmployeeForm = (props) => {
   );
 };
 
-EmployeeForm.propTypes = {
-  employee: React.PropTypes.object.isRequired,
-  onSubmit: React.PropTypes.func.isRequired,
-  onChange: React.PropTypes.func.isRequired,
+EmployeeEditor.propTypes = {
+  employee: React.PropTypes.object,
+  onSubmit: React.PropTypes.func,
+  onChange: React.PropTypes.func,
   form: React.PropTypes.object
 };
 
-export default EmployeeForm;
+export default EmployeeEditor;

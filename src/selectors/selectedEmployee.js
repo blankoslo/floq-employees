@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect';
 
-import { loading, loaded, isLoading, getValue } from '../loading';
-
 const employeesSelector = state => state.employees;
 const selectedEmployeeSelector = state => state.selected_employee;
 
 const getEmployee = (employees, selectedEmployee) => {
-  if (selectedEmployee === null || isLoading(employees)) {
-    return loading();
+  if (employees.loading) {
+    return { loading: true, data: null };
   }
 
-  const employee = getValue(employees).find(e => e.id === selectedEmployee) || null;
-  return loaded(employee);
+  return {
+    loading: false,
+    data: employees.data.find(e => e.id === selectedEmployee) || null
+  };
 };
 
 export default createSelector(
