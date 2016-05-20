@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getEmployees, createEmployee, updateEmployee, updateField } from '../actions/index';
 
-import View from '../components/employeeForm';
+import EmployeeEditor from '../components/employeeEditor';
 
 const FORM_NAME = 'edit_employee';
 
@@ -57,7 +57,7 @@ class EmployeeForm extends Component {
 
   render() {
     return (
-      <View
+      <EmployeeEditor
         employee={this.props.employee}
         onSubmit={this.onSubmit}
         onChange={this.onChange}
