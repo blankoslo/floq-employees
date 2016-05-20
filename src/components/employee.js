@@ -2,6 +2,8 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import md5 from 'md5';
 
+import Spinner from './spinner';
+
 const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
 const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
 
@@ -24,9 +26,7 @@ IconAndText.propTypes = {
 const Employee = (props) => {
   if (props.employee.loading) {
     return (
-      <div>
-        Loading
-      </div>
+      <Spinner />
     );
   } else if (props.employee.data === null) {
     return (
