@@ -9,7 +9,7 @@ import { isLoading, getValue } from '../loading';
 
 class EmployeeList extends Component {
   componentWillMount() {
-    this.props.getEmployees();
+    this.props.dispatch(getEmployees());
   }
 
   render() {
@@ -47,11 +47,11 @@ class EmployeeList extends Component {
 
 EmployeeList.propTypes = {
   employees: React.PropTypes.object,
-  getEmployees: React.PropTypes.func
+  dispatch: React.PropTypes.func
 };
 
 const mapStateToProps = ({ employees }) => ({
   employees
 });
 
-export default connect(mapStateToProps, { getEmployees })(EmployeeList);
+export default connect(mapStateToProps)(EmployeeList);
