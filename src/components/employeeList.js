@@ -15,7 +15,7 @@ const EmployeeList = (props) => {
 
   return (
     <div>
-      <div className='demo-list-action mdl-list'>
+      <div className='mdl-list'>
         <div className='employee-list-header'>
           <div>
             <h3>Alle ansatte</h3>
