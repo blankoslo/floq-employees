@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getEmployees, createEmployee, updateEmployee, updateField } from '../actions/index';
+import { createEmployee, updateEmployee, updateField } from '../actions/index';
 
 import EmployeeEditor from '../components/employeeEditor';
 
@@ -48,7 +48,6 @@ class EmployeeForm extends Component {
                    ? `/employees/${this.props.selected_employee}`
                    : '/employees/';
 
-        this.props.dispatch(getEmployees());
         this.context.router.push(next);
         document.getElementById('detail').scrollIntoView();
       }
