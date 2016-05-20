@@ -11,7 +11,7 @@ const App = (props) => {
       <div className={listClasses}>
         <EmployeeList />
       </div>
-      <div className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
+      <div id='detail' className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
         <div className='detail-view'>
           {props.children}
         </div>

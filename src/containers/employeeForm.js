@@ -26,6 +26,7 @@ class EmployeeForm extends Component {
     // no changes
     if (this.props.selected_employee !== null && this.props.form === null) {
       this.context.router.push(`/employees/${this.props.selected_employee}`);
+      document.getElementById('detail').scrollIntoView();
       return;
     }
 
@@ -49,6 +50,7 @@ class EmployeeForm extends Component {
 
         this.props.dispatch(getEmployees());
         this.context.router.push(next);
+        document.getElementById('detail').scrollIntoView();
       }
     });
   }
