@@ -46,7 +46,7 @@ const Employee = (props) => {
         <img
           className='profile-pic'
           src={`https://www.gravatar.com/avatar/${md5(employee.email)}`}
-          alt='{employee.first_name}'
+          alt={employee.first_name}
         />
       </div>
       <div className={`${cellClasses} center-text`}>
