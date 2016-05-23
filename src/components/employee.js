@@ -55,7 +55,10 @@ const Employee = (props) => {
       </div>
       <div className='vert-spacer' />
       <div className={gridClasses}>
-        <IconAndText icon='phone' textLines={[employee.phone]} />
+        <IconAndText
+          icon='phone'
+          textLines={[<a id='phone-number' href={`tel:${employee.phone}`}>{employee.phone}</a>]}
+        />
       </div>
       <div className={gridClasses}>
         <IconAndText icon='email' textLines={[employee.email]} />

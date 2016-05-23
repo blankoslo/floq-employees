@@ -44,4 +44,10 @@ describe('Employee', () => {
 
     expect(component).to.contain('Not found');
   });
+
+  it('generates link for phone number', () => {
+    const component = renderComponent(Employee, { employee });
+
+    expect(component.find('#phone-number')).to.have.attr('href', `tel:${employee.data.phone}`);
+  });
 });
