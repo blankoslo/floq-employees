@@ -21,9 +21,12 @@ class EmployeeForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
+    // note that employee contains data and loading, while data contains id, name etc.
+    const employee = this.props.employee.data;
+
     // no changes
-    if (this.props.employee !== null && this.props.form === null) {
-      this.context.router.push(`/employees/${this.props.employee}`);
+    if (employee !== null && this.props.form === null) {
+      this.context.router.push(`/employees/${employee.id}`);
       document.getElementById('detail').scrollIntoView();
       return;
     }
@@ -32,9 +35,9 @@ class EmployeeForm extends Component {
       ? this.props.form[FORM_NAME]
       : {};
 
-    const persist = this.props.employee === null
+    const persist = employee === null
       ? this.props.dispatch(createEmployee(data))
-      : this.props.dispatch(updateEmployee(this.props.employee, data));
+      : this.props.dispatch(updateEmployee(employee.id, data));
 
     persist.then(res => {
       if (res.error === true) {
@@ -42,8 +45,8 @@ class EmployeeForm extends Component {
         // FIXME
         alert(errorMessage); // eslint-disable-line no-alert
       } else {
-        const next = this.props.employee
-                   ? `/employees/${this.props.employee}`
+        const next = employee
+                   ? `/employees/${employee.id}`
                    : '/employees/';
 
         this.context.router.push(next);
