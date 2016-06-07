@@ -10,7 +10,7 @@ const getEmployee = (employees, selectedEmployee) => {
 
   return {
     loading: false,
-    data: employees.data.find(e => e.id === selectedEmployee) || null
+    data: employees.data.get(selectedEmployee) || null
   };
 };
 

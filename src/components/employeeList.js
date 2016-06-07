@@ -9,7 +9,7 @@ const EmployeeList = (props) => {
     return <Spinner />;
   }
 
-  const employeeRows = props.employees.data.map(employee =>
+  const employeeRows = props.employees.data.valueSeq().map(employee =>
     <EmployeeRow key={`employee-${employee.id}`} employee={employee} />
   );
 

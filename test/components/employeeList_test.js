@@ -2,6 +2,7 @@
 
 import { renderComponent, expect } from '../testhelper';
 import EmployeeList from '../../src/components/employeeList';
+import * as Immutable from 'immutable';
 
 const loadingEmployees = {
   loading: true,
@@ -10,12 +11,14 @@ const loadingEmployees = {
 
 const employees = {
   loading: false,
-  data: [{
-    id: 0,
-    first_name: 'X',
-    last_name: 'Y',
-    email: 'xy@foo'
-  }]
+  data: new Immutable.OrderedMap({
+    0: {
+      id: 0,
+      first_name: 'X',
+      last_name: 'Y',
+      email: 'xy@foo'
+    }
+  })
 };
 
 describe('EmployeeList', () => {
