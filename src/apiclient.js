@@ -11,7 +11,7 @@ const axios = axios_.create({
 });
 
 export const getEmployees = () =>
-  axios.get('/employees?order=first_name.asc');
+  axios.get('/employees');
 
 export const updateEmployee = (id, updates) =>
   axios.patch(`/employees?id=eq.${id}`, updates);
