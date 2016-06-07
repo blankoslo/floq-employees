@@ -10,6 +10,7 @@
     "test:watch": "npm run test -- --watch"
   },
   "author": "",
+  "repository": "https://github.com/blankoslo/employees",
   "license": "UNLICENSED",
   "devDependencies": {
     "babel-core": "^6.2.1",
