@@ -13,6 +13,11 @@ export default (state = { loading: true, data: new Immutable.Map() }, action) =>
             .sortBy(lowerCaseName)
       };
     case CREATE_EMPLOYEE:
+      return {
+        loading: false,
+        data: state.data.set(action.payload.data.id, action.payload.data)
+          .sortBy(lowerCaseName)
+      };
     case UPDATE_EMPLOYEE:
       return {
         loading: false,
