@@ -13,9 +13,12 @@ class App extends Component {
   }
 
   componentWillReceiveProps(props) {
+    // monitor `id` parameter to keep selected employee in sync
     if (props.params.id !== undefined) {
       const selectedId = parseInt(props.params.id);
       props.dispatch(selectEmployee(selectedId));
+    } else {
+      props.dispatch(selectEmployee(null));
     }
   }
 
