@@ -40,11 +40,10 @@ class EmployeeForm extends Component {
       : this.props.updateEmployee(employee.id, data);
 
     persist.then(res => {
-      // when POSTing a new employee, we get the object back, but when PATCHing an existing employee
-      // we get a one-element list back.
-      debugger;
+      // redirect back to the list of employees when creating a new employee since that is the only
+      // safe choice on mobile
       const next = employee === null
-                 ? `/employees/${res.payload.data.id}`
+                 ? '/employees'
                  : `/employees/${res.payload.data[0].id}`;
 
       this.context.router.push(next);
