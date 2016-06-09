@@ -40,18 +40,15 @@ class EmployeeForm extends Component {
       : this.props.updateEmployee(employee.id, data);
 
     persist.then(res => {
-      if (res.error === true) {
-        const errorMessage = `Error when attempting to save data: ${res.payload.data.message}`;
-        // FIXME
-        alert(errorMessage); // eslint-disable-line no-alert
-      } else {
-        const next = employee
-                   ? `/employees/${employee.id}`
-                   : '/employees/';
+      // when POSTing a new employee, we get the object back, but when PATCHing an existing employee
+      // we get a one-element list back.
+      debugger;
+      const next = employee === null
+                 ? `/employees/${res.payload.data.id}`
+                 : `/employees/${res.payload.data[0].id}`;
 
-        this.context.router.push(next);
-        document.getElementById('detail').scrollIntoView();
-      }
+      this.context.router.push(next);
+      document.getElementById('detail').scrollIntoView();
     });
   }
 
