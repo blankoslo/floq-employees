@@ -4,6 +4,7 @@ import { getEmployees, selectEmployee } from '../actions/index';
 import selectedEmployeeSelector from '../selectors/selectedEmployee';
 
 import EmployeeList from '../components/employeeList';
+import ErrorDialog from './errorDialog';
 
 class App extends Component {
   constructor(props) {
@@ -34,13 +35,16 @@ class App extends Component {
       }));
 
     return (
-      <div className='mdl-grid'>
-        <div className={listClasses}>
-          <EmployeeList employees={this.props.employees} />
-        </div>
-        <div id='detail' className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
-          <div className='detail-view'>
-            {children}
+      <div>
+        <ErrorDialog />
+        <div className='mdl-grid'>
+          <div className={listClasses}>
+            <EmployeeList employees={this.props.employees} />
+          </div>
+          <div id='detail' className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
+            <div className='detail-view'>
+              {children}
+            </div>
           </div>
         </div>
       </div>
