@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   render() {
+    // if we have children, i.e. a detail view is shown, hide the left columns on phones
     const listClasses = this.props.children === null
                       ? 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet'
                       : 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--hide-phone';
