@@ -1,5 +1,8 @@
 import * as api from '../apiclient';
 
+export const API_ERROR = 'API_ERROR';
+export const API_ERROR_CLEAR = 'API_ERROR_CLEAR';
+
 export const GET_EMPLOYEE = 'GET_EMPLOYEE';
 export const GET_EMPLOYEES = 'GET_EMPLOYEES';
 export const SELECT_EMPLOYEE = 'SELECT_EMPLOYEE';
@@ -8,6 +11,15 @@ export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 
 export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
+
+export const apiError = (message) => ({
+  type: API_ERROR,
+  payload: message
+});
+
+export const clearApiError = () => ({
+  type: API_ERROR_CLEAR
+});
 
 export const getEmployee = (id) => ({
   type: GET_EMPLOYEE,
