@@ -36,8 +36,8 @@ class EmployeeForm extends Component {
       : {};
 
     const persist = employee === null
-      ? this.props.dispatch(createEmployee(data))
-      : this.props.dispatch(updateEmployee(employee.id, data));
+      ? this.props.createEmployee(data)
+      : this.props.updateEmployee(employee.id, data);
 
     persist.then(res => {
       if (res.error === true) {
@@ -55,7 +55,7 @@ class EmployeeForm extends Component {
     });
   }
 
-  onChange = (fieldName, value) => this.props.dispatch(updateField(FORM_NAME, fieldName, value));
+  onChange = (fieldName, value) => this.props.updateField(FORM_NAME, fieldName, value);
 
   render() {
     // pass `employee` prop to children
@@ -74,11 +74,20 @@ EmployeeForm.propTypes = {
   employee: React.PropTypes.object,
   form: React.PropTypes.object,
   dispatch: React.PropTypes.func,
-  children: React.PropTypes.object
+  children: React.PropTypes.object,
+  updateEmployee: React.PropTypes.func,
+  createEmployee: React.PropTypes.func,
+  updateField: React.PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   form: state.form
 });
 
-export default connect(mapStateToProps)(EmployeeForm);
+const mapDispatchToProps = {
+  createEmployee,
+  updateEmployee,
+  updateField
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeForm);
