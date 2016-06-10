@@ -32,7 +32,7 @@ class DateField extends Component {
             <DatePicker
               floatingLabelText={this.props.label}
               textFieldStyle={{ width: '100%' }}
-              floatingLabelFocusStyle={{color: '#3f51b5'}}
+              floatingLabelFocusStyle={{ color: '#3f51b5' }}
               hintText={this.props.label}
               value={this.state.controlledDate}
               onChange={this.onChange}
