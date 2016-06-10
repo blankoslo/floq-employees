@@ -6,7 +6,7 @@ module.exports = {
   entry: [
     `webpack-dev-server/client?http://localhost:${port}`,
     'webpack/hot/only-dev-server',
-    './script/index.js'
+    './src/index.js'
   ],
   output: {
     path: __dirname + "/dist/js",
