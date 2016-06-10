@@ -12,7 +12,7 @@ class DateField extends Component {
     super(props);
 
     this.state = {
-      controlledDate: props.value === '' ? new Date() : new Date(props.value)
+      date: props.value === '' ? '' : new Date(props.value)
     };
   }
 
