@@ -31,7 +31,7 @@ class DateField extends Component {
           <div style={{ width: '100%' }} className={textFieldClasses}>
             <DatePicker
               floatingLabelText={this.props.label}
-              textFieldStyle={{ width: '100%' }}
+              fullWidth
               floatingLabelFocusStyle={{ color: '#3f51b5' }}
               hintText={this.props.label}
               value={this.state.date}
