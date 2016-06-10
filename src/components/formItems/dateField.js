@@ -30,7 +30,9 @@ class DateField extends Component {
         <div className='mdl-cell mdl-cell--12-col'>
           <div style={{ width: '100%' }} className={textFieldClasses}>
             <DatePicker
+              floatingLabelText={this.props.label}
               textFieldStyle={{ width: '100%' }}
+              floatingLabelFocusStyle={{color: '#3f51b5'}}
               hintText={this.props.label}
               value={this.state.controlledDate}
               onChange={this.onChange}
