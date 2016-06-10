@@ -12,13 +12,13 @@ class DateField extends Component {
     super(props);
 
     this.state = {
-      controlledDate: props.value === '' ? new Date() : new Date(props.value)
+      date: props.value === '' ? '' : new Date(props.value)
     };
   }
 
   onChange = (event, date) => {
     this.setState({
-      controlledDate: date
+      date
     });
 
     this.props.onChange(this.props.fieldName, formatIso(date));
@@ -34,7 +34,7 @@ class DateField extends Component {
               textFieldStyle={{ width: '100%' }}
               floatingLabelFocusStyle={{ color: '#3f51b5' }}
               hintText={this.props.label}
-              value={this.state.controlledDate}
+              value={this.state.date}
               onChange={this.onChange}
               autoOk
               maxDate={oneYearFromNow}
