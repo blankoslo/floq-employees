@@ -24,7 +24,6 @@ const fields = {
   city: { type: 'TextField' },
   birth_date: { type: 'DateField' },
   date_of_employment: { type: 'DateField' },
-  termination_date: { type: 'DateField' },
   emergency_contact_name: { type: 'TextField' },
   emergency_contact_phone: { type: 'TextField', pattern: '[-+ 0-9]+' },
   emergency_contact_relation: { type: 'TextField' }
