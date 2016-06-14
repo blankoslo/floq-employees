@@ -15,7 +15,7 @@ notifications:
 before_deploy: npm run dist
 deploy:
   - provider: gcs
-    bucket: blank-intranet-test
+    bucket: floq-test
     local_dir: dist
     upload-dir: employees
     cache_control: "max-age=0"
@@ -27,7 +27,7 @@ deploy:
     on:
       branch: develop
   - provider: gcs
-    bucket: blank-intranet
+    bucket: floq
     local_dir: dist
     upload-dir: employees
     cache_control: "max-age=3600"
