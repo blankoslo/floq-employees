@@ -26,6 +26,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: develop
+      repo: blankoslo/floq-employees
   - provider: gcs
     bucket: floq
     local_dir: dist
@@ -38,3 +39,4 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
+      repo: blankoslo/floq-employees
