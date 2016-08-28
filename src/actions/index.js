@@ -5,7 +5,6 @@ export const API_ERROR_CLEAR = 'API_ERROR_CLEAR';
 
 export const GET_EMPLOYEE = 'GET_EMPLOYEE';
 export const GET_EMPLOYEES = 'GET_EMPLOYEES';
-export const SELECT_EMPLOYEE = 'SELECT_EMPLOYEE';
 export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
 export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 
@@ -29,11 +28,6 @@ export const getEmployee = (id) => ({
 export const getEmployees = () => ({
   type: GET_EMPLOYEES,
   payload: api.getEmployees()
-});
-
-export const selectEmployee = (id) => ({
-  type: SELECT_EMPLOYEE,
-  payload: id
 });
 
 export const createEmployee = (employee) => ({
