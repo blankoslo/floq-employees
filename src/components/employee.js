@@ -4,9 +4,6 @@ import md5 from 'md5';
 
 import Spinner from './spinner';
 
-const gridClasses = 'mdl-cell mdl-cell--6-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone';
-const cellClasses = 'mdl-cell mdl-cell--8-col mdl-cell--4-offset-desktop mdl-cell--4-col-phone';
-
 const IconAndText = ({ icon, textLines }) => (
   <div className='icon-row'>
     <div className='icon-row-icon'>
