@@ -39,40 +39,35 @@ const Employee = (props) => {
   const employee = props.employee.data;
 
   return (
-    <div className='mdl-grid'>
-      <div className={`${cellClasses} center-text`}>
-      </div>
-      <div className={`${cellClasses} center-text`}>
+    <div className='floq-details-sticky'>
+      <div className='employee-image'>
         <img
           className='profile-pic'
           src={`https://www.gravatar.com/avatar/${md5(employee.email)}`}
           alt={employee.first_name}
         />
       </div>
-      <div className={`${cellClasses} center-text`}>
+      <div className='employee-name'>
         <h5>{employee.first_name} {employee.last_name}</h5>
         <span className='gray'>{employee.title}</span>
       </div>
-      <div className='vert-spacer' />
-      <div className={gridClasses}>
+
+      <div>
         <IconAndText
           icon='phone'
           textLines={[<a id='phone-number' href={`tel:${employee.phone}`}>{employee.phone}</a>]}
         />
       </div>
-      <div className={gridClasses}>
+      <div>
         <IconAndText icon='email' textLines={[employee.email]} />
       </div>
-      <div className={gridClasses}>
+      <div>
         <IconAndText
           icon='location_on'
           textLines={[employee.address, `${employee.postal_code} ${employee.city}`]}
         />
       </div>
-      <div className='mdl-cell mdl-cell--9-col mdl-cell--3-offset-desktop mdl-cell--12-col-phone'>
-        <hr className='icon-margin' />
-      </div>
-      <div className={gridClasses}>
+      <div>
         <div className='icon-row'>
           <div className='icon-row-icon'>
           </div>
@@ -88,7 +83,7 @@ const Employee = (props) => {
       </div>
       <button
         onClick={() => browserHistory.push(`/employees/edit/${employee.id}`)}
-        className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+        className='edit-employee mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
       >
         <i className='material-icons dark-gray'>create</i>
       </button>

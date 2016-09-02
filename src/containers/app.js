@@ -15,9 +15,9 @@ class App extends Component {
 
   render() {
     // if we have children, i.e. a detail view is shown, hide the left columns on phones
-    const listClasses = this.props.children === null
-                      ? 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet'
-                      : 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--hide-phone';
+    const classes = this.props.children === null
+                      ? 'floq-app-employees floq-list-and-details floq-hide-details-mobile'
+                      : 'floq-app-employees floq-list-and-details floq-hide-list-mobile';
 
     const children = React.Children.map(this.props.children,
       child => React.cloneElement(child, {
@@ -28,14 +28,10 @@ class App extends Component {
     return (
       <div>
         <ErrorDialog />
-        <div className='mdl-grid'>
-          <div className={listClasses}>
-            <EmployeeList employees={this.props.employees} />
-          </div>
-          <div id='detail' className='mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet'>
-            <div className='detail-view'>
+        <div className={classes}>
+          <EmployeeList employees={this.props.employees} />
+          <div id='detail' className='floq-details'>
               {children}
-            </div>
           </div>
         </div>
       </div>
