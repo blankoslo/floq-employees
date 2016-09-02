@@ -37,12 +37,12 @@ describe('EmployeeList', () => {
   it('shows a list if employees are loaded', () => {
     const component = renderComponent(EmployeeList, { employees });
 
-    expect(component.find('.employee-list-header')).to.exist;
+    expect(component.find('.floq-list-header')).to.exist;
   });
 
   it('lists employees\' names', () => {
     const component = renderComponent(EmployeeList, { employees });
 
-    expect(component.find('.employee-list-row')).to.contain('X Y');
+    expect(component.find('.floq-list-row')).to.contain('X Y');
   });
 });
