@@ -14,8 +14,8 @@ export default (
       <IndexRoute component={NewEmployeeEditor} />
     </Route>
     <Route path='edit' component={EmployeeFormContainer}>
-      <Route path=':id' component={EmployeeEditor} />
+      <Route path=':employeeId' component={EmployeeEditor} />
     </Route>
-    <Route path=':id' component={Employee} />
+    <Route path=':employeeId' component={Employee} />
   </Route>
 );

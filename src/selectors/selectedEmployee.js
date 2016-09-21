@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
 const employeesSelector = state => state.employees;
-const selectedEmployeeSelector = state => state.selected_employee;
+const selectedEmployeeSelector = (_, props) => parseInt(props.params.employeeId);
 
 const getEmployee = (employees, selectedEmployee) => {
-  if (employees.loading) {
+  if (selectedEmployee === null || employees.loading) {
     return { loading: true, data: null };
   }
 

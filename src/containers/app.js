@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEmployees, selectEmployee } from '../actions/index';
+import { getEmployees } from '../actions/index';
 import selectedEmployeeSelector from '../selectors/selectedEmployee';
 
 import EmployeeList from '../components/employeeList';
@@ -11,16 +11,6 @@ class App extends Component {
     super(props);
 
     props.dispatch(getEmployees());
-  }
-
-  componentWillReceiveProps(props) {
-    // monitor `id` parameter to keep selected employee in sync
-    if (props.params.id !== undefined) {
-      const selectedId = parseInt(props.params.id);
-      props.dispatch(selectEmployee(selectedId));
-    } else {
-      props.dispatch(selectEmployee(null));
-    }
   }
 
   render() {
@@ -61,9 +51,9 @@ App.propTypes = {
   params: React.PropTypes.object
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   employees: state.employees,
-  selected_employee: selectedEmployeeSelector(state)
+  selected_employee: selectedEmployeeSelector(state, ownProps)
 });
 
 export default connect(mapStateToProps)(App);
