@@ -1,6 +1,7 @@
 @import "reset.less";
-//@import "header.less";
-//@import "datepicker.less";
+@import "floq.less";
+@import "details.less";
+@import "list.less";
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,700);
 
@@ -113,16 +114,6 @@ table {
 
 }
 
-div.detail-view {
-    /*
-    @media (min-width: 480px) {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-    }
-    */
-}
-
 .main-color {
     color: @purple;
 }
@@ -133,48 +124,4 @@ div.detail-view {
 
 .dark-gray {
     color: @dark-gray;
-}
-
-p.emergency-contact {
-    font-size: 16px;
-    margin-bottom: 8px; 
-}
-
-img.profile-pic {
-    width: 128px;
-    height: 128px;
-    border-radius: 64px;
-}
-
-div.center-text {
-    text-align: center
-}
-
-div.pull-right {
-    text-align: right;
-}
-
-div.employee-list-row {
-    border-bottom: 1px solid #eee;
-}
-
-img.employee-list-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-}
-
-div.employee-list-header {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-}
-
-#add-employee-button {
-    align-self: flex-end;
-    background-color: white;
-    margin: 0;
-    position: relative;
-    top: 20px;
-    right: 10px;
 }

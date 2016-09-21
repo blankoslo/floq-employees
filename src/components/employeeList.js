@@ -14,24 +14,18 @@ const EmployeeList = (props) => {
   );
 
   return (
-    <div>
-      <div className='mdl-list'>
-        <div className='employee-list-header'>
-          <div>
-            <h3>Alle ansatte</h3>
-          </div>
-          <button
-            onClick={() => browserHistory.push('/employees/new')}
-            id='add-employee-button'
-            className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
-          >
-            <i className='material-icons dark-gray'>add</i>
-          </button>
-        </div>
-        <hr />
-        <div className='vert-spacer' />
-        {employeeRows}
+    <div className='floq-list'>
+      <div className='floq-list-header'>
+        <h3>Alle ansatte</h3>
+        <button
+          onClick={() => browserHistory.push('/employees/new')}
+          id='add-employee-button'
+          className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+        >
+          <i className='material-icons dark-gray'>add</i>
+        </button>
       </div>
+      {employeeRows}
     </div>
   );
 };
