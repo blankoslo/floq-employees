@@ -1,16 +1,17 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import md5 from 'md5';
+import EmployeeImage from './employeeImage';
 
 const EmployeeRow = (props) => (
   <div
     className='floq-list-row'
     onClick={() => browserHistory.push(`/employees/${props.employee.id}`)}
   >
-    <img
+    <EmployeeImage
       className='employee-list-image'
-      src={`https://www.gravatar.com/avatar/${md5(props.employee.email)}`}
-      alt={props.employee.first_name}
+      src={props.employee.image_url}
+      width='40'
+      height='40'
     />
     <span>{props.employee.first_name} {props.employee.last_name}</span>
   </div>

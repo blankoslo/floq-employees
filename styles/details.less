@@ -14,9 +14,9 @@ p.emergency-contact {
 }
 
 img.profile-pic {
-    width: 128px;
-    height: 128px;
-    border-radius: 64px;
+    width: 256px;
+    height: 256px;
+    border-radius: 128px;
 }
 
 .edit-employee {
@@ -28,4 +28,29 @@ img.profile-pic {
     top: 16px;
     right: 16px;
   }
+}
+
+.keyframes(@name; @arguments) {
+  @-moz-keyframes @name { @arguments(); }
+  @-webkit-keyframes @name { @arguments(); }
+  @keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+  -webkit-animation: @arguments;
+  -moz-animation: @arguments;
+  animation: @arguments;
+}
+
+.edit-pic {
+  width: 200px;
+  height: 200px;
+
+  .keyframes(fade-in;{
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    });
+
+  .animation(fade-in 0.3s linear)
+
 }
