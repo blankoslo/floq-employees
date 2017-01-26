@@ -1,8 +1,8 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import md5 from 'md5';
 
 import Spinner from './spinner';
+import EmployeeImage from './employeeImage';
 
 const IconAndText = ({ icon, textLines }) => (
   <div className='icon-row'>
@@ -35,13 +35,20 @@ const Employee = (props) => {
 
   const employee = props.employee.data;
 
+  // Cloudinary image resize
+  let imgSrc = employee.image_url;
+  if (imgSrc !== null) {
+    imgSrc = imgSrc.replace('/upload/', '/upload/w_256,h_256,c_fill/');
+  }
+
   return (
     <div className='floq-details-sticky'>
       <div className='employee-image'>
-        <img
+        <EmployeeImage
           className='profile-pic'
-          src={`https://www.gravatar.com/avatar/${md5(employee.email)}`}
-          alt={employee.first_name}
+          src={employee.image_url}
+          width='256'
+          height='256'
         />
       </div>
       <div className='employee-name'>

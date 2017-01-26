@@ -51,3 +51,45 @@
     }
   }
 }
+
+
+.keyframes(@name; @arguments) {
+  @-moz-keyframes @name { @arguments(); }
+  @-webkit-keyframes @name { @arguments(); }
+  @keyframes @name { @arguments(); }
+}
+
+.animation(@arguments) {
+  -webkit-animation: @arguments;
+  -moz-animation: @arguments;
+  animation: @arguments;
+}
+
+.edit-hover {
+  padding: 16px;
+  display: flex;
+  &.floq-hide-list-mobile {
+    .floq-list {
+      @media (max-width: 620px) {
+        display: none;
+      }
+    }
+  }
+  &.floq-hide-details-mobile {
+    .floq-details {
+      @media (max-width: 620px) {
+        display: none;
+      }
+    }
+  }
+  flex:1;
+  margin-left:20px;
+  margin-top: 50px;
+  .keyframes(fade-in;{
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    });
+
+  .animation(fade-in 0.3s linear)
+
+}

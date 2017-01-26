@@ -22,7 +22,8 @@ const employee = {
     emergency_contact_relation: 'spouse',
     address: 'Downing Street 10',
     postal_code: '0000',
-    city: 'XYZ'
+    city: 'XYZ',
+    image_url: null
   }
 };
 
@@ -36,7 +37,7 @@ describe('Employee', () => {
   it('shows information about selected employee', () => {
     const component = renderComponent(Employee, { employee });
 
-    _.values(employee.data).map(v => expect(component).to.contain(v));
+    _.values(employee.data).filter(v => v !== null).map(v => expect(component).to.contain(v));
   });
 
   it('shows ‘not found’ if employee doesn\'t exist', () => {
