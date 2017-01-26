@@ -4,4 +4,4 @@
 
 To run:
 
-    npm install && npm start
+    yarn install && yarn start

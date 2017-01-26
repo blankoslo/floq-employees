@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import TextField from './formItems/textField';
 import DateField from './formItems/dateField';
 import SelectField from './formItems/selectField';
+import Images from '../containers/images';
 import { employeeFormLabels as labels, formLabels } from '../strings';
 
 const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored';
@@ -93,6 +94,9 @@ const EmployeeEditor = (props) => {
 
   return (
     <form onSubmit={props.onSubmit}>
+      <Images
+        employee={props.employee}
+      />
       {fieldElems}
       <div className='mdl-grid'>
         <button className={buttonClasses} type='submit'>
