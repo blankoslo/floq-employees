@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { renderComponent, expect } from '../testhelper';
-import EmployeeList from '../../src/components/employeeList';
+import EmployeeList from '../../src/containers/employeeList';
 import * as Immutable from 'immutable';
 
 const loadingEmployees = {

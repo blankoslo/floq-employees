@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getEmployees } from '../actions/index';
 import selectedEmployeeSelector from '../selectors/selectedEmployee';
 
-import EmployeeList from '../components/employeeList';
+import EmployeeList from '../containers/employeeList';
 import ErrorDialog from './errorDialog';
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
       <div>
         <ErrorDialog />
         <div className={classes}>
-          <EmployeeList employees={this.props.employees} onNewClick={this.onNewClick} />
+          <EmployeeList employees={this.props.employees} />
         </div>
       </div>
     );
