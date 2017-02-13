@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import EditCard from '../components/editCard';
+import EditEmployee from '../components/editEmployee';
 import NewEmployeeEditor from '../components/newEmployeeEditor';
 
 import {
@@ -69,7 +69,7 @@ class EmployeeForm extends Component {
     }
 
     return (
-      <EditCard
+      <EditEmployee
         employee={this.props.employee}
         onSubmit={this.onSubmit}
         onChange={this.onChange}

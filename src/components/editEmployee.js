@@ -74,7 +74,7 @@ renderField.propTypes = {
   onChange: React.PropTypes.func.isRequired
 };
 
-const EditCard = (props) => {
+const EditEmployee = (props) => {
   if (props.employee.loading) {
     return (
       <div>
@@ -110,10 +110,10 @@ const EditCard = (props) => {
   );
 };
 
-EditCard.propTypes = {
+EditEmployee.propTypes = {
   employee: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onChange: React.PropTypes.func,
 };
 
-export default EditCard;
+export default EditEmployee;

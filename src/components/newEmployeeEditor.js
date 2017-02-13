@@ -1,8 +1,8 @@
 import React from 'react';
-import EditCard from './editCard';
+import EditEmployee from './editEmployee';
 
 const CreateEmployee = (props) => (
-  <EditCard
+  <EditEmployee
     onSubmit={props.onSubmit}
     onChange={props.onChange}
     employee={{
