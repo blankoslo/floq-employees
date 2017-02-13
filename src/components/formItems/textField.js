@@ -30,29 +30,25 @@ export default class TextField extends Component {
 
   render() {
     return (
-      <div className='mdl-grid'>
-        <div className='mdl-cell mdl-cell--12-col'>
-          <div style={{ width: '100%' }} className={textFieldClasses}>
-            <input
-              fieldName={this.props.fieldName}
-              className='mdl-textfield__input'
-              type='text'
-              pattern={this.props.pattern}
-              value={this.state.value}
-              onChange={this.onChange}
-              onBlur={this.onBlur}
-            />
-            <label className='mdl-textfield__label' htmlFor={this.props.fieldName}>
-              {this.props.label}
-            </label>
-            <span
-              style={{ display: this.state.blurred ? 'block' : 'none' }}
-              className='mdl-textfield__error'
-            >
-              Ugyldig format
-            </span>
-          </div>
-        </div>
+      <div className={textFieldClasses}>
+        <input
+          fieldName={this.props.fieldName}
+          className='mdl-textfield__input'
+          type='text'
+          pattern={this.props.pattern}
+          value={this.state.value}
+          onChange={this.onChange}
+          onBlur={this.onBlur}
+        />
+        <label className='mdl-textfield__label' htmlFor={this.props.fieldName}>
+          {this.props.label}
+        </label>
+        <span
+          style={{ display: this.state.blurred ? 'block' : 'none' }}
+          className='mdl-textfield__error'
+        >
+          Ugyldig format
+        </span>
       </div>
     );
   }

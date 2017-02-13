@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The frontend application for employees",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --port 5000",
     "dist": "webpack --config ./webpack-prod.config.js",
     "lint": "eslint src test",
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --recursive ./test",
@@ -54,11 +54,14 @@
     "md5": "^2.0.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
+    "react-dropzone": "^3.9.0",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.5",
     "react-tap-event-plugin": "^2.0.0",
     "redux": "^3.0.4",
-    "reselect": "^2.5.1"
+    "reselect": "^2.5.1",
+    "sha1": "^1.1.1",
+    "superagent": "^3.3.2"
   }
 }

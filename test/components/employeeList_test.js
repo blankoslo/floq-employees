@@ -39,10 +39,4 @@ describe('EmployeeList', () => {
 
     expect(component.find('.floq-list-header')).to.exist;
   });
-
-  it('lists employees\' names', () => {
-    const component = renderComponent(EmployeeList, { employees });
-
-    expect(component.find('.floq-list-row')).to.contain('X Y');
-  });
 });

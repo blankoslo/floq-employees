@@ -1,7 +1,5 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
-import md5 from 'md5';
-
+import EmployeeImage from './employeeImage';
 import Spinner from './spinner';
 
 const IconAndText = ({ icon, textLines }) => (
@@ -10,7 +8,7 @@ const IconAndText = ({ icon, textLines }) => (
       <i className='material-icons main-color'>{icon}</i>
     </div>
     <div>
-      {textLines.map(line => <div key={line}>{line}</div>)}
+      {textLines.map(line => <div key={line} style={{ marginTop: '3px' }}>{line}</div>)}
     </div>
   </div>
 );
@@ -33,63 +31,68 @@ const Employee = (props) => {
     );
   }
 
-  const employee = props.employee.data;
+  const employee = props.employee;
 
   return (
-    <div className='floq-details-sticky'>
-      <div className='employee-image'>
-        <img
-          className='profile-pic'
-          src={`https://www.gravatar.com/avatar/${md5(employee.email)}`}
-          alt={employee.first_name}
+    <div className='floq-card mdl-card mdl-shadow--4dp'>
+      <div className='mdl-card__media'>
+        <EmployeeImage
+          className='cavd-pic'
+          src={employee.image_url}
+          width='256'
+          height='200'
         />
       </div>
-      <div className='employee-name'>
-        <h5>{employee.first_name} {employee.last_name}</h5>
-        <span className='gray'>{employee.title}</span>
+      <div className='mdl-card__title' style={{ paddingBottom: '0px' }}>
+        <div>
+          <h1 className='mdl-card__title-text' style={{ display: 'block' }}>
+            {employee.first_name} {employee.last_name}
+          </h1>
+        </div>
+        <div>
+          <h3 className='gray'>{employee.title}</h3>
+        </div>
       </div>
-
-      <div>
+      <div className='mdl-card__supporting-text'>
         <IconAndText
           icon='phone'
           textLines={[<a id='phone-number' href={`tel:${employee.phone}`}>{employee.phone}</a>]}
         />
-      </div>
-      <div>
-        <IconAndText icon='email' textLines={[employee.email]} />
-      </div>
-      <div>
+        <IconAndText
+          icon='email'
+          textLines={[<a id='email-address' href={`mailto:${employee.email}`}>{employee.email}</a>]}
+        />
         <IconAndText
           icon='location_on'
           textLines={[employee.address, `${employee.postal_code} ${employee.city}`]}
         />
+        <IconAndText icon='date_range' textLines={[employee.birth_date]} />
+        <h1 className='mdl-card__title-text' style={{ paddingTop: '20px', paddingBottom: '0px' }}>
+          Kontaktperson
+        </h1>
+        <h3 className='black' style={{ lineHeight: '24px' }}>{employee.emergency_contact_name}</h3>
+        <h3 className='gray' style={{ lineHeight: '24px' }}>
+          {employee.emergency_contact_relation}
+        </h3>
+        <a id='phone-number' href={`tel:${employee.emergency_contact_phone}`}>
+          {employee.emergency_contact_phone}
+        </a>
       </div>
-      <div>
-        <div className='icon-row'>
-          <div className='icon-row-icon'>
-          </div>
-          <div>
-            <h3>Kontaktperson</h3>
-            <span className='emergency-contact'>{employee.emergency_contact_name}</span>
-            <br />
-            <span className='emergency-contact gray'>{employee.emergency_contact_relation}</span>
-            <br />
-            <span className='emergency-contact'>{employee.emergency_contact_phone}</span>
-          </div>
-        </div>
+      <div className='edit-click mdl-card__menu'>
+        <button
+          className='edit-employee mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+          onClick={props.onEdit}
+        >
+          <i className='material-icons white'>create</i>
+        </button>
       </div>
-      <button
-        onClick={() => browserHistory.push(`/employees/edit/${employee.id}`)}
-        className='edit-employee mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
-      >
-        <i className='material-icons dark-gray'>create</i>
-      </button>
     </div>
   );
 };
 
 Employee.propTypes = {
-  employee: React.PropTypes.object
+  employee: React.PropTypes.object,
+  onEdit: React.PropTypes.func
 };
 
 export default Employee;

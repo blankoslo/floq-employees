@@ -1,29 +1,27 @@
 import React from 'react';
-import EmployeeEditor from './employeeEditor';
+import EditCard from './editCard';
 
 const CreateEmployee = (props) => (
-  <EmployeeEditor
+  <EditCard
     onSubmit={props.onSubmit}
     onChange={props.onChange}
     employee={{
-      loading: false,
-      data: {
-        first_name: '',
-        last_name: '',
-        title: '',
-        gender: '',
-        phone: '',
-        email: '',
-        address: '',
-        postal_code: '',
-        city: '',
-        birth_date: '',
-        date_of_employment: '',
-        termination_date: '',
-        emergency_contact_name: '',
-        emergency_contact_phone: '',
-        emergency_contact_relation: ''
-      }
+      first_name: '',
+      last_name: '',
+      title: '',
+      gender: '',
+      phone: '',
+      email: '',
+      address: '',
+      postal_code: '',
+      city: '',
+      birth_date: '',
+      date_of_employment: '',
+      termination_date: '',
+      emergency_contact_name: '',
+      emergency_contact_phone: '',
+      emergency_contact_relation: '',
+      image_url: ''
     }}
   />
 );

@@ -11,6 +11,9 @@ export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
 
+export const EDIT_EMPLOYEE = 'EDIT_EMPLOYEE';
+export const NEW_EMPLOYEE = 'NEW_EMPLOYEE';
+
 export const apiError = (message) => ({
   type: API_ERROR,
   payload: message
@@ -48,4 +51,14 @@ export const updateField = (formName, fieldName, value) => ({
 export const resetForm = (formName) => ({
   type: FORM_RESET,
   payload: formName
+});
+
+export const editEmployee = (id) => ({
+  type: EDIT_EMPLOYEE,
+  payload: id
+});
+
+export const newEmployee = (value) => ({
+  type: NEW_EMPLOYEE,
+  payload: value
 });
