@@ -55,6 +55,23 @@ img.profile-pic {
 
 }
 
+.loading-spinner {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-hover {
+  position: relative;
+  top: 25%;
+  padding: 20px;
+  .keyframes(fade-in;{
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    });
+
+  .animation(fade-in 0.3s linear)
+}
+
 .card-pic {
   width: 256px;
   height: 200px;

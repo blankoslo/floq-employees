@@ -33,14 +33,14 @@ export default class TextField extends Component {
       <div className={textFieldClasses}>
         <input
           fieldName={this.props.fieldName}
-          className='mdl-textfield__input'
+          className='mdl-textfield__input floq-card-textfield'
           type='text'
           pattern={this.props.pattern}
           value={this.state.value}
           onChange={this.onChange}
           onBlur={this.onBlur}
         />
-        <label className='mdl-textfield__label' htmlFor={this.props.fieldName}>
+        <label className='mdl-textfield__label floq-card-textfield' htmlFor={this.props.fieldName}>
           {this.props.label}
         </label>
         <span

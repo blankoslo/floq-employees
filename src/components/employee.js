@@ -8,7 +8,7 @@ const IconAndText = ({ icon, textLines }) => (
       <i className='material-icons main-color'>{icon}</i>
     </div>
     <div>
-      {textLines.map(line => <div key={line} style={{ marginTop: '3px' }}>{line}</div>)}
+      {textLines.map(line => <div className='floq-card-icon-and-text' key={line}>{line}</div>)}
     </div>
   </div>
 );
@@ -43,9 +43,9 @@ const Employee = (props) => {
           height='200'
         />
       </div>
-      <div className='mdl-card__title' style={{ paddingBottom: '0px' }}>
+      <div className='mdl-card__title floq-card-title'>
         <div>
-          <h1 className='mdl-card__title-text' style={{ display: 'block' }}>
+          <h1 className='mdl-card__title-text floq-card-name'>
             {employee.first_name} {employee.last_name}
           </h1>
         </div>
@@ -53,7 +53,7 @@ const Employee = (props) => {
           <h3 className='gray'>{employee.title}</h3>
         </div>
       </div>
-      <div className='mdl-card__supporting-text'>
+      <div className='mdl-card__supporting-text floq-card-text'>
         <IconAndText
           icon='phone'
           textLines={[<a id='phone-number' href={`tel:${employee.phone}`}>{employee.phone}</a>]}
@@ -67,11 +67,11 @@ const Employee = (props) => {
           textLines={[employee.address, `${employee.postal_code} ${employee.city}`]}
         />
         <IconAndText icon='date_range' textLines={[employee.birth_date]} />
-        <h1 className='mdl-card__title-text' style={{ paddingTop: '20px', paddingBottom: '0px' }}>
+        <h1 className='mdl-card__title-text floq-card-contact-title'>
           Kontaktperson
         </h1>
-        <h3 className='black' style={{ lineHeight: '24px' }}>{employee.emergency_contact_name}</h3>
-        <h3 className='gray' style={{ lineHeight: '24px' }}>
+        <h3 className='black floq-card-contact'>{employee.emergency_contact_name}</h3>
+        <h3 className='gray floq-card-contact'>
           {employee.emergency_contact_relation}
         </h3>
         <a id='phone-number' href={`tel:${employee.emergency_contact_phone}`}>

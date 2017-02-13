@@ -79,7 +79,9 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 
     if (this.state.uploading === true) {
       return (
-        <Spinner />
+        <div className='edit-pic'>
+          <Spinner />
+        </div>
       );
     }
 
