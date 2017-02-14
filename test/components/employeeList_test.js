@@ -16,7 +16,8 @@ const employees = {
       id: 0,
       first_name: 'X',
       last_name: 'Y',
-      email: 'xy@foo'
+      email: 'xy@foo',
+      image_url: null
     }
   })
 };

@@ -8,7 +8,6 @@ import { updateEmployee, imageDrop } from '../actions/index';
 import ImageDrop from '../components/imageDrop';
 import Spinner from '../components/spinner';
 
-
 class Images extends Component {
 
   constructor(props) {
@@ -21,6 +20,7 @@ class Images extends Component {
 
   uploadFile = (files) => {
     this.setState({ uploading: true });
+
     const image = files[0];
     const cloudName = 'blank';
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
@@ -38,7 +38,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
     const signature = sha1(paramStr);
 
     const params = {
-      api_key: '295669173729256',
+      api_key: window.config.cloudinaryApiKey,
       public_id: publicId,
       timestamp,
       upload_preset: uploadPreset,
@@ -56,6 +56,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       if (err === true) {
         return;
       }
+
       const updatedEmployee = Object.assign({}, this.props.employee);
       updatedEmployee.image_url = resp.body.secure_url;
 
