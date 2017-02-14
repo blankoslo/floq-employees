@@ -1,6 +1,7 @@
 export const formLabels = {
   no: {
-    save: 'Lagre'
+    save: 'Lagre',
+    cancel: 'Avbryt'
   }
 };
 
@@ -21,7 +22,7 @@ export const employeeFormLabels = {
     male: 'Mann',
     female: 'Kvinne',
     other: 'Annet',
-    emergency_contact_name: 'Kontaktperson',
+    emergency_contact_name: 'Kontaktperson, navn',
     emergency_contact_phone: 'Kontaktperson, telefon',
     emergency_contact_relation: 'Kontaktperson, relasjon'
   }

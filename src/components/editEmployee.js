@@ -7,8 +7,6 @@ import SelectField from './formItems/selectField';
 import Images from '../containers/images';
 import { employeeFormLabels as labels, formLabels } from '../strings';
 
-const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored';
-
 const fields = {
   first_name: { type: 'TextField' },
   last_name: { type: 'TextField' },
@@ -29,6 +27,8 @@ const fields = {
   emergency_contact_phone: { type: 'TextField', pattern: '[-+ 0-9]+' },
   emergency_contact_relation: { type: 'TextField' }
 };
+
+const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored';
 
 const renderField = (employee, onChange, fieldConfig, fieldName) => {
   switch (fieldConfig.type) {
@@ -74,7 +74,7 @@ renderField.propTypes = {
   onChange: React.PropTypes.func.isRequired
 };
 
-const EmployeeEditor = (props) => {
+const EditEmployee = (props) => {
   if (props.employee.loading) {
     return (
       <div>
@@ -90,28 +90,30 @@ const EmployeeEditor = (props) => {
   }
 
   const fieldElems = _.map(fields, (config, fieldName) =>
-    renderField(props.employee.data, props.onChange, config, fieldName));
-
+    renderField(props.employee, props.onChange, config, fieldName));
   return (
-    <form onSubmit={props.onSubmit}>
-      <Images
-        employee={props.employee}
-      />
-      {fieldElems}
-      <div className='mdl-grid'>
-        <button className={buttonClasses} type='submit'>
-          {formLabels.no.save}
-        </button>
+    <form onSubmit={props.onSubmit} style={{ display: 'block' }}>
+      <div className='floq-card mdl-card mdl-shadow--4dp'>
+        <div className='mdl-card__media'>
+          <Images employee={props.employee} onSubmit={props.onSubmit} />
+        </div>
+        <div className='mdl-card__supporting-text mdl-card--border' style={{ overflow: 'scroll' }}>
+          {fieldElems}
+        </div>
+        <div className='mdl-card__actions mdl-card--border'>
+          <button className={buttonClasses} type='submit'>
+            {formLabels.no.save}
+          </button>
+        </div>
       </div>
     </form>
   );
 };
 
-EmployeeEditor.propTypes = {
+EditEmployee.propTypes = {
   employee: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onChange: React.PropTypes.func,
-  form: React.PropTypes.object
 };
 
-export default EmployeeEditor;
+export default EditEmployee;

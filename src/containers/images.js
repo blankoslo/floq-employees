@@ -4,20 +4,23 @@ import superagent from 'superagent';
 
 import { connect } from 'react-redux';
 
-import { updateEmployee } from '../actions/index';
+import { updateEmployee, imageDrop } from '../actions/index';
 import ImageDrop from '../components/imageDrop';
-
+import Spinner from '../components/spinner';
 
 class Images extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: true,
+      uploading: false
     };
   }
 
   uploadFile = (files) => {
+    this.setState({ uploading: true });
+
     const image = files[0];
     const cloudName = 'blank';
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
@@ -25,7 +28,7 @@ class Images extends Component {
     const timestamp = Date.now() / 1000;
     const uploadPreset = 'ansattliste';
 
-    const publicId = this.props.employee.data.id;
+    const publicId = this.props.employee.id;
 
     const paramStr = `public_id=${publicId}\
 &timestamp=${timestamp}\
@@ -53,10 +56,12 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       if (err === true) {
         return;
       }
-      const updatedEmployee = Object.assign({}, this.props.employee.data);
+
+      const updatedEmployee = Object.assign({}, this.props.employee);
       updatedEmployee.image_url = resp.body.secure_url;
 
       this.props.updateEmployee(parseInt(publicId), updatedEmployee);
+      this.setState({ uploading: false, hover: false });
     });
   }
 
@@ -67,9 +72,23 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
   }
 
   render() {
+    if (this.props.employee.id == null) {
+      return (
+        <div></div>
+      );
+    }
+
+    if (this.state.uploading === true) {
+      return (
+        <div className='edit-pic'>
+          <Spinner />
+        </div>
+      );
+    }
+
     return (
       <ImageDrop
-        imgSrc={this.props.employee.data.image_url}
+        imgSrc={this.props.employee.image_url}
         hover={this.state.hover}
         onDrop={this.uploadFile}
         onMouseEnter={this.toggleHover}
@@ -80,15 +99,15 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 
 Images.propTypes = {
   employee: React.PropTypes.object,
-  updateEmployee: React.PropTypes.func
+  updateEmployee: React.PropTypes.func,
+  onSubmit: React.PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
-  imgSrc: state.images
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
-  updateEmployee
+  updateEmployee,
+  imageDrop
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);
