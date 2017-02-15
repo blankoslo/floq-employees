@@ -76,3 +76,15 @@ img.profile-pic {
   width: 256px;
   height: 200px;
 }
+
+.crop-container {
+  width: 256px;
+  height: 50px;
+  overflow: hidden;
+  .keyframes(move-to;{
+    0% { height: 200px; }
+    100% { height: 50px; }
+    });
+
+  .animation(move-to 0.07s ease-out)
+}

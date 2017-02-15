@@ -18,7 +18,7 @@ IconAndText.propTypes = {
   textLines: React.PropTypes.array.isRequired
 };
 
-const Employee = (props) => {
+const EmployeeExpanded = (props) => {
   if (props.employee.loading) {
     return (
       <Spinner />
@@ -35,7 +35,7 @@ const Employee = (props) => {
 
   return (
     <div className='floq-card mdl-card mdl-shadow--4dp'>
-      <div className='mdl-card__media'>
+      <div className='mdl-card__media crop-container'>
         <EmployeeImage
           className='card-pic'
           src={employee.image_url}
@@ -43,7 +43,7 @@ const Employee = (props) => {
           height='200'
         />
       </div>
-      <div className='mdl-card__title floq-card-title'>
+      <div className='mdl-card__tidle floq-card-title'>
         <div>
           <h1 className='mdl-card__title-text floq-card-name'>
             {employee.first_name} {employee.last_name}
@@ -63,6 +63,20 @@ const Employee = (props) => {
           textLines={[<a id='email-address' href={`mailto:${employee.email}`}>{employee.email}</a>]}
         />
         <IconAndText icon='cake' textLines={[employee.birth_date]} />
+        <IconAndText
+          icon='location_on'
+          textLines={[employee.address, `${employee.postal_code} ${employee.city}`]}
+        />
+        <h1 className='mdl-card__title-text floq-card-contact-title'>
+          Kontaktperson
+        </h1>
+        <h3 className='black floq-card-contact'>{employee.emergency_contact_name}</h3>
+        <h3 className='gray floq-card-contact'>
+          {employee.emergency_contact_relation}
+        </h3>
+        <a id='phone-number' href={`tel:${employee.emergency_contact_phone}`}>
+          {employee.emergency_contact_phone}
+        </a>
       </div>
       <div className='edit-click mdl-card__menu'>
         <button
@@ -77,17 +91,17 @@ const Employee = (props) => {
           className='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'
           onClick={props.onExpand}
         >
-          Mer info
+          Mindre info
         </a>
       </div>
     </div>
   );
 };
 
-Employee.propTypes = {
+EmployeeExpanded.propTypes = {
   employee: React.PropTypes.object,
   onEdit: React.PropTypes.func,
   onExpand: React.PropTypes.func
 };
 
-export default Employee;
+export default EmployeeExpanded;

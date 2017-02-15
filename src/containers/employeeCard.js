@@ -2,12 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Employee from '../components/employee';
+import EmployeeExpanded from '../components/employeeExpanded';
 import EmployeeForm from './employeeForm';
 import { editEmployee } from '../actions/index';
 
 class EmployeeCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false
+    };
+  }
+
   setEdit = () => {
     this.props.editEmployee(this.props.employee.id);
+  }
+
+  toggleExpand = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
   }
 
   render() {
@@ -18,11 +33,20 @@ class EmployeeCard extends Component {
           form={null}
         />
       );
+    } else if (this.state.expanded === true) {
+      return (
+        <EmployeeExpanded
+          employee={this.props.employee}
+          onEdit={this.setEdit}
+          onExpand={this.toggleExpand}
+        />
+      );
     }
     return (
       <Employee
         employee={this.props.employee}
         onEdit={this.setEdit}
+        onExpand={this.toggleExpand}
       />
     );
   }
