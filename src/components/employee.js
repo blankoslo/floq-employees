@@ -33,6 +33,7 @@ const Employee = (props) => {
 
   const employee = props.employee;
   const firstNames = employee.first_name.split(' ');
+  const birthDate = employee.birth_date.split('-').reverse().join('-');
 
   return (
     <div className='floq-card mdl-card mdl-shadow--4dp'>
@@ -63,7 +64,7 @@ const Employee = (props) => {
           icon='email'
           textLines={[<a id='email-address' href={`mailto:${employee.email}`}>{employee.email}</a>]}
         />
-        <IconAndText icon='cake' textLines={[employee.birth_date]} />
+        <IconAndText icon='cake' textLines={[birthDate]} />
       </div>
       <div className='edit-click mdl-card__menu'>
         <button

@@ -17,6 +17,7 @@ const employees = {
       first_name: 'X',
       last_name: 'Y',
       email: 'xy@foo',
+      birth_date: '1999-04-04',
       image_url: null
     }
   })
