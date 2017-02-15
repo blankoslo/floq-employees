@@ -30,8 +30,10 @@ class EmployeeList extends Component {
               <i className='material-icons dark-gray'>clear</i>
             </button>
           </div>
-          <EmployeeCard employee={null} />
-          {employeeRows}
+          <div className='floq-cards'>
+            <EmployeeCard employee={null} />
+            {employeeRows}
+          </div>
         </div>
       );
     }
@@ -47,7 +49,9 @@ class EmployeeList extends Component {
             <i className='material-icons dark-gray'>add</i>
           </button>
         </div>
-        {employeeRows}
+        <div className='floq-cards'>
+          {employeeRows}
+        </div>
       </div>
     );
   }
