@@ -13,7 +13,7 @@ const EmployeeImage = (props) => {
     <img
       className={props.className}
       src={src}
-      alt='Empty'
+      role='presentation'
       onLoad={props.onLoad}
     />
   );
