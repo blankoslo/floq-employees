@@ -32,6 +32,7 @@ const Employee = (props) => {
   }
 
   const employee = props.employee;
+  const firstNames = employee.first_name.split(' ');
 
   return (
     <div className='floq-card mdl-card mdl-shadow--4dp'>
@@ -46,7 +47,7 @@ const Employee = (props) => {
       <div className='mdl-card__title floq-card-title'>
         <div>
           <h1 className='mdl-card__title-text floq-card-name'>
-            {employee.first_name} {employee.last_name}
+            {firstNames[0]} {firstNames[1]} {employee.last_name}
           </h1>
         </div>
         <div>
