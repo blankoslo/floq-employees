@@ -1,10 +1,7 @@
 import React from 'react';
 
 export default () => (
-  <div
-    className='loading-spinner'
-    style={{ width: '100%', margin: '15px', textAlign: 'center' }}
-  >
+  <div className='loading-spinner edit-hover'>
     <div className='mdl-spinner mdl-js-spinner is-active' />
   </div>
 );

@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { getEmployees } from '../actions/index';
 import selectedEmployeeSelector from '../selectors/selectedEmployee';
 
-import EmployeeList from '../components/employeeList';
+import EmployeeList from '../containers/employeeList';
 import ErrorDialog from './errorDialog';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     props.dispatch(getEmployees());
   }
 
@@ -19,20 +18,11 @@ class App extends Component {
                       ? 'floq-app-employees floq-list-and-details floq-hide-details-mobile'
                       : 'floq-app-employees floq-list-and-details floq-hide-list-mobile';
 
-    const children = React.Children.map(this.props.children,
-      child => React.cloneElement(child, {
-        employees: this.props.employees,
-        employee: this.props.selected_employee
-      }));
-
     return (
       <div>
         <ErrorDialog />
         <div className={classes}>
           <EmployeeList employees={this.props.employees} />
-          <div id='detail' className='floq-details'>
-              {children}
-          </div>
         </div>
       </div>
     );

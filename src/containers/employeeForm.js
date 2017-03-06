@@ -1,17 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import EditEmployee from '../components/editEmployee';
+import NewEmployeeEditor from '../components/newEmployeeEditor';
 
-import { createEmployee, updateEmployee, updateField } from '../actions/index';
+import {
+  createEmployee,
+  updateEmployee,
+  updateField,
+  resetForm,
+  editEmployee,
+  newEmployee } from '../actions/index';
 
 const FORM_NAME = 'edit_employee';
 
 class EmployeeForm extends Component {
+
   static contextTypes = {
     router: PropTypes.object
   };
 
   componentDidMount() {
     componentHandler.upgradeDom();
+    this.props.resetForm(FORM_NAME);
   }
 
   componentDidUpdate() {
@@ -22,12 +32,11 @@ class EmployeeForm extends Component {
     e.preventDefault();
 
     // note that employee contains data and loading, while data contains id, name etc.
-    const employee = this.props.employee.data;
+    const employee = this.props.employee;
 
     // no changes
-    if (employee !== null && this.props.form === null) {
-      this.context.router.push(`/employees/${employee.id}`);
-      document.getElementById('detail').scrollIntoView();
+    if (employee !== null && this.props.form.edit_employee === undefined) {
+      this.props.editEmployee(null);
       return;
     }
 
@@ -39,51 +48,60 @@ class EmployeeForm extends Component {
       ? this.props.createEmployee(data)
       : this.props.updateEmployee(employee.id, data);
 
-    persist.then(res => {
-      // redirect back to the list of employees when creating a new employee since that is the only
-      // safe choice on mobile
-      const next = employee === null
-                 ? '/employees'
-                 : `/employees/${res.payload.data[0].id}`;
-
-      this.context.router.push(next);
-      document.getElementById('detail').scrollIntoView();
+    persist.then(() => {
+      this.props.editEmployee(null);
+      this.props.newEmployee(false);
     });
   }
 
-  onChange = (fieldName, value) => this.props.updateField(FORM_NAME, fieldName, value);
+  onChange = (fieldName, value) => {
+    this.props.updateField(FORM_NAME, fieldName, value);
+  }
 
   render() {
-    // pass `employee` prop to children
-    const children = React.Children.map(this.props.children,
-      child => React.cloneElement(child, {
-        employee: this.props.employee,
-        onSubmit: this.onSubmit,
-        onChange: this.onChange
-      }));
+    if (this.props.employee === null) {
+      return (
+        <NewEmployeeEditor
+          onSubmit={this.onSubmit}
+          onChange={this.onChange}
+        />
+      );
+    }
 
-    return <div>{children}</div>;
+    return (
+      <EditEmployee
+        employee={this.props.employee}
+        onSubmit={this.onSubmit}
+        onChange={this.onChange}
+      />
+    );
   }
 }
 
 EmployeeForm.propTypes = {
   employee: React.PropTypes.object,
+  newEmployee: React.PropTypes.func,
   form: React.PropTypes.object,
   dispatch: React.PropTypes.func,
   children: React.PropTypes.object,
   updateEmployee: React.PropTypes.func,
   createEmployee: React.PropTypes.func,
-  updateField: React.PropTypes.func
+  updateField: React.PropTypes.func,
+  editEmployee: React.PropTypes.func,
+  resetForm: React.PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
-  form: state.form
-});
+const mapStateToProps = (state) => (
+  { form: state.form }
+);
 
 const mapDispatchToProps = {
   createEmployee,
   updateEmployee,
-  updateField
+  updateField,
+  resetForm,
+  editEmployee,
+  newEmployee
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeForm);

@@ -34,7 +34,7 @@ class SelectField extends Component {
             }}
             checked={choice === this.state.value}
           />
-          <span className='mdl-radio__label'>{this.props.labels[choice]}</span>
+          <span className='mdl-radio__label floq-card-textfield'>{this.props.labels[choice]}</span>
         </label>
       </div>
     ));

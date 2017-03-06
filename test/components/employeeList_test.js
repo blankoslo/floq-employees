@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 
 import { renderComponent, expect } from '../testhelper';
-import EmployeeList from '../../src/components/employeeList';
+import EmployeeList from '../../src/containers/employeeList';
 import * as Immutable from 'immutable';
 
 const loadingEmployees = {
@@ -17,6 +17,7 @@ const employees = {
       first_name: 'X',
       last_name: 'Y',
       email: 'xy@foo',
+      birth_date: '1999-04-04',
       image_url: null
     }
   })
@@ -39,11 +40,5 @@ describe('EmployeeList', () => {
     const component = renderComponent(EmployeeList, { employees });
 
     expect(component.find('.floq-list-header')).to.exist;
-  });
-
-  it('lists employees\' names', () => {
-    const component = renderComponent(EmployeeList, { employees });
-
-    expect(component.find('.floq-list-row')).to.contain('X Y');
   });
 });
