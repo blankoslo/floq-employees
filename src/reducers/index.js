@@ -11,7 +11,7 @@ const rootReducer = {
   form: FormReducer,
   error: ErrorReducer,
   edit: EditReducer,
-  isNew: NewReducer
+  creatingEmployee: NewReducer
 };
 
 export default rootReducer;
