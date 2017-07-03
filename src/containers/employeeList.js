@@ -23,7 +23,7 @@ class EmployeeList extends Component {
   }
 
   excludeInactive = (employee) => {
-    if (employee.termination_date) {
+    if (employee.termination_date !== null) {
       const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
       return this.state.showInactiveEmployees || today <= new Date(employee.termination_date);
     }
