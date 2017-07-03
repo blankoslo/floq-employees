@@ -7,15 +7,18 @@ import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 import reducers from '../src/reducers';
 import chaiJquery from 'chai-jquery';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const $ = jquery(global.window);
 
 // build 'renderComponent' helper that should render a given react class
 const renderComponent = (ComponentClass, props, state) => {
   const componentInstance = TestUtils.renderIntoDocument(
-    <Provider store={createStore(combineReducers(reducers), state)}>
-      <ComponentClass {...props} />
-    </Provider>
+    <MuiThemeProvider>
+      <Provider store={createStore(combineReducers(reducers), state)}>
+        <ComponentClass {...props} />
+      </Provider>
+    </MuiThemeProvider>
   );
 
   return $(ReactDOM.findDOMNode(componentInstance)); // produces HTML
