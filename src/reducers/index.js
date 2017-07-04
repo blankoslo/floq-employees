@@ -3,7 +3,7 @@ import SelectedEmployeeReducer from './selectedEmployee';
 import FormReducer from './form';
 import ErrorReducer from './error';
 import EditReducer from './edit';
-import NewReducer from './new';
+import CreatingEmployeeReducer from './create';
 
 const rootReducer = {
   employees: EmployeesReducer,
@@ -11,7 +11,7 @@ const rootReducer = {
   form: FormReducer,
   error: ErrorReducer,
   edit: EditReducer,
-  isNew: NewReducer
+  creatingEmployee: CreatingEmployeeReducer
 };
 
 export default rootReducer;
