@@ -5,6 +5,7 @@ const CreateEmployee = (props) => (
   <EditEmployee
     onSubmit={props.onSubmit}
     onChange={props.onChange}
+    onCancel={props.onCancel}
     employee={{
       first_name: '',
       last_name: '',
@@ -28,7 +29,8 @@ const CreateEmployee = (props) => (
 
 CreateEmployee.propTypes = {
   onSubmit: React.PropTypes.func,
-  onChange: React.PropTypes.func
+  onChange: React.PropTypes.func,
+  onCancel: React.PropTypes.func
 };
 
 export default CreateEmployee;

@@ -28,7 +28,7 @@ const fields = {
   emergency_contact_relation: { type: 'TextField' }
 };
 
-const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored';
+const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised';
 
 const renderField = (employee, onChange, fieldConfig, fieldName) => {
   switch (fieldConfig.type) {
@@ -101,8 +101,11 @@ const EditEmployee = (props) => {
           {fieldElems}
         </div>
         <div className='mdl-card__actions mdl-card--border'>
-          <button className={buttonClasses} type='submit'>
+          <button className={`${buttonClasses} mdl-button--colored`} type='submit'>
             {formLabels.no.save}
+          </button>
+          <button className={buttonClasses} style={{ marginLeft: '1em' }} onClick={props.onCancel} >
+            {formLabels.no.cancel}
           </button>
         </div>
       </div>
@@ -114,6 +117,7 @@ EditEmployee.propTypes = {
   employee: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onChange: React.PropTypes.func,
+  onCancel: React.PropTypes.func,
 };
 
 export default EditEmployee;
