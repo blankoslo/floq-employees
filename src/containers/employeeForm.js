@@ -28,6 +28,11 @@ class EmployeeForm extends Component {
     componentHandler.upgradeDom();
   }
 
+  onCancel = () => {
+    this.props.editEmployee(null);
+    this.props.newEmployee(false);
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -63,6 +68,7 @@ class EmployeeForm extends Component {
       return (
         <NewEmployeeEditor
           onSubmit={this.onSubmit}
+          onCancel={this.onCancel}
           onChange={this.onChange}
         />
       );
@@ -73,6 +79,7 @@ class EmployeeForm extends Component {
         employee={this.props.employee}
         onSubmit={this.onSubmit}
         onChange={this.onChange}
+        onCancel={this.onCancel}
       />
     );
   }
