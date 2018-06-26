@@ -1,19 +1,18 @@
 language: node_js
 cache:
-  yarn: true
   directories: node_modules
 node_js:
   - "6"
 
 script:
-  - yarn run lint
-  - yarn test
+  - npm run lint
+  - npm test
 
 notifications:
   slack:
     secure: ssmoeR+BD6CSxOuvdV3m8isfRlcTIkvEJal2c4aQ0deB4rq3vKa0hRGSPtgiGqKtNNe+EvXO3xRUdpKZjyl8SDNLFDgVvq9VwrCGbuRMJcpo63xp5IQWQXlpaQxJGT//vi5tD+CjmK36mTYhGSjqAQxd0Xd67kOMz/UOLB5QN32Zm+PoebvRVQIp+7oNIGXyKGU4QlPx/BJgeYn7/EvU/mu9JqOsm+UE4dzlP8ZBSxGcWrfHtKo1b9Q393Eq3Bib3c2v+gZmXgr4tvYSon8b6A+8IPK3BPVdesholxoCARfmF3tieKWcKDWKHM65ZDiLvRzVJA+BRQYiJFeVW+urMQYgVH6tis9Xpbjt0eP5UD1WWNytq5F2TxQu1ENzUXSeYz4VNY4snyQylejUkBdIhEo2GYe+yzXPGBHHgeTyWh3BO4kC3SCgEngSKQA5AQzT75bdRnGybwEBlCQHsQIjHCPVki/UBDga6TRCKhvYcwi8FTk9ai5IDi3i3BJIKV9EOb1EPHimMBjakFpkjXDczeQ8M/7+ExtwEmMzN2SSjZ1kecg13cykSNvq3pKT4btoZkpvjlNoUREDt8zCIP16+uN+mFk1hMCPZsi6362M/7fNgUBgZWkliEhzJvOn7T2n6DQ6Ad+C/qqs8j0PGicT26+y3QEK8EShspIXdjmIQck=
 
-before_deploy: yarn run dist
+before_deploy: npm run dist
 deploy:
   - provider: gcs
     bucket: floq-test
