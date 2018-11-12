@@ -24,6 +24,7 @@ export const employeeFormLabels = {
     other: 'Annet',
     emergency_contact_name: 'Kontaktperson, navn',
     emergency_contact_phone: 'Kontaktperson, telefon',
-    emergency_contact_relation: 'Kontaktperson, relasjon'
+    emergency_contact_relation: 'Kontaktperson, relasjon',
+    emoji: 'Emoji'
   }
 };
