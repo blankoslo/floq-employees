@@ -25,7 +25,8 @@ const fields = {
   date_of_employment: { type: 'DateField' },
   emergency_contact_name: { type: 'TextField' },
   emergency_contact_phone: { type: 'TextField', pattern: '[-+ 0-9]+' },
-  emergency_contact_relation: { type: 'TextField' }
+  emergency_contact_relation: { type: 'TextField' },
+  emoji: { type: 'TextField' },
 };
 
 const buttonClasses = 'mdl-button mdl-js-button mdl-button--raised';
