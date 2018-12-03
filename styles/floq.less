@@ -1,7 +1,13 @@
 .keyframes(@name; @arguments) {
-  @-moz-keyframes @name { @arguments(); }
-  @-webkit-keyframes @name { @arguments(); }
-  @keyframes @name { @arguments(); }
+  @-moz-keyframes @name {
+    @arguments();
+  }
+  @-webkit-keyframes @name {
+    @arguments();
+  }
+  @keyframes @name {
+    @arguments();
+  }
 }
 
 .animation(@arguments) {
@@ -13,8 +19,9 @@
 .floq-list {
   padding-left: 5%;
   padding-right: 5%;
+  background-color: #f8f8f8;
   .floq-list-header {
-    display:flex;
+    display: flex;
     margin: 16px;
     justify-content: space-between;
   }
@@ -68,7 +75,7 @@
 }
 
 .floq-card-contact-title {
-  padding-top:  20px;
+  padding-top: 20px;
   padding-bottom: 0px;
 }
 
@@ -82,12 +89,9 @@
   width: 512px;
   height: 992px;
 
-  .keyframes(fade-in;{
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-    });
+  .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
 
-  .animation(fade-in 0.6s linear)
+  .animation(fade-in 0.6s linear);
 }
 
 .floq-card-expanded {
@@ -96,23 +100,133 @@
   width: 256px;
   height: 494px;
 
-  .keyframes(fade-in;{
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-    });
+  .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
 
-  .animation(fade-in 0.6s linear)
+  .animation(fade-in 0.6s linear);
 }
 
-
 .keyframes(@name; @arguments) {
-  @-moz-keyframes @name { @arguments(); }
-  @-webkit-keyframes @name { @arguments(); }
-  @keyframes @name { @arguments(); }
+  @-moz-keyframes @name {
+    @arguments();
+  }
+  @-webkit-keyframes @name {
+    @arguments();
+  }
+  @keyframes @name {
+    @arguments();
+  }
 }
 
 .animation(@arguments) {
   -webkit-animation: @arguments;
   -moz-animation: @arguments;
   animation: @arguments;
+}
+
+@card-width: 400px;
+
+.employee-card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.image-with-overlay {
+  display: flex;
+  position: relative;
+  color: @blank-white;
+}
+
+.image-with-overlay__overlay-text-and-emoji {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: @card-width;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: fade(@blank-purple, 90%);
+
+  & div {
+    padding-left: 20px;
+    & > h1 {
+      color: @blank-white;
+      font-size: 1.4em;
+    }
+
+    & > a {
+      color: @blank-white;
+    }
+  }
+
+  & > a {
+    font-size: 6em;
+    padding-right: 40px;
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: @blank-purple;
+  width: @card-width;
+  padding: 10px 0px 10px 40px;
+
+  & > a {
+    color: @blank-turquoise;
+  }
+}
+
+.customer-info-and-expand {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: @blank-piss-yellow;
+  color: @blank-black;
+  width: @card-width;
+  padding: 10px 10px 10px 20px;
+  align-items: center;
+}
+
+.customer-info-and-expand__expand-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  & > a {
+    color: @blank-purple-dark;
+    text-transform: uppercase;
+    font-weight: 100;
+  }
+}
+
+.customer-info-and-expand__customer-text {
+  color: @blank-black;
+}
+
+.expanded-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: @card-width;
+  padding: 10px 10px 10px 30px;
+  background-color: @blank-white;
+
+  & h5 {
+    text-transform: uppercase;
+    color: @blank-grey;
+  }
+
+  & a {
+    color: @blank-black;
+  }
+}
+
+.expanded-info__birthday {
 }
