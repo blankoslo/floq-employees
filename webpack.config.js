@@ -1,44 +1,47 @@
 const webpack = require("webpack");
-
-const port = process.env.PORT || 8080;
+const argv = require("yargs").argv;
 
 module.exports = {
+  mode: "development",
   entry: [
-    `webpack-dev-server/client?http://localhost:5000/`,
+    `webpack-dev-server/client?http://localhost:${argv.port}/`,
     "webpack/hot/only-dev-server",
     "./src/index.js"
   ],
   output: {
     path: __dirname + "/dist/js",
     filename: "app.bundle.js",
-    publicPath: `http://localhost:5000/`
+    publicPath: `http://localhost:${argv.port}/`
   },
+
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devtool: "source-map",
   devServer: {
-    clientLogLevel: "info"
+    clientLogLevel: "info",
+    headers: {
+      "Access-Control-Allow-Origin": `http://localhost:${argv.floq_port}`,
+      "Access-Control-Allow-Headers": `http://localhost:${argv.floq_port}`
+    }
   },
   module: {
-    preLoaders: [{ test: /\.js?$/, loaders: ["eslint"] }],
-    loaders: [
-      { test: /\.less$/, loader: "style!css!less" },
-      { test: /\.json$/, loader: "json" },
+    rules: [
+      { test: /\.less$/, loader: "style-loader!css-loader!less-loader" },
+      { test: /\.json$/, loader: "json-loader" },
+      // { test: /\.js?$/, loaders: ["eslint"], enforce: "pre" },
       {
         test: /\.js$/,
-        loaders: ["react-hot", "babel"],
         exclude: /node_modules/,
-        include: __dirname
-      },
-      {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: "file?name=public/fonts/[name].[ext]",
-        options: {
-          emitFile: false
+        use: {
+          loader: "babel-loader"
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: "url-loader?limit=100000"
+        test: [/\.(ttf|woff)$/],
+        loader: "file-loader",
+        options: {
+          // See floq project for path
+          name: "static/fonts/[name].[ext]"
+        }
       }
     ]
   }
