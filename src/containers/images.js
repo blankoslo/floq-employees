@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import sha1 from 'sha1';
-import superagent from 'superagent';
+import React, { Component } from "react";
+import sha1 from "sha1";
+import superagent from "superagent";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import { updateEmployee, imageDrop } from '../actions/index';
-import ImageDrop from '../components/imageDrop';
-import Spinner from '../components/spinner';
+import { updateEmployee } from "../actions/index";
+import ImageDrop from "../components/imageDrop";
+import Spinner from "../components/spinner";
 
 class Images extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -18,15 +17,15 @@ class Images extends Component {
     };
   }
 
-  uploadFile = (files) => {
+  uploadFile = files => {
     this.setState({ uploading: true });
 
     const image = files[0];
-    const cloudName = 'blank';
+    const cloudName = "blank";
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
     const timestamp = Date.now() / 1000;
-    const uploadPreset = 'ansattliste';
+    const uploadPreset = "ansattliste";
 
     const publicId = this.props.employee.id;
 
@@ -42,13 +41,13 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       public_id: publicId,
       timestamp,
       upload_preset: uploadPreset,
-      signature,
+      signature
     };
 
     const uploadRequest = superagent.post(url);
-    uploadRequest.attach('file', image);
+    uploadRequest.attach("file", image);
 
-    Object.keys(params).forEach((key) => {
+    Object.keys(params).forEach(key => {
       uploadRequest.field(key, params[key]);
     });
 
@@ -63,24 +62,22 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       this.props.updateEmployee(parseInt(publicId), updatedEmployee);
       this.setState({ uploading: false, hover: false });
     });
-  }
+  };
 
   toggleHover = () => {
     this.setState({
       hover: !this.state.hover
     });
-  }
+  };
 
   render() {
     if (this.props.employee.id == null) {
-      return (
-        <div></div>
-      );
+      return <div />;
     }
 
     if (this.state.uploading === true) {
       return (
-        <div className='edit-pic'>
+        <div className="edit-pic">
           <Spinner />
         </div>
       );
@@ -93,7 +90,8 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
         onDrop={this.uploadFile}
         onMouseEnter={this.toggleHover}
         onMouseLeave={this.toggleHover}
-      />);
+      />
+    );
   }
 }
 
@@ -106,8 +104,10 @@ Images.propTypes = {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = {
-  updateEmployee,
-  imageDrop
+  updateEmployee
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Images);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Images);

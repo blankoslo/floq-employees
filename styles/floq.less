@@ -129,6 +129,12 @@
   display: flex;
   flex-direction: column;
   margin-top: 40px;
+
+  & a,
+  h1,
+  h5 {
+    font-family: "WorkSans-Regular";
+  }
 }
 
 .image-with-overlay {
@@ -149,22 +155,26 @@
 
   & div {
     padding-left: 20px;
+    padding-top: 5px;
+
     & > h1 {
       color: @blank-white;
-      font-size: 1.4em;
+      font-size: 1.6em;
+      font-weight: 800;
     }
 
     & > a {
+      font-size: 1.2em;
       color: @blank-white;
     }
   }
 
   & > a {
-    font-size: 6em;
-    padding-right: 40px;
+    font-size: 5em;
+    padding-right: 20px;
     position: absolute;
     right: 0;
-    bottom: -30px;
+    bottom: 0;
   }
 }
 
@@ -177,6 +187,8 @@
   padding: 10px 0px 10px 40px;
 
   & > a {
+    font-size: 1.2em;
+    font-weight: 600;
     color: @blank-turquoise;
   }
 }
@@ -185,7 +197,7 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  background-color: @blank-piss-yellow;
+  background-color: @blank-yellow;
   color: @blank-black;
   width: @card-width;
   padding: 10px 10px 10px 20px;
@@ -215,7 +227,7 @@
   justify-content: flex-start;
   box-sizing: border-box;
   width: @card-width;
-  padding: 10px 10px 10px 30px;
+  padding: 0px 10px 10px 30px;
   background-color: @blank-white;
 
   & h5 {
@@ -225,6 +237,18 @@
 
   & a {
     color: @blank-black;
+  }
+
+  & > div {
+    margin-top: 15px;
+  }
+}
+
+.expanded-info__address {
+  & address {
+    margin-top: 5px;
+    line-height: 20px;
+    font-family: "WorkSans-Regular";
   }
 }
 
