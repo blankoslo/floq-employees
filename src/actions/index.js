@@ -15,6 +15,8 @@ export const FORM_RESET = "FORM_RESET";
 export const EDIT_EMPLOYEE = "EDIT_EMPLOYEE";
 export const NEW_EMPLOYEE = "NEW_EMPLOYEE";
 
+export const SELECT_EMPLOYEE = "SELECT_EMPLOYEE";
+
 export const apiError = message => ({
   type: API_ERROR,
   payload: message
@@ -24,10 +26,10 @@ export const clearApiError = () => ({
   type: API_ERROR_CLEAR
 });
 
-export const getEmployee = id => ({
-  type: GET_EMPLOYEE,
-  payload: api.getEmployee(id)
-});
+// export const getEmployee = id => ({
+//   type: GET_EMPLOYEE,
+//   payload: api.getEmployee(id)
+// });
 
 export const getEmployees = () => ({
   type: GET_EMPLOYEES,
