@@ -30,7 +30,7 @@
 .floq-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .floq-card {
@@ -123,12 +123,34 @@
   animation: @arguments;
 }
 
+/* NEW */
+
+.role-column {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.role-column__title {
+  font-size: 1.2em;
+  font-family: "WorkSans-Regular";
+  text-transform: uppercase;
+}
+
+.role-column__horizontal-line {
+  border: none;
+  height: 2px;
+  background-color: @blank-black;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
 @card-width: 400px;
 
 .employee-card {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-bottom: 40px;
 
   & a,
   h1,

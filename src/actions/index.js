@@ -16,6 +16,7 @@ export const EDIT_EMPLOYEE = "EDIT_EMPLOYEE";
 export const NEW_EMPLOYEE = "NEW_EMPLOYEE";
 
 export const SELECT_EMPLOYEE = "SELECT_EMPLOYEE";
+export const TOGGLE_REMOVE_TERMINATED = "TOGGLE_REMOVE_TERMINATED";
 
 export const apiError = message => ({
   type: API_ERROR,
@@ -69,4 +70,9 @@ export const newEmployee = value => ({
 export const getEmployeesProjects = (fromDate, toDate) => ({
   type: GET_EMPLOYEES_PROJECTS,
   payload: api.getEmployeesProjects(fromDate, toDate)
+});
+
+export const toggleShowTerminated = () => ({
+  type: TOGGLE_REMOVE_TERMINATED,
+  payload: null
 });

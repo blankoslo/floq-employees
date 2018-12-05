@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getEmployees, getEmployeesProjects } from "../actions/index";
-import selectedEmployeeSelector from "../selectors/selectedEmployee";
-import employeeWithAssignedCustomerSelector from "../selectors/employeesWithCustomer";
 
 import EmployeeList from "../containers/employeeList";
 import ErrorDialog from "./errorDialog";
@@ -22,12 +20,11 @@ class App extends Component {
       this.props.children === null
         ? "floq-app-employees floq-list-and-details floq-hide-details-mobile"
         : "floq-app-employees floq-list-and-details floq-hide-list-mobile";
-    console.log(this.props.employees.data);
     return (
       <div>
         <ErrorDialog />
         <div className={classes}>
-          <EmployeeList employees={this.props.employees} />
+          <EmployeeList />
         </div>
       </div>
     );
@@ -36,16 +33,12 @@ class App extends Component {
 
 App.propTypes = {
   employees: React.PropTypes.object,
-  selected_employee: React.PropTypes.object,
   children: React.PropTypes.object,
   dispatch: React.PropTypes.func,
   params: React.PropTypes.object
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  employees: employeeWithAssignedCustomerSelector(state, ownProps),
-  selected_employee: selectedEmployeeSelector(state, ownProps)
-});
+const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = dispatch => {
   const toDate = new Date();

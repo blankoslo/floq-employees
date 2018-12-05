@@ -123,7 +123,7 @@ class Employee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: true
+      expanded: false
     };
   }
 
