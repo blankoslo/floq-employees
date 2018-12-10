@@ -1,7 +1,4 @@
-import React from 'react';
-import { Route } from 'react-router';
-import App from './containers/app';
+import React from "react";
+import { Route } from "react-router";
 
-export default (
-  <Route path='/employees' component={App} />
-);
+export default <Route exact path="/employees" component={App} />;

@@ -1,39 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Provider } from 'react-redux';
-import { combineReducers, compose, createStore, applyMiddleware } from 'redux';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
-import { Router, browserHistory } from 'react-router';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from "react";
+import ReactDOM from "react-dom";
+import { combineReducers, compose, createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import { Route, Switch } from "react-router";
+import { connectRouter, routerMiddleware, ConnectedRouter } from "connected-react-router";
+import { createBrowserHistory } from "history";
 
-import apiMiddleware from './middleware/api';
-import routes from './routes';
-import _reducers from './reducers';
+import apiMiddleware from "./middleware/api";
+import _reducers from "./reducers";
+import App from "./containers/app";
 
-require('../styles/main.less');
+require("../styles/main.less");
 
-// needed for material-ui, for now
-injectTapEventPlugin();
+const createRootReducer = history =>
+  combineReducers({
+    router: connectRouter(history),
+    ..._reducers
+  });
 
-const reducers = combineReducers({
-  ..._reducers,
-  routing: routerReducer
-});
+const history = createBrowserHistory();
 
-const createStoreWithMiddleware = compose(
-  applyMiddleware(apiMiddleware),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore);
-
-const store = createStoreWithMiddleware(reducers);
-const history = syncHistoryWithStore(browserHistory, store);
+const store = createStore(
+  createRootReducer(history),
+  compose(
+    applyMiddleware(apiMiddleware, routerMiddleware(history)),
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>
-    <MuiThemeProvider muiTheme={getMuiTheme()}>
-      <Router history={history} routes={routes} />
-    </MuiThemeProvider>
-  </Provider>
-  , document.getElementById('app'));
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path="/employees" component={App} />
+      </Switch>
+    </ConnectedRouter>
+  </Provider>,
+  document.getElementById("app")
+);
