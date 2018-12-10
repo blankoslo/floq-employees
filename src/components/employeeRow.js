@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { browserHistory } from 'react-router';
 import EmployeeImage from './employeeImage';
@@ -18,7 +19,7 @@ const EmployeeRow = (props) => (
 );
 
 EmployeeRow.propTypes = {
-  employee: React.PropTypes.object.isRequired
+  employee: PropTypes.object.isRequired
 };
 
 export default EmployeeRow;

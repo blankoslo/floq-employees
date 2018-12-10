@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import EmployeeImage from "./employeeImage";
 import Spinner from "./spinner";
@@ -18,8 +19,8 @@ const IconAndText = ({ icon, textLines }) => (
 );
 
 IconAndText.propTypes = {
-  icon: React.PropTypes.string.isRequired,
-  textLines: React.PropTypes.array.isRequired
+  icon: PropTypes.string.isRequired,
+  textLines: PropTypes.array.isRequired
 };
 
 const Employee = props => {
@@ -91,9 +92,9 @@ const Employee = props => {
 };
 
 Employee.propTypes = {
-  employee: React.PropTypes.object,
-  onEdit: React.PropTypes.func,
-  onExpand: React.PropTypes.func
+  employee: PropTypes.object,
+  onEdit: PropTypes.func,
+  onExpand: PropTypes.func
 };
 
 export default Employee;

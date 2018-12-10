@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 class SelectField extends Component {
@@ -48,11 +49,11 @@ class SelectField extends Component {
 }
 
 SelectField.propTypes = {
-  value: React.PropTypes.string,
-  fieldName: React.PropTypes.string.isRequired,
-  labels: React.PropTypes.object.isRequired,
-  choices: React.PropTypes.array.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  value: PropTypes.string,
+  fieldName: PropTypes.string.isRequired,
+  labels: PropTypes.object.isRequired,
+  choices: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default SelectField;

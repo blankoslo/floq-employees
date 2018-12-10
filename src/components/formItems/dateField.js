@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import { formatIso } from 'material-ui/DatePicker/dateUtils';
@@ -44,10 +45,10 @@ class DateField extends Component {
 }
 
 DateField.propTypes = {
-  fieldName: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string,
-  label: React.PropTypes.string,
-  onChange: React.PropTypes.func.isRequired
+  fieldName: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  label: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 };
 
 export default DateField;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import * as _ from 'lodash';
 
@@ -71,8 +72,8 @@ const renderField = (employee, onChange, fieldConfig, fieldName) => {
 };
 
 renderField.propTypes = {
-  employee: React.PropTypes.object.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  employee: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 const EditEmployee = (props) => {
@@ -115,10 +116,10 @@ const EditEmployee = (props) => {
 };
 
 EditEmployee.propTypes = {
-  employee: React.PropTypes.object,
-  onSubmit: React.PropTypes.func,
-  onChange: React.PropTypes.func,
-  onCancel: React.PropTypes.func,
+  employee: PropTypes.object,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  onCancel: PropTypes.func,
 };
 
 export default EditEmployee;

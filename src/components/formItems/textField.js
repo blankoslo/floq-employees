@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 const textFieldClasses = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label';
@@ -55,9 +56,9 @@ export default class TextField extends Component {
 }
 
 TextField.propTypes = {
-  fieldName: React.PropTypes.string.isRequired,
-  value: React.PropTypes.string.isRequired,
-  label: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  pattern: React.PropTypes.string.isRequired
+  fieldName: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  pattern: PropTypes.string.isRequired
 };

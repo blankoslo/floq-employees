@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import sha1 from "sha1";
 import superagent from "superagent";
@@ -96,9 +97,9 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 }
 
 Images.propTypes = {
-  employee: React.PropTypes.object,
-  updateEmployee: React.PropTypes.func,
-  onSubmit: React.PropTypes.func
+  employee: PropTypes.object,
+  updateEmployee: PropTypes.func,
+  onSubmit: PropTypes.func
 };
 
 const mapStateToProps = () => ({});

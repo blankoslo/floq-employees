@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditEmployee from '../components/editEmployee';
 import NewEmployeeEditor from '../components/newEmployeeEditor';
@@ -86,16 +87,16 @@ class EmployeeForm extends Component {
 }
 
 EmployeeForm.propTypes = {
-  employee: React.PropTypes.object,
-  newEmployee: React.PropTypes.func,
-  form: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
-  children: React.PropTypes.object,
-  updateEmployee: React.PropTypes.func,
-  createEmployee: React.PropTypes.func,
-  updateField: React.PropTypes.func,
-  editEmployee: React.PropTypes.func,
-  resetForm: React.PropTypes.func
+  employee: PropTypes.object,
+  newEmployee: PropTypes.func,
+  form: PropTypes.object,
+  dispatch: PropTypes.func,
+  children: PropTypes.object,
+  updateEmployee: PropTypes.func,
+  createEmployee: PropTypes.func,
+  updateField: PropTypes.func,
+  editEmployee: PropTypes.func,
+  resetForm: PropTypes.func
 };
 
 const mapStateToProps = (state) => (

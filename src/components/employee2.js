@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import EmployeeImage from "./employeeImage";
 import Spinner from "./spinner";
@@ -10,7 +11,7 @@ const ImageWithOverlay = props => {
   const { firstNames, lastName, dateOfEmployment, imageUrl, title, emoji } = props;
   return (
     <div className="image-with-overlay">
-      <EmployeeImage className="card-pic" src={imageUrl} width="400" height="200" />
+      <EmployeeImage className="card-pic" src={imageUrl} width="800" height="400" />
       <div className="image-with-overlay__overlay-text-and-emoji">
         <div>
           <h1>
@@ -162,9 +163,9 @@ class Employee extends React.Component {
 }
 
 Employee.propTypes = {
-  employee: React.PropTypes.object,
-  onEdit: React.PropTypes.func,
-  onExpand: React.PropTypes.func
+  employee: PropTypes.object,
+  onEdit: PropTypes.func,
+  onExpand: PropTypes.func
 };
 
 export default Employee;

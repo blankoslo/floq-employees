@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getEmployees, getEmployeesProjects } from "../actions/index";
@@ -32,10 +33,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  employees: React.PropTypes.object,
-  children: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
-  params: React.PropTypes.object
+  employees: PropTypes.object,
+  children: PropTypes.object,
+  dispatch: PropTypes.func,
+  params: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({});

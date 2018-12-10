@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -43,9 +44,9 @@ class EmployeeCard extends Component {
 }
 
 EmployeeCard.propTypes = {
-  employee: React.PropTypes.object,
-  editEmployee: React.PropTypes.func,
-  edit: React.PropTypes.string
+  employee: PropTypes.object,
+  editEmployee: PropTypes.func,
+  edit: PropTypes.string
 };
 
 const mapStateToProps = state => ({

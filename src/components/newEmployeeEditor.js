@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import EditEmployee from './editEmployee';
 
@@ -28,9 +29,9 @@ const CreateEmployee = (props) => (
 );
 
 CreateEmployee.propTypes = {
-  onSubmit: React.PropTypes.func,
-  onChange: React.PropTypes.func,
-  onCancel: React.PropTypes.func
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  onCancel: PropTypes.func
 };
 
 export default CreateEmployee;
