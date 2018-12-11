@@ -6,9 +6,9 @@ import Spinner from "../components/spinner";
 import { newEmployee, toggleShowTerminated } from "../actions/index";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import employeeWithAssignedCustomerSelector from "../selectors/employeesWithCustomer";
+import employeesWithCustomerSelector from "../selectors/employeesWithCustomerSelector";
 
-const RoleColumn = ({ roleTitle, data }) => {
+export const RoleColumn = ({ roleTitle, data }) => {
   const cardsData = data.valueSeq();
   return (
     <div className="role-column">
@@ -123,7 +123,7 @@ EmployeeList.propTypes = {
 const mapStateToProps = (state, props) => {
   return {
     creatingEmployee: state.creatingEmployee,
-    employees: employeeWithAssignedCustomerSelector(state, props)
+    employees: employeesWithCustomerSelector(state, props)
   };
 };
 

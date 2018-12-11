@@ -1,19 +1,17 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import DatePicker from 'material-ui/DatePicker';
-import { formatIso } from 'material-ui/DatePicker/dateUtils';
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import TextField from "@material-ui/core/TextField";
 
-const textFieldClasses = 'mdl-textfield mdl-js-textfield floq-card-textfield floq-card-datefield';
+const textFieldClasses = "mdl-textfield mdl-js-textfield floq-card-textfield floq-card-datefield";
 
 const oneYearFromNow = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
 
 class DateField extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      date: props.value === '' ? {} : new Date(props.value)
+      date: props.value === "" ? {} : new Date(props.value)
     };
   }
 
@@ -28,16 +26,13 @@ class DateField extends Component {
   render() {
     return (
       <div className={textFieldClasses}>
-        <DatePicker
-          floatingLabelText={this.props.label}
-          floatingLabelStyle={{ fontSize: '14px' }}
-          textFieldStyle={{ fontSize: '14px' }}
+        <TextField
+          type="date"
+          label={this.props.label}
           fullWidth
-          hintText={this.props.label}
           value={this.state.date}
           onChange={this.onChange}
-          autoOk
-          maxDate={oneYearFromNow}
+          autoComplete
         />
       </div>
     );

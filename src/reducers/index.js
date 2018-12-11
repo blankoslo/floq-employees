@@ -7,6 +7,7 @@ import CreatingEmployeeReducer from "./create";
 import EmployeesProjectsReducer from "./employeesProjects";
 
 const rootReducer = {
+  app: (state = { dateToday: new Date() }) => state,
   employees: EmployeesReducer,
   employeesProjects: EmployeesProjectsReducer,
   selected_employee: SelectedEmployeeReducer,

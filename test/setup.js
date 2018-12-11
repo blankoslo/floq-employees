@@ -1,19 +1,31 @@
-import jsdom from 'jsdom';
-import jquery from 'jquery';
-import chai from 'chai';
-import chaiJquery from 'chai-jquery';
+import Enzyme from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import chai from "chai";
+import chaiEnzyme from "chai-enzyme";
+const { JSDOM } = require("jsdom");
 
-// Set up testing environment to run like a browser in the command line
-global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
-global.window = document.defaultView;
-const $ = jquery(global.window);
+chai.use(chaiEnzyme());
+Enzyme.configure({ adapter: new Adapter() });
 
-chaiJquery(chai, chai.util, $);
+const jsdom = new JSDOM("<!doctype html><html><body></body></html>");
+const { window } = jsdom;
 
-// Attach all the window properties to the mocha global object
-for (const key in global.window) { // eslint-disable-line no-restricted-syntax
-  if (!global.window.hasOwnProperty(key)) continue;
-  if (key in global) continue;
-
-  global[key] = global.window[key];
+function copyProps(src, target) {
+  Object.defineProperties(target, {
+    ...Object.getOwnPropertyDescriptors(src),
+    ...Object.getOwnPropertyDescriptors(target)
+  });
 }
+
+global.window = window;
+global.document = window.document;
+global.navigator = {
+  userAgent: "node.js"
+};
+global.requestAnimationFrame = function(callback) {
+  return setTimeout(callback, 0);
+};
+global.cancelAnimationFrame = function(id) {
+  clearTimeout(id);
+};
+copyProps(window, global);

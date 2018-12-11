@@ -2,16 +2,16 @@ import { createSelector } from "reselect";
 
 const employeesSelector = state => state.employees;
 const employeesProjectsSelector = state => state.employeesProjects;
+const dateTodaySelector = state => state.app.dateToday;
 
-const isEmployeed = employee => {
+const isEmployeed = (employee, dateToday) => {
   if (employee.termination_date !== null) {
-    const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    return today <= new Date(employee.termination_date);
+    return dateToday <= new Date(employee.termination_date);
   }
   return true;
 };
 
-const employeeWithAssignedCustomerSelector = (employees, employeesProjects) => {
+const employeesWithCustomerSelector = (employees, employeesProjects, dateToday) => {
   if (employees.loading || employeesProjects.loading) {
     return { loading: true, data: null };
   }
@@ -19,7 +19,7 @@ const employeeWithAssignedCustomerSelector = (employees, employeesProjects) => {
   let data = employees.data;
 
   if (employees.removeTerminated) {
-    data = data.filter(isEmployeed);
+    data = data.filter(employee => isEmployeed(employee, dateToday));
   }
 
   data = data.map((e, key) => {
@@ -42,5 +42,6 @@ const employeeWithAssignedCustomerSelector = (employees, employeesProjects) => {
 export default createSelector(
   employeesSelector,
   employeesProjectsSelector,
-  employeeWithAssignedCustomerSelector
+  dateTodaySelector,
+  employeesWithCustomerSelector
 );
