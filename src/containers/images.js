@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { Component } from "react";
-import sha1 from "sha1";
-import superagent from "superagent";
+import React, { Component } from 'react';
+import sha1 from 'sha1';
+import superagent from 'superagent';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
-import { updateEmployee } from "../actions/index";
-import ImageDrop from "../components/imageDrop";
-import Spinner from "../components/spinner";
+import { updateEmployee } from '../actions/index';
+import ImageDrop from '../components/imageDrop';
+import Spinner from '../components/spinner';
 
 class Images extends Component {
   constructor(props) {
@@ -22,11 +22,11 @@ class Images extends Component {
     this.setState({ uploading: true });
 
     const image = files[0];
-    const cloudName = "blank";
+    const cloudName = 'blank';
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
     const timestamp = Date.now() / 1000;
-    const uploadPreset = "ansattliste";
+    const uploadPreset = 'ansattliste';
 
     const publicId = this.props.employee.id;
 
@@ -46,7 +46,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
     };
 
     const uploadRequest = superagent.post(url);
-    uploadRequest.attach("file", image);
+    uploadRequest.attach('file', image);
 
     Object.keys(params).forEach(key => {
       uploadRequest.field(key, params[key]);
@@ -78,7 +78,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 
     if (this.state.uploading === true) {
       return (
-        <div className="edit-pic">
+        <div className='edit-pic'>
           <Spinner />
         </div>
       );

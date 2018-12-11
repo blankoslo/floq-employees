@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
-import React from "react";
-import EmployeeImage from "./employeeImage";
-import Spinner from "./spinner";
+import React from 'react';
+import EmployeeImage from './employeeImage';
+import Spinner from './spinner';
 
-import nbLocale from "date-fns/locale/nb";
-import distanceInWords from "date-fns/distance_in_words";
-import format from "date-fns/format";
+import nbLocale from 'date-fns/locale/nb';
+import distanceInWords from 'date-fns/distance_in_words';
+import format from 'date-fns/format';
 
 const ImageWithOverlay = props => {
   const { firstNames, lastName, dateOfEmployment, imageUrl, title, emoji } = props;
   return (
-    <div className="image-with-overlay">
-      <EmployeeImage className="card-pic" src={imageUrl} width="800" height="400" />
-      <div className="image-with-overlay__overlay-text-and-emoji">
+    <div className='image-with-overlay'>
+      <EmployeeImage className='card-pic' src={imageUrl} width='800' height='400' />
+      <div className='image-with-overlay__overlay-text-and-emoji'>
         <div>
           <h1>
             {firstNames[0]} {firstNames[1]} {lastName}
@@ -27,39 +27,65 @@ const ImageWithOverlay = props => {
   );
 };
 
+ImageWithOverlay.propTypes = {
+  firstNames: PropTypes.array,
+  lastName: PropTypes.string,
+  dateOfEmployment: PropTypes.string,
+  imageUrl: PropTypes.string,
+  title: PropTypes.string,
+  emoji: PropTypes.string
+};
+
 const EmergancyContact = ({ name, relation, phone }) => {
   if (!name || !phone) return null;
   return (
     <div>
       <h5>Kontaktperson</h5>
-      <a>{`${name || ""} (${relation || ""})`}</a>
-      <a href={`tel:${phone || ""}`} />
+      <a>{`${name || ''} (${relation || ''})`}</a>
+      <a href={`tel:${phone || ''}`} />
     </div>
   );
+};
+
+EmergancyContact.propTypes = {
+  name: PropTypes.string,
+  relation: PropTypes.string,
+  phone: PropTypes.string
 };
 
 const ContactInformation = ({ email, phone }) => {
   if (!phone && !email) return null;
   return (
-    <div className="contact-info">
-      <a href={`tel:${phone}`}>{phone || ""}</a>
-      <a href={`mailto:${email}`}>{email || ""}</a>
+    <div className='contact-info'>
+      <a href={`tel:${phone}`}>{phone || ''}</a>
+      <a href={`mailto:${email}`}>{email || ''}</a>
     </div>
   );
+};
+
+ContactInformation.propTypes = {
+  phone: PropTypes.string,
+  email: PropTypes.string
 };
 
 const Address = ({ streetAddress, postalCode, city }) => {
   if (!streetAddress && !postalCode && !city) return null;
   return (
-    <div className="expanded-info__address">
+    <div className='expanded-info__address'>
       <h5>Adresse</h5>
       <address>
-        {streetAddress || ""}
+        {streetAddress || ''}
         <br />
-        {`${postalCode || ""} ${city || ""}`}
+        {`${postalCode || ''} ${city || ''}`}
       </address>
     </div>
   );
+};
+
+Address.propTypes = {
+  streetAddress: PropTypes.string,
+  postalCode: PropTypes.string,
+  city: PropTypes.city
 };
 
 const Birthday = ({ birthDate }) => {
@@ -67,9 +93,13 @@ const Birthday = ({ birthDate }) => {
   return (
     <div>
       <h5>Bursdag</h5>
-      <a>{format(new Date(birthDate), "DD/MM/YYYY")}</a>
+      <a>{format(new Date(birthDate), 'DD/MM/YYYY')}</a>
     </div>
   );
+};
+
+Birthday.propTypes = {
+  birthDate: PropTypes.string
 };
 
 const DebitAccountNumber = ({ accountNumber }) => {
@@ -82,17 +112,25 @@ const DebitAccountNumber = ({ accountNumber }) => {
   );
 };
 
+DebitAccountNumber.propTypes = {
+  accountNumber: PropTypes.string
+};
+
 const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) => (
-  <div className="customer-info-and-expand">
-    <a className="customer-info-and-expand__customer-text">{`Jobber nå hos ${
-      workplace ? workplace : "morra di"
-    }`}</a>
-    <div className="customer-info-and-expand__expand-button" onClick={toggleExpanded}>
-      <a>{expanded ? "Lukk" : "Mer info"}</a>
-      <i className="material-icons">{expanded ? "expand_less" : "expand_more"}</i>
+  <div className='customer-info-and-expand'>
+    <a className='customer-info-and-expand__customer-text'>{`Jobber nå hos ${workplace}`}</a>
+    <div className='customer-info-and-expand__expand-button' onClick={toggleExpanded}>
+      <a>{expanded ? 'Lukk' : 'Mer info'}</a>
+      <i className='material-icons'>{expanded ? 'expand_less' : 'expand_more'}</i>
     </div>
   </div>
 );
+
+WorkplaceWithCardExpandButton.propTypes = {
+  workplace: PropTypes.string,
+  expanded: PropTypes.bool,
+  toggleExpanded: PropTypes.func
+};
 
 const AskMeAbout = ({ text }) => {
   if (!text) return null;
@@ -104,10 +142,14 @@ const AskMeAbout = ({ text }) => {
   );
 };
 
+AskMeAbout.propTypes = {
+  text: PropTypes.string
+};
+
 const ExpandedInformation = ({ employee, expanded }) => {
   if (!expanded) return null;
   return (
-    <div className="expanded-info">
+    <div className='expanded-info'>
       <Birthday birthDate={employee.birth_date} />
       <Address streetAddress={employee.address} postalCode={employee.postal} city={employee.city} />
       <EmergancyContact
@@ -118,6 +160,11 @@ const ExpandedInformation = ({ employee, expanded }) => {
       <AskMeAbout text={undefined} />
     </div>
   );
+};
+
+ExpandedInformation.propTypes = {
+  employee: PropTypes.object,
+  expanded: PropTypes.bool
 };
 
 class Employee extends React.Component {
@@ -138,10 +185,10 @@ class Employee extends React.Component {
     } else if (this.props.employee.data === null) {
       return <div>Not found...</div>;
     }
-    const firstNames = this.props.employee.first_name.split(" ");
+    const firstNames = this.props.employee.first_name.split(' ');
 
     return (
-      <div className="employee-card">
+      <div className='employee-card'>
         <ImageWithOverlay
           firstNames={firstNames}
           lastName={this.props.employee.last_name}

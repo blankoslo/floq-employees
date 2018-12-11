@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Employee from "../components/employee2";
-import EmployeeExpanded from "../components/employeeExpanded";
-import EmployeeForm from "./employeeForm";
-import { editEmployee } from "../actions/index";
+import Employee from '../components/employee2';
+import EmployeeExpanded from '../components/employeeExpanded';
+import EmployeeForm from './employeeForm';
+import { editEmployee } from '../actions/index';
 
 class EmployeeCard extends Component {
   constructor(props) {

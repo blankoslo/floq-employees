@@ -21,12 +21,11 @@ class SelectField extends Component {
   render() {
     const buttons = this.props.choices.map(choice => (
       <div key={choice} className='mdl-cell mdl-cell--4-col'>
-        <label
-          className='mdl-radio mdl-js-radio mdl-js-ripple-effect'
-          htmlFor={choice}
-        >
+        <label className='mdl-radio mdl-js-radio mdl-js-ripple-effect' htmlFor={choice}>
           <input
-            type='radio' id={choice} className='mdl-radio__button'
+            type='radio'
+            id={choice}
+            className='mdl-radio__button'
             name='options'
             value={choice}
             onChange={() => {
@@ -40,11 +39,7 @@ class SelectField extends Component {
       </div>
     ));
 
-    return (
-      <div className='mdl-grid'>
-        {buttons}
-      </div>
-    );
+    return <div className='mdl-grid'>{buttons}</div>;
   }
 }
 

@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 const employeesSelector = state => state.employees;
 const employeesProjectsSelector = state => state.employeesProjects;
@@ -22,15 +22,15 @@ const employeesWithCustomerSelector = (employees, employeesProjects, dateToday) 
     data = data.filter(employee => isEmployeed(employee, dateToday));
   }
 
-  data = data.map((e, key) => {
+  data = data.map(e => {
     const employeeProject = employeesProjects.data.get(e.id);
     return Object.assign(e, employeeProject);
   });
 
-  const technologists = data.filter(employee => employee.title === "Teknolog");
-  const designers = data.filter(employee => employee.title === "Designer");
+  const technologists = data.filter(employee => employee.title === 'Teknolog');
+  const designers = data.filter(employee => employee.title === 'Designer');
   const other = data.filter(
-    employee => employee.title !== "Teknolog" && employee.title !== "Designer"
+    employee => employee.title !== 'Teknolog' && employee.title !== 'Designer'
   );
 
   return {

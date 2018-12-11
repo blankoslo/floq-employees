@@ -1,11 +1,11 @@
-import * as Immutable from "immutable";
+import * as Immutable from 'immutable';
 
 import {
   GET_EMPLOYEES,
   CREATE_EMPLOYEE,
   UPDATE_EMPLOYEE,
   TOGGLE_REMOVE_TERMINATED
-} from "../actions/index";
+} from '../actions/index';
 
 const lowerCaseName = e => `${e.first_name}${e.last_name}`.toLowerCase();
 

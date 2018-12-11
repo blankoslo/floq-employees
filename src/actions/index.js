@@ -1,22 +1,22 @@
-import * as api from "../apiclient";
+import * as api from '../apiclient';
 
-export const API_ERROR = "API_ERROR";
-export const API_ERROR_CLEAR = "API_ERROR_CLEAR";
+export const API_ERROR = 'API_ERROR';
+export const API_ERROR_CLEAR = 'API_ERROR_CLEAR';
 
-export const GET_EMPLOYEE = "GET_EMPLOYEE";
-export const GET_EMPLOYEES = "GET_EMPLOYEES";
-export const GET_EMPLOYEES_PROJECTS = "GET_EMPLOYEES_PROJECTS";
-export const CREATE_EMPLOYEE = "CREATE_EMPLOYEE";
-export const UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE";
+export const GET_EMPLOYEE = 'GET_EMPLOYEE';
+export const GET_EMPLOYEES = 'GET_EMPLOYEES';
+export const GET_EMPLOYEES_PROJECTS = 'GET_EMPLOYEES_PROJECTS';
+export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 
-export const FORM_UPDATE_VALUE = "FORM_UPDATE_VALUE";
-export const FORM_RESET = "FORM_RESET";
+export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
+export const FORM_RESET = 'FORM_RESET';
 
-export const EDIT_EMPLOYEE = "EDIT_EMPLOYEE";
-export const NEW_EMPLOYEE = "NEW_EMPLOYEE";
+export const EDIT_EMPLOYEE = 'EDIT_EMPLOYEE';
+export const NEW_EMPLOYEE = 'NEW_EMPLOYEE';
 
-export const SELECT_EMPLOYEE = "SELECT_EMPLOYEE";
-export const TOGGLE_REMOVE_TERMINATED = "TOGGLE_REMOVE_TERMINATED";
+export const SELECT_EMPLOYEE = 'SELECT_EMPLOYEE';
+export const TOGGLE_REMOVE_TERMINATED = 'TOGGLE_REMOVE_TERMINATED';
 
 export const apiError = message => ({
   type: API_ERROR,
