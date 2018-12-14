@@ -15,6 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
@@ -48,6 +49,7 @@
     "redux-devtools-dock-monitor": "^1.1.0",
     "redux-devtools-log-monitor": "^1.0.5",
     "redux-mock-store": "^1.5.3",
+    "regenerator-runtime": "^0.13.1",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.26.1",
@@ -58,6 +60,7 @@
   "dependencies": {
     "@material-ui/core": "^3.6.1",
     "axios": "^0.11.0",
+    "classnames": "^2.2.6",
     "connected-react-router": "^6.0.0-beta.1",
     "date-fns": "^1.29.0",
     "express": "^4.16.3",
@@ -72,8 +75,10 @@
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "redux": "^4.0.1",
+    "redux-form": "^8.0.1",
     "reselect": "^2.5.1",
     "sha1": "^1.1.1",
-    "superagent": "^3.8.3"
+    "superagent": "^3.8.3",
+    "svg-url-loader": "^2.3.2"
   }
 }

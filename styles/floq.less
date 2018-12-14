@@ -142,7 +142,7 @@
 
 .role-column__title {
   font-size: 1.2em;
-  font-family: "WorkSans-Regular";
+  font-family: 'WorkSans-Regular';
   text-transform: uppercase;
 }
 
@@ -155,13 +155,14 @@
 }
 .employee-card {
   display: flex;
+  position: relative;
   flex-direction: column;
   margin-bottom: 40px;
 
   & a,
   h1,
   h5 {
-    font-family: "WorkSans-Regular";
+    font-family: 'WorkSans-Regular';
   }
 }
 
@@ -273,7 +274,7 @@
   & address {
     margin-top: 5px;
     line-height: 20px;
-    font-family: "WorkSans-Regular";
+    font-family: 'WorkSans-Regular';
   }
 }
 
@@ -305,4 +306,54 @@
 .floq-search-field__icon {
   margin: 0px 10px 0px 10px;
   color: @floq-header-text !important;
+}
+
+.floq-employee-editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: fade(@blank-purple-dark, 80%);
+  z-index: 3;
+}
+
+.floq-edit-employee-button {
+  margin: 5px 0px 0px 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.floq-edit-employee-button__icon {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-image: url(../icons/edit.svg);
+  background-position: center center;
+  background-size: contain;
+  z-index: 2;
+}
+
+.add-employee-button {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
+}
+
+.add-employee-button__button {
+  background-color: white;
+}
+
+.floq-title-select__button--selected {
+  background-color: @blank-pink;
+}
+
+.floq-gender-select__button--selected {
+  background-color: @blank-purple;
 }

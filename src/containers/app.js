@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { getEmployees, getEmployeesProjects } from '../actions/index';
 
 import EmployeeList from '../containers/employeeList';
+import EmployeeEditor from '../containers/employeeEditor';
+import AddEmployeeButton from '../components/AddEmployeeButton';
 import ErrorDialog from './errorDialog';
 import subWeeks from 'date-fns/sub_weeks';
 
@@ -26,6 +28,8 @@ class App extends Component {
         <ErrorDialog />
         <div className={classes}>
           <EmployeeList />
+          {this.props.displayEmployeeEditor ? <EmployeeEditor /> : undefined}
+          <AddEmployeeButton />
         </div>
       </div>
     );
@@ -38,7 +42,8 @@ App.propTypes = {
   dispatch: PropTypes.func,
   params: PropTypes.object,
   fetchEmployees: PropTypes.func,
-  fetchEmployeesProjects: PropTypes.func
+  fetchEmployeesProjects: PropTypes.func,
+  displayEmployeeEditor: PropTypes.bool
 };
 
 const mapDispatchToProps = dispatch => {
@@ -54,7 +59,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => ({
+  displayEmployeeEditor: state.edit.displayEmployeeEditor
+});
+
 export default connect(
-  () => ({}),
+  mapStateToProps,
   mapDispatchToProps
 )(App);

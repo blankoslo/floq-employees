@@ -12,11 +12,13 @@ export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
 export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
 
-export const EDIT_EMPLOYEE = 'EDIT_EMPLOYEE';
-export const NEW_EMPLOYEE = 'NEW_EMPLOYEE';
+export const SET_EMPLOYEE_EDITOR_INITIAL_VALUES = 'SET_EMPLOYEE_EDITOR_INITIAL_VALUES';
 
 export const SELECT_EMPLOYEE = 'SELECT_EMPLOYEE';
 export const TOGGLE_REMOVE_TERMINATED = 'TOGGLE_REMOVE_TERMINATED';
+export const TOGGLE_EMPLOYEE_EDITOR = 'TOGGLE_EMPLOYEE_EDITOR';
+
+export const SUBMIT_EMPLOYEE_FORM = 'SUBMIT_EMPLOYEE_FORM';
 
 export const apiError = message => ({
   type: API_ERROR,
@@ -26,11 +28,6 @@ export const apiError = message => ({
 export const clearApiError = () => ({
   type: API_ERROR_CLEAR
 });
-
-// export const getEmployee = id => ({
-//   type: GET_EMPLOYEE,
-//   payload: api.getEmployee(id)
-// });
 
 export const getEmployees = () => ({
   type: GET_EMPLOYEES,
@@ -47,24 +44,14 @@ export const updateEmployee = (id, employee) => ({
   payload: api.updateEmployee(id, employee)
 });
 
-export const updateField = (formName, fieldName, value) => ({
-  type: FORM_UPDATE_VALUE,
-  payload: { [formName]: { [fieldName]: value } }
+export const setEmployeeEditorInitialValues = values => ({
+  type: SET_EMPLOYEE_EDITOR_INITIAL_VALUES,
+  payload: values
 });
 
-export const resetForm = formName => ({
-  type: FORM_RESET,
-  payload: formName
-});
-
-export const editEmployee = id => ({
-  type: EDIT_EMPLOYEE,
-  payload: id
-});
-
-export const newEmployee = value => ({
-  type: NEW_EMPLOYEE,
-  payload: value
+export const toggleEmployeeEditor = () => ({
+  type: TOGGLE_EMPLOYEE_EDITOR,
+  payload: null
 });
 
 export const getEmployeesProjects = (fromDate, toDate) => ({
@@ -76,3 +63,8 @@ export const toggleShowTerminated = () => ({
   type: TOGGLE_REMOVE_TERMINATED,
   payload: null
 });
+
+// export const submitEmployeeForm = values => ({
+//   type: SUBMIT_EMPLOYEE_FORM,
+//   payload: values
+// });

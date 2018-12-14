@@ -16,7 +16,7 @@ const employeesWithCustomerSelector = (employees, employeesProjects, dateToday) 
     return { loading: true, data: null };
   }
 
-  let data = employees.data;
+  let data = employees.data.toOrderedMap();
 
   if (employees.removeTerminated) {
     data = data.filter(employee => isEmployeed(employee, dateToday));
@@ -24,7 +24,7 @@ const employeesWithCustomerSelector = (employees, employeesProjects, dateToday) 
 
   data = data.map(e => {
     const employeeProject = employeesProjects.data.get(e.id);
-    return Object.assign(e, employeeProject);
+    return { ...e, ...employeeProject };
   });
 
   const technologists = data.filter(employee => employee.title === 'Teknolog');
