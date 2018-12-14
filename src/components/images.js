@@ -4,16 +4,14 @@ import sha1 from 'sha1';
 import superagent from 'superagent';
 
 import { connect } from 'react-redux';
-
-import { updateEmployee } from '../actions/index';
-import ImageDrop from '../components/imageDrop';
-import Spinner from '../components/spinner';
+import ImageDrop from './imageDrop';
+import Spinner from './spinner';
 
 class Images extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: true,
+      hover: false,
       uploading: false
     };
   }
@@ -28,7 +26,7 @@ class Images extends Component {
     const timestamp = Date.now() / 1000;
     const uploadPreset = 'ansattliste';
 
-    const publicId = this.props.employee.id;
+    const publicId = this.props.employeeData.id;
 
     const paramStr = `public_id=${publicId}\
 &timestamp=${timestamp}\
@@ -57,10 +55,9 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
         return;
       }
 
-      const updatedEmployee = Object.assign({}, this.props.employee);
+      const updatedEmployee = Object.assign({}, this.props.employeeData);
       updatedEmployee.image_url = resp.body.secure_url;
 
-      this.props.updateEmployee(parseInt(publicId), updatedEmployee);
       this.setState({ uploading: false, hover: false });
     });
   };
@@ -72,7 +69,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
   };
 
   render() {
-    if (this.props.employee.id == null) {
+    if (this.props.employeeData.id === undefined) {
       return <div />;
     }
 
@@ -86,7 +83,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 
     return (
       <ImageDrop
-        imgSrc={this.props.employee.image_url}
+        imgSrc={this.props.input.value}
         hover={this.state.hover}
         onDrop={this.uploadFile}
         onMouseEnter={this.toggleHover}
@@ -96,19 +93,13 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
   }
 }
 
+const mapStateToProps = state => ({
+  employeeData: state.edit.initialValues
+});
+
 Images.propTypes = {
-  employee: PropTypes.object,
-  updateEmployee: PropTypes.func,
-  onSubmit: PropTypes.func
+  employeeData: PropTypes.object,
+  input: PropTypes.object
 };
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = {
-  updateEmployee
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Images);
+export default connect(mapStateToProps)(Images);

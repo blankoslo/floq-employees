@@ -2,31 +2,27 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { renderField } from './CustomFields';
+import { TextInput } from './CustomFields';
+import PagingAndSubmitControls from './PagingAndSubmitControls';
 
 const EmergancyDetailsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name='emergency_contact_name' type='text' component={renderField} label='Navn' />
-      <Field name='emergency_contact_phone' type='text' component={renderField} label='Telefon' />
-      <Field
-        name='emergency_contact_relation'
-        type='text'
-        component={renderField}
-        label='Relasjon'
-      />
-      <Field name='address' type='text' component={renderField} label='Adresse' />
-      <Field name='postal_code' type='text' component={renderField} label='Postnr.' />
-      <Field name='city' type='text' component={renderField} label='Sted' />
-      <div>
-        <button type='button' className='previous' onClick={previousPage}>
-          Tilbake
-        </button>
-        <button type='submit' className='next'>
-          Next
-        </button>
+      <div className='form-page_fields'>
+        <Field name='emergency_contact_name' type='text' component={TextInput} label='Navn' />
+        <Field name='emergency_contact_phone' type='text' component={TextInput} label='Telefon' />
+        <Field
+          name='emergency_contact_relation'
+          type='text'
+          component={TextInput}
+          label='Relasjon'
+        />
+        <Field name='address' type='text' component={TextInput} label='Adresse' />
+        <Field name='postal_code' type='text' component={TextInput} label='Postnr.' />
+        <Field name='city' type='text' component={TextInput} label='Sted' />
       </div>
+      <PagingAndSubmitControls previousPage={previousPage} />
     </form>
   );
 };

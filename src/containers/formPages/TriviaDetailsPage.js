@@ -8,25 +8,21 @@ import { toggleEmployeeEditor, getEmployees } from '../../actions/index';
 import regeneratorRuntime from 'regenerator-runtime';
 /* eslint no-unused-vars: 1 */
 
-import { renderField } from './CustomFields';
+import { TextInput } from './CustomFields';
+import PagingAndSubmitControls from './PagingAndSubmitControls';
 
 const TriviaDetialsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name='bio_1' type='text' component={renderField} label='?' />
-      <Field name='bio_2' type='text' component={renderField} label='??' />
-      <Field name='bio_3' type='text' component={renderField} label='???' />
-      <Field name='emoji' type='text' component={renderField} label='🦐' />
-      <Field name='personal_title' type='text' component={renderField} label='CEO? Snapchatter?' />
-      <div>
-        <button type='button' className='previous' onClick={previousPage}>
-          Tilbake
-        </button>
-        <button type='submit' className='next'>
-          Ferdig
-        </button>
+      <div className='form-page_fields'>
+        <Field name='bio_1' type='text' component={TextInput} label='?' />
+        <Field name='bio_2' type='text' component={TextInput} label='??' />
+        <Field name='bio_3' type='text' component={TextInput} label='???' />
+        <Field name='emoji' type='text' component={TextInput} label='🦐' />
+        <Field name='personal_title' type='text' component={TextInput} label='CEO? Snapchatter?' />
       </div>
+      <PagingAndSubmitControls previousPage={previousPage} isFormSubmit />
     </form>
   );
 };

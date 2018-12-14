@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-export const renderField = ({ input, label, type, meta: { touched, error } }) => (
+export const TextInput = ({ input, label, type, meta: { touched, error } }) => (
   <div>
-    <input {...input} placeholder={label} type={type} />
+    <input className='floq-text-input__input' {...input} placeholder={label} type={type} />
     {touched && error && <span>{error}</span>}
   </div>
 );
 
-renderField.propTypes = {
+TextInput.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   type: PropTypes.string,
@@ -17,8 +17,8 @@ renderField.propTypes = {
 };
 
 export const Button = ({ value, type, currentValue, onChange, label, fieldName }) => {
-  const className = classNames('floq-title-select__button', {
-    [`floq-${fieldName}-select__button--selected`]: currentValue === value
+  const className = classNames('floq-button-group__button', {
+    [`floq-button-group__button-${fieldName}--selected`]: currentValue === value
   });
   return (
     <button type={type} className={className} value={value} onClick={() => onChange(value)}>
@@ -36,13 +36,13 @@ Button.propTypes = {
   fieldName: PropTypes.string
 };
 
-export const TitleSelect = props => {
+export const ButtonGroup = props => {
   const {
     options,
     input: { value: currentValue, onChange, name: fieldName }
   } = props;
   return (
-    <div>
+    <div className='floq-button-group'>
       {options.map(({ label, value }, key) => (
         <Button
           key={key}
@@ -58,7 +58,7 @@ export const TitleSelect = props => {
   );
 };
 
-TitleSelect.propTypes = {
+ButtonGroup.propTypes = {
   options: PropTypes.array,
   input: PropTypes.object
 };

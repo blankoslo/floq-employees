@@ -3,7 +3,8 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { renderField, TitleSelect } from './CustomFields';
+import { TextInput, ButtonGroup } from './CustomFields';
+import PagingAndSubmitControls from './PagingAndSubmitControls';
 
 const titleOptions = [
   {
@@ -39,15 +40,13 @@ const BasicDetailsPage = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <Field name='first_name' type='text' component={renderField} label='First Name' />
-      <Field name='last_name' type='text' component={renderField} label='Last Name' />
-      <Field options={titleOptions} name='title' type='button' component={TitleSelect} />
-      <Field options={genderOptions} name='gender' type='button' component={TitleSelect} />
-      <div>
-        <button type='submit' className='next'>
-          Next
-        </button>
+      <div className='form-page_fields'>
+        <Field name='first_name' type='text' component={TextInput} label='Fornavn' />
+        <Field name='last_name' type='text' component={TextInput} label='Etternavn' />
+        <Field options={titleOptions} name='title' type='button' component={ButtonGroup} />
+        <Field options={genderOptions} name='gender' type='button' component={ButtonGroup} />
       </div>
+      <PagingAndSubmitControls />
     </form>
   );
 };

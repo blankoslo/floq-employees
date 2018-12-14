@@ -25,7 +25,7 @@
   .floq-list-header {
     display: flex;
     justify-content: space-between;
-    background-color: @floq-list-background-header;
+    background-color: @floq-creamy-light-purple;
   }
 }
 
@@ -309,6 +309,9 @@
 }
 
 .floq-employee-editor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 0;
   left: 0;
@@ -346,14 +349,88 @@
   z-index: 4;
 }
 
+.floq-employee-editor__page {
+  display: flex;
+  background-color: @blank-white;
+  height: 450px;
+
+  & > form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: auto;
+  }
+}
+
 .add-employee-button__button {
   background-color: white;
 }
 
-.floq-title-select__button--selected {
+.floq-button-group {
+  display: flex;
+  margin-top: 15px;
+
+  & > * {
+    margin-left: 5px;
+  }
+
+  & > *:first-child {
+    margin-left: 0px;
+  }
+}
+
+.floq-button-group__button {
+  display: flex;
+  width: 100px;
+  height: 35px;
+  flex-basis: 100px;
+  flex-shrink: 0;
+  justify-content: center;
+  border: none;
+  background-color: @floq-creamy-light-purple;
+  border-radius: 5px;
+  font-family: 'WorkSans-Regular';
+  font-size: 1em;
+}
+
+.floq-button-group__button-title--selected {
   background-color: @blank-pink;
 }
 
-.floq-gender-select__button--selected {
+.floq-button-group__button-gender--selected {
   background-color: @blank-purple;
+}
+
+.floq-text-input__input {
+  margin-top: 5px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid fade(@blank-black, 12);
+  font-size: 1.2em;
+  font-family: 'WorkSans-Regular';
+}
+
+.form-page_fields {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 10px 25px 10px;
+}
+
+.form_paging_and_submit-controls {
+  display: flex;
+}
+
+.form_paging_and_submit-controls__button {
+  border: none;
+  font-family: 'WorkSans-Regular';
+  flex-grow: 1;
+  height: 35px;
+}
+
+.form_paging_and_submit-controls__button_submit {
+  background-color: @blank-yellow;
+}
+
+.form_paging_and_submit-controls__button_previous {
+  background-color: @blank-white;
 }
