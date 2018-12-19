@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from '@material-ui/core/Dialog';
+import Button from '@material-ui/core/Button';
 
 import { clearApiError } from '../actions';
 
@@ -12,12 +13,7 @@ class ErrorDialog extends Component {
 
   render() {
     const actions = [
-      <FlatButton
-        label='Got it'
-        primary
-        keyboardFocused
-        onTouchTap={this.handleClose}
-      />,
+      <Button label='Got it' primary keyboardFocused onTouchTap={this.handleClose} />
     ];
 
     return (
@@ -29,7 +25,7 @@ class ErrorDialog extends Component {
           open={this.props.error !== null}
           onRequestClose={this.handleClose}
         >
-          {this.props.error}
+          <div>{this.props.error}</div>
         </Dialog>
       </div>
     );
@@ -37,12 +33,15 @@ class ErrorDialog extends Component {
 }
 
 ErrorDialog.propTypes = {
-  error: React.PropTypes.string,
-  clearApiError: React.PropTypes.func
+  error: PropTypes.string,
+  clearApiError: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { clearApiError })(ErrorDialog);
+export default connect(
+  mapStateToProps,
+  { clearApiError }
+)(ErrorDialog);

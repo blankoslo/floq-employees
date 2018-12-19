@@ -1,25 +1,27 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import sha1 from 'sha1';
 import superagent from 'superagent';
 
 import { connect } from 'react-redux';
-
-import { updateEmployee, imageDrop } from '../actions/index';
-import ImageDrop from '../components/imageDrop';
-import Spinner from '../components/spinner';
+import ImageDrop from './imageDrop';
+import Spinner from './spinner';
 
 class Images extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      hover: true,
       uploading: false
     };
   }
 
-  uploadFile = (files) => {
+  uploadFile = files => {
     this.setState({ uploading: true });
+
+    const {
+      employeeData,
+      input: { onChange }
+    } = this.props;
 
     const image = files[0];
     const cloudName = 'blank';
@@ -28,7 +30,7 @@ class Images extends Component {
     const timestamp = Date.now() / 1000;
     const uploadPreset = 'ansattliste';
 
-    const publicId = this.props.employee.id;
+    const publicId = employeeData.id;
 
     const paramStr = `public_id=${publicId}\
 &timestamp=${timestamp}\
@@ -42,13 +44,13 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       public_id: publicId,
       timestamp,
       upload_preset: uploadPreset,
-      signature,
+      signature
     };
 
     const uploadRequest = superagent.post(url);
     uploadRequest.attach('file', image);
 
-    Object.keys(params).forEach((key) => {
+    Object.keys(params).forEach(key => {
       uploadRequest.field(key, params[key]);
     });
 
@@ -57,25 +59,13 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
         return;
       }
 
-      const updatedEmployee = Object.assign({}, this.props.employee);
-      updatedEmployee.image_url = resp.body.secure_url;
-
-      this.props.updateEmployee(parseInt(publicId), updatedEmployee);
-      this.setState({ uploading: false, hover: false });
+      this.setState({ uploading: false });
+      onChange(resp.body.secure_url);
     });
-  }
-
-  toggleHover = () => {
-    this.setState({
-      hover: !this.state.hover
-    });
-  }
-
+  };
   render() {
-    if (this.props.employee.id == null) {
-      return (
-        <div></div>
-      );
+    if (this.props.employeeData.id === undefined) {
+      return <div />;
     }
 
     if (this.state.uploading === true) {
@@ -88,26 +78,22 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 
     return (
       <ImageDrop
-        imgSrc={this.props.employee.image_url}
-        hover={this.state.hover}
+        imgSrc={this.props.input.value}
         onDrop={this.uploadFile}
         onMouseEnter={this.toggleHover}
         onMouseLeave={this.toggleHover}
-      />);
+      />
+    );
   }
 }
 
+const mapStateToProps = state => ({
+  employeeData: state.edit.initialValues
+});
+
 Images.propTypes = {
-  employee: React.PropTypes.object,
-  updateEmployee: React.PropTypes.func,
-  onSubmit: React.PropTypes.func
+  employeeData: PropTypes.object,
+  input: PropTypes.object
 };
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = {
-  updateEmployee,
-  imageDrop
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Images);
+export default connect(mapStateToProps)(Images);

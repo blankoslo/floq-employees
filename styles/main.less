@@ -1,13 +1,13 @@
+@import "colors.less";
+@import "fonts.less";
 @import "reset.less";
 @import "floq.less";
 @import "details.less";
 @import "list.less";
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,700);
-
 @errorColor: red;
 @backgroundPanelColor: #c3c3c3;
-@inputColor: #EEE;
+@inputColor: #eee;
 
 @purple: #414cb7;
 @gray: #9b9b9b;
@@ -16,32 +16,32 @@
 @black: #000000;
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 h3 {
-    font-size: px;
+  font-size: px;
 }
 
 hr {
-    border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 div.icon-row {
-    display: flex;
-    flex-flow: row;
+  display: flex;
+  flex-flow: row;
 }
 
 div.icon-row-icon {
-    width: 34px;
+  width: 34px;
 }
 
 div.vert-spacer {
-    margin: 34px 0 34px 0;
+  margin: 34px 0 34px 0;
 }
 
 hr.icon-margin {
-    margin-left: 34px;
+  margin-left: 34px;
 }
 
 label {
@@ -66,16 +66,19 @@ div.form-row {
   display: table-row;
 }
 
-input, select {
-  position: relative;
-  font-size: 16px;
-  border-style: none;
-  border-bottom: 1px solid black;
-  line-height: 19px;
-  padding: 6px 10px 5px;
-  width: 12rem;
-  margin-bottom: 1rem;
-  background-color: @inputColor;
+form {
+  &input,
+  select {
+    position: relative;
+    font-size: 16px;
+    border-style: none;
+    border-bottom: 1px solid black;
+    line-height: 19px;
+    padding: 6px 10px 5px;
+    width: 12rem;
+    margin-bottom: 1rem;
+    background-color: @inputColor;
+  }
 }
 
 div.container {
@@ -92,7 +95,6 @@ div.container {
 
 .error {
   color: red;
-
 }
 
 table {
@@ -100,7 +102,6 @@ table {
   border-collapse: separate;
   border-spacing: 0 0.5rem;
   tr {
-
     th {
       background-color: #0088cc;
       padding: 0.5rem 1rem;
@@ -110,22 +111,19 @@ table {
       padding: 0.5rem 1rem;
       background-color: #6699cc;
     }
-
-
   }
-
 }
 
 .main-color {
-    color: @purple;
+  color: @purple;
 }
 
 .gray {
-    color: @gray;
+  color: @gray;
 }
 
 .dark-gray {
-    color: @dark-gray;
+  color: @dark-gray;
 }
 
 .white {
