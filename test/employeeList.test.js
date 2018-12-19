@@ -35,7 +35,7 @@ describe('<EmployeeList /> container', () => {
         <EmployeeList />
       </Provider>
     );
-    expect(wrapper.find(EmployeeCard)).to.have.lengthOf(46 - 9);
+    expect(wrapper.find(EmployeeCard)).to.have.lengthOf(45 - 8);
   });
 
   it('Is rendering <EmployeeCard /> for all employees', () => {
@@ -45,7 +45,7 @@ describe('<EmployeeList /> container', () => {
         <EmployeeList />
       </Provider>
     );
-    expect(wrapper.find(EmployeeCard)).to.have.lengthOf(46);
+    expect(wrapper.find(EmployeeCard)).to.have.lengthOf(45);
   });
 
   //   it("Is rendering three <RoleColumn /> (");

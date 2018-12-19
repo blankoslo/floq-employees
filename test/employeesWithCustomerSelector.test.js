@@ -11,16 +11,16 @@ describe('employeesWithCustomerSelector(state, props)', () => {
   it('Sum of each split is correct when showing terminated employees', () => {
     const store = mockStore(stateWithDataKeepTerminated);
     const employees = employeesWithCustomer(store.getState());
-    expect(employees.data.designers.size).equal(10);
-    expect(employees.data.technologists.size).equal(22);
-    expect(employees.data.other.size).equal(store.getState().employees.data.size - 32);
+    expect(employees.data.designers.size).equal(11);
+    expect(employees.data.technologists.size).equal(28);
+    expect(employees.data.other.size).equal(6);
   });
 
   it('Sum of each split is correct when filtering out terminated employees', () => {
     const store = mockStore(stateWithDataRemoveTerminated);
     const employees = employeesWithCustomer(store.getState());
-    expect(employees.data.designers.size).equal(10 - 2);
-    expect(employees.data.technologists.size).equal(22 - 4);
-    expect(employees.data.other.size).equal(store.getState().employees.data.size - 32 - 3);
+    expect(employees.data.designers.size).equal(11 - 2);
+    expect(employees.data.technologists.size).equal(28 - 6);
+    expect(employees.data.other.size).equal(6);
   });
 });
