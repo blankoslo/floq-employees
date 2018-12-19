@@ -49,26 +49,51 @@ img.profile-pic {
 }
 
 .edit-pic {
-  width: 256px;
-  height: 200px;
-
   .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
 
   .animation(fade-in 0.3s linear);
+}
+
+.edit-hover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: 'WorkSans-Regular';
+  background-color: fade(@blank-pink, 45%);
+  opacity: 0;
+}
+
+.edit-hover:hover {
+  opacity: 1;
+  cursor: pointer;
+
+  .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
+  .animation(fade-in 0.3s linear);
+}
+
+.edit-hover__icon {
+  color: fade(@blank-purple-dark, 75%);
+  font-size: 7em;
+}
+
+.edit-hover__description {
+  padding: 7px 10px;
+  border-radius: 15px;
+  color: @blank-black;
+  font-weight: 600;
+  font-size: 1.2em;
+  letter-spacing: 3px;
 }
 
 .loading-spinner {
   margin-left: auto;
   margin-right: auto;
-}
-
-.edit-hover {
-  position: relative;
-  top: 25%;
-  padding: 20px;
-  .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
-
-  .animation(fade-in 0.3s linear);
 }
 
 .card-pic {
@@ -90,3 +115,9 @@ img.profile-pic {
 
   .animation(move-to 0.07s ease-out);
 }
+
+.image-drop__dropzone {
+  border-style: hidden;
+  position: relative;
+}
+

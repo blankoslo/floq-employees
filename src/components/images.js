@@ -11,13 +11,17 @@ class Images extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false,
       uploading: false
     };
   }
 
   uploadFile = files => {
     this.setState({ uploading: true });
+
+    const {
+      employeeData,
+      input: { onChange }
+    } = this.props;
 
     const image = files[0];
     const cloudName = 'blank';
@@ -26,7 +30,7 @@ class Images extends Component {
     const timestamp = Date.now() / 1000;
     const uploadPreset = 'ansattliste';
 
-    const publicId = this.props.employeeData.id;
+    const publicId = employeeData.id;
 
     const paramStr = `public_id=${publicId}\
 &timestamp=${timestamp}\
@@ -55,19 +59,10 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
         return;
       }
 
-      const updatedEmployee = Object.assign({}, this.props.employeeData);
-      updatedEmployee.image_url = resp.body.secure_url;
-
-      this.setState({ uploading: false, hover: false });
+      this.setState({ uploading: false });
+      onChange(resp.body.secure_url);
     });
   };
-
-  toggleHover = () => {
-    this.setState({
-      hover: !this.state.hover
-    });
-  };
-
   render() {
     if (this.props.employeeData.id === undefined) {
       return <div />;
@@ -84,7 +79,6 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
     return (
       <ImageDrop
         imgSrc={this.props.input.value}
-        hover={this.state.hover}
         onDrop={this.uploadFile}
         onMouseEnter={this.toggleHover}
         onMouseLeave={this.toggleHover}
