@@ -103,29 +103,18 @@ Birthday.propTypes = {
   birthDate: PropTypes.string
 };
 
-const DebitAccountNumber = ({ accountNumber }) => {
-  if (!accountNumber) return null;
+const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) => {
+  const customerText = workplace ? `På oppdrag hos ${workplace}` : `Jobber nå internt hos Blank`;
   return (
-    <div>
-      <h5>Kontonummer</h5>
-      <a>{accountNumber}</a>
+    <div className='customer-info-and-expand'>
+      <a className='customer-info-and-expand__customer-text'> {customerText}</a>
+      <div className='customer-info-and-expand__expand-button' onClick={toggleExpanded}>
+        <a>{expanded ? 'Lukk' : 'Mer info'}</a>
+        <i className='material-icons'>{expanded ? 'expand_less' : 'expand_more'}</i>
+      </div>
     </div>
   );
 };
-
-DebitAccountNumber.propTypes = {
-  accountNumber: PropTypes.string
-};
-
-const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) => (
-  <div className='customer-info-and-expand'>
-    <a className='customer-info-and-expand__customer-text'>{`Jobber nå hos ${workplace}`}</a>
-    <div className='customer-info-and-expand__expand-button' onClick={toggleExpanded}>
-      <a>{expanded ? 'Lukk' : 'Mer info'}</a>
-      <i className='material-icons'>{expanded ? 'expand_less' : 'expand_more'}</i>
-    </div>
-  </div>
-);
 
 WorkplaceWithCardExpandButton.propTypes = {
   workplace: PropTypes.string,
