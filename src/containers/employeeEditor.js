@@ -1,4 +1,4 @@
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import BasicDetailsPage from './formPages/BasicDetailsPage';
@@ -24,15 +24,23 @@ const ProgressLegend = ({ currentPage, legendPage, legendText }) => {
   );
 };
 
-const ProgressIndicator = ({ currentPage }) => {
-  return (
-    <div className='form_progress_indicator'>
-      <ProgressLegend currentPage={currentPage} legendPage={1} legendText={'Basic'} />
-      <ProgressLegend currentPage={currentPage} legendPage={2} legendText={'Personal'} />
-      <ProgressLegend currentPage={currentPage} legendPage={3} legendText={'Emergancy'} />
-      <ProgressLegend currentPage={currentPage} legendPage={4} legendText={'Trivia'} />
-    </div>
-  );
+ProgressLegend.propTypes = {
+  currentPage: PropTypes.number,
+  legendPage: PropTypes.number,
+  legendText: PropTypes.string
+};
+
+const ProgressIndicator = ({ currentPage }) => (
+  <div className='form_progress_indicator'>
+    <ProgressLegend currentPage={currentPage} legendPage={1} legendText={'Basic'} />
+    <ProgressLegend currentPage={currentPage} legendPage={2} legendText={'Personal'} />
+    <ProgressLegend currentPage={currentPage} legendPage={3} legendText={'Emergancy'} />
+    <ProgressLegend currentPage={currentPage} legendPage={4} legendText={'Trivia'} />
+  </div>
+);
+
+ProgressIndicator.propTypes = {
+  currentPage: PropTypes.number
 };
 
 class EmployeeEditor extends React.Component {
@@ -80,7 +88,7 @@ class EmployeeEditor extends React.Component {
 }
 
 EmployeeEditor.propTypes = {
-  handleSubmit: propTypes.func
+  handleSubmit: PropTypes.func
 };
 
 export default reduxForm({
