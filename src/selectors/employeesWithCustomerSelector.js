@@ -27,11 +27,9 @@ const employeesWithCustomerSelector = (employees, employeesProjects, dateToday) 
     return { ...e, ...employeeProject };
   });
 
-  const technologists = data.filter(employee => employee.title === 'Teknolog');
-  const designers = data.filter(employee => employee.title === 'Designer');
-  const other = data.filter(
-    employee => employee.title !== 'Teknolog' && employee.title !== 'Designer'
-  );
+  const technologists = data.filter(employee => employee.role === 'Teknolog');
+  const designers = data.filter(employee => employee.role === 'Designer');
+  const other = data.filter(employee => employee.role === 'Annet');
 
   return {
     loading: false,

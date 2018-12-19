@@ -3,21 +3,22 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { TextInput, ButtonGroup } from './CustomFields';
+import { TextInput, ButtonGroup, InputLabel } from './CustomFields';
 import PagingAndSubmitControls from './PagingAndSubmitControls';
+import { required } from './fieldValidators';
 
-const titleOptions = [
+const roleOptions = [
   {
     label: 'Teknolog',
-    value: 'technologist'
+    value: 'Teknolog'
   },
   {
     label: 'Designer',
-    value: 'designer'
+    value: 'Designer'
   },
   {
     label: 'Annet*',
-    value: 'other'
+    value: 'Annet'
   }
 ];
 
@@ -41,10 +42,36 @@ const BasicDetailsPage = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div className='form-page_fields'>
-        <Field name='first_name' type='text' component={TextInput} label='Fornavn' />
-        <Field name='last_name' type='text' component={TextInput} label='Etternavn' />
-        <Field options={titleOptions} name='title' type='button' component={ButtonGroup} />
-        <Field options={genderOptions} name='gender' type='button' component={ButtonGroup} />
+        <InputLabel labelText={'Navn'}>
+          <Field
+            name='first_name'
+            type='text'
+            component={TextInput}
+            label='Fornavn'
+            validate={[required]}
+          />
+          <Field
+            name='last_name'
+            type='text'
+            component={TextInput}
+            label='Etternavn'
+            validate={[required]}
+          />
+        </InputLabel>
+        <Field
+          options={roleOptions}
+          name='role'
+          type='button'
+          component={ButtonGroup}
+          validate={[required]}
+        />
+        <Field
+          options={genderOptions}
+          name='gender'
+          type='button'
+          component={ButtonGroup}
+          validate={[required]}
+        />
       </div>
       <PagingAndSubmitControls />
     </form>

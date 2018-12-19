@@ -16,10 +16,18 @@ TextInput.propTypes = {
   meta: PropTypes.object
 };
 
+export const InputLabel = ({ labelText, children }) => (
+  <div className={'floq_form_input_label'}>
+    <h6 className={'floq_form_input_label__header_text'}>{labelText}</h6>
+    {children}
+  </div>
+);
+
 export const Button = ({ value, type, currentValue, onChange, label, fieldName }) => {
   const className = classNames('floq-button-group__button', {
     [`floq-button-group__button-${fieldName}--selected`]: currentValue === value
   });
+  console.log(currentValue, value, currentValue === value);
   return (
     <button type={type} className={className} value={value} onClick={() => onChange(value)}>
       {label}
@@ -61,4 +69,16 @@ export const ButtonGroup = props => {
 ButtonGroup.propTypes = {
   options: PropTypes.array,
   input: PropTypes.object
+};
+
+export const TextArea = props => {
+  const {
+    label,
+    input: { value, onChange, name: fieldName }
+  } = props;
+  return (
+    <textarea className='floq-textarea' placeholder={label} onChange={onChange}>
+      {value}
+    </textarea>
+  );
 };

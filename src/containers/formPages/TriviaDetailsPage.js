@@ -8,7 +8,7 @@ import { toggleEmployeeEditor, getEmployees } from '../../actions/index';
 import regeneratorRuntime from 'regenerator-runtime';
 /* eslint no-unused-vars: 1 */
 
-import { TextInput } from './CustomFields';
+import { TextInput, InputLabel, TextArea } from './CustomFields';
 import PagingAndSubmitControls from './PagingAndSubmitControls';
 
 const TriviaDetialsPage = props => {
@@ -16,11 +16,15 @@ const TriviaDetialsPage = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div className='form-page_fields'>
-        <Field name='bio_1' type='text' component={TextInput} label='?' />
-        <Field name='bio_2' type='text' component={TextInput} label='??' />
-        <Field name='bio_3' type='text' component={TextInput} label='???' />
-        <Field name='emoji' type='text' component={TextInput} label='🦐' />
-        <Field name='personal_title' type='text' component={TextInput} label='CEO? Snapchatter?' />
+        <InputLabel labelText='Hvem er du?'>
+          <Field name='bio' component={TextArea} label={'?\n??\n???'} />
+        </InputLabel>
+        <InputLabel labelText='Din personlige emoji'>
+          <Field name='emoji' type='text' component={TextInput} label='🦐' />
+        </InputLabel>
+        <InputLabel labelText='Din personlige tittel'>
+          <Field name='title' type='text' component={TextInput} label='CEO? Snapchatter?' />
+        </InputLabel>
       </div>
       <PagingAndSubmitControls previousPage={previousPage} isFormSubmit />
     </form>

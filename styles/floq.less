@@ -308,7 +308,7 @@
   color: @floq-header-text !important;
 }
 
-.floq-employee-editor {
+.floq-employee-editor-overlay {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -319,6 +319,10 @@
   height: 100%;
   background-color: fade(@blank-purple-dark, 80%);
   z-index: 3;
+}
+
+.floq-employee-editor {
+  display: flex;
 }
 
 .floq-edit-employee-button {
@@ -351,11 +355,14 @@
 
 .floq-employee-editor__page {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: @blank-white;
-  height: 450px;
+  height: 520px;
 
   & > form {
     display: flex;
+    flex-grow: 1;
     justify-content: space-between;
     flex-direction: column;
     width: auto;
@@ -381,19 +388,19 @@
 
 .floq-button-group__button {
   display: flex;
-  width: 100px;
   height: 35px;
-  flex-basis: 100px;
-  flex-shrink: 0;
+  flex-basis: 110px;
+  flex-shrink: 1;
+  flex-grow: 1;
   justify-content: center;
   border: none;
   background-color: @floq-creamy-light-purple;
   border-radius: 5px;
   font-family: 'WorkSans-Regular';
-  font-size: 1em;
+  font-size: 1.1em;
 }
 
-.floq-button-group__button-title--selected {
+.floq-button-group__button-role--selected {
   background-color: @blank-pink;
 }
 
@@ -402,18 +409,20 @@
 }
 
 .floq-text-input__input {
-  margin-top: 5px;
-  width: 100%;
+  margin-bottom: 10px;
+  width: 350px;
+  height: 30px;
   border: none;
-  border-bottom: 2px solid fade(@blank-black, 12);
-  font-size: 1.2em;
+  border-bottom: 1px solid fade(@blank-black, 12);
+  font-size: 1.4em;
   font-family: 'WorkSans-Regular';
 }
 
 .form-page_fields {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
-  padding: 25px 10px 25px 10px;
+  padding: 10px 40px 40px 40px;
 }
 
 .form_paging_and_submit-controls {
@@ -423,8 +432,10 @@
 .form_paging_and_submit-controls__button {
   border: none;
   font-family: 'WorkSans-Regular';
+  font-size: 1.1em;
+  font-weight: 600;
   flex-grow: 1;
-  height: 35px;
+  height: 40px;
 }
 
 .form_paging_and_submit-controls__button_submit {
@@ -433,4 +444,74 @@
 
 .form_paging_and_submit-controls__button_previous {
   background-color: @blank-white;
+}
+
+.form_progress_indicator {
+  display: flex;
+  margin: 35px 20% 15px 20%;
+  justify-content: space-between;
+  align-items: center;
+  height: 1px;
+  min-height: 1px;
+  overflow: visible;
+  background-color: @floq-creamy-light-purple;
+}
+
+.form_progress_legend {
+  display: flex;
+  position: relative;
+}
+
+.form_progress_legend__text {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  top: 25px;
+  background-color: @blank-white;
+  padding: 0px 5px 0px 5px;
+  font-family: 'WorkSans-Regular';
+  font-size: 0.9em;
+  align-self: center;
+  line-height: 5px;
+}
+
+.form_progress_indicator__progress_legend--past {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  border: 1px solid @floq-creamy-light-purple;
+  background-color: @blank-purple;
+}
+
+.form_progress_indicator__progress_legend--current {
+  height: 10px;
+  width: 10px;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  align-self: center;
+  border: 1px solid @floq-creamy-light-purple;
+  background-color: @blank-purple;
+}
+
+.form_progress_indicator__progress_legend--future {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  border: 1px solid @floq-creamy-light-purple;
+  background-color: @blank-white;
+}
+
+.floq_form_input_label {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.floq_form_input_label__header_text {
+  color: @blank-purple-dark;
+  font-weight: 600;
+  font-size: 1em;
+  font-family: 'WorkSans-Regular';
+  margin-bottom: 5px;
 }
