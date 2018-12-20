@@ -4,7 +4,7 @@
   "description": "The frontend application for employees",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --port 5000 --floq_port 3000",
-    "build": "webpack --mode production",
+    "dist": "webpack --mode production",
     "lint": "eslint src test",
     "test": "mocha --require @babel/register --require ./test/setup.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
