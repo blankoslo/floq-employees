@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "The frontend application for employees",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --port 5000 --floq_port 3000",
-    "dist": "webpack --mode production",
+    "start": "webpack-dev-server --open --port=5000 --config config/webpack.dev.js",
+    "dist": "webpack --open --config config/webpack.prod.js",
     "lint": "eslint src test",
     "test": "mocha --require @babel/register --require ./test/setup.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
@@ -55,6 +55,7 @@
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
+    "webpack-merge": "^4.1.5",
     "yargs": "^12.0.5"
   },
   "dependencies": {
