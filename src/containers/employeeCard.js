@@ -104,7 +104,9 @@ Birthday.propTypes = {
 };
 
 const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) => {
-  const customerText = workplace ? `På oppdrag hos ${workplace}` : 'Jobber nå internt hos Blank';
+  const customerText = (workplace !== 'Blank')
+    ? `På oppdrag hos ${workplace}`
+    : 'Jobber nå internt hos Blank';
   return (
     <div className='customer-info-and-expand'>
       <a className='customer-info-and-expand__customer-text'> {customerText}</a>

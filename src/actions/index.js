@@ -13,12 +13,12 @@ export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
 
 export const SET_EMPLOYEE_EDITOR_INITIAL_VALUES = 'SET_EMPLOYEE_EDITOR_INITIAL_VALUES';
-
-export const SELECT_EMPLOYEE = 'SELECT_EMPLOYEE';
 export const TOGGLE_REMOVE_TERMINATED = 'TOGGLE_REMOVE_TERMINATED';
 export const TOGGLE_EMPLOYEE_EDITOR = 'TOGGLE_EMPLOYEE_EDITOR';
 
 export const SUBMIT_EMPLOYEE_FORM = 'SUBMIT_EMPLOYEE_FORM';
+
+export const UPDATE_SEARCH_TERMS = 'UPDATE_SEARCH_TERMS';
 
 export const apiError = message => ({
   type: API_ERROR,
@@ -64,6 +64,10 @@ export const toggleShowTerminated = () => ({
   payload: null
 });
 
+export const updateSearchTerms = (inputValue) => ({
+  type: UPDATE_SEARCH_TERMS,
+  payload: inputValue
+});
 // export const submitEmployeeForm = values => ({
 //   type: SUBMIT_EMPLOYEE_FORM,
 //   payload: values

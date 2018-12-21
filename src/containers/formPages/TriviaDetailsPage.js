@@ -51,14 +51,14 @@ const submitEmployeeForm = (employeeData, dispatch) => {
     delete modifiedEmployeeData.id;
     return updateEmployee(employeeData.id, modifiedEmployeeData)
       .then(onSuccessfulSubmit(dispatch))
-      .catch(e => {
+      .catch(() => {
         dispatch(stopSubmit('employeeeForm'));
       });
   }
 
   return createEmployee(employeeData)
     .then(onSuccessfulSubmit(dispatch))
-    .catch(e => {
+    .catch(() => {
       dispatch(stopSubmit('employeeeForm'));
     });
 };

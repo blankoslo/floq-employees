@@ -3,6 +3,9 @@ import * as Immutable from 'immutable';
 const baseState = {
   app: {
     dateToday: new Date(2018, 11, 10)
+  },
+  search: {
+    terms: ''
   }
 };
 

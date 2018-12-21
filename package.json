@@ -1,13 +1,13 @@
 {
   "name": "employees",
   "version": "1.0.0",
-  "description": "The frontend application for employees",
+  "description": "Floq – Employees",
   "scripts": {
     "start": "webpack-dev-server --open --port=5000 --config config/webpack.dev.js",
     "dist": "webpack --open --config config/webpack.prod.js",
     "lint": "eslint src test",
     "test": "mocha --require @babel/register --require ./test/setup.js --recursive ./test",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test --watch"
   },
   "author": "",
   "repository": "https://github.com/blankoslo/employees",
@@ -65,6 +65,7 @@
     "connected-react-router": "^6.0.0-beta.1",
     "date-fns": "^1.29.0",
     "express": "^4.16.3",
+    "fuse.js": "^3.3.0",
     "history": "^4.7.2",
     "immutable": "^3.8.1",
     "lodash": "^4.17.10",

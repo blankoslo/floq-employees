@@ -7,20 +7,17 @@ import { toggleShowTerminated } from '../actions/index';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import employeesWithCustomerSelector from '../selectors/employeesWithCustomerSelector';
-import { SearchField } from '../components/SearchField';
+import SearchField from '../components/SearchField';
 
-export const RoleColumn = ({ roleTitle, data }) => {
-  const cardsData = data.valueSeq();
-  return (
-    <div className='role-column'>
-      <h5 className='role-column__title'>{roleTitle}</h5>
-      <hr className='role-column__horizontal-line' />
-      {cardsData.map(employee => (
-        <EmployeeCard key={employee.id} employee={employee} />
-      ))}
-    </div>
+export const RoleColumn = ({ roleTitle, data }) => (
+  <div className='role-column'>
+    <h5 className='role-column__title'>{roleTitle}</h5>
+    <hr className='role-column__horizontal-line' />
+    {data.map(employee => (
+      <EmployeeCard key={employee.id} employee={employee} />
+    ))}
+  </div>
   );
-};
 
 RoleColumn.propTypes = {
   roleTitle: PropTypes.string,
