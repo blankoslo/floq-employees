@@ -6,7 +6,7 @@ export const email = value =>
     : undefined);
 
 export const phone = value =>
-  (value && !/^[0-9]{8,8}$/i.test(value) ? 'Ugylding telefonnummer' : undefined);
+  (value && !/^[0-9]{8,8}$/i.test(value) ? 'Ugyldig telefonnummer' : undefined);
 
 export const bankAccount = value =>
-  (value && !/^[0-9]{4}.[0-9]{2}.[0-9]{5}$/i.test(value) ? 'Ugydling kontonummer' : undefined);
+  (value && !/^[0-9]{4}.[0-9]{2}.[0-9]{5}$/i.test(value) ? 'Ugyldig kontonummer' : undefined);

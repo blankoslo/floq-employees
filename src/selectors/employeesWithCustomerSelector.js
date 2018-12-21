@@ -57,6 +57,9 @@ const employeesWithCustomerSelector = (employees, employeesProjects, dateToday, 
     data = new Immutable.List(fuse.search(searchTerms));
   }
 
+  // Add random card color (placed here to avoid rerender)
+  data = data.map(e => ({ ...e, cardColor: Math.round(Math.random(), 1) }));
+
   const technologists = data.filter(employee => employee.role === 'Teknolog');
   const designers = data.filter(employee => employee.role === 'Designer');
   const other = data.filter(employee => employee.role === 'Annet');

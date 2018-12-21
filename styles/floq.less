@@ -208,11 +208,18 @@
   }
 }
 
+.image-with-overlay__overlay-text-and-emoji--blank-purple {
+  background-color: fade(@blank-purple, 90%);
+}
+
+.image-with-overlay__overlay-text-and-emoji--blank-pink {
+  background-color: fade(@blank-pink, 90%);
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  background-color: @blank-purple;
   padding: 10px 0px 10px 40px;
 
   & > a {
@@ -220,6 +227,14 @@
     font-weight: 600;
     color: @blank-turquoise;
   }
+}
+
+.contact-info--blank-pink {
+  background-color: fade(@blank-pink, 90%);
+}
+
+.contact-info--blank-purple {
+  background-color: fade(@blank-purple, 90%);
 }
 
 .customer-info-and-expand {
@@ -372,7 +387,7 @@
 }
 
 .add-employee-button__button {
-  background-color: white;
+  background-color: @blank-purple-dark;
 }
 
 .floq-button-group {
@@ -404,16 +419,34 @@
 
 .floq-button-group__button-role--selected {
   background-color: @blank-pink;
+  color: @blank-white;
 }
 
 .floq-button-group__button-gender--selected {
   background-color: @blank-purple;
+  color: @blank-white;
 }
 
-.floq-text-input__input {
-  margin-bottom: 10px;
+.floq-text-input {
+  position: relative;
+  display: flex;
+  margin-bottom: 16px;
   width: 350px;
   height: 30px;
+}
+
+.floq-text-input__error-message {
+  position: absolute;
+  bottom: -17px;
+  right: 0;
+  font-size: 0.8em;
+  color: @blank-pink;
+
+}
+
+
+.floq-text-input__input {
+  flex-grow: 1;
   border: none;
   border-bottom: 1px solid fade(@blank-black, 12);
   font-size: 1.4em;

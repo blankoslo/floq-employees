@@ -3,9 +3,9 @@ import React from 'react';
 import classNames from 'classnames';
 
 export const TextInput = ({ input, label, type, meta: { touched, error } }) => (
-  <div>
+  <div className='floq-text-input'>
     <input className='floq-text-input__input' {...input} placeholder={label} type={type} />
-    {touched && error && <span>{error}</span>}
+    {touched && error && <a className='floq-text-input__error-message'>{error}</a>}
   </div>
 );
 
@@ -25,7 +25,7 @@ export const InputLabel = ({ labelText, children }) => (
 
 InputLabel.propTypes = {
   labelText: PropTypes.string,
-  children: PropTypes.array
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
 export const Button = ({ value, type, currentValue, onChange, label, fieldName }) => {
@@ -81,9 +81,7 @@ export const TextArea = props => {
     input: { value, onChange }
   } = props;
   return (
-    <textarea className='floq-textarea' placeholder={label} onChange={onChange}>
-      {value}
-    </textarea>
+    <textarea value={value} className='floq-textarea' placeholder={label} onChange={onChange} />
   );
 };
 

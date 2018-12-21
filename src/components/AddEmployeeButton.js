@@ -7,11 +7,9 @@ const AddEmployeeButton = ({ displayEmployeeEditor, createNewEmployee }) => (
   <div className='add-employee-button'>
     <button
       onClick={createNewEmployee}
-      className='add-employee-button__button
-           mdl-button mdl-js-button mdl-button--fab
-           mdl-button--mini-fab'
+      className='add-employee-button__button mdl-button mdl-js-button mdl-button--fab'
     >
-      <i className='material-icons dark-gray'>{displayEmployeeEditor ? 'clear' : 'add'}</i>
+      <i className='material-icons white'>{displayEmployeeEditor ? 'clear' : 'add'}</i>
     </button>
   </div>
 );

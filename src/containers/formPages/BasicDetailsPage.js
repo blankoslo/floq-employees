@@ -17,7 +17,7 @@ const roleOptions = [
     value: 'Designer'
   },
   {
-    label: 'Annet*',
+    label: 'Annet',
     value: 'Annet'
   }
 ];

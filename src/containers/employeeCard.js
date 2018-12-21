@@ -3,17 +3,22 @@ import React from 'react';
 import EmployeeImage from '../components/employeeImage';
 import Spinner from '../components/spinner';
 import EditEmployeeButton from '../components/EditEmployeeButton';
+import classNames from 'classnames';
 
 import nbLocale from 'date-fns/locale/nb';
 import distanceInWords from 'date-fns/distance_in_words';
 import format from 'date-fns/format';
 
 const ImageWithOverlay = props => {
-  const { firstNames, lastName, dateOfEmployment, imageUrl, title, emoji } = props;
+  const { firstNames, lastName, dateOfEmployment, imageUrl, title, emoji, cardColor } = props;
+  const className = classNames('image-with-overlay__overlay-text-and-emoji',
+  { 'image-with-overlay__overlay-text-and-emoji--blank-purple': cardColor === 0 },
+  { 'image-with-overlay__overlay-text-and-emoji--blank-pink': cardColor === 1 });
+
   return (
     <div className='image-with-overlay'>
       <EmployeeImage className='card-pic' src={imageUrl} width='800' height='400' />
-      <div className='image-with-overlay__overlay-text-and-emoji'>
+      <div className={className}>
         <div>
           <h1>
             {firstNames[0]} {firstNames[1]} {lastName}
@@ -34,7 +39,8 @@ ImageWithOverlay.propTypes = {
   dateOfEmployment: PropTypes.string,
   imageUrl: PropTypes.string,
   title: PropTypes.string,
-  emoji: PropTypes.string
+  emoji: PropTypes.string,
+  cardColor: PropTypes.number
 };
 
 const EmergancyContact = ({ name, relation, phone }) => {
@@ -54,10 +60,13 @@ EmergancyContact.propTypes = {
   phone: PropTypes.string
 };
 
-const ContactInformation = ({ email, phone }) => {
+const ContactInformation = ({ email, phone, cardColor }) => {
   if (!phone && !email) return null;
+  const className = classNames('contact-info',
+  { 'contact-info--blank-purple': cardColor === 0 },
+  { 'contact-info--blank-pink': cardColor === 1 });
   return (
-    <div className='contact-info'>
+    <div className={className}>
       <a href={`tel:${phone}`}>{phone || ''}</a>
       <a href={`mailto:${email}`}>{email || ''}</a>
     </div>
@@ -66,7 +75,8 @@ const ContactInformation = ({ email, phone }) => {
 
 ContactInformation.propTypes = {
   phone: PropTypes.string,
-  email: PropTypes.string
+  email: PropTypes.string,
+  cardColor: PropTypes.number
 };
 
 const Address = ({ streetAddress, postalCode, city }) => {
@@ -86,7 +96,7 @@ const Address = ({ streetAddress, postalCode, city }) => {
 Address.propTypes = {
   streetAddress: PropTypes.string,
   postalCode: PropTypes.string,
-  city: PropTypes.city
+  city: PropTypes.string
 };
 
 const Birthday = ({ birthDate }) => {
@@ -181,7 +191,9 @@ export default class EmployeeCard extends React.Component {
 
     return (
       <div className='employee-card'>
-        <EditEmployeeButton id={this.props.employee.id} />
+        <EditEmployeeButton
+          id={this.props.employee.id}
+        />
         <ImageWithOverlay
           firstNames={firstNames}
           lastName={this.props.employee.last_name}
@@ -189,14 +201,22 @@ export default class EmployeeCard extends React.Component {
           dateOfEmployment={this.props.employee.date_of_employment}
           title={this.props.employee.title}
           emoji={this.props.employee.emoji}
+          cardColor={this.props.employee.cardColor}
         />
-        <ContactInformation email={this.props.employee.email} phone={this.props.employee.phone} />
+        <ContactInformation
+          email={this.props.employee.email}
+          phone={this.props.employee.phone}
+          cardColor={this.props.employee.cardColor}
+        />
         <WorkplaceWithCardExpandButton
           workplace={this.props.employee.customer_name}
           expanded={this.state.expanded}
           toggleExpanded={this.toggleExpanded}
         />
-        <ExpandedInformation employee={this.props.employee} expanded={this.state.expanded} />
+        <ExpandedInformation
+          employee={this.props.employee}
+          expanded={this.state.expanded}
+        />
       </div>
     );
   }

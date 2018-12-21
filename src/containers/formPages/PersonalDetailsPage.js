@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { TextInput, InputLabel } from './CustomFields';
 import PagingAndSubmitControls from './PagingAndSubmitControls';
-import { required } from './fieldValidators';
+import { required, phone, email } from './fieldValidators';
 
 const PersonalDetailsPage = props => {
   const { handleSubmit, previousPage } = props;
@@ -17,14 +17,14 @@ const PersonalDetailsPage = props => {
             type='text'
             component={TextInput}
             label='Telefon'
-            validate={[required]}
+            validate={[required, phone]}
           />
           <Field
             name='email'
             type='text'
             component={TextInput}
             label='E-post'
-            validate={[required]}
+            validate={[required, email]}
           />
         </InputLabel>
         <InputLabel labelText={'Fødselsdato'}>
