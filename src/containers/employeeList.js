@@ -41,20 +41,23 @@ class EmployeeList extends React.Component {
       return <Spinner />;
     }
 
+    const { designers, technologists, other } = this.props.employees.data;
+
     return (
       <div>
         <div className='floq-list'>
           <div className='floq-list-header'>
             <SearchField />
             <FormControlLabel
+              className='floq-list-header__filter-unemployed-switch'
               control={<Switch onChange={this.props.toggleShowTerminated} />}
               label='Vis x-blankere'
             />
           </div>
           <div className='floq-cards'>
-            <RoleColumn data={this.props.employees.data.designers} roleTitle={'Designere'} />
-            <RoleColumn data={this.props.employees.data.technologists} roleTitle={'Teknologer'} />
-            <RoleColumn data={this.props.employees.data.other} roleTitle={'Administrasjon ++'} />
+            {designers.size > 0 && <RoleColumn data={designers} roleTitle={'Designere'} />}
+            {technologists.size > 0 && <RoleColumn data={technologists} roleTitle={'Teknologer'} />}
+            {other.size > 0 && <RoleColumn data={other} roleTitle={'Administrasjon ++'} />}
           </div>
         </div>
       </div>

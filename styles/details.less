@@ -131,3 +131,44 @@ img.profile-pic {
   border: none;
   resize: none;
 }
+
+@media screen and (max-width: @breakpoint-first) {
+
+  .floq-cards {
+    padding-left: 0px;
+  }
+
+  .employee-card {
+    font-size: 10px;
+  }
+
+  .role-column {
+    padding-bottom: 5em;
+  }
+}
+
+@media screen and (max-width: @breakpoint-second) {
+  
+  .employee-card {
+    font-size: 12px;
+  }
+
+}
+
+@media screen and (max-width: @breakpoint-third) {
+  
+  .floq {
+    font-size: 12px;
+  }
+
+  .floq-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .floq-list-header__filter-unemployed-switch {
+    display: none !important;
+  }
+}

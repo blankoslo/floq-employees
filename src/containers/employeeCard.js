@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import EmployeeImage from '../components/employeeImage';
 import Spinner from '../components/spinner';
-import EditEmployeeButton from '../components/EditEmployeeButton';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import nbLocale from 'date-fns/locale/nb';
 import distanceInWords from 'date-fns/distance_in_words';
 import format from 'date-fns/format';
+import { setEmployeeEditorInitialValues, toggleEmployeeEditor } from '../actions/index';
 
 const ImageWithOverlay = props => {
   const { firstNames, lastName, dateOfEmployment, imageUrl, title, emoji, cardColor } = props;
@@ -67,8 +68,10 @@ const ContactInformation = ({ email, phone, cardColor }) => {
   { 'contact-info--blank-pink': cardColor === 1 });
   return (
     <div className={className}>
-      <a href={`tel:${phone}`}>{phone || ''}</a>
-      <a href={`mailto:${email}`}>{email || ''}</a>
+      <div>
+        <a className='contact-info__medium' href={`tel:${phone}`}>{phone || ''}</a>
+        <a className='contact-info__medium' href={`mailto:${email}`}>{email || ''}</a>
+      </div>
     </div>
   );
 };
@@ -169,7 +172,11 @@ ExpandedInformation.propTypes = {
   expanded: PropTypes.bool
 };
 
-export default class EmployeeCard extends React.Component {
+const formatPhoneNumber = (phoneNumber) => (
+  phoneNumber.replace(/\s+/g, '').replace(/(\d{2})(?=\d)/g, '$1 ')
+);
+
+class EmployeeCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -177,9 +184,14 @@ export default class EmployeeCard extends React.Component {
     };
   }
 
-  toggleExpanded = () => {
+  toggleExpanded = e => {
     this.setState({ expanded: !this.state.expanded });
+    e.stopPropagation();
   };
+
+  editEmployee = () => {
+    this.props.editEmployee(this.props.employee);
+  }
 
   render() {
     if (this.props.employee.loading) {
@@ -188,12 +200,10 @@ export default class EmployeeCard extends React.Component {
       return <div>Not found...</div>;
     }
     const firstNames = this.props.employee.first_name.split(' ');
+    const phone = formatPhoneNumber(this.props.employee.phone);
 
     return (
-      <div className='employee-card'>
-        <EditEmployeeButton
-          id={this.props.employee.id}
-        />
+      <div className='employee-card' onClick={this.editEmployee}>
         <ImageWithOverlay
           firstNames={firstNames}
           lastName={this.props.employee.last_name}
@@ -205,7 +215,7 @@ export default class EmployeeCard extends React.Component {
         />
         <ContactInformation
           email={this.props.employee.email}
-          phone={this.props.employee.phone}
+          phone={phone}
           cardColor={this.props.employee.cardColor}
         />
         <WorkplaceWithCardExpandButton
@@ -223,5 +233,18 @@ export default class EmployeeCard extends React.Component {
 }
 
 EmployeeCard.propTypes = {
-  employee: PropTypes.object
+  employee: PropTypes.object,
+  editEmployee: PropTypes.func
 };
+
+const mapDispatchToProps = dispatch => ({
+  editEmployee: employeeData => {
+    dispatch(setEmployeeEditorInitialValues(employeeData));
+    dispatch(toggleEmployeeEditor());
+  }
+});
+
+export default connect(
+  () => ({}),
+  mapDispatchToProps
+)(EmployeeCard);

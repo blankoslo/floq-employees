@@ -34,7 +34,6 @@
   padding-left: 170px;
   padding-top: 45px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -135,16 +134,14 @@
   flex-grow: 1;
   flex-shrink: 1;
   max-width: 600px;
-  flex-basis: 420px;
-  min-width: 420px;
   flex-direction: column;
-  margin-right: 50px;
 }
 
 .role-column__title {
   font-size: 1.2em;
   font-family: 'WorkSans-Regular';
   text-transform: uppercase;
+  margin: 0px 20px;
 }
 
 .role-column__horizontal-line {
@@ -153,18 +150,27 @@
   background-color: @blank-black;
   margin-top: 5px;
   margin-bottom: 15px;
+  margin: 0px 20px;
 }
 .employee-card {
   display: flex;
   position: relative;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin: 0.9em 0.9em;
 
   & a,
   h1,
   h5 {
     font-family: 'WorkSans-Regular';
   }
+}
+
+.employee-card:hover {
+  transform: scale(1.01);
+  box-shadow: 2px 3px 4px rgba(125,125,125,0.2);
+  transition: all 0.2s ease-in-out;
+  transition-delay: 0.1s;
+  cursor: pointer;
 }
 
 .image-with-overlay {
@@ -178,24 +184,21 @@
   flex-direction: row;
   justify-content: space-between;
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
   background-color: fade(@blank-purple, 90%);
   width: 100%;
 
   & > div {
-    padding-left: 20px;
-    padding-top: 5px;
+    padding: 0.5em 0em 0.2em 1em;
 
     & > h1 {
-      color: @blank-white;
       font-size: 1.6em;
       font-weight: 800;
     }
 
     & > a {
       font-size: 1.2em;
-      color: @blank-white;
     }
   }
 
@@ -209,24 +212,48 @@
 }
 
 .image-with-overlay__overlay-text-and-emoji--blank-purple {
-  background-color: fade(@blank-purple, 90%);
+  background-color: fade(@blank-purple, 80%);
+
+  & h1 {
+    color: @blank-white;
+  }
+
+  & a {
+    color: @blank-white;
+  }
 }
 
 .image-with-overlay__overlay-text-and-emoji--blank-pink {
-  background-color: fade(@blank-pink, 90%);
+  background-color: fade(@blank-pink, 80%);
+
+  & h1 {
+    color: @blank-black;
+  }
+
+  & a {
+    color: @blank-black;
+  }
 }
 
 .contact-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
-  padding: 10px 0px 10px 40px;
+  padding: 1em 0em;
 
-  & > a {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: @blank-turquoise;
+  & > div {
+    display: flex;
+    flex-direction: column;
   }
+}
+
+.contact-info__medium {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: @blank-turquoise;
+  letter-spacing: 0.1em;
 }
 
 .contact-info--blank-pink {
@@ -243,7 +270,7 @@
   box-sizing: border-box;
   background-color: @blank-yellow;
   color: @blank-black;
-  padding: 10px 10px 10px 20px;
+  padding: 0.7em 1em;
   align-items: center;
 }
 
@@ -256,7 +283,11 @@
   & > a {
     color: @blank-purple-dark;
     text-transform: uppercase;
-    font-weight: 100;
+    font-weight: 600;
+    font-size: 0.8em;
+  }
+  & > i {
+    font-size: 1.4em;
   }
 }
 
@@ -415,6 +446,7 @@
   border-radius: 5px;
   font-family: 'WorkSans-Regular';
   font-size: 1.1em;
+  cursor: pointer;
 }
 
 .floq-button-group__button-role--selected {
@@ -471,6 +503,7 @@
   font-weight: 600;
   flex-grow: 1;
   height: 40px;
+  cursor: pointer;
 }
 
 .form_paging_and_submit-controls__button_submit {
