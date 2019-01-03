@@ -49,8 +49,8 @@ img.profile-pic {
 }
 
 .edit-pic {
-  height: 22em;
-  width: auto;
+  max-width: 100%;
+  height: auto;
   
   .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
   .animation(fade-in 0.3s linear);
@@ -121,6 +121,7 @@ img.profile-pic {
   position: relative;
 }
 
+
 .floq-textarea {
   height: 121px;
   margin-bottom: 10px;
@@ -179,5 +180,48 @@ img.profile-pic {
   .floq-search-field {
     width: auto;
     flex-grow: 1;
+  }
+
+  .mobile-upload-button {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background-color: @blank-green;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .image-drop__image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .edit-hover {
+    display: none;
+  }
+
+  .edit-pic {
+    height: 4em;
+    width: auto;
+    clip-path: circle();
+    margin: 0.6em 0em 0.2em 0em;
+  }
+
+  .floq-employee-editor {
+    padding: 0em 3em 0em 0em;
+  }
+
+  .floq-employee-editor__image-upload {
+    position: relative;
+    width: 4em;
+
+    & > form {
+      position: absolute;
+      left: 2em;
+    }
   }
 }

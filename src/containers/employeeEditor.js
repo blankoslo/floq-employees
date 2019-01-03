@@ -65,7 +65,7 @@ class EmployeeEditor extends React.Component {
     return (
       <div className='floq-employee-editor-overlay'>
         <div className='floq-employee-editor'>
-          <div>
+          <div className='floq-employee-editor__image-upload'>
             <form onSubmit={handleSubmit}>
               <Field name='image_url' type='file' component={Images} />
             </form>
