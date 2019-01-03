@@ -9,7 +9,7 @@ module.exports = merge(common, {
     './src/index.js'
   ],
   output: {
-    path: __dirname + '/dist/js',
+    path: `${__dirname}/dist/js`,
     filename: 'app.bundle.js',
     publicPath: `http://localhost:${argv.port}/`
   },
