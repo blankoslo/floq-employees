@@ -204,7 +204,7 @@
 
   & > a {
     font-size: 5em;
-    padding-right: 20px;
+    padding-right: 0.2em;
     position: absolute;
     right: 0;
     bottom: 0;
@@ -406,7 +406,7 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: @blank-white;
-  height: 520px;
+  height: 37em;
 
   & > form {
     display: flex;
@@ -423,21 +423,21 @@
 
 .floq-button-group {
   display: flex;
-  margin-top: 15px;
+  margin-top: 0.8em;
 
   & > * {
-    margin-left: 5px;
+    margin-left: 0.4em;
   }
 
   & > *:first-child {
-    margin-left: 0px;
+    margin-left: 0em;
   }
 }
 
 .floq-button-group__button {
   display: flex;
-  height: 35px;
-  flex-basis: 110px;
+  height: 2.2em;
+  flex-basis: 5em;
   flex-shrink: 1;
   flex-grow: 1;
   justify-content: center;
@@ -446,6 +446,7 @@
   border-radius: 5px;
   font-family: 'WorkSans-Regular';
   font-size: 1.1em;
+  padding: 0em 0em;
   cursor: pointer;
 }
 
@@ -462,14 +463,14 @@
 .floq-text-input {
   position: relative;
   display: flex;
-  margin-bottom: 16px;
-  width: 350px;
-  height: 30px;
+  margin-bottom: 1.5em;
+  width: 22em;
+  height: 2em;
 }
 
 .floq-text-input__error-message {
   position: absolute;
-  bottom: -17px;
+  bottom: -2em;
   right: 0;
   font-size: 0.8em;
   color: @blank-pink;
@@ -489,7 +490,7 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  padding: 10px 40px 40px 40px;
+  padding: 2em;
 }
 
 .form_paging_and_submit-controls {
@@ -502,7 +503,7 @@
   font-size: 1.1em;
   font-weight: 600;
   flex-grow: 1;
-  height: 40px;
+  height: 3em;
   cursor: pointer;
 }
 
@@ -516,7 +517,7 @@
 
 .form_progress_indicator {
   display: flex;
-  margin: 35px 20% 15px 20%;
+  margin: 3em 6em;
   justify-content: space-between;
   align-items: center;
   height: 1px;
@@ -535,26 +536,24 @@
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  top: 25px;
+  top: 2.1em;
   background-color: @blank-white;
-  padding: 0px 5px 0px 5px;
   font-family: 'WorkSans-Regular';
   font-size: 0.9em;
   align-self: center;
-  line-height: 5px;
 }
 
 .form_progress_indicator__progress_legend--past {
-  height: 12px;
-  width: 12px;
+  height: 1em;
+  width: 1em;
   border-radius: 50%;
   border: 1px solid @floq-creamy-light-purple;
   background-color: @blank-purple;
 }
 
 .form_progress_indicator__progress_legend--current {
-  height: 10px;
-  width: 10px;
+  height: 0.8em;
+  width: 0.8em;
   transform: rotate(45deg);
   transform-origin: 50% 50%;
   align-self: center;
@@ -563,8 +562,8 @@
 }
 
 .form_progress_indicator__progress_legend--future {
-  height: 12px;
-  width: 12px;
+  height: 1em;
+  width: 1em;
   border-radius: 50%;
   border: 1px solid @floq-creamy-light-purple;
   background-color: @blank-white;

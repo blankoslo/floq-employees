@@ -49,8 +49,10 @@ img.profile-pic {
 }
 
 .edit-pic {
+  height: 22em;
+  width: auto;
+  
   .keyframes(fade-in;{0% {opacity: 0;} 100% {opacity: 1;}});
-
   .animation(fade-in 0.3s linear);
 }
 
@@ -83,12 +85,10 @@ img.profile-pic {
 }
 
 .edit-hover__description {
-  padding: 7px 10px;
-  border-radius: 15px;
   color: @blank-black;
   font-weight: 600;
   font-size: 1.2em;
-  letter-spacing: 3px;
+  letter-spacing: 0.2em;
 }
 
 .loading-spinner {
@@ -164,6 +164,10 @@ img.profile-pic {
   .floq-cards {
     flex-direction: column;
     align-items: center;
+  }
+
+  .floq-employee-editor {
+    font-size: 12px;
   }
 }
 
