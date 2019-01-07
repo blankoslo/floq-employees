@@ -88,8 +88,6 @@ export default connect(state => ({
   reduxForm({
     form: 'employeeForm',
     destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true,
-    enableReinitialize: true,
-    keepDirtyOnReinitialize: true
+    forceUnregisterOnUnmount: true
   })(BasicDetailsPage)
 );

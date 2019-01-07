@@ -93,7 +93,5 @@ EmployeeEditor.propTypes = {
 
 export default reduxForm({
   form: 'employeeForm',
-  destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
-  keepDirtyOnReinitialize: true
+  destroyOnUnmount: true
 })(EmployeeEditor);

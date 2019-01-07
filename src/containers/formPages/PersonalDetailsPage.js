@@ -53,6 +53,5 @@ PersonalDetailsPage.propTypes = {
 export default reduxForm({
   form: 'employeeForm',
   destroyOnUnmount: false,
-  forceUnregisterOnUnmount: true,
-  keepDirtyOnReinitialize: true
+  forceUnregisterOnUnmount: true
 })(PersonalDetailsPage);
