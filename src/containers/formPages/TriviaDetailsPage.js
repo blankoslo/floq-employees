@@ -49,6 +49,10 @@ const submitEmployeeForm = (employeeData, dispatch) => {
   if (employeeData.id) {
     const modifiedEmployeeData = { ...employeeData };
     delete modifiedEmployeeData.id;
+    delete modifiedEmployeeData.customer_id;
+    delete modifiedEmployeeData.customer_name;
+    delete modifiedEmployeeData.customer_name;
+    delete modifiedEmployeeData.cardColor;
     return updateEmployee(employeeData.id, modifiedEmployeeData)
       .then(onSuccessfulSubmit(dispatch))
       .catch(() => {
