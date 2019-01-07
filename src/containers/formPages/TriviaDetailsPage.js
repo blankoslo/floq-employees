@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Field, reduxForm, startSubmit, stopSubmit, destroy } from 'redux-form';
 import { updateEmployee, createEmployee } from '../../apiclient';
-import { toggleEmployeeEditor, getEmployees } from '../../actions/index';
+import { toggleEmployeeEditor, getEmployees, apiError } from '../../actions/index';
 
 /* eslint no-unused-vars: 0 */
 import regeneratorRuntime from 'regenerator-runtime';
@@ -36,11 +36,17 @@ TriviaDetialsPage.propTypes = {
   previousPage: PropTypes.func
 };
 
-const onSuccessfulSubmit = async dispatch => {
+const onSuccessfulSubmit = async (result, dispatch) => {
   dispatch(getEmployees());
   dispatch(toggleEmployeeEditor());
   dispatch(stopSubmit('employeeForm'));
   dispatch(destroy('employeeForm'));
+};
+
+const onFailedSubmit = async (error, dispatch, submitError) => {
+  if (submitError && submitError.status) {
+    dispatch(apiError({ status: submitError.status, message: submitError.data.message }));
+  }
 };
 
 const submitEmployeeForm = (employeeData, dispatch) => {
@@ -53,23 +59,17 @@ const submitEmployeeForm = (employeeData, dispatch) => {
     delete modifiedEmployeeData.customer_name;
     delete modifiedEmployeeData.customer_name;
     delete modifiedEmployeeData.cardColor;
-    return updateEmployee(employeeData.id, modifiedEmployeeData)
-      .then(onSuccessfulSubmit(dispatch))
-      .catch(() => {
-        dispatch(stopSubmit('employeeeForm'));
-      });
+    return updateEmployee(employeeData.id, modifiedEmployeeData);
   }
 
-  return createEmployee(employeeData)
-    .then(onSuccessfulSubmit(dispatch))
-    .catch(() => {
-      dispatch(stopSubmit('employeeeForm'));
-    });
+  return createEmployee(employeeData);
 };
 
 export default reduxForm({
   form: 'employeeForm',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  onSubmit: submitEmployeeForm
+  onSubmit: submitEmployeeForm,
+  onSubmitSuccess: onSuccessfulSubmit,
+  onSubmitFail: onFailedSubmit
 })(TriviaDetialsPage);

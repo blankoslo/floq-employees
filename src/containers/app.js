@@ -25,7 +25,7 @@ class App extends Component {
         : 'floq-app-employees floq-list-and-details floq-hide-list-mobile';
     return (
       <div>
-        <ErrorDialog />
+        {this.props.showErrorDialog ? <ErrorDialog /> : undefined}
         <div className={classes}>
           <EmployeeList />
           {this.props.displayEmployeeEditor ? <EmployeeEditor /> : undefined}
@@ -43,7 +43,8 @@ App.propTypes = {
   params: PropTypes.object,
   fetchEmployees: PropTypes.func,
   fetchEmployeesProjects: PropTypes.func,
-  displayEmployeeEditor: PropTypes.bool
+  displayEmployeeEditor: PropTypes.bool,
+  showErrorDialog: PropTypes.bool
 };
 
 const mapDispatchToProps = dispatch => {
@@ -60,7 +61,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => ({
-  displayEmployeeEditor: state.edit.displayEmployeeEditor
+  displayEmployeeEditor: state.edit.displayEmployeeEditor,
+  showErrorDialog: state.error.showErrorDialog
 });
 
 export default connect(

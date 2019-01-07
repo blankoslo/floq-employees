@@ -1,44 +1,36 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import Dialog from '@material-ui/core/Dialog';
-import Button from '@material-ui/core/Button';
 
 import { clearApiError } from '../actions';
 
-class ErrorDialog extends Component {
-  handleClose = () => {
-    this.props.clearApiError();
-  };
+const statusErrorMessages = new Map([
+  [400, 'Bad Request'],
+  [401, 'Unautherized'],
+  [404, 'Not found'],
+  [500, 'Internal Server Error']
+]);
 
-  render() {
-    const actions = [
-      <Button label='Got it' primary keyboardFocused onTouchTap={this.handleClose} />
-    ];
-
-    return (
-      <div>
-        <Dialog
-          title='Error'
-          actions={actions}
-          modal
-          open={this.props.error !== null}
-          onRequestClose={this.handleClose}
-        >
-          <div>{this.props.error}</div>
-        </Dialog>
-      </div>
-    );
-  }
-}
+const ErrorDialog = ({ status, message }) => (
+  <div className='error-overlay' onClick={() => this.props.clearApiError()}>
+    <div className='error-dialog'>
+      <i className='material-icons error-dialog__icon'>sentiment_very_dissatisfied</i>
+      {status && <h5 className='error-dialog__status_code'>{status}</h5>}
+      {status && <a className='error-dialog__status_message'>{statusErrorMessages.get(status)}</a>}
+      {message && <a className='error-dialog__description'>{message}</a>}
+    </div>
+  </div>
+);
 
 ErrorDialog.propTypes = {
-  error: PropTypes.string,
+  status: PropTypes.string,
+  message: PropTypes.string,
   clearApiError: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  error: state.error
+  status: state.error.data.status,
+  message: state.error.data.message
 });
 
 export default connect(
