@@ -41,7 +41,9 @@ const BasicDetailsPage = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page_fields'>
+      <div className='form-page-fields'>
+        <h1 className='form-page-fields__basic-details-header'>Fortell oss <br /> litt om deg</h1>
+        <a className='form-page-fields__intro-text'>Først litt formelle ting</a>
         <InputLabel labelText={'Navn'}>
           <Field
             name='first_name'

@@ -14,7 +14,6 @@ class App extends Component {
     super(props);
     props.fetchEmployees();
     props.fetchEmployeesProjects();
-    // props.dispatch(getEmployeesProjects());
   }
 
   render() {

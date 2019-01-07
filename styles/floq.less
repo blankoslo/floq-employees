@@ -309,6 +309,7 @@
   }
 
   & a {
+    display: block;
     color: @blank-black;
   }
 
@@ -424,7 +425,7 @@
 
 .floq-button-group {
   display: flex;
-  margin-top: 0.8em;
+  margin-bottom: 1em;
 
   & > * {
     margin-left: 0.4em;
@@ -483,16 +484,16 @@
   flex-grow: 1;
   border: none;
   border-bottom: 1px solid fade(@blank-black, 12);
-  font-size: 1.4em;
-  height: 1.5em;
+  font-size: 1.3em;
+  height: 1.4em;
   font-family: 'WorkSans-Regular';
 }
 
-.form-page_fields {
+.form-page-fields {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  padding: 2em;
+  padding: 0.5em 2em;
 }
 
 .form_paging_and_submit-controls {
@@ -574,7 +575,6 @@
 .floq_form_input_label {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
 }
 
 .floq_form_input_label__header_text {
@@ -641,4 +641,18 @@
   .error-dialog {
     font-size: 20px;
   }
+}
+
+.form-page-fields__basic-details-header {
+  font-size: 1.6em;
+  font-weight: 600;
+  font-family: 'WorkSans-Regular';
+  margin-bottom: 1em;
+}
+
+.form-page-fields__intro-text {
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  font-family: 'WorkSans-Regular';
+  color: @blank-black;
 }

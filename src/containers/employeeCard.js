@@ -50,7 +50,7 @@ const EmergancyContact = ({ name, relation, phone }) => {
     <div>
       <h5>Kontaktperson</h5>
       <a>{`${name || ''} (${relation || ''})`}</a>
-      <a href={`tel:${phone || ''}`} />
+      <a href={`tel:${phone || ''}`}>{phone || ''}</a>
     </div>
   );
 };

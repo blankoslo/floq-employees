@@ -10,7 +10,7 @@ const PersonalDetailsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page_fields'>
+      <div className='form-page-fields'>
         <InputLabel labelText={'Kontaktopplysninger'}>
           <Field
             name='phone'

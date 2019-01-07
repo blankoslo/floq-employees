@@ -9,7 +9,8 @@ const EmergancyDetailsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page_fields'>
+      <div className='form-page-fields'>
+        <a className='form-page-fields__intro-text'>Dersom det skjer noe...</a>
         <InputLabel labelText='Kontaktperson'>
           <Field name='emergency_contact_name' type='text' component={TextInput} label='Navn' />
           <Field name='emergency_contact_phone' type='text' component={TextInput} label='Telefon' />

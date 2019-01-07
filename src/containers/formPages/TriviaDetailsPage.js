@@ -15,7 +15,8 @@ const TriviaDetialsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page_fields'>
+      <div className='form-page-fields'>
+        <a className='form-page-fields__intro-text'>Litt trivielle ting</a>
         <InputLabel labelText='Hvem er du?'>
           <Field name='bio' component={TextArea} label={'?\n??\n???'} />
         </InputLabel>
