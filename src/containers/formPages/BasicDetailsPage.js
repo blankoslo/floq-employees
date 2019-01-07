@@ -33,7 +33,7 @@ const genderOptions = [
   },
   {
     label: '🌳',
-    value: 'annet'
+    value: 'other'
   }
 ];
 
