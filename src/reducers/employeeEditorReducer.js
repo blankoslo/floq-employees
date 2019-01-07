@@ -1,6 +1,6 @@
 import { TOGGLE_EMPLOYEE_EDITOR, SET_EMPLOYEE_EDITOR_INITIAL_VALUES } from '../actions';
 
-export default (state = { displayEmployeeEditor: true, initialValues: {} }, action) => {
+export default (state = { displayEmployeeEditor: false, initialValues: {} }, action) => {
   switch (action.type) {
     case TOGGLE_EMPLOYEE_EDITOR:
       return {
