@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   render() {
-    // if we have children, i.e. a detail view is shown, hide the left columns on phones
     const classes =
       this.props.children === null
         ? 'floq-app-employees floq-list-and-details floq-hide-details-mobile'

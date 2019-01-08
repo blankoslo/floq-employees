@@ -15,16 +15,16 @@ const TriviaDetialsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page-fields'>
-        <a className='form-page-fields__intro-text'>Litt trivielle ting</a>
-        <InputLabel labelText='Hvem er du?'>
-          <Field name='bio' component={TextArea} label={'?\n??\n???'} />
+      <div className="form-page-fields">
+        <a className="form-page-fields__intro-text">Litt trivielle ting</a>
+        <InputLabel labelText="Hvem er du?">
+          <Field name="bio" component={TextArea} label={'?\n??\n???'} />
         </InputLabel>
-        <InputLabel labelText='Din personlige emoji'>
-          <Field name='emoji' type='text' component={TextInput} label='🦐' />
+        <InputLabel labelText="Din personlige emoji">
+          <Field name="emoji" type="text" component={TextInput} label="🦐" />
         </InputLabel>
-        <InputLabel labelText='Din personlige tittel'>
-          <Field name='title' type='text' component={TextInput} label='CEO? Snapchatter?' />
+        <InputLabel labelText="Din personlige tittel">
+          <Field name="title" type="text" component={TextInput} label="CEO? Snapchatter?" />
         </InputLabel>
       </div>
       <PagingAndSubmitControls previousPage={previousPage} isFormSubmit />

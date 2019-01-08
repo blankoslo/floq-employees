@@ -70,7 +70,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
 
     if (this.state.uploading === true) {
       return (
-        <div className='edit-pic'>
+        <div className="edit-pic">
           <Spinner />
         </div>
       );
