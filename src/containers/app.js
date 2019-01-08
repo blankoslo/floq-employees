@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import subWeeks from 'date-fns/sub_weeks';
 import { getEmployees, getEmployeesProjects } from '../actions/index';
 
-import EmployeeList from '../containers/employeeList';
-import EmployeeEditor from '../containers/employeeEditor';
+import EmployeeList from './employeeList';
+import EmployeeEditor from './employeeEditor';
 import AddEmployeeButton from '../components/AddEmployeeButton';
 import ErrorDialog from './errorDialog';
-import subWeeks from 'date-fns/sub_weeks';
 
 class App extends Component {
   constructor(props) {
@@ -17,14 +17,10 @@ class App extends Component {
   }
 
   render() {
-    const classes =
-      this.props.children === null
-        ? 'floq-app-employees floq-list-and-details floq-hide-details-mobile'
-        : 'floq-app-employees floq-list-and-details floq-hide-list-mobile';
     return (
       <div>
         {this.props.showErrorDialog ? <ErrorDialog /> : undefined}
-        <div className={classes}>
+        <div>
           <EmployeeList />
           {this.props.displayEmployeeEditor ? <EmployeeEditor /> : undefined}
           <AddEmployeeButton />
@@ -35,14 +31,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  employees: PropTypes.object,
-  children: PropTypes.object,
-  dispatch: PropTypes.func,
-  params: PropTypes.object,
-  fetchEmployees: PropTypes.func,
-  fetchEmployeesProjects: PropTypes.func,
-  displayEmployeeEditor: PropTypes.bool,
-  showErrorDialog: PropTypes.bool
+  fetchEmployees: PropTypes.func.isRequired,
+  fetchEmployeesProjects: PropTypes.func.isRequired,
+  displayEmployeeEditor: PropTypes.bool.isRequired,
+  showErrorDialog: PropTypes.bool.isRequired
 };
 
 const mapDispatchToProps = dispatch => {

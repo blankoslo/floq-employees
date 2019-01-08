@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Field, reduxForm, startSubmit, stopSubmit, destroy } from 'redux-form';
+import regeneratorRuntime from 'regenerator-runtime';
 import { updateEmployee, createEmployee } from '../../apiclient';
 import { toggleEmployeeEditor, getEmployees, apiError } from '../../actions/index';
 
 /* eslint no-unused-vars: 0 */
-import regeneratorRuntime from 'regenerator-runtime';
 /* eslint no-unused-vars: 1 */
 
 import { TextInput, InputLabel, TextArea } from './CustomFields';
@@ -16,7 +16,7 @@ const TriviaDetialsPage = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-page-fields">
-        <a className="form-page-fields__intro-text">Litt trivielle ting</a>
+        <span className="form-page-fields__intro-text">Litt trivielle ting</span>
         <InputLabel labelText="Hvem er du?">
           <Field name="bio" component={TextArea} label={'?\n??\n???'} />
         </InputLabel>
@@ -33,8 +33,8 @@ const TriviaDetialsPage = props => {
 };
 
 TriviaDetialsPage.propTypes = {
-  handleSubmit: PropTypes.func,
-  previousPage: PropTypes.func
+  handleSubmit: PropTypes.func.isRequired,
+  previousPage: PropTypes.func.isRequired
 };
 
 const onSuccessfulSubmit = async (result, dispatch) => {

@@ -3,49 +3,48 @@ import React from 'react';
 import classNames from 'classnames';
 
 export const TextInput = ({ input, label, type, meta: { touched, error } }) => (
-  <div className='floq-text-input'>
-    <input className='floq-text-input__input' {...input} placeholder={label} type={type} />
-    {touched && error && <a className='floq-text-input__error-message'>{error}</a>}
+  <div className="floq-text-input">
+    <input className="floq-text-input__input" {...input} placeholder={label} type={type} />
+    {touched && error && <span className="floq-text-input__error-message">{error}</span>}
   </div>
 );
 
 TextInput.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  meta: PropTypes.object
+  input: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  meta: PropTypes.object.isRequired
 };
 
 export const InputLabel = ({ labelText, children }) => (
-  <div className={'floq_form_input_label'}>
-    <h6 className={'floq_form_input_label__header_text'}>{labelText}</h6>
+  <div className="floq_form_input_label">
+    <h6 className="floq_form_input_label__header_text">{labelText}</h6>
     {children}
   </div>
 );
 
 InputLabel.propTypes = {
-  labelText: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+  labelText: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired
 };
 
-export const Button = ({ value, type, currentValue, onChange, label, fieldName }) => {
+export const Button = ({ value, currentValue, onChange, label, fieldName }) => {
   const className = classNames('floq-button-group__button', {
     [`floq-button-group__button-${fieldName}--selected`]: currentValue === value
   });
   return (
-    <button type={type} className={className} value={value} onClick={() => onChange(value)}>
+    <button type="button" className={className} value={value} onClick={() => onChange(value)}>
       {label}
     </button>
   );
 };
 
 Button.propTypes = {
-  value: PropTypes.string,
-  type: PropTypes.string,
-  currentValue: PropTypes.string,
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  fieldName: PropTypes.string
+  value: PropTypes.string.isRequired,
+  currentValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired,
+  fieldName: PropTypes.string.isRequired
 };
 
 export const ButtonGroup = props => {
@@ -54,13 +53,12 @@ export const ButtonGroup = props => {
     input: { value: currentValue, onChange, name: fieldName }
   } = props;
   return (
-    <div className='floq-button-group'>
-      {options.map(({ label, value }, key) => (
+    <div className="floq-button-group">
+      {options.map(({ label, value }) => (
         <Button
-          key={key}
           currentValue={currentValue}
-          type='button'
           label={label}
+          key={value}
           value={value}
           fieldName={fieldName}
           onChange={onChange}
@@ -71,8 +69,8 @@ export const ButtonGroup = props => {
 };
 
 ButtonGroup.propTypes = {
-  options: PropTypes.array,
-  input: PropTypes.object
+  options: PropTypes.array.isRequired,
+  input: PropTypes.object.isRequired
 };
 
 export const TextArea = props => {
@@ -81,11 +79,11 @@ export const TextArea = props => {
     input: { value, onChange }
   } = props;
   return (
-    <textarea value={value} className='floq-textarea' placeholder={label} onChange={onChange} />
+    <textarea value={value} className="floq-textarea" placeholder={label} onChange={onChange} />
   );
 };
 
 TextArea.propTypes = {
-  label: PropTypes.string,
-  input: PropTypes.object
+  label: PropTypes.string.isRequired,
+  input: PropTypes.object.isRequired
 };

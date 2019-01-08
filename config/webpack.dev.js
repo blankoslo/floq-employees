@@ -1,13 +1,11 @@
 const webpack = require('webpack');
+const { argv } = require('yargs');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
-const argv = require('yargs').argv;
 
 module.exports = merge(common, {
   mode: 'development',
-  entry: [
-    './src/index.js'
-  ],
+  entry: ['./src/index.js'],
   output: {
     path: `${__dirname}/dist/js`,
     filename: 'app.bundle.js',

@@ -1,9 +1,9 @@
+import { reducer as formReducer } from 'redux-form';
 import EmployeesReducer from './employees';
 import ErrorReducer from './error';
 import EmployeeEditorReducer from './employeeEditorReducer';
 import EmployeesProjectsReducer from './employeesProjects';
 import SearchReducer from './searchReducer';
-import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = {
   app: (state = { dateToday: new Date() }) => state,

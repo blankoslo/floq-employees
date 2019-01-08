@@ -8,8 +8,8 @@ module.exports = {
           options: {}
         }
       },
-        { test: /\.less$/, loader: 'style-loader!css-loader!postcss-loader!less-loader' },
-        { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.less$/, loader: 'style-loader!css-loader!postcss-loader!less-loader' },
+      { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -21,7 +21,7 @@ module.exports = {
         test: [/\.(ttf|woff)$/],
         loader: 'file-loader',
         options: {
-            // See floq project for path
+          // See floq project for path
           name: 'static/fonts/[name].[ext]'
         }
       }

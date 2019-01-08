@@ -10,34 +10,34 @@ const PersonalDetailsPage = props => {
   const { handleSubmit, previousPage } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page-fields'>
-        <InputLabel labelText={'Kontaktopplysninger'}>
+      <div className="form-page-fields">
+        <InputLabel labelText="Kontaktopplysninger">
           <Field
-            name='phone'
-            type='text'
+            name="phone"
+            type="text"
             component={TextInput}
-            label='Telefon'
+            label="Telefon"
             validate={[required, phone]}
           />
           <Field
-            name='email'
-            type='text'
+            name="email"
+            type="text"
             component={TextInput}
-            label='E-post'
+            label="E-post"
             validate={[required, email]}
           />
         </InputLabel>
-        <InputLabel labelText={'Fødselsdato'}>
+        <InputLabel labelText="Fødselsdato">
           <Field
-            name='birth_date'
-            type='date'
+            name="birth_date"
+            type="date"
             component={TextInput}
-            label='00/00/00'
+            label="00/00/00"
             validate={[required]}
           />
         </InputLabel>
-        <InputLabel labelText={'Ansettelsedato'}>
-          <Field name='date_of_employment' type='date' component={TextInput} label='00/00/00' />
+        <InputLabel labelText="Ansettelsedato">
+          <Field name="date_of_employment" type="date" component={TextInput} label="00/00/00" />
         </InputLabel>
       </div>
       <PagingAndSubmitControls previousPage={previousPage} />
@@ -46,8 +46,8 @@ const PersonalDetailsPage = props => {
 };
 
 PersonalDetailsPage.propTypes = {
-  handleSubmit: PropTypes.func,
-  previousPage: PropTypes.func
+  handleSubmit: PropTypes.func.isRequired,
+  previousPage: PropTypes.func.isRequired
 };
 
 export default reduxForm({

@@ -49,7 +49,8 @@
     position: relative;
     flex-direction: column;
     margin: 0.9em 0.9em;
-    & a,
+    & span,
+    a,
     h1,
     h5 {
         font-family: 'WorkSans-Regular';
@@ -85,11 +86,11 @@
             font-size: 1.6em;
             font-weight: 800;
         }
-        &>a {
+        &>span {
             font-size: 1.2em;
         }
     }
-    &>a {
+    &>span {
         font-size: 5em;
         padding-right: 0.2em;
         position: absolute;
@@ -103,7 +104,7 @@
     & h1 {
         color: @blank-white;
     }
-    & a {
+    & span {
         color: @blank-white;
     }
 }
@@ -113,7 +114,7 @@
     & h1 {
         color: @blank-black;
     }
-    & a {
+    & span {
         color: @blank-black;
     }
 }
@@ -161,7 +162,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    &>a {
+    &>span {
         color: @blank-purple-dark;
         text-transform: uppercase;
         font-weight: 600;
@@ -187,7 +188,7 @@
         text-transform: uppercase;
         color: @blank-grey;
     }
-    & a {
+    & span {
         display: block;
         color: @blank-black;
     }

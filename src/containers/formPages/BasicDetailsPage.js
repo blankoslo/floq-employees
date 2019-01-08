@@ -41,36 +41,40 @@ const BasicDetailsPage = props => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-page-fields'>
-        <h1 className='form-page-fields__basic-details-header'>Fortell oss <br /> litt om deg</h1>
-        <a className='form-page-fields__intro-text'>Først litt formelle ting</a>
-        <InputLabel labelText={'Navn'}>
+      <div className="form-page-fields">
+        <h1 className="form-page-fields__basic-details-header">
+          Fortell oss
+          <br />
+          litt om deg
+        </h1>
+        <span className="form-page-fields__intro-text">Først litt formelle ting</span>
+        <InputLabel labelText="Navn">
           <Field
-            name='first_name'
-            type='text'
+            name="first_name"
+            type="text"
             component={TextInput}
-            label='Fornavn'
+            label="Fornavn"
             validate={[required]}
           />
           <Field
-            name='last_name'
-            type='text'
+            name="last_name"
+            type="text"
             component={TextInput}
-            label='Etternavn'
+            label="Etternavn"
             validate={[required]}
           />
         </InputLabel>
         <Field
           options={roleOptions}
-          name='role'
-          type='button'
+          name="role"
+          type="button"
           component={ButtonGroup}
           validate={[required]}
         />
         <Field
           options={genderOptions}
-          name='gender'
-          type='button'
+          name="gender"
+          type="button"
           component={ButtonGroup}
           validate={[required]}
         />
@@ -81,7 +85,7 @@ const BasicDetailsPage = props => {
 };
 
 BasicDetailsPage.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default connect(state => ({

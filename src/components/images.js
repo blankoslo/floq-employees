@@ -63,6 +63,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       onChange(resp.body.secure_url);
     });
   };
+
   render() {
     if (this.props.employeeData.id === undefined) {
       return <div />;
@@ -76,14 +77,7 @@ MxK1OBDt-H488-5dUMB64sJb8NY`;
       );
     }
 
-    return (
-      <ImageDrop
-        imgSrc={this.props.input.value}
-        onDrop={this.uploadFile}
-        onMouseEnter={this.toggleHover}
-        onMouseLeave={this.toggleHover}
-      />
-    );
+    return <ImageDrop imgSrc={this.props.input.value} onDrop={this.uploadFile} />;
   }
 }
 
@@ -92,8 +86,8 @@ const mapStateToProps = state => ({
 });
 
 Images.propTypes = {
-  employeeData: PropTypes.object,
-  input: PropTypes.object
+  employeeData: PropTypes.object.isRequired,
+  input: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(Images);

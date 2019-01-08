@@ -1,30 +1,31 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const EmployeeImage = props => {
+const EmployeeImage = ({ src, width, height, className }) => {
   // Cloudinary image resize
-  let src = props.src;
+  let augSrc;
   if (src != null && src !== '') {
-    src = src.replace('/upload/', `/upload/w_${props.width},h_${props.height},c_fill/`);
+    augSrc = src.replace('/upload/', `/upload/w_${width},h_${height},c_fill/`);
   } else {
-    src = `https://res.cloudinary.com/blank/image/upload/w_${props.width},h_${
-      props.height
-    },c_fill/v1485263369/person-placeholder_jld9eh.jpg`;
+    augSrc = `https://res.cloudinary.com/blank/image/upload/w_${width},h_${height},c_fill/v1485263369/person-placeholder_jld9eh.jpg`;
   }
 
   return (
     <div>
-      <img className={props.className} src={src} role='presentation' onLoad={props.onLoad} />
+      <img className={className} src={augSrc} role="presentation" />
     </div>
   );
 };
 
 EmployeeImage.propTypes = {
-  onLoad: PropTypes.func,
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
   src: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired
+};
+
+EmployeeImage.defaultProps = {
+  src: ''
 };
 
 export default EmployeeImage;

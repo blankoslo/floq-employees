@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { updateSearchTerms } from '../actions/index';
 
 class SearchField extends React.Component {
-
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
@@ -20,13 +19,13 @@ class SearchField extends React.Component {
 
   render() {
     return (
-      <div className='floq-search-field' onClick={this.onSearchFieldClick}>
-        <i className='floq-search-field__icon material-icons dark-gray'>{'search'}</i>
+      <div className="floq-search-field" onClick={this.onSearchFieldClick}>
+        <i className="floq-search-field__icon material-icons dark-gray">search</i>
         <input
           ref={this.inputRef}
-          type='text'
-          className='floq-search-field__input'
-          placeholder='Søk på navn, tittel, emoji'
+          type="text"
+          className="floq-search-field__input"
+          placeholder="Søk på navn, tittel, emoji"
           onChange={this.onChange}
           value={this.props.terms}
         />
@@ -36,8 +35,8 @@ class SearchField extends React.Component {
 }
 
 SearchField.propTypes = {
-  terms: PropTypes.string,
-  updateSearchTerms: PropTypes.func
+  terms: PropTypes.string.isRequired,
+  updateSearchTerms: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -45,8 +44,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateSearchTerms: (inputValue) => { dispatch(updateSearchTerms(inputValue)); }
+  updateSearchTerms: inputValue => {
+    dispatch(updateSearchTerms(inputValue));
+  }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchField)
-;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchField);

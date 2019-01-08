@@ -4,19 +4,20 @@ import { connect } from 'react-redux';
 import { setEmployeeEditorInitialValues, toggleEmployeeEditor } from '../actions/index';
 
 const AddEmployeeButton = ({ displayEmployeeEditor, createNewEmployee }) => (
-  <div className='add-employee-button'>
+  <div className="add-employee-button">
     <button
+      type="button"
       onClick={createNewEmployee}
-      className='add-employee-button__button mdl-button mdl-js-button mdl-button--fab'
+      className="add-employee-button__button mdl-button mdl-js-button mdl-button--fab"
     >
-      <i className='material-icons white'>{displayEmployeeEditor ? 'clear' : 'add'}</i>
+      <i className="material-icons white">{displayEmployeeEditor ? 'clear' : 'add'}</i>
     </button>
   </div>
 );
 
 AddEmployeeButton.propTypes = {
-  displayEmployeeEditor: PropTypes.bool,
-  createNewEmployee: PropTypes.func
+  displayEmployeeEditor: PropTypes.bool.isRequired,
+  createNewEmployee: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

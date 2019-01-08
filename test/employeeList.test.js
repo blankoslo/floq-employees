@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import { it, describe } from 'mocha';
 
 import EmployeeList from '../src/containers/employeeList';
 import EmployeeCard from '../src/containers/employeeCard';

@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 import Fuse from 'fuse.js';
 import * as Immutable from 'immutable';
 
-
 const options = {
   shouldSort: true,
   threshold: 0.2,

@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import configureStore from 'redux-mock-store';
+import { it, describe } from 'mocha';
 import employeesWithCustomer from '../src/selectors/employeesWithCustomerSelector';
 
 import { stateWithDataKeepTerminated, stateWithDataRemoveTerminated } from './state';

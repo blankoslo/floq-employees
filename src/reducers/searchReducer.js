@@ -1,4 +1,4 @@
-import { UPDATE_SEARCH_TERMS } from '../actions/index.js';
+import { UPDATE_SEARCH_TERMS } from '../actions/index';
 
 const initialState = {
   terms: ''

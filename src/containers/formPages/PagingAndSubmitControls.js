@@ -8,10 +8,10 @@ const PagingAndSubmitControls = ({ isFormSubmit, previousPage }) => {
   const previousClassName = 'form_paging_and_submit-controls__button_previous';
 
   return (
-    <div className='form_paging_and_submit-controls'>
+    <div className="form_paging_and_submit-controls">
       {previousPage ? (
         <button
-          type='button'
+          type="button"
           className={classNames(buttonClassName, previousClassName)}
           onClick={previousPage}
         >
@@ -20,7 +20,7 @@ const PagingAndSubmitControls = ({ isFormSubmit, previousPage }) => {
       ) : (
         undefined
       )}
-      <button type='submit' className={classNames(buttonClassName, submitClassName)}>
+      <button type="submit" className={classNames(buttonClassName, submitClassName)}>
         {isFormSubmit ? 'Ferdig' : 'Neste'}
       </button>
     </div>
@@ -30,6 +30,11 @@ const PagingAndSubmitControls = ({ isFormSubmit, previousPage }) => {
 PagingAndSubmitControls.propTypes = {
   isFormSubmit: PropTypes.bool,
   previousPage: PropTypes.func
+};
+
+PagingAndSubmitControls.defaultProps = {
+  previousPage: null,
+  isFormSubmit: false
 };
 
 export default PagingAndSubmitControls;

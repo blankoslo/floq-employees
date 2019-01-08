@@ -64,11 +64,7 @@ export const toggleShowTerminated = () => ({
   payload: null
 });
 
-export const updateSearchTerms = (inputValue) => ({
+export const updateSearchTerms = inputValue => ({
   type: UPDATE_SEARCH_TERMS,
   payload: inputValue
 });
-// export const submitEmployeeForm = values => ({
-//   type: SUBMIT_EMPLOYEE_FORM,
-//   payload: values
-// });
