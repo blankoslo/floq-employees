@@ -6,7 +6,7 @@ import PersonalDetailsPage from './formPages/PersonalDetailsPage';
 import EmergancyDetailsPage from './formPages/EmergancyDetailsPage';
 import TriviaDetailsPage from './formPages/TriviaDetailsPage';
 
-import Images from '../components/images';
+import ImageDrop from '../components/imageDrop';
 import ProgressIndicator from './formPages/ProgressIndicator';
 
 class EmployeeEditor extends React.Component {
@@ -33,7 +33,7 @@ class EmployeeEditor extends React.Component {
         <div className="floq-employee-editor">
           <div className="floq-employee-editor__image-upload">
             <form onSubmit={handleSubmit}>
-              <Field name="image_url" type="file" component={Images} />
+              <Field name="image_url" type="file" component={ImageDrop} />
             </form>
           </div>
           <div className="floq-employee-editor__page">

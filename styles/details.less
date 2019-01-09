@@ -36,11 +36,6 @@
     letter-spacing: 0.2em;
 }
 
-.loading-spinner {
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .card-pic {
     display: block;
     width: 100%;
@@ -50,6 +45,18 @@
 .image-drop__dropzone {
     border-style: hidden;
     position: relative;
+}
+
+.image-drop-spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: fade(@blank-green, 60%);
 }
 
 @media screen and (max-width: @breakpoint-first) {
