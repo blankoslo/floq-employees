@@ -1,0 +1,95 @@
+/* TextInput Component */
+
+.floq-text-input {
+  position: relative;
+  display: flex;
+  margin-bottom: 1.5em;
+  width: 22em;
+  height: 2em;
+}
+
+.floq-text-input__input {
+  flex-grow: 1;
+  border: none;
+  border-bottom: 1px solid fade(@blank-black, 12);
+  font-size: 1.3em;
+  height: 1.4em;
+  font-family: 'WorkSans-Regular';
+}
+
+.floq-text-input__error-message {
+  position: absolute;
+  bottom: -2em;
+  right: 0;
+  font-size: 0.8em;
+  color: @blank-pink;
+}
+
+/* InputLabel Component */
+
+.floq_form_input_label {
+  display: flex;
+  flex-direction: column;
+}
+
+.floq_form_input_label__header_text {
+  color: @blank-purple-dark;
+  font-weight: 600;
+  font-size: 1em;
+  font-family: 'WorkSans-Regular';
+  margin-bottom: 5px;
+}
+
+/* ButtonGroup and Button Component */
+
+.floq-button-group {
+  display: flex;
+  margin-bottom: 1em;
+  & > * {
+    margin-left: 0.4em;
+  }
+  & > *:first-child {
+    margin-left: 0em;
+  }
+}
+
+.floq-button-group__button {
+  display: flex;
+  height: 2.2em;
+  flex-basis: 5em;
+  flex-shrink: 1;
+  flex-grow: 1;
+  justify-content: center;
+  border: none;
+  background-color: @floq-creamy-light-purple;
+  border-radius: 5px;
+  font-family: 'WorkSans-Regular';
+  font-size: 1.1em;
+  padding: 0em 0em;
+  cursor: pointer;
+}
+
+// Dynamicly created at runtime in BasicDetailsPage
+.floq-button-group__button-role--selected {
+  background-color: @blank-pink;
+  color: @blank-white;
+}
+
+// Dynamicly created at runtime in BasicDetailsPage
+.floq-button-group__button-gender--selected {
+  background-color: @blank-purple;
+  color: @blank-white;
+}
+
+/* TextArea */
+
+.floq-textarea {
+  height: 8.1em;
+  margin-bottom: 10px;
+  background: url(../icons/line.svg) repeat-y;
+  line-height: 42px;
+  font-family: 'WorkSans-Regular';
+  font-size: 1.4em;
+  border: none;
+  resize: none;
+}

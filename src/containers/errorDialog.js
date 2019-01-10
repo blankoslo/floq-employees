@@ -1,48 +1,41 @@
-import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 import { clearApiError } from '../actions';
 
-class ErrorDialog extends Component {
-  handleClose = () => {
-    this.props.clearApiError();
-  };
+const statusErrorMessages = new Map([
+  [400, 'Bad Request'],
+  [401, 'Unautherized'],
+  [404, 'Not found'],
+  [500, 'Internal Server Error']
+]);
 
-  render() {
-    const actions = [
-      <FlatButton
-        label='Got it'
-        primary
-        keyboardFocused
-        onTouchTap={this.handleClose}
-      />,
-    ];
-
-    return (
-      <div>
-        <Dialog
-          title='Error'
-          actions={actions}
-          modal
-          open={this.props.error !== null}
-          onRequestClose={this.handleClose}
-        >
-          {this.props.error}
-        </Dialog>
-      </div>
-    );
-  }
-}
+const ErrorDialog = ({ status, message, exitDialog }) => (
+  <div className="error-overlay" onClick={() => exitDialog()}>
+    <div className="error-dialog">
+      <i className="material-icons error-dialog__icon">sentiment_very_dissatisfied</i>
+      {status && <h5 className="error-dialog__status_code">{status}</h5>}
+      {status && (
+        <span className="error-dialog__status_message">{statusErrorMessages.get(status)}</span>
+      )}
+      {message && <span className="error-dialog__description">{message}</span>}
+    </div>
+  </div>
+);
 
 ErrorDialog.propTypes = {
-  error: React.PropTypes.string,
-  clearApiError: React.PropTypes.func
+  status: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  exitDialog: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  error: state.error
+const mapStateToProps = state => ({
+  status: state.error.data.status,
+  message: state.error.data.message
 });
 
-export default connect(mapStateToProps, { clearApiError })(ErrorDialog);
+export default connect(
+  mapStateToProps,
+  { exitDialog: clearApiError }
+)(ErrorDialog);

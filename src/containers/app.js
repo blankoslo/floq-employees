@@ -1,28 +1,29 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEmployees } from '../actions/index';
-import selectedEmployeeSelector from '../selectors/selectedEmployee';
+import subWeeks from 'date-fns/sub_weeks';
+import { getEmployees, getEmployeesProjects } from '../actions/index';
 
-import EmployeeList from '../containers/employeeList';
+import EmployeeList from './employeeList';
+import EmployeeEditor from './employeeEditor';
+import AddEmployeeButton from '../components/AddEmployeeButton';
 import ErrorDialog from './errorDialog';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    props.dispatch(getEmployees());
+    props.fetchEmployees();
+    props.fetchEmployeesProjects();
   }
 
   render() {
-    // if we have children, i.e. a detail view is shown, hide the left columns on phones
-    const classes = this.props.children === null
-                      ? 'floq-app-employees floq-list-and-details floq-hide-details-mobile'
-                      : 'floq-app-employees floq-list-and-details floq-hide-list-mobile';
-
     return (
       <div>
-        <ErrorDialog />
-        <div className={classes}>
-          <EmployeeList employees={this.props.employees} />
+        {this.props.showErrorDialog ? <ErrorDialog /> : undefined}
+        <div>
+          <EmployeeList />
+          {this.props.displayEmployeeEditor ? <EmployeeEditor /> : undefined}
+          <AddEmployeeButton />
         </div>
       </div>
     );
@@ -30,16 +31,31 @@ class App extends Component {
 }
 
 App.propTypes = {
-  employees: React.PropTypes.object,
-  selected_employee: React.PropTypes.object,
-  children: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
-  params: React.PropTypes.object
+  fetchEmployees: PropTypes.func.isRequired,
+  fetchEmployeesProjects: PropTypes.func.isRequired,
+  displayEmployeeEditor: PropTypes.bool.isRequired,
+  showErrorDialog: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  employees: state.employees,
-  selected_employee: selectedEmployeeSelector(state, ownProps)
+const mapDispatchToProps = dispatch => {
+  const toDate = new Date();
+  const fromDate = subWeeks(toDate, 1);
+  return {
+    fetchEmployees: () => {
+      dispatch(getEmployees());
+    },
+    fetchEmployeesProjects: () => {
+      dispatch(getEmployeesProjects(fromDate, toDate));
+    }
+  };
+};
+
+const mapStateToProps = state => ({
+  displayEmployeeEditor: state.edit.displayEmployeeEditor,
+  showErrorDialog: state.error.showErrorDialog
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

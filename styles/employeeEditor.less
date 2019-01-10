@@ -1,0 +1,162 @@
+/* EmployeeEditor and Form Pages */
+
+.floq-employee-editor-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: fade(@blank-purple-dark, 80%);
+  z-index: 3;
+}
+
+.floq-employee-editor {
+  display: flex;
+  padding: 0em 1em;
+}
+
+.floq-employee-editor__page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: @blank-white;
+  height: 38em;
+  & > form {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    flex-direction: column;
+    width: auto;
+  }
+}
+
+.form-page-fields {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 0.5em 2em;
+}
+
+.form-page-fields__basic-details-header {
+  font-size: 1.6em;
+  font-weight: 600;
+  font-family: 'WorkSans-Regular';
+  margin-bottom: 1em;
+}
+
+.form-page-fields__intro-text {
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  font-family: 'WorkSans-Regular';
+  color: @blank-black;
+}
+
+@media screen and (max-width: 500px) {
+  .floq-employee-editor {
+    padding: 0em 3em 6em 0em;
+  }
+  .floq-employee-editor__image-upload {
+    position: relative;
+    width: 4em;
+    & > form {
+      position: absolute;
+      left: 2em;
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .floq-employee-editor {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: @breakpoint-third) {
+  .floq-employee-editor {
+    font-size: 12px;
+  }
+}
+
+/* Form Progress Indicator */
+
+.form_progress_indicator {
+  display: flex;
+  margin: 3em 6em;
+  justify-content: space-between;
+  align-items: center;
+  height: 1px;
+  min-height: 1px;
+  overflow: visible;
+  background-color: @floq-creamy-light-purple;
+}
+
+.form_progress_legend {
+  display: flex;
+  position: relative;
+}
+
+.form_progress_legend__text {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  top: 2.1em;
+  background-color: @blank-white;
+  color: @blank-pink;
+  font-family: 'WorkSans-Regular';
+  font-size: 0.9em;
+  align-self: center;
+}
+
+.form_progress_indicator__progress_legend--past {
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  border: 1px solid @floq-creamy-light-purple;
+  background-color: @blank-purple;
+}
+
+.form_progress_indicator__progress_legend--current {
+  height: 0.8em;
+  width: 0.8em;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  align-self: center;
+  border: 1px solid @floq-creamy-light-purple;
+  background-color: @blank-purple;
+}
+
+.form_progress_indicator__progress_legend--future {
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  border: 1px solid @floq-creamy-light-purple;
+  background-color: @blank-white;
+}
+
+/* PagingAndSubmitControls Component */
+
+.form_paging_and_submit-controls {
+  display: flex;
+}
+
+.form_paging_and_submit-controls__button {
+  border: none;
+  font-family: 'WorkSans-Regular';
+  font-size: 1.1em;
+  font-weight: 600;
+  flex-grow: 1;
+  height: 3em;
+  cursor: pointer;
+}
+
+.form_paging_and_submit-controls__button_submit {
+  background-color: @blank-yellow;
+}
+
+.form_paging_and_submit-controls__button_previous {
+  background-color: @blank-white;
+}
