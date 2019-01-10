@@ -115,7 +115,7 @@ ExpandedInformation.propTypes = {
 };
 
 const formatPhoneNumber = phoneNumber =>
-  phoneNumber.replace(/\s+/g, '').replace(/(\d{2})(?=\d)/g, '$1 ');
+  phoneNumber.replace(/\s+/g, '').replace(/(\d{3})(\d{2})(\d{3})/g, '$1 $2 $3');
 
 class EmployeeCard extends React.Component {
   constructor(props) {
