@@ -32,7 +32,7 @@ const genderOptions = [
     value: 'male'
   },
   {
-    label: '🌳',
+    label: 'Annet',
     value: 'other'
   }
 ];
