@@ -39,7 +39,7 @@ const EmployeeList = ({ employees, toggleTerminated }) => {
           <FormControlLabel
             className="floq-list-header__filter-unemployed-switch"
             control={<Switch onChange={toggleTerminated} />}
-            label="Vis x-blankere"
+            label="Vis eks-blankere"
           />
         </div>
         <div className="floq-cards">
