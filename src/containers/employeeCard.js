@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import format from 'date-fns/format';
+import isBefore from 'date-fns/is_before';
 import Spinner from '../components/spinner';
 import { setEmployeeEditorInitialValues, toggleEmployeeEditor } from '../actions/index';
 import ImageWithOverlay from './ImageWithOverlay';
@@ -59,9 +60,17 @@ Birthday.propTypes = {
   birthDate: PropTypes.string.isRequired
 };
 
-const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) => {
-  const customerText =
-    workplace !== 'Blank' ? `På oppdrag hos ${workplace}` : 'Jobber nå internt hos Blank';
+const WorkplaceWithCardExpandButton = ({
+  workplace,
+  expanded,
+  toggleExpanded,
+  isterminatedEmployee
+}) => {
+  const customerText = isterminatedEmployee
+    ? ''
+    : workplace !== 'Blank'
+    ? `På oppdrag hos ${workplace}`
+    : 'Jobber nå internt hos Blank';
   return (
     <div className="customer-info-and-expand">
       <span className="customer-info-and-expand__customer-text">{customerText}</span>
@@ -76,7 +85,8 @@ const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) 
 WorkplaceWithCardExpandButton.propTypes = {
   workplace: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
-  toggleExpanded: PropTypes.func.isRequired
+  toggleExpanded: PropTypes.func.isRequired,
+  isterminatedEmployee: PropTypes.bool.isRequired
 };
 
 const AskMeAbout = ({ text }) => {
@@ -142,14 +152,20 @@ class EmployeeCard extends React.Component {
       return <div>Not found...</div>;
     }
     const phone = formatPhoneNumber(this.props.employee.phone);
+    const isterminatedEmployee =
+      Boolean(this.props.employee.termination_date) &&
+      isBefore(new Date(this.props.employee.termination_date), new Date());
 
     return (
-      <div className="employee-card" onClick={this.editEmployee}>
+      <div className="employee-card">
         <ImageWithOverlay
+          onClick={this.editEmployee}
           firstName={this.props.employee.first_name}
           lastName={this.props.employee.last_name}
           imageUrl={this.props.employee.image_url}
           dateOfEmployment={this.props.employee.date_of_employment}
+          isterminatedEmployee={isterminatedEmployee}
+          terminationDate={this.props.employee.termination_date}
           title={this.props.employee.title}
           emoji={this.props.employee.emoji}
           cardColor={this.props.employee.cardColor}
@@ -163,6 +179,8 @@ class EmployeeCard extends React.Component {
           workplace={this.props.employee.customer_name}
           expanded={this.state.expanded}
           toggleExpanded={this.toggleExpanded}
+          isterminatedEmployee={isterminatedEmployee}
+          terminationDate={this.props.employee.termination_date}
         />
         <ExpandedInformation employee={this.props.employee} expanded={this.state.expanded} />
       </div>

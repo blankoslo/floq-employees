@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 
 import { TextInput, ButtonGroup, InputLabel } from './CustomFields';
 import PagingAndSubmitControls from './PagingAndSubmitControls';
@@ -88,12 +87,8 @@ BasicDetailsPage.propTypes = {
   handleSubmit: PropTypes.func.isRequired
 };
 
-export default connect(state => ({
-  initialValues: state.edit.initialValues
-}))(
-  reduxForm({
-    form: 'employeeForm',
-    destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true
-  })(BasicDetailsPage)
-);
+export default reduxForm({
+  form: 'employeeForm',
+  destroyOnUnmount: false,
+  forceUnregisterOnUnmount: true
+})(BasicDetailsPage);
