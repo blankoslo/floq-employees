@@ -9,6 +9,10 @@ class SearchField extends React.Component {
     this.inputRef = React.createRef();
   }
 
+  componentDidMount = () => {
+    this.inputRef.current.focus();
+  };
+
   onSearchFieldClick = () => {
     this.inputRef.current.focus();
   };

@@ -89,18 +89,18 @@ WorkplaceWithCardExpandButton.propTypes = {
   isterminatedEmployee: PropTypes.bool.isRequired
 };
 
-const AskMeAbout = ({ text }) => {
-  if (!text) return null;
+const AskMeAbout = ({ bio }) => {
+  if (!bio) return null;
   return (
     <div>
       <h5>Spør meg om</h5>
-      <span>{text}</span>
+      <span>{bio}</span>
     </div>
   );
 };
 
 AskMeAbout.propTypes = {
-  text: PropTypes.string.isRequired
+  bio: PropTypes.string.isRequired
 };
 
 const ExpandedInformation = ({ employee, expanded }) => {
@@ -114,7 +114,7 @@ const ExpandedInformation = ({ employee, expanded }) => {
         phone={employee.emergency_contact_phone}
         relation={employee.emergency_contact_relation}
       />
-      <AskMeAbout text={undefined} />
+      <AskMeAbout bio={employee.bio} />
     </div>
   );
 };
