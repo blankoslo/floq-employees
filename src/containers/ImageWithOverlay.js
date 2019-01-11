@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import nbLocale from 'date-fns/locale/nb';
 import distanceInWords from 'date-fns/distance_in_words';
+import format from 'date-fns/format';
 import EmployeeImage from '../components/employeeImage';
 
 // const durationText = (strings, isTerminated);
@@ -13,7 +14,8 @@ const ImageWithOverlay = props => {
     firstName,
     lastName,
     dateOfEmployment,
-    isterminatedEmployee,
+    terminatedEmployee,
+    futureEmployee,
     terminationDate,
     imageUrl,
     title,
@@ -26,7 +28,17 @@ const ImageWithOverlay = props => {
     { 'image-with-overlay__overlay-text-and-emoji--blank-purple': cardColor === 0 },
     { 'image-with-overlay__overlay-text-and-emoji--blank-pink': cardColor === 1 }
   );
-  const toDate = isterminatedEmployee ? new Date(terminationDate) : new Date();
+  const toDate = terminatedEmployee ? new Date(terminationDate) : new Date();
+
+  const employeementDistanceInWords = distanceInWords(new Date(dateOfEmployment), toDate, {
+    locale: nbLocale
+  });
+
+  const durationText = terminatedEmployee
+    ? `Tidligere ${title} i ${employeementDistanceInWords}`
+    : futureEmployee
+    ? `Fremtidig ${title} med oppstart ${format(new Date(dateOfEmployment), 'D. MMMM YYYY')}`
+    : `${title} i ${employeementDistanceInWords}`;
 
   return (
     <div className="image-with-overlay" onClick={onClick}>
@@ -34,15 +46,7 @@ const ImageWithOverlay = props => {
       <div className={className}>
         <div>
           <h1>{`${firstName} ${lastName}`}</h1>
-          <span>
-            {`${isterminatedEmployee ? 'Tidligere ' : ''}${title} i ${distanceInWords(
-              new Date(dateOfEmployment),
-              toDate,
-              {
-                locale: nbLocale
-              }
-            )}`}
-          </span>
+          <span>{durationText}</span>
         </div>
         <span>{emoji}</span>
       </div>
@@ -60,16 +64,14 @@ ImageWithOverlay.propTypes = {
   emoji: PropTypes.string,
   cardColor: PropTypes.number.isRequired,
   terminationDate: PropTypes.string,
-  isterminatedEmployee: PropTypes.bool.isRequired
-};
-
-ImageWithOverlay.defaultProps = {
-  terminationDate: ''
+  terminatedEmployee: PropTypes.bool.isRequired,
+  futureEmployee: PropTypes.bool.isRequired
 };
 
 ImageWithOverlay.defaultProps = {
   imageUrl: '',
-  emoji: ''
+  emoji: '',
+  terminationDate: ''
 };
 
 export default ImageWithOverlay;

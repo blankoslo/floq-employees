@@ -64,13 +64,16 @@ const WorkplaceWithCardExpandButton = ({
   workplace,
   expanded,
   toggleExpanded,
-  isterminatedEmployee
+  terminatedEmployee,
+  futureEmployee
 }) => {
-  const customerText = isterminatedEmployee
-    ? ''
-    : workplace !== 'Blank'
-    ? `På oppdrag hos ${workplace}`
-    : 'Jobber nå internt hos Blank';
+  const customerText =
+    !terminatedEmployee && !futureEmployee
+      ? workplace === 'Blank'
+        ? 'Jobber nå internt hos Blank'
+        : `På oppdrag hos ${workplace}`
+      : '';
+
   return (
     <div className="customer-info-and-expand">
       <span className="customer-info-and-expand__customer-text">{customerText}</span>
@@ -86,7 +89,8 @@ WorkplaceWithCardExpandButton.propTypes = {
   workplace: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
   toggleExpanded: PropTypes.func.isRequired,
-  isterminatedEmployee: PropTypes.bool.isRequired
+  terminatedEmployee: PropTypes.bool.isRequired,
+  futureEmployee: PropTypes.bool.isRequired
 };
 
 const AskMeAbout = ({ bio }) => {
@@ -152,9 +156,13 @@ class EmployeeCard extends React.Component {
       return <div>Not found...</div>;
     }
     const phone = formatPhoneNumber(this.props.employee.phone);
-    const isterminatedEmployee =
+
+    const today = new Date();
+    const terminatedEmployee =
       Boolean(this.props.employee.termination_date) &&
-      isBefore(new Date(this.props.employee.termination_date), new Date());
+      isBefore(new Date(this.props.employee.termination_date), today);
+
+    const futureEmployee = isBefore(today, new Date(this.props.employee.date_of_employment));
 
     return (
       <div className="employee-card">
@@ -164,7 +172,8 @@ class EmployeeCard extends React.Component {
           lastName={this.props.employee.last_name}
           imageUrl={this.props.employee.image_url}
           dateOfEmployment={this.props.employee.date_of_employment}
-          isterminatedEmployee={isterminatedEmployee}
+          futureEmployee={futureEmployee}
+          terminatedEmployee={terminatedEmployee}
           terminationDate={this.props.employee.termination_date}
           title={this.props.employee.title}
           emoji={this.props.employee.emoji}
@@ -179,7 +188,8 @@ class EmployeeCard extends React.Component {
           workplace={this.props.employee.customer_name}
           expanded={this.state.expanded}
           toggleExpanded={this.toggleExpanded}
-          isterminatedEmployee={isterminatedEmployee}
+          futureEmployee={futureEmployee}
+          terminatedEmployee={terminatedEmployee}
           terminationDate={this.props.employee.termination_date}
         />
         <ExpandedInformation employee={this.props.employee} expanded={this.state.expanded} />
