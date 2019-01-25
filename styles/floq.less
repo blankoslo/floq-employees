@@ -1,250 +1,251 @@
 .floq-list {
-    background-color: @floq-list-background;
-    position: relative;
-    height: calc(100vh - 65px);
-    overflow: scroll;
-    .floq-list-header {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px;
-        background-color: @floq-creamy-light-purple;
-    }
+  background-color: @floq-list-background;
+  position: relative;
+  height: calc(100vh - 65px);
+  overflow: scroll;
+  .floq-list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: @floq-creamy-light-purple;
+  }
 }
 
 .floq-cards {
-    padding-left: 170px;
-    padding-top: 45px;
-    display: flex;
-    justify-content: center;
+  padding-left: 170px;
+  padding-top: 45px;
+  display: flex;
+  justify-content: center;
 }
 
 /* NEW */
 
 .role-column {
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    max-width: 600px;
-    flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  max-width: 600px;
+  flex-direction: column;
 }
 
 .role-column__title {
-    font-size: 1.2em;
-    font-family: 'WorkSans-Regular';
-    text-transform: uppercase;
-    margin: 0px 20px;
+  font-size: 1.2em;
+  font-family: 'WorkSans-Regular';
+  text-transform: uppercase;
+  margin: 0px 20px;
 }
 
 .role-column__horizontal-line {
-    border: none;
-    height: 2px;
-    background-color: @blank-black;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    margin: 0px 20px;
+  border: none;
+  height: 2px;
+  background-color: @blank-black;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  margin: 0px 20px;
 }
 
 .employee-card {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    margin: 0.9em 0.9em;
-    & span,
-    a,
-    h1,
-    h5 {
-        font-family: 'WorkSans-Regular';
-    }
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin: 0.9em 0.9em;
+  & span,
+  a,
+  h1,
+  h5 {
+    font-family: 'WorkSans-Regular';
+  }
 }
 
 .employee-card:hover {
-    transform: scale(1.01);
-    box-shadow: 2px 3px 4px rgba(125, 125, 125, 0.2);
-    transition: all 0.2s ease-in-out;
-    transition-delay: 0.1s;
-    cursor: pointer;
+  transform: scale(1.01);
+  box-shadow: 2px 3px 4px rgba(125, 125, 125, 0.2);
+  transition: all 0.2s ease-in-out;
+  transition-delay: 0.1s;
 }
 
 .image-with-overlay {
-    display: flex;
-    position: relative;
-    color: @blank-white;
+  display: flex;
+  position: relative;
+  color: @blank-white;
+  cursor: pointer;
 }
 
 .image-with-overlay__overlay-text-and-emoji {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  background-color: fade(@blank-purple, 90%);
+  width: 100%;
+  & > div {
+    padding: 0.5em 0em 0.2em 1em;
+    & > h1 {
+      font-size: 1.6em;
+      font-weight: 800;
+    }
+    & > span {
+      font-size: 1.2em;
+    }
+  }
+  & > span {
+    font-size: 5em;
+    padding-right: 0.2em;
     position: absolute;
-    bottom: -1px;
-    left: 0;
-    background-color: fade(@blank-purple, 90%);
-    width: 100%;
-    &>div {
-        padding: 0.5em 0em 0.2em 1em;
-        &>h1 {
-            font-size: 1.6em;
-            font-weight: 800;
-        }
-        &>span {
-            font-size: 1.2em;
-        }
-    }
-    &>span {
-        font-size: 5em;
-        padding-right: 0.2em;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-    }
+    right: 0;
+    bottom: 0;
+  }
 }
 
 .image-with-overlay__overlay-text-and-emoji--blank-purple {
-    background-color: fade(@blank-purple, 80%);
-    & h1 {
-        color: @blank-white;
-    }
-    & span {
-        color: @blank-white;
-    }
+  background-color: fade(@blank-purple, 80%);
+  & h1 {
+    color: @blank-white;
+  }
+  & span {
+    color: @blank-white;
+  }
 }
 
 .image-with-overlay__overlay-text-and-emoji--blank-pink {
-    background-color: fade(@blank-pink, 80%);
-    & h1 {
-        color: @blank-black;
-    }
-    & span {
-        color: @blank-black;
-    }
+  background-color: fade(@blank-pink, 80%);
+  & h1 {
+    color: @blank-black;
+  }
+  & span {
+    color: @blank-black;
+  }
 }
 
 .contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1em 0em;
+  & > div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 1em 0em;
-    &>div {
-        display: flex;
-        flex-direction: column;
-    }
+  }
 }
 
 .contact-info__medium {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: @blank-turquoise;
-    letter-spacing: 0.1em;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: @blank-turquoise;
+  letter-spacing: 0.1em;
 }
 
 .contact-info--blank-pink {
-    background-color: fade(@blank-pink, 90%);
+  background-color: fade(@blank-pink, 90%);
 }
 
 .contact-info--blank-purple {
-    background-color: fade(@blank-purple, 90%);
+  background-color: fade(@blank-purple, 90%);
 }
 
 .customer-info-and-expand {
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    background-color: @blank-yellow;
-    color: @blank-black;
-    padding: 0.7em 1em;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background-color: @blank-yellow;
+  color: @blank-black;
+  padding: 0.7em 1em;
+  align-items: center;
 }
 
 .customer-info-and-expand__expand-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    &>span {
-        color: @blank-purple-dark;
-        text-transform: uppercase;
-        font-weight: 600;
-        font-size: 0.8em;
-    }
-    &>i {
-        font-size: 1.4em;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  & > span {
+    color: @blank-purple-dark;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.8em;
+  }
+  & > i {
+    font-size: 1.4em;
+  }
 }
 
 .customer-info-and-expand__customer-text {
-    color: @blank-black;
+  color: @blank-black;
 }
 
 .expanded-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    box-sizing: border-box;
-    padding: 0px 10px 10px 30px;
-    background-color: @blank-white;
-    & h5 {
-        text-transform: uppercase;
-        color: @blank-grey;
-    }
-    & span {
-        display: block;
-        color: @blank-black;
-    }
-    &>div {
-        margin-top: 15px;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 0px 9em 1em 1em;
+  background-color: @blank-white;
+  & h5 {
+    text-transform: uppercase;
+    color: @blank-grey;
+  }
+  & span {
+    display: block;
+    color: @blank-black;
+  }
+  & > div {
+    margin-top: 15px;
+  }
 }
 
 .expanded-info__address {
-    & address {
-        margin-top: 5px;
-        line-height: 20px;
-        font-family: 'WorkSans-Regular';
-    }
+  & address {
+    margin-top: 5px;
+    line-height: 20px;
+    font-family: 'WorkSans-Regular';
+  }
 }
 
-.expanded-info__birthday {}
+.expanded-info__birthday {
+}
 
 .floq-search-field {
-    width: 300px;
-    margin: 0px 10px 0px 10px;
-    align-self: center;
-    height: 25px;
-    display: flex;
-    border-radius: 20px;
-    background-color: @blank-white;
-    padding: 5px;
+  width: 300px;
+  margin: 0px 10px 0px 10px;
+  align-self: center;
+  height: 25px;
+  display: flex;
+  border-radius: 20px;
+  background-color: @blank-white;
+  padding: 5px;
 }
 
 .floq-search-field__input {
-    background: none;
-    border: none;
-    color: @floq-header-text  !important;
-    font-size: 1.2em;
+  background: none;
+  border: none;
+  color: @floq-header-text !important;
+  font-size: 1.2em;
 }
 
 .floq-search-field__input::placeholder {
-    color: @floq-header-text;
-    opacity: 1;
+  color: @floq-header-text;
+  opacity: 1;
 }
 
 .floq-search-field__icon {
-    margin: 0px 10px 0px 10px;
-    color: @floq-header-text  !important;
+  margin: 0px 10px 0px 10px;
+  color: @floq-header-text !important;
 }
 
 .add-employee-button {
-    margin-left: 20px;
-    margin-bottom: 20px;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 4;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
 }
 
 .add-employee-button__button {
-    background-color: @blank-purple-dark;
-    color: @blank-yellow;
+  background-color: @blank-purple-dark;
+  color: @blank-yellow;
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import format from 'date-fns/format';
+import isBefore from 'date-fns/is_before';
 import Spinner from '../components/spinner';
 import { setEmployeeEditorInitialValues, toggleEmployeeEditor } from '../actions/index';
 import ImageWithOverlay from './ImageWithOverlay';
@@ -59,9 +60,20 @@ Birthday.propTypes = {
   birthDate: PropTypes.string.isRequired
 };
 
-const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) => {
+const WorkplaceWithCardExpandButton = ({
+  workplace,
+  expanded,
+  toggleExpanded,
+  terminatedEmployee,
+  futureEmployee
+}) => {
   const customerText =
-    workplace !== 'Blank' ? `På oppdrag hos ${workplace}` : 'Jobber nå internt hos Blank';
+    !terminatedEmployee && !futureEmployee
+      ? workplace === 'Blank'
+        ? 'Jobber nå internt hos Blank'
+        : `På oppdrag hos ${workplace}`
+      : '';
+
   return (
     <div className="customer-info-and-expand">
       <span className="customer-info-and-expand__customer-text">{customerText}</span>
@@ -76,21 +88,23 @@ const WorkplaceWithCardExpandButton = ({ workplace, expanded, toggleExpanded }) 
 WorkplaceWithCardExpandButton.propTypes = {
   workplace: PropTypes.string.isRequired,
   expanded: PropTypes.bool.isRequired,
-  toggleExpanded: PropTypes.func.isRequired
+  toggleExpanded: PropTypes.func.isRequired,
+  terminatedEmployee: PropTypes.bool.isRequired,
+  futureEmployee: PropTypes.bool.isRequired
 };
 
-const AskMeAbout = ({ text }) => {
-  if (!text) return null;
+const AskMeAbout = ({ bio }) => {
+  if (!bio) return null;
   return (
     <div>
       <h5>Spør meg om</h5>
-      <span>{text}</span>
+      <span>{bio}</span>
     </div>
   );
 };
 
 AskMeAbout.propTypes = {
-  text: PropTypes.string.isRequired
+  bio: PropTypes.string.isRequired
 };
 
 const ExpandedInformation = ({ employee, expanded }) => {
@@ -104,7 +118,7 @@ const ExpandedInformation = ({ employee, expanded }) => {
         phone={employee.emergency_contact_phone}
         relation={employee.emergency_contact_relation}
       />
-      <AskMeAbout text={undefined} />
+      <AskMeAbout bio={employee.bio} />
     </div>
   );
 };
@@ -143,13 +157,24 @@ class EmployeeCard extends React.Component {
     }
     const phone = formatPhoneNumber(this.props.employee.phone);
 
+    const today = new Date();
+    const terminatedEmployee =
+      Boolean(this.props.employee.termination_date) &&
+      isBefore(new Date(this.props.employee.termination_date), today);
+
+    const futureEmployee = isBefore(today, new Date(this.props.employee.date_of_employment));
+
     return (
-      <div className="employee-card" onClick={this.editEmployee}>
+      <div className="employee-card">
         <ImageWithOverlay
+          onClick={this.editEmployee}
           firstName={this.props.employee.first_name}
           lastName={this.props.employee.last_name}
           imageUrl={this.props.employee.image_url}
           dateOfEmployment={this.props.employee.date_of_employment}
+          futureEmployee={futureEmployee}
+          terminatedEmployee={terminatedEmployee}
+          terminationDate={this.props.employee.termination_date}
           title={this.props.employee.title}
           emoji={this.props.employee.emoji}
           cardColor={this.props.employee.cardColor}
@@ -163,6 +188,9 @@ class EmployeeCard extends React.Component {
           workplace={this.props.employee.customer_name}
           expanded={this.state.expanded}
           toggleExpanded={this.toggleExpanded}
+          futureEmployee={futureEmployee}
+          terminatedEmployee={terminatedEmployee}
+          terminationDate={this.props.employee.termination_date}
         />
         <ExpandedInformation employee={this.props.employee} expanded={this.state.expanded} />
       </div>

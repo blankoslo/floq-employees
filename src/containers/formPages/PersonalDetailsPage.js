@@ -39,6 +39,9 @@ const PersonalDetailsPage = props => {
         <InputLabel labelText="Ansettelsedato">
           <Field name="date_of_employment" type="date" component={TextInput} label="00/00/00" />
         </InputLabel>
+        <InputLabel labelText="Sluttdato">
+          <Field name="termination_date" type="date" component={TextInput} label="00/00/00" />
+        </InputLabel>
       </div>
       <PagingAndSubmitControls previousPage={previousPage} />
     </form>

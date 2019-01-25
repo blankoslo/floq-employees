@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import BasicDetailsPage from './formPages/BasicDetailsPage';
 import PersonalDetailsPage from './formPages/PersonalDetailsPage';
 import EmergancyDetailsPage from './formPages/EmergancyDetailsPage';
 import TriviaDetailsPage from './formPages/TriviaDetailsPage';
+import { toggleEmployeeEditor } from '../actions/index';
 
 import ImageDrop from '../components/imageDrop';
 import ProgressIndicator from './formPages/ProgressIndicator';
@@ -29,8 +31,8 @@ class EmployeeEditor extends React.Component {
     const { handleSubmit } = this.props;
     const { currentPage } = this.state;
     return (
-      <div className="floq-employee-editor-overlay">
-        <div className="floq-employee-editor">
+      <div className="floq-employee-editor-overlay" onClick={this.props.closeEmployeeEditor}>
+        <div className="floq-employee-editor" onClick={e => e.stopPropagation()}>
           <div className="floq-employee-editor__image-upload">
             <form onSubmit={handleSubmit}>
               <Field name="image_url" type="file" component={ImageDrop} />
@@ -54,10 +56,26 @@ class EmployeeEditor extends React.Component {
 }
 
 EmployeeEditor.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  closeEmployeeEditor: PropTypes.func.isRequired
 };
 
-export default reduxForm({
-  form: 'employeeForm',
-  destroyOnUnmount: true
-})(EmployeeEditor);
+const mapStateToProps = state => ({
+  initialValues: state.edit.initialValues
+});
+
+const mapDispatchToProps = dispatch => ({
+  closeEmployeeEditor: () => {
+    dispatch(toggleEmployeeEditor());
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
+  reduxForm({
+    form: 'employeeForm',
+    destroyOnUnmount: true
+  })(EmployeeEditor)
+);
