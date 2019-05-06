@@ -46,6 +46,8 @@ const employeesWithCustomerSelector = (employees, employeesProjects, dateToday, 
     data = data.filter(employee => isEmployeed(employee, dateToday));
   }
 
+  data = data.map(e => ({ ...e, title: (e.title) ? e.title : e.role }))
+
   data = data.map(e => {
     const employeeProject = employeesProjects.data.get(e.id);
     return { ...e, ...fallbackProject, ...employeeProject };
