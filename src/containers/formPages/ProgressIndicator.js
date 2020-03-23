@@ -29,7 +29,7 @@ const ProgressIndicator = ({ currentPage }) => (
   <div className="form_progress_indicator">
     <ProgressLegend currentPage={currentPage} legendPage={1} legendText="Basic" />
     <ProgressLegend currentPage={currentPage} legendPage={2} legendText="Personal" />
-    <ProgressLegend currentPage={currentPage} legendPage={3} legendText="Emergancy" />
+    <ProgressLegend currentPage={currentPage} legendPage={3} legendText="Emergency" />
     <ProgressLegend currentPage={currentPage} legendPage={4} legendText="Trivia" />
   </div>
 );
